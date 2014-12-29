@@ -11,47 +11,41 @@ Autorzy:
 ====================================================================
 
 Autorzy tej wersji:
-	- Arnold "SeriouS" Fornalczyk
-	- Lukasz "Wielebny" Biegaj
+  - Arnold "SeriouS" Fornalczyk
+  - Lukasz "Wielebny" Biegaj
 
 Pozniejsi autorzy:
-	- Mateusz "eider" Cichon
-	- XJL
+  - Mateusz "eider" Cichon
+  - XJL
 
 Credits:
-	- Mlody626 - autor poprzedniej wersji gamemodu (FullDM), a takze kilku
+  - Mlody626 - autor poprzedniej wersji gamemodu (FullDM), a takze kilku
 	  linii kodu przeniesionych do tej wersji (commands_anim.inc).
-	- DracoBlue, Incognito, Y-Less, Sacky, StrickenKid, Zeex, Fro1sha, DanielCortez, SA-MP
+  - DracoBlue, Incognito, Y-Less, Sacky, StrickenKid, Zeex, Fro1sha, 
+     DanielCortez, SA-MP
 
 Kompilacja + kilka uwag:
 ====================================================================
 
 W katalogu gamemode/gamemodes/ znajduje sie skrypt make.bat, ktory dokonuje
-aktualizacji plikow z wersja gamemodu, wykonuje kompilacje gamemodu i jesli ta sie
-powiedzie, przesyla gamemod przez FTP.
+aktualizacji plikow z wersja gamemodu, wykonuje kompilacje gamemodu.
 
 W pliku make.bat (badz tez w generowanych pliku version.inc) nalezy zmodyfikowac
 adres IP oraz port serwera. Dane te sa weryfikowane przy starcie gamemodu, tak
 aby uniemozliwic uruchamianie 'kradzionego' amx bezposrednio na innym komputerze.
 
-Kod nie zawiera i nigdy nie zawieral zabezpieczen typu deamx. Posiada natomiast
-wbudowany mechanizm licencjonowania, ktory przy starcie gamemodu wysyla
-jedno zadanie HTTP POST pod nasz adres. Prosimy o pozostawienie tego kodu,
-pozwoli on nam sie zorientowac gdzie uruchamiany jest gamemod.
-
 W katalogu gamemode/schema/ znajduje sie struktura bazy danych, ktora nalezy wgrac
 na serwer MySQL. Konfiguracja danych MySQL znajduje sie w pliku 
-scriptfiles/FullServer/mysql.cfg. Haslo do bazy danych musi byc 'zaszyfrowane'
+scriptfiles/FullServer/config.db. Haslo do bazy danych musi byc 'zaszyfrowane'
 algorytmem ROT13 (!!!).
 
 Haslo RCON podane w pliku server.cfg rowniez musi byc przetworzone funkcja ROT13.
 
 Hasla graczy szyfrowane sa za pomoca funkcji MD5(nick+sol+haslo), dzieki czemu
 sa nie do zlamania za pomoca tzw. rainbow tables. Sol zapisana jest na sztywno
-w pliku utility_functions.inc, w linii 926. Jesli planujesz wykorzystac ten
+w pliku utility_functions.inc. Jesli planujesz wykorzystac ten
 gamemod jako podstawe do dalszego rozwoju, zmien sol na inna losowa wartosc,
 przed zarejestrowaniem jakiegokolwiek konta!
-
 
 Poziomy zapisane w bazie danych, w tabeli z graczami to:
 	1 - moderator

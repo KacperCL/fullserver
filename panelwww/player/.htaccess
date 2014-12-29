@@ -1,0 +1,55 @@
+<FilesMatch ".(.*sql|.*~|.*bak)$">
+  Order deny,allow
+  Deny from all
+</FilesMatch>
+
+# Turn it on
+ExpiresActive On
+# Set a default expiry time.
+ExpiresDefault A604800
+# Turn expiry off for dynamic content (or potentially dynamic content).
+ExpiresByType application/x-httpd-php A0
+ExpiresByType application/x-python-code A0
+ExpiresByType text/html A0
+
+<FilesMatch ".(php|py|pyc|pyo)$">
+  ExpiresActive Off
+</FilesMatch>
+
+# Osobne ustawienia dla fs.i32.pl (paski!)
+<FilesMatch ".png$">
+  ExpiresDefault A10800
+</FilesMatch>
+
+Options -Indexes
+
+RewriteEngine On
+
+RewriteRule ^$	http://fs.i32.pl/stats	[L,R=301]
+RewriteRule ^s/i/SKIN/([0-9]+)	/s/i/skins2/gtam_skin$1.jpg	[L]
+RewriteRule ^player/([0-9]+)\.png$	/dynbar.php?pid=$1	[L]
+RewriteRule ^player/2-([0-9]+)\.png$	/dynbar2.php?pid=$1	[L]
+RewriteRule ^player/3-([0-9]+)\.png$	/dynbar3.php?pid=$1	[L]
+RewriteRule ^player/3-([0-9]+)-([0-9])\.png$	/dynbar3.php?pid=$1&tlo=$2	[L]
+
+RewriteRule ^stats/player/([0-9]+)	/main.php?m=stats-player&pid=$1	[L]
+#RewriteRule ^api/player/([0-9]+),([a-z]+)	/main.php?m=api-player&pid=$1&format=$2	[L]
+RewriteRule ^stats/gang/([0-9]+)	/main.php?m=stats-gang&gid=$1	[L]
+RewriteRule ^stats/gangs	/main.php?m=stats-gangs	[L]
+RewriteRule ^stats/areny	/main.php?m=stats-areny	[L]
+RewriteRule ^stats/races	/main.php?m=stats-races	[L]
+RewriteRule ^stats/race/([0-9]+)	/main.php?m=stats-race&rid=$1	[L]
+RewriteRule ^stats/drifts	/main.php?m=stats-drifts	[L]
+Rewriterule ^stats/drift/([0-9]+)	/main.php?m=stats-drift&rid=$1	[L]
+RewriteRule ^stats/osiagniecia	/main.php?m=stats-osiagniecia	[L]
+RewriteRule ^stats	/main.php?m=stats-osiagniecia	[L]
+
+RewriteRule ^obsluga	/main.php?m=obsluga	[L]
+RewriteRule ^polec	/main.php?m=polec	[L]
+RewriteRule ^mapa	/main.php?m=mapa	[L]
+RewriteRule ^change	/main.php?m=change	[L]
+RewriteRule ^fsdomy/([0-9]+)	http://fs.i32.pl/obsluga?$1\#domki	[L,R=301,NE]
+RewriteRule ^fsdomy	http://fs.i32.pl/obsluga\#domki	[L,R=301,NE]
+RewriteRule ^fsvipeu	http://fs.i32.pl/obsluga	[L,R=301]
+RewriteRule ^fsvip	http://fs.i32.pl/obsluga	[L,R=301]
+RewriteRule ^fshaslo	http://fs.i32.pl/obsluga\#haslo	[L,R=301,NE]

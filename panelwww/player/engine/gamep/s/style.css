@@ -1,0 +1,113 @@
+#foota {
+	clear: both;
+	margin: 2em 0;
+	text-align: center;
+}
+
+
+#footer {
+	clear: both;
+	border-top: 1px solid white;
+	margin: 4em 0 1em 0;
+	padding: 0.2em 0 0 0;
+	color: white;
+}
+#footer>div { float: left; padding: 0 2em; text-align: center; }
+#footer>div+div { float: right;  text-align: right; }
+#footer h1 { margin:0; }
+#footer p { font-size: 75%; margin: 0; float: left; }
+#footer p#footsp { float: right; }
+#footer p#footsp a { display: inline-block; vertical-align: middle; }
+#footer a { color: white; text-decoration: none; }
+#footer a:HOVER { color: red; }
+
+* { margin: 0; padding: 0; }
+body { margin: 1em; /*background: #5f5e5e url(img/body-bg.gif) repeat-x top left;*/ }
+hr { display: none; height: 0px; border-style: none; }
+.hidden { display: none; }
+.clear{ clear: both; }
+p.clear{ line-height: 0px; height: 0px; }
+
+ 
+hr.linia { height: 0px; border-color: #362418; border-width: 1px 0 0 0; border-style: solid; }
+hr.margines { margin: 2em 0; }
+
+
+fieldset { margin: 1em 0.5em;padding: 1em;  -moz-border-radius: 7px; -webkit-border-radius: 7px; -o-border-radius: 7px; border-radius: 7px; 
+    background: #f0f0f0; border: 3px solid CornflowerBlue; }
+fieldset>legend { padding: 0.5em 1em; letter-spacing: 0.1em; font-size: 17px;
+ -moz-border-radius: 7px 0 0 0; -webkit-border-radius: 7px 0 0 0; -o-border-radius: 7px 0 0 0; border-radius: 7px 0 0 0; 
+ background: url("img/bodyarea-bg.gif") repeat-x scroll 0 0 white;
+ text-shadow; 1px 1px 3px #999; 
+ -moz-box-shadow: 0px 0px 1px #000; -webkit-box-shadow: 0px 0px 1px #000;-o-box-shadow: 0px 0px 1px #000; box-shadow: 0px 0px 1px #000;
+}
+fieldset>p {   clear: both; margin:25px 10px; vertical-align: top;}
+fieldset>p>label { display: block; }
+fieldset>p>select {   margin: 1em;}
+fieldset>p>#slider {  margin: 1em;  width: 200px; float: left;}
+fieldset>p>input,#smsinfo button,#smsinfo input,textarea { border: 1px solid #aaa; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 0.5em 1em; background: #f8f8f8;}
+fieldset>p>input:FOCUS { border: 1px solid #666; background: #fff;}
+fieldset>p>input:DISABLED { color: #333; }
+fieldset>p>small { clear:left;
+color:red;
+display:block;
+font-size:11px;
+font-weight:normal;
+margin:0.25em;
+width:40%; opacity: 0.25;}
+fieldset>p:HOVER>small { opacity: 1;}
+fieldset>p>small>a  { color: #900000;}
+fieldset label.error { -moz-border-radius:0 5px 5px 5px; -o-border-radius:0 5px 5px 5px; -webkit-border-radius:0 5px 5px 5px; border-radius:0 5px 5px 5px;
+background:none repeat scroll 0 0 red;
+border-color:#DD0000 #990000 #990000 #DD0000;
+border-style:solid;
+border-width:1px;
+color:white;
+display:block;
+
+font-size:10px;
+font-weight:bold;
+margin: 5px 20px; 
+opacity:0.9;
+padding:4px;
+position:absolute;}
+
+fieldset#vipbuy { margin-bottom: 4em; }
+fieldset button { border: 1px solid #aaa; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 0.5em 1em;
+ background: #f8f8f8 url(img/bodyarea-bg.gif) repeat-x 50% -15%; font-weight: bold;
+    -moz-box-shadow: 1px 1px 0px #999;  -webkit-box-shadow: 1px 1px 0px #999; -o-box-shadow: 1px 1px 0px #999;  box-shadow: 1px 1px 0px #999; cursor: pointer; }
+
+
+.ui-progressbar-value { background-image: url(img/pbar-ani.gif) !important; }
+.progressbar.ui-widget { height: 1.2em; }
+
+#vip_progress { display: inline-block;  width: 25%; margin: 1em 0; }
+#vipinfo>.avatar { float: left; margin: 0 1em 1em 0; }
+#vipinfo>h2 { }
+#vipinfo>p { clear: none;margin:0;}
+
+#vipbuy>p { display: inline-block; width: 40%; }
+
+.cols3,.cols2 { height: auto; overflow: auto; }
+.cols3>* { width: 33%; display: inline-block; vertical-align: top; }
+.cols2>* { width: 49%; display: inline-block; vertical-align: top; }
+
+#smsinfo { padding: 1em 2em; margin: 0 -1em -1em; background: #fff;
+     -moz-border-radius: 0 0 7px; -webkit-border-radius: 0 0 7px; -o-border-radius: 0 0 7px; border-radius: 0 0 7px;}
+#smsinfo h2,#smsinfo h3 { font-size: 34px; font-family: sans-serif; text-shadow: 2px 2px 1px #aaa; }
+#smsinfo h4 { font-size: 34px; font-family: sans-serif; text-shadow: 2px 2px 1px #aaa; }
+#smsinfo ul { font-size: smaller; margin: 0.5em 1em;  }
+#smsinfo img.qrcode { border:medium none;
+float:right;
+margin-right:2em;
+text-decoration:none;} 
+#smsinfo div+div { font-size: 13px; }
+#vipbuy>p.cb { width: 80%; }
+#vipbuy>p.cb>label { font-size: smaller; }
+#bledy>ul { margin-left: 3em; }
+fieldset#bledy { border-color:red;}
+fieldset#bledy>legend { background: red; color: white; }
+
+dl { margin: 2em; }
+dl>dt { width: 40%; clear: both; float: left; }
+dl>dd { width: 40%; margin-left: 2em; float: left; }

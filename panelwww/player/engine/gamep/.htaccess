@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^checknick$	index.php?a=ajax&a2=checknick

@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^$   http://fs.i128.pl/obsluga      [L,R=301]
+RewriteRule ^checknick$	index.php?a=ajax&a2=checknick

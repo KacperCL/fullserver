@@ -1,0 +1,381 @@
+Dodano gong na calej mapie pod komenda /gong:23.03.2014:SERWER
+Komenda /raudio przeladowywuje Audio Plugina w razie problemow:23.03.2014:SERWER
+Komenda /audio wylacza streaming z AudioPlugina (alias /setplay):23.03.2014:SERWER
+Dodano dzwieki do KillStreak i HeadShota (zgloszenie #000329), wymaga AudioPlugina:23.03.2014:SERWER
+Usunieto problem z denerwujacym napisem 'Poszukiwani przestepcy' widocznym przez sciany na /ONEDE:23.03.2014:SERWER
+Dodano komende /pp przywolujaca pojazd domowy do naszej pozycji (/mp teleportuje do pojazdu) [zgloszenie #000327]:23.03.2014:SERWER
+Przywrocono komendy /sp2 i /lp2:23.03.2014:SERWER
+Usunieto wyrzucanie na /ONEDE2 za nagminne wykonywanie GL:23.03.2014:SERWER
+Usuniety blad ze zgaszonym silnikiem w pojezdzie domowym (zgloszenie #000330):23.03.2014:SERWER
+Nagroda za spedycje TIR i JETMAX jest obliczana na podstawie odleglosci do celu (#000107):23.03.2014:SERWER
+Dodatkowo zwiekszone bonusy za godzine grania w nocy (zgloszenie #000328):23.03.2014:SERWER
+Takie same skiny na /CHOWANY (zgloszenie #000231), rozwiaze problemy ze wzajemnym zabijaniem na /CHOWANY (#000236):23.03.2014:SERWER
+Usunieta wymuszona rejestracje konta (zgloszenia #000318 i #000322):22.03.2014:SERWER
+Dodano komende /kolorauto (zgloszenie #000310):22.03.2014:SERWER
+Poprawiono spawn aut z domkow (wymaga zapisania od nowa pojazdow domowych, zgloszenie #000276):22.03.2014:SERWER
+Rozwiazane problemy z autami statycznymi (mogly znikac, np. przyczepy, zgloszenie #000323):22.03.2014:SERWER
+Informacja o KillStreak na arenach, dodatkowy skill za KillStreak i HeadShota (wszedzie):22.03.2014:SERWER
+Zegarek i data+ilosc graczy rozdzielona na dwie opcje w /HUD (#000306):22.03.2014:SERWER
+Informacja o wejsciu czlonka gangu dla reszty tego gangu (#000308):22.03.2014:SERWER
+Usuniete limity FPS na arenach (nie sa wymagane na 0.3z):22.03.2014:SERWER
+Dodana arena /ONEDE2 (zgloszenie #000296):22.03.2014:SERWER
+Rozwiazane rozne problemy i zwiekszona oplacalnosc biznesow:05.02.2014:SERWER
+Usuniety blad pozwalajacy wlascicielowi artefaktu zmienic kolor:03.02.2014:SERWER
+Rozwiazany problem ze znikaniem artefaktu gdy jest na skinie gracza:03.02.2014:SERWER
+Zgloszenie #000263, #000267:01.02.2014:SERWER
+Zgloszenie #000262:31.01.2014:SERWER
+Usuniete maszyny z jedzeniem/napojami przywracajace HP (#000256):31.01.2014:SERWER
+Rozwiazny problem z blokada wybieralki po wpisaniu zlego hasla :31.01.2014:SERWER
+Wymuszona rejestracja konta :31.01.2014:SERWER
+[0.3z] Optymalizacja wewnatrz kodu dot. VectorSize :23.01.2014:SERWER
+Optymalizacja wewnatrz kodu dot. GetPlayerDistanceFromPoint :23.01.2014:SERWER
+[0.3z] Zgloszenia #000250, #000251, #000249 i inne poprawki :20.01.2014:SERWER
+Zgloszenie #000252 (assigned #000259):20.01.2014:SERWER
+[0.3z] Wskaznik obrazen wyswietla teraz informacje przez dluszy okres czasu:18.01.2014:SERWER
+[0.3z] Informacja i textdraw przy headshocie:18.01.2014:SERWER
+[0.3z] Wskaznik obrazen juz dziala (pokazuje utrate HP i miejsce postrzalu):17.01.2014:SERWER
+[0.3z] Wskaznik obrazen mozliwy do kontroli poprzez /HUD:17.01.2014:SERWER
+[0.3z] Odblokowane granie na padzie w zwiazku z usunieciem auto-aima w nim (0.3z RC2):17.01.2014:SERWER
+Lepsze zabezpieczenie przeciwko strzelaniu w trybie pasywnym/strefie be DM:17.01.2014:SERWER
+[0.3z] Headshot ze snajpy i rifle:17.01.2014:SERWER
+[0.3z] Przygotowania pod CJ_HIT (pokazywanie gdzie zostales trafiony):17.01.2014 :SERWER
+Optymalizacja MySQL:17.01.2014:SERWER
+Optymalizacja komend:16.01.2014:SERWER
+Nowe pakiety zakupu GamePoints:02.01.2014:SERWER
+Zgloszenie #000215 oraz kilka innych zmian:27.12.2013:SERWER
+Mikolajkowa promocja GamePoints (+10%):06.12.2013:SERWER
+Zgloszenia #000186 oraz #000190:01.12.2013:SERWER
+Fix na /BS - part 2 (#000184):01.12.2013:SERWER
+Fix na /BS (#000184):29.11.2013:SERWER
+Keybind '2' nie zabiera juz kasy VIPom (#000179):29.11.2013:SERWER
+Nametags nie sa widoczne na /CHOWANY (#000172):29.11.2013:SERWER
+Blokada bicia na /CHOWANY podczas chowania sie (#000170):29.11.2013:SERWER
+Rozwiazany problem z /RSP na /CHOWANY (#000168):29.11.2013:SERWER
+Dlugosc /CHOWANY zwiekszona do 8 minut (#000169); dlugosc /HAY zmniejszona do 5 minut:29.11.2013:SERWER
+Usunieta arena /ONEDE2 z powodu pewnych problemow:29.11.2013:SERWER
+Spedycje tirami i samolotem daja teraz wiecej kasy w odpowiednich frakcjach (kierowcy oraz piloci):26.11.2013:SERWER
+Zgloszenie #000140:26.11.2013:SERWER
+Nowa mapa obiektow - PART #014:26.11.2013:SERWER
+Hotfix na problemy z trybem pasywnym (zgloszenie #000148):23.11.2013:SERWER
+Usunieto blad umozliwiajacy bezkarne wykonywanie Heli-Kill (HK):23.11.2013:SERWER
+Gracz dostaje kase tylko podczas pierwszego spawnu oraz po smierci. Respawn po wyjsciu z areny/atrakcji nie daje juz kasy:23.11.2013:SERWER
+DTBK ponownie zablokowane ze wzgledu na mozliwa niesmiertelnosc (bug SA-MP), DB dalej dozwolone:23.11.2013:SERWER
+Nowi zarejestrowani gracze na powitanie otrzymuja 15GP.:23.11.2013:SERWER
+Wprowadzono TRYB PASYWNY pod komenda /GP. Koszt to 5GP za uruchomienie do konca sesji gry.:23.11.2013:SERWER
+Kilka mniejszych poprawek; poprawiona obsluga osiagniec (wraz z aktualizacja osiagniec na stronie statystyk):23.11.2013:SERWER
+Wiele roznych poprawek i ulepszen w kodzie:21.11.2013:SERWER
+Skill jest teraz prawidlowo przyznawany z pojazdow:21.11.2013:SERWER
+Mozliwe wylaczenie komunikatow glosowych serwera poprzez komende /SETPLAY:21.11.2013:SERWER
+Zgloszenie #000129 (zmiana broni specjalnych komenda /BS) oraz #000126 (kontrola szybkiego respawnu pod /FRSP):21.11.2013:SERWER
+Usuniete dwie krytyczne luki; zgloszenie #000137 (wykonalismy restart wszystkich zapisanych skinow!):20.11.2013:SERWER
+DTBK (strzelanie jako pasazer bez kierowcy) oraz DB (strzelanie jako kierowca) sa ogolnie zezwolone przez regulamin serwera:20.11.2013:SERWER
+Poprawki do trybu furii po ponownym zalogowaniu sie do gry; komenda /FURIA pokazuje pozostaly czas trybu furii:20.11.2013:SERWER
+Tryb furii dziala 4 godziny od aktywacji bez wzgledu na aktywnosc gracza na serwerze:20.11.2013:SERWER
+Cenzura ponownie nie obowiazuje w godzinach nocnych:19.11.2013:SERWER
+Zgloszenia #000123, #000119, #000136; kilka innych poprawek i zmian wewnatrz kodu:19.11.2013:SERWER
+URODZINY FS! SCENA NA /URODZINY (/PLAZA), RUCHOME KOLO, FAJERWERKI, LAMPIONY, INNE ATRAKCJE:11.11.2013:SERWER
+Nowa mapa obiektow - PART #012 & #013; fix dla #000130:11.11.2013:SERWER
+Nowa mapa obiektow - PART #011:08.11.2013:SERWER
+Nowa mapa obiektow - PART #010:07.11.2013:SERWER
+Przelewy GamePoints dostepene pod komenda /dajgp:07.11.2013:SERWER
+Nowa mapa obiektow - PART #008 & #009:05.11.2013:SERWER
+Nowa mapa obiektow - PART #007:28.10.2013:SERWER
+Poprawiony powazny problem z respawnem pojazdow:30.10.2013:SERWER
+Nowa mapa obiektow - PART #006:29.10.2013:SERWER
+Mandaty sa zabierane z portfela gracza, lub jezeli nie ma on - sa ustawiane jako hitman:29.10.2013:SERWER
+Frakcja policjantow otrzymuje co jakis czas wynagrodzenie z mandatow:29.10.2013:SERWER  
+Gracze z frakcji dilerow otrzymuja wieksze wynagrodzenie za spedycje jetmaxem:29.10.2013:SERWER
+Rampy nie dzialaja w strefie bez DM oraz w poblizu moderatora ktory ma wlaczone blokowanie ich:29.10.2013:SERWER
+Zgloszenia #000109, #000114, #000110:29.10.2013:SERWER
+Nowa mapa obiektow - PART #005:28.10.2013:SERWER
+Zgłoszenie #000090 (mozliwosc ustawienia sobie koloru gangu poprzez komende /GANG):27.10.2013:SERWER
+Nowa mapa obiektow - PART #004:27.10.2013:SERWER
+Nowa mapa obiektow - PART #003:25.10.2013:SERWER
+Nowa mapa obiektow - PART #002:24.10.2013:SERWER
+Nowa mapa obiektow - PART #001:23.10.2013:SERWER
+Zgloszenie #000104 oraz #000103:23.10.2013:SERWER
+Rozwiazano problem ze spedycja lotnicza powodujacy lagi w okolicach miejsc zrzutu paczek:17.10.2013:SERWER
+Usuniety blad powodujacy wyzwalanie sie funkcji naprawy w samolotach i helikopterach:17.10.2013:SERWER
+Strefy bez DM i smierci (nie dotyczy przenosnych) sa teraz reprezentowane odpowiednio na mapie:15.10.2013:SERWER
+Ponownie rozwiazano problem powodujacy nie nadawanie skilla w trybie furii:15.10.2013:SERWER
+Kilka poprawek stylistycznych w spedycjach lotniczych i jetmaxem:15.10.2013:SERWER
+Dodano ilosc GamePoints do statystyk (zarowno strona gracza jak i API):14.10.2013:STAYSTYKI
+Tryb furii nie podwaja juz kasy; usuniety problem powodujacy nie nadawanie podwojnego skilla w trybie furii:14.10.2013:SERWER
+Szybki przelew (/dajkase) posiada od teraz limit $10000. Wieksze kwoty prosimy przesylac przez /BANK:14.10.2013:SERWER
+Kwota ktora nie miesci sie w portfelu jest automatycznie przesylana na konto bankowe:14.10.2013:SERWER;
+Usunieto blad uniemozliwiajacy kupno 3 biznesow VIPowi:14.10.2013:SERWER
+Rozwiazany blad umozliwiajacy podglad czatu gangu przed zalogowaniem:14.10.2013:SERWER
+Koszt trybu furii zmniejszony do 80 GP; ujednolicone (wewnatrz kodu) naprawiania pojazdu:14.10.2013:SERWER
+Zgloszenie #000071 oraz #000015:12.10.2013:SERWER
+Zgloszenie #000085; tryb furii w /GP (patrz na forum):11.10.2013:SERWER
+Zgloszenia #000072, #000077, #000073, #000091; kilka innych poprawek:10.10.2013:SERWER
+HotFix na problemy z limitem pojazdow:13.09.2013:SERWER
+Zgloszenia #000059, #000064, #000069 i kilka innych poprawek:11.09.2013:SERWER
+/SPS zamienione w /HAY:08.09.2013:SERWER
+Wiele roznych poprawek, ktorych nie trzeba wymieniac:08.09.2013:SERWER
+Zgłoszenie #000065:06.09.2013:SERWER
+Zgłoszenia #000061 oraz #000063 (zmiany w GamePoints):06.09.2013:SERWER
+Kilka innych malych poprawek w roznych miejscach:04.09.2013:SERWER
+Mala poprawka do denerwujacego zabijania na /DERBY (2x kill):04.09.2013:SERWER
+Limit czasu ukonczenia dla /RACE i /DRIFTING:04.09.2013:SERWER
+Prawidłowo naprawione rekordy na /RACE i /DRIFT (2 osoba, szybsza od starego rekordu, ale wolniejsza od 1 osoby nie moze go nadpisac!):04.09.2013:SERWER
+/CPANEL nie dziala dla pasazera!:03.09.2013:SERWER
+Poprawione dzialanie /nametags (2 podejscie):03.09.2013:SERWER
+Kilka poprawek i ujednolicenie funkcji Kick:03.09.2013:SERWER
+Bonus za czas gry uwzglednia takze GamePoints:03.09.2013:SERWER
+Dodana komenda /vtune dla VIPa:02.09.2013:SERWER
+Kilka poprawek optymalizacyjnych w kodzie i kilka malych poprawek w tekstach:02.09.2013:SERWER
+Nowa komenda /CPANEL do zarzadzania pojazdem; usuniete komendy /silnik /bagaznik /maska (/lock i /unlock zostaja):02.09.2013:SERWER
+Brzydki fix na dublowanie sie nagrod za /derby:02.09.2013:SERWER
+Mozliwosc zakupienia GamePoints bezposrednio w grze!:02.09.2013:SERWER
+Usuniecie binda na klawisz num8 i num3 w pojazdach (uzyj /silnik, /maska, /bagaznik). num3 pozostaje do cholowania:02.09.2013:SERWER
+Zwiekszene nagrody za dostarczenie towaru TIRem:02.09.2013:SERWER
+Nowy system zakupu VIPa i domkow poprzez /GP. Wiecej informacji na forum.:01.09.2013:SERWER
+Czesciowo zrealizowane zgloszenie #000042 (/nametags dziala teraz takze na nowo spotkanych graczy):01.09.2013:SERWER
+VIP moze kupic 3 biznesy:29.08.2013:SERWER
+2 nowe huntery na /MARYNARKA, pickupy, schody do lotniskowca:29.08.2013:SERWER
+Lider moze sam odejsc z gangu:29.08.2013:SERWER
+Poprawiona strefa smierci na /MARYNARKA (lepiej dopasowana, mniej wykracza):27.08.2013:SERWER
+Wiecej bilbordow z MaterialText (na razie tylko w Los Santos):27.08.2013:SERWER
+Zamiana bilbordow z 3dtextami na bilbordy uzywajace MaterialText (na razie tylko te w /skatepark):27.08.2013:SERWER
+Nowa strefa śmierci przy lotniskowcu w SF. Teleport /MARYNARKA (propozycja w zgloszeniu #000013):27.08.2013:SERWER
+Zgloszenie #000033 (usunięte auto-bany) oraz zgłoszenie #000023:26.08.2013:SERWER
+Zgloszenia #000030 oraz #000029; sprzedaz biznesu daje teraz polowe ceny zakupu.:25.08.2013:SERWER
+Kolory i komponenty tuningu pojazdow prywatnych pod domem sa teraz poprawnie zapisywane i odtwarzane:25.08.2013:SERWER
+Nowe zabezpieczenie na crashe; troszke czyszczenia kodu; zmiany w usuwaniu z derbow (i w czestotliwosci odswiezania atrakcji):23.08.2013:SERWER
+Troszke zmodyfikowane dwa podstawowe zabezpieczenia:22.08.2013:SERWER
+Zgloszenie #000012; przywrocona komenda /nametags:21.08.2013:SERWER
+Troszke optymalizacji; czyszczenie kodu; poprawiony problem z naprawianiem pojazdu prywatnego; zgłoszenie #000007 i #000011:19.08.2013:SERWER
+Zgloszenie #000010 oraz #000008:15.08.2013:SERWER
+Zgloszenie #000006 oraz #000005; kilka innych poprawek:13.08.2013:SERWER
+Poprawiony problem z przelewami; rozwiazany bug z /race (fixes.inc):12.08.2013:SERWER
+Poprawiony blad z rejestracja; usuniety bug z ominieciem anty-DB w /skin:11.08.2013:SERWER
+Zmieniony wyglad paska statystyk w textdrawie:11.08.2013:SERWER
+Dalsze porzadkowanie kodu, kilkanascie poprawek:11.08.2013:SERWER
+Usuniete SKOKI, METEORY (z powodu malego zainteresowania), sporo innych poprawek, porzadkowanie kodu:09.08.2013:SERWER
+Zwiekszenie zabezpieczen wrazliwych plikow aplikacji webowych:08-09.08.2013:WEB SERWER
+Optymalizacja systemow webowych:07-09.08.2013:WEB SERWER
+Kilka poprawek:09.08.2013:SERWER
+Polaczenie (na razie dosyc prymitywne) kupna VIPa, domkow i resetu hasla z glownym panelem statystyk:07.08.2013:STATYSTYKI
+Dalsze modyfikacje majace na celu zwiekszenie bezpieczenstwa systemow webowych:07.08.2013:WEB SERWER
+Zmiany w czesci administracyjnej:07.08.2013:SERWER
+Zakonczono konserwacje serwera webowego:03.08.2013:WEB SERWER
+Gracz z artefaktem traci go w wiezieniu:25.07.2013:SERWER
+Poprawiony blad z transferem kasy z banku:25.07.2013:SERWER
+Bron o ID 35 zablokowana w /vbron:25.07.2013:SERWER
+Kilka zabezieczen zwiazanych z crasherami:16-25.07.2013:SERWER
+Poprawki bezpieczenstwa zwiazane z haslami; wymagany restart hasla na fs.i128.pl/fshaslo:12.07.2013:SERWER
+Poprawiony blad umozliwiajacy bugowanie spedycji jetmaxem i samolotem; dopasowany do obecnych cen skup pojazdow; zmniejszona cena naprawy:09.07.2013:SERWER
+Wprowadzono pelna obsluge SSL do logowania/rejestracji na forum; inne modyfikacje konfiguracji serwera:08.07.2013:FORUM
+Kilka poprawek z kasa:07.07.2013:SERWER
+Poprawiony blad umozliwiajacy zakup zmiany nicku bez posiadania odpowiedniej liczby GP:07.07.2013:SERWER
+Poprawiona ilosc respektu w /gangprzyjmij; inne poprawki; nowy sposob rozpoznawania tagu [FS]:05.07.2013:SERWER
+Zamiana wbudowane SA-MP Stream na Audio Plugin:05.07.2013:SERWER
+Kilka poprawek bledow:04.07.2013:SERWER
+RESTART STATYSTYK SERWERA (patrz forum po dokladne informacje):03.07.2013:SERWER
+Modyfikacja systemu kasy (zmniejszenie ogólnie wszystkich wartości):03.07.2013:SERWER
+Naprawiony problem z desynchronizacją stanu użytkownika (active_server) po restarcie serwera (błąd uniemożliwiał rozdawanie VIPa z poleceń):03.07.2013:SERWER
+Informacja o AFK w /id (od 1 minuty):03.07.2013:SERWER
+Zmieniony system zapisywania konfiguracji HUDa uzytkownika (/hud):03.07.2013:SERWER
+Usunieta spedycja pociagiem ze wzgledu na problemy ze spawnem pociagow w SA-MP:03.07.2013:SERWER
+Nowe pozycje paczek i ostryg; ogólny limit to 128; usunięte z /TOP (nie będą one dodawane - mają stanowić sposób na zdobycie respektu dla nowych graczy):03.07.2013:SERWER
+Odejmujemy respekt za przewinienia gracza (WARN -10, MUTE -3, JAIL -5, PRZEKLENSTWO -1, KICK -50, BAN -100):03.07.2013:SERWER
+Game Points za organizacje eventow przez graczy (nadawane przez GMow):03.07.2013:SERWER
+Mozliwosc wymiany Game Points na VIPa (komenda /gp):03.07.2013:SERWER
+Mozliwosc wymiany Game Points na szybsza zmiane nicku (komenda /gp):03.07.2013:SERWER
+Koszt spawnu pojazdu poprzez /CARS to $5000 (nie dotyczy /p dla VIPow):03.07.2013:SERWER
+Poprawnie zaimplementowane wyciszanie graczy do daty (zapisane w osobnej tabeli jak bany):03.07.2013:SERWER
+Zrzucanie paczek znow dziala poprawnie (pojawia sie obiekt i pickup):03.07.2013:SERWER
+Maksymalna kwota kasy w portfelu to $5000000:03.07.2013:SERWER
+Poprawnie zaimplementowane textdrawy per gracz (uzywajac nowej funkcji PlayerTextDraw):03.07.2013:SERWER
+Finalne poprawki przed wpuszczeniem aktualizacji na serwer:03.07.2013:SERWER
+Inne poprawki czesci administracyjnej:09.06.2013:SERWER:SERWER
+Lopata w wyborze broni:09.06.2013:SERWER:SERWER
+Poprawiona ranga wspolzalozyciela gangu (czat liderow, usuwanie z gangu):09.06.2013:SERWER:SERWER
+Szybkie naprawianie pojazdow zablokowane dla kolejnych pojazdow latajacych i pojazdow RC:09.06.2013:SERWER:SERWER
+Naprawione zmienne skiny na /CTF i /WG:09.06.2013:SERWER:SERWER
+Dodane wnetrze shamala (wejscie pod G):07.06.2013:SERWER:SERWER
+Rampy zablokowane na atrakcjach (podejscie 2):07.06.2013:SERWER:SERWER
+Naprawione fake artefakty:07.06.2013:SERWER:SERWER
+Rampy zablokowane na atrakcjach:05.06.2013:SERWER:SERWER
+Skill na /CTF zablokowany; Ilosc punktow do wygrania na CTF zmniejszona do 3:05.06.2013:SERWER:SERWER
+Tag [FS] rozpoznawany na wiele nowych sposobów:05.06.2013:SERWER:SERWER
+Skiny ustawianie według grupy na CTF i WG:05.06.2013:SERWER:SERWER
+Poszukiwacze bonusów w /TOP:04.06.2013:SERWER:SERWER
+Rustler dodany do spedycji lotniczej; ilosc paczek w spedycji lotniczej zalezy od samolotu:03.06.2013:SERWER:SERWER
+Rampy zablokowane w pojazdach latajacyh, plywajacych itp.:03.06.2013:SERWER:SERWER
+Mozliwosc teleportu do wyspy/spawnu sojusznika w /gang:03.06.2013:SERWER:SERWER
+Usuniete powiadomienia o graczu na atrakcji przy PM:03.06.2013:SERWER:SERWER
+Naprawiony spawn gangu w /spawn:03.06.2013:SERWER:SERWER
+Poprawki na forum; Naprawiona lista adminow (paski):03.06.2013:SERWER:FORUM
+Dodane API w formacie JSON, XML i YAML:03.06.2013:SERWER:STATYSTYKI
+Naprawione zabijanie z piesci na /onede2:02.06.2013:SERWER:SERWER
+Naprawiony respray pojazdu w warsztacie (strefa bez dm):02.06.2013:SERWER:SERWER
+Nowe spawny i przywrocone pickupy broni na /minigun:02.06.2013:SERWER:SERWER
+Dodane rampy - /rampy:02.06.2013:SERWER:SERWER
+Mozliwosc podania ID broni bezposrednio w komendzie /vbron, np. /vbron 30:02.06.2013:SERWER:SERWER
+Zablokowana mozliwosc ominiecia blokaty DB poprzez /vdualuzi i /rdualuzi:02.06.2013:SERWER:SERWER
+Informacja o stanie gracza do którego wysyłamy PM jeżeli ten jest na atrakcji, jest wyciszony lub znajduje się w więzieniu:02.06.2013:SERWER:SERWER
+Poprawione działanie binda na klawiszu '2' w Andromadzie i Rustlerze:02.06.2013:SERWER:SERWER
+Nowe komendy dla VIPow:01.06.2013:SERWER:SERWER
+Rakiety obronne na wyspach gangow:01.06.2013:SERWER:SERWER
+Aktualizacja pluginow i nowe zabezpieczenia:16.05.2013:SERWER:SERWER
+3 nowe stacje w /radio dla wielbicieli ciezkich brzmien; rogi, maska hokejowa i okulary w /zaloz:06.05.2013:SERWER:SERWER
+Wieksze zarobki za biznesy; naprawiona dziupla i pojazdy off-road w /cars; nowe kolory w /tunemenu:06.04.2013:SERWER:SERWER
+Wiele roznych poprawek:23.02.2013:SERWER:SERWER
+Mozliwosc ustawienia spawnu gangu w /spawn:17.02.2013:SERWER:SERWER
+Przywrocony spawn gangow:17.02.2013:SERWER:SERWER
+Poprawka w konczeniu derbow:17.02.2013:SERWER:SERWER
+Wiele poprawek optymalizacyjnych:13.02.2013:SERWER:SERWER
+Aktualizacja tekstow pomocy:13.02.2013:SERWER:SERWER
+Wstepnie zaprogramowany system wysp gagnow:11.02.2013:SERWER:SERWER
+Rozne inne zmiany:11.02.2013:SERWER:SERWER
+Usuniety bug zwiazany z mozliwoscia przejscia pomiedzy /RPG i /SNIPER:10.02.2013:SERWER:SERWER
+Kilka innych drobnych poprawek:04.02.2013:SERWER:SERWER
+Odnowienie HP po zabiciu gracza na arenie /CS:04.02.2013:SERWER:SERWER
+Nowy teleport /ANGELPINE:04.02.2013:SERWER:SERWER
+Kilka innych drobnych poprawek:02.02.2013:SERWER:SERWER
+Poprawiony blad zwiazany z zamrazaniem przy uzyciu /GUNS na /WG:02.02.2013:SERWER:SERWER
+Dodane 2 nowe stacje do radia:02.02.2013:SERWER:SERWER
+Rozne poprawki:01.02.2013:SERWER:SERWER
+Przejscie na 0.3x:01.02.2013:SERWER:SERWER
+Anty-DM w strefach bez DM (freeze gracza na 250ms):01.02.2013:SERWER:SERWER
+Komenda /GUNS pozwalajaca na zmiane zestawu broni na /CTF i /WG przez 30 sekund od startu atrakcji:01.02.2013:SERWER:SERWER
+Poprawki w /SPS:01.02.2013:SERWER:SERWER
+Poprawione pickupy na /AFGANISTAN:01.02.2013:SERWER:SERWER
+Minimalny zakres komendy /SKOK zmniejszony do 200:01.02.2013:SERWER:SERWER
+Usuniety bug zwiazany z mozliwoscia przejscia pomiedzy /RPG,/MINIGUN i /RIFLE:01.02.2013:SERWER:SERWER
+Poprawione wiadomosci od serwera podczas wyrzucania gracza:01.02.2013:SERWER:SERWER
+Automatyczny ban za uzywanie pada:30.01.2013:SERWER:SERWER
+System anty-lag na arenie /onede2:30.01.2013:SERWER:SERWER
+Przeprojektowane areny i optymalizacja z nimi zwiazana; /onede2 -> /onede; /onede3 -> /onede2:30.01.2013:SERWER:SERWER
+Zmniejszone opoznienie w informacjach o pojezdzie:30.01.2013:SERWER:SERWER
+SPS zabija po opuszczeniu areny:30.01.2013:SERWER:SERWER
+Zmniejszony maksymalny czas na ukonczenie atrakcji:30.01.2013:SERWER:SERWER
+Ograniczenie komendy /skok:27.01.2013:SERWER:SERWER
+Rozne poprawki optymalizacyjne:27.01.2013:SERWER:SERWER
+RC Baron dla VIPow:26.01.2013:SERWER:SERWER
+Dodana komenda /burdel:26.01.2013:SERWER:SERWER
+Poprawki w plikach pomocy; inne zmiany:26.01.2013:SERWER:SERWER
+Poprawione usuwanie broni na arenie /RPG:25.01.2013:SERWER:SERWER
+Optymalizacja; wylaczony /labirynt:22.01.2013:SERWER:SERWER
+Rozne poprawki:20.01.2013:SERWER:SERWER
+Przywrocona arena /RPG:19.01.2013:SERWER:SERWER
+Zmniejszony czas oczekiwania na wyplate z biznesow; maksymalna ilosc biznesow per gracz zwiekszona do 3:18.01.2013:SERWER:SERWER
+Zmiany w chowanym (propozycja z forum):18.01.2013:SERWER:SERWER
+Aktualizacja tekstow pomocy:17.01.2013:SERWER:SERWER
+Granaty usunięte z areny /CS:17.01.2013:SERWER:SERWER
+Poprawione kilka bledow runtime:17.01.2013:SERWER:SERWER
+Poprawiony artefakt:17.01.2013:SERWER:SERWER
+Poprawiony artefakt:17.01.2013:SERWER:SERWER
+Rozne pomniejsze poprawki; usuniete kilka bledow typu runtime; optymalizacja:07.01.2013:SERWER:SERWER
+Przywrocona stara arena /minigun:08.01.2013:SERWER:SERWER
+Poprawiony powazny blad z rejestracja i dlugimi adresami email:03.01.2013:SERWER:SERWER
+Rozne inne mniejsze poprawki:03.01.2013:SERWER:SERWER
+Poprawione kilka pickupow i jeden spawn:03.01.2013:SERWER:SERWER
+Poprawiona komenda /artefakt:03.01.2013:SERWER:SERWER
+Dodane nowe spawny artefaktu:03.01.2013:SERWER:SERWER
+Mozliwosc szybkiej naprawy/obrocenia pojazdu; Zmniejszony HP pojazdu:02.01.2013:SERWER:SERWER
+Dodane komunikaty pomocnicze o wyjsciu z areny i zmianie spawnu:02.01.2013:SERWER:SERWER
+Naprawiony blad z podwojnym spawnem po smierci:02.01.2013:SERWER:SERWER
+Poprawione dzwieki w pojazdach i strefach; mozliwosc ich wylaczenia poprzez komende /audio:02.01.2013:SERWER:SERWER
+Audio Plugin zostal usuniety i zastapiony wbudowanym w SA-MP. Wszystkie funkcje nadal dzialaja:02.01.2013:SERWER:SERWER
+Usuniete pare literowek:02.01.2013:SERWER:SERWER
+Masa roznych poprawkek:02.01.2013:SERWER:SERWER
+Poprawki do dodanych wczesniej obiektow; rozne mniejsze poprawki:01.01.2013:SERWER:SERWER
+Poprawiony wskaznik HP; dodana mozliwosc jego wylaczenia:31.12.2012:SERWER
+Aktualizacja spawnow na arenach:31.12.2012:SERWER
+Poprawki do areny /CS:31.12.2012:SERWER
+Usunieta arena /RPG:31.12.2012:SERWER
+Duza aktualizacja obiektow; zmienione niektore teleporty:31.12.2012:SERWER
+Zmieniona muzyka w wybieralce; dodany dzwiek zbierania respektu:31.12.2012:SERWER
+Zmniejszone przychody, zwiekszone ceny biznesow; zmniejszona ilosc max. biznesow na gracza do 2; zwiekszony czas pomiedy wyplatami:31.12.2012:SERWER
+Dom mozna oplacic maksymalnie na 14 dni korzystajac z respektu:31.12.2012:SERWER
+Rozne mniejsze poprawki:30.12.2012:SERWER
+Ikonka i wskazanie tekstowe stanu armora/hp:30.12.2012:SERWER
+Mozliwosc uciszenia gracza "do daty" (np. na miesiac):30.12.2012:SERWER
+Komenda /ZMIENEMAIL:29.12.2012:SERWER
+Rejestracja wymaga podania adresu email (uzyte przy rejestracji na forum uzywajac konta z serwera):29.12.2012:SERWER
+Optymalizacja (w tym takze usuniete /sprawdzpm):28.12.2012:SERWER
+Poprawiony gong:28.12.2012:SERWER
+Mozliwy wybor zestawow broni na /CTF i /WG:26.12.2012:SERWER
+Dzwiek za trafienie zamiast za zabicie na arenach:26.12.2012:SERWER
+Dodana nowa arena >> /GRANATY <<:26.12.2012:SERWER
+Poprawki w quizie:26.12.2012:SERWER
+Rozne poprawki bledow i usprawnienia:22.12.2012:SERWER
+Dodana nowa arena na /DERBY i /DRIFTING:22.12.2012:SERWER
+Dodano licznik czasu na /DRIFTING:22.12.2012:SERWER
+Dodana informacja o rekordzie na /DRIFTING:22.12.2012:SERWER
+Dodane pare nowosci na swieta:21.12.2012:SERWER
+Poprawione strefy smierci na /DERBY:16.12.2012:SERWER
+Rozne poprawki:16.12.2012:SERWER
+Poprawione areny i TOP najlepsi na /onede(1-3):07.12.2012:SERWER
+Dodane /zaloz laser2:07.12.2012:SERWER
+Dodane /zaloz gitara:07.12.2012:SERWER
+Mozliwosc zmiany spawnu postaci poprzez /spawn:07.12.2012:SERWER
+Poprawiony pickup z frakcja wojska:07.12.2012:SERWER
+Dodane nowe biznesy, zmieniona cena i przychod z pozostalych (zbyt latwy zarobek):07.12.2012:SERWER
+Rozne poprawki:07.12.2012:SERWER
+/100hp zablokowane dla artefaktu:04.12.2012:SERWER
+Kask przeniesiony do /zaloz:29.11.2012:SERWER
+Dodana komenda /ODLEGLOSC:28.11.2012:SERWER
+Dodana komenda /NET:28.11.2012:SERWER
+Wiele innych mniejszych poprawek:28.11.2012:SERWER
+PPM+SKOK aby wykonac szybki /rsp:25.11.2012:SERWER
+Dodana tarcza do frakcji policji:24.11.2012:SERWER
+TOP /meteory:24.11.2012:SERWER
+Masa roznych mniejszych poprawek:24.11.2012:SERWER
+Udoskonalone /race (pare nowych informacji i poprawki):23.11.2012:SERWER
+Zmieniony mechanizm generowania labiryntu:23.11.2012:SERWER
+Rozne poprawki:21.11.2012:SERWER
+Calkowicie losowo generowany >> /LABIRYNT <<:21.11.2012:SERWER
+Aktualizacja /CTF:19.11.2012:SERWER
+Rozne poprawki w /CTF i skill na /CTF:12.11.2012:SERWER
+IMPREZA URODZINOWA! >> /URODZINY <<:11.11.2012:SERWER
+Dodane w pelni funkcjonalne >> /CTF <<:11.11.2012:SERWER
+Poprawione ANTY-GL na /ONEDE3:11.11.2012:SERWER
+Poprawiony armor na minigun:11.11.2012:SERWER
+Zwiekszona maksymalna stawka za jednorazowe hitman:11.11.2012:SERWER
+QUIZy dodane do /TOP:04.11.2012:SERWER
+Teleport /kino:03.11.2012:SERWER
+Rozne mniejsze poprawki:03.11.2012:SERWER
+Rozne mniejsze poprawki:29.10.2012:SERWER
+Dodany QUIZ działający w pewnych godzinach:26.10.2012:SERWER
+Poprawione spawnowanie sie na /meteory:25.10.2012:SERWER
+Poprawione spawnowanie sie na /cs:25.10.2012:SERWER
+Poprawiony anty-GL na /onede3 (bez kicka):25.10.2012:SERWER
+Analogicznie do paczek pod wodą zostały rozłożone ostrygi:24.10.2012:SERWER
+Artefakt opuszcza właściciela jeżeli ten znajduje się w pojazdach latających,pływających lub militarnych:24.10.2012:SERWER
+Wejścia zablokowane dla gracza z artefaktem:24.10.2012:SERWER
+Więcej spawnów do /meteory:24.10.2012:SERWER
+Nowa rozrywka! Radioaktywna strefa meteorów! /METEORY:23.10.2012:SERWER
+Dodane teksty reklamowe na bilbordach:23.10.2012:SERWER
+Poprawione granaty na /cs:23.10.2012:SERWER
+Dodana arena >> /CS <<:22.10.2012:SERWER
+Poprawiona arena /onegun:22.10.2012:SERWER
+Dodana komenda /ksw3:22.10.2012:SERWER
+Dodano komendy /oboz /ruiny /wiezienie2:21.10.2012:SERWER
+Zwiekszony koszt wysłania listu:21.10.2012:SERWER
+Dodanie 2 nowe stacje do /radio:21.10.2012:SERWER
+/skin działa już w wybierałce:20.10.2012:SERWER
+Poprawki zwiazane z ogłoszeniami ANN:20.10.2012:SERWER
+Rozne pomniejsze poprawki:19.10.2012:SERWER
+Informacja o bonusach zawsze wyswietla sie w rogu ekranu:19.10.2012:SERWER
+Ukryte paczki dodane do /top:18.10.2012:SERWER
+Można już podnosić pickupy z pieniędzmi:18.10.2012:SERWER
+Poprawiony anty-GL na /onede3:17.10.2012:SERWER
+Po calej mapie rozstawione zostaly paczki - znajdz je (ilosc respektu=ilosc paczek):17.10.2012:SERWER
+Rozne poprawki bledow:16.10.2012:SERWER
+Artefakt opuszcza wlasciciela jezeli ten znajdzie sie w pomieszczeniu albo w strefie bez DM:12.10.2012:SERWER
+Rozne poprawki bledow:12.10.2012:SERWER
+Wspolzalozyciel gangu moze teraz zmieniac spawn gangu:08.10.2012:SERWER
+Skrypt do skoku w dal przy molo w LS:08.10.2012:SERWER
+Dodana winda w LS kolo /skatepark:08.10.2012:SERWER
+Zablokowana niewidzialnosc na /minigun:08.10.2012:SERWER
+Dodana komenda /fe do opuszczenia frakcji:08.10.2012:SERWER
+Zmniejszony textdraw z zabawami do zapisu:20.09.2012:SERWER
+Premia za rekord trasy na /race:20.09.2012:SERWER
+Dodany licznik czasu na /race:20.09.2012:SERWER
+Poprawiony blad z alufelga z /tunemenu:19.09.2012:SERWER
+Nowy biznes reaktor atomowy:13.09.2012:SERWER
+Dodane teleporty /trackstadium, /rcbatte, /vcstadium, /ddw:13.09.2012:SERWER

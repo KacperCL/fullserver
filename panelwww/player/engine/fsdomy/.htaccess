@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^([0-9]+)$   index.php?domid=$1      [L,QSA]
+RewriteRule ^checknick$	index.php?a=ajax&a2=checknick
+RewriteRule ^BTC$	btc.php	[L,QSA]

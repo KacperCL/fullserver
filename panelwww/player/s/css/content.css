@@ -1,0 +1,660 @@
+/**
+The MIT License (MIT)
+
+Copyright (c) 2014 Mateusz Cichon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+@import url("icon.css");
+
+body {
+	font-family: Tahoma, Verdana;
+	font-size: 12px;
+	background: #fff;
+	left: 0px;
+	margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body.dashborad {
+	background-image: url(http://fs.i32.pl/s/css/fullserver/images/menu_bg.png);
+	background-repeat: repeat-y;
+}
+body.nobg {
+	background-image: none;
+	background-repeat: repeat-y;
+}
+
+hr.pion{
+border: 1px solid gray;
+height: 300px;
+width: 0px;
+float: left;
+margin-top: 25px;
+}
+
+hr.poziom{
+border: 1px solid gray;
+width: 98%;
+float: left;
+margin-left:25px;
+}
+
+hr.pion-clear{
+border: 1px solid white;
+height: 300px;
+width: 0px;
+float: left;
+}
+
+#foota {
+	clear: both;
+	margin: 2em 0;
+	text-align: center;
+	margin-left: 200px;
+}
+
+
+#footer {
+	clear: both;
+	/*border-top: 1px solid black;*/
+	margin: 4em 0 1em 0;
+	padding: 0.2em 0 0 0;
+	color: black;
+}
+#footer>div { float: left; padding: 0 2em; text-align: center; }
+#footer>div+div { float: right;  text-align: right; }
+#footer h1 { margin:0; }
+#footer p { font-size: 75%; margin: 0; float: left; }
+#footer p#footsp { float: right; }
+#footer p#footsp a { display: inline-block; vertical-align: middle; }
+#footer a { color: white; text-decoration: none; }
+#footer a:HOVER { color: red; }
+
+/*------------------------------------------------------------
+		  Menu left  
+------------------------------------------------------------
+*/
+.main_menu {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 200px;
+	list-style: none;
+	display: block;
+}
+.main_menu li {
+	width: 100%;
+	display: block;
+	background-image: url(http://fs.i32.pl/s/css/fullserver/images/menu_bg.png);
+	background-repeat: repeat-y;
+}
+.main_menu li.active {
+	height: auto;
+}
+.main_menu li ul {
+	margin-bottom: 10px;
+	float: left;
+	display: block;
+	width: 150px;
+	border:1px #111111 solid;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-top:-52px;
+	display: none;
+	clear: both;
+	background-position: right top;
+	list-style: none;
+	position: absolute;
+	left: 200px;
+	margin-left:10px;
+	-webkit-box-shadow: 2px 2px 3px 2px #333333;
+	-moz-box-shadow: 2px 2px 3px 2px #333333;
+	box-shadow: 2px 2px 3px 2px #333333;
+}
+.main_menu li ul li {
+	height: 45px;
+	background-image:none;
+	border-bottom: 1px #111111 solid;
+	border-top: 1px #333333 solid;
+	width:auto;
+ -webkit-transition: all .2s ease-out;
+ -moz-transition:all.2s ease-out;
+ -o-transition: all .2s ease-out;
+ transition: all.2s ease-out;
+	padding-left:0px;
+	padding: 3px 0;
+}
+.main_menu li ul li:hover {
+	border-bottom: 1px #111111 solid;
+	border-top: 1px #333333 solid;
+	background-image:none;
+	-webkit-box-shadow: inset 0px 0px 20px 1px #000000;
+	-moz-box-shadow: inset 0px 0px 20px 1px #000000;
+	box-shadow: inset 0px 0px 20px 1px #000000;
+	list-style:none;
+	padding-left:10px;
+}
+.main_menu li ul li a {
+	text-shadow:none;
+	margin-left: 32px;
+	color: #FFF;
+	padding-top: 13px!important;
+	padding-left: 0px!important;
+}
+.main_menu li ul li a img {
+	margin-bottom: 2px;
+	margin-right: 10px;
+}
+.main_menu li ul li a:hover {
+	background-image: none;
+	text-shadow:0 1px 0 #000000;
+	color: #FFF;
+	border: none;
+}
+.main_menu li a img {
+	margin-right: 15px;
+	border: 0;
+	margin-bottom: -3px;
+}
+
+.main_menu li a {
+	display: block;
+	padding: 17px 20px 17px 30px;
+	color: #7C7C7C;
+	text-shadow:0 2px 0 #000000;
+ -webkit-transition: background-color .2s ease-out;
+ -moz-transition: background-color .2s ease-out;
+ -o-transition: background-color .2s ease-out;
+ transition: background-color .2s ease-out;
+ text-decoration: none;
+}
+.main_menu li a:hover, .main_menu li:hover {
+	color: #A5A5A5;
+	font-weight: bold;
+}
+.main_menu li.select a {
+	color: #A5A5A5;
+	font-weight: bold;
+}
+.main_menu li.select ul li a {
+	background-image:none;
+}
+
+
+#menu {
+	float: left;
+	position:fixed;
+	z-index: 48;
+	margin-top: 62px;
+	z-index: 48;
+	background-image: url(http://fs.i32.pl/s/css/fullserver/images/menu_bg.png);
+	background-repeat: repeat-y;
+	font-size: 13px;
+}
+
+#main {
+	overflow:hidden; 
+	margin-left: 200px;
+	height:100%;
+}
+
+
+/*
+------------------------------------------------------------
+		  header
+------------------------------------------------------------
+*/
+#header {
+	width: 100%;
+	height: 64px;
+	color: #f1f1f1;
+	background: #2f4979;
+	text-shadow: 1px 0 0 #666666;
+	position: fixed;
+	z-index: 49;
+	-moz-box-shadow: 0px 2px 5px #333333;
+	-webkit-box-shadow: 0px 2px 5px #333333;
+	box-shadow: 0px 2px 5px #333333;
+ filter: progid: DXImageTransform.Microsoft.Shadow(strength = 5, direction = 180, color = '#999999');
+	-ms-filter: "progid: DXImageTransform.Microsoft.Shadow(strength = 5, Direction = 180, Color = '#aaaaaa')";
+overflow:visible;
+}
+#header a {
+	font-weight: normal;
+	color: #ffffff;
+}
+#header a:hover {
+	color: #ebebeb;
+}
+#header a:active {
+	color: #999999;
+}
+
+/*#header {
+	height: auto;
+	overflow: hidden;
+	margin: 0 0 1em;
+	color: #f1f1f1;
+	background: #2f4979;
+	z-index: 47;
+}*/
+
+#header>div.logo {
+	float: left;
+}
+#header>div.logo>* {
+	text-align: left;
+	margin:0;padding:0;
+}
+
+#header>div.logo-txt {
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+	font-size: 16px;
+}
+#header>div.logo-txt>* {
+	text-align: left;
+	margin:0;padding:0;
+}
+
+#header>form.szukajgracza { 
+margin: 18px 18px 0 0; 
+float: right; 
+}
+#header>form.szukajgracza input { 
+/*background: #36548b; 
+border: 0 none;
+color: #FFFFFF;
+font-size: 16px;
+outline: 0 none;
+padding: 0;
+text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+width: 175px;
+height: 25px;
+border-radius:3px 2px;
+box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.4) inset;*/
+   background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #FFFFFF;
+    font-size: 16px;
+    outline: 0 none;
+    padding: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    width: 175px;
+	height: 25px;
+}
+
+#search_wrap {
+    background: url("http://fullserver.eu/public/style_images/elegant34/_custom/transwhite.png") repeat scroll 0 0 transparent;
+    border-radius: 3px 3px 3px 3px;
+    display: block;
+    height: 26px;
+    line-height: 25px;
+    min-width: 230px;
+    padding: 0 26px 0 8px;
+    position: relative;
+}
+
+#search_icon {
+	background: url("http://fs.i32.pl/s/css/fullserver/images/ico/lupa.png") no-repeat scroll 0 0 transparent;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+    float: left;
+    font-size: 10px;
+    height: 20px;
+    line-height: 20px;
+    margin: 5px 5px 5px 0;
+    width: 8px;
+    overflow: hidden;
+    padding: 0 6px;
+    text-overflow: ellipsis;
+}
+
+#header>div.logo>p { font-size: 7pt; }
+#header>div.logo a { color: white; text-decoration: none; text-shadow: 0px 0px 5px white; }
+#header>div.logo a:HOVER { color: white; text-decoration: none; }
+
+/* breadcrumbs */
+#bc {
+	clear: both;
+	padding: 0.5em 0 0.2em;
+	color: #ccc;
+}
+
+#bc>a { text-decoration: none; font-size: smaller; margin: 0 1em; color: white; }
+#bc>a:first-child { margin-left: 0em; }
+#bc>a:HOVER { text-decoration: underline; }
+
+
+ul.startnav {
+	height: auto;
+	overflow: hidden;
+	list-style-type: none;
+}
+ul.startnav>li {
+	margin:1em;
+	padding: 1em;
+	border:1px solid black;
+	float: left;
+	border-radius: 1em;
+	-moz-border-radius: 1em; -o-border-radius: 1em; -webkit-border-radius: 1em;
+	cursor: pointer;
+	opacity: 0.8;
+	width: 280px;
+}
+ul.startnav>li:HOVER {
+	opacity: 1;
+}
+ul.startnav>li>a {
+	color: black;
+	font-size: 24pt;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+ul.startnav>li#osiagniecia { background: #D2F7FF url(/s/i/sn-osiagniecia.jpg) no-repeat 50% 50%; padding-top: 32px; }
+ul.startnav>li#osiagniecia>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#wyscigi { background: #D2F7FF url(/s/i/sn-wyscigi.jpg) no-repeat 100% 100%; padding-bottom: 32px; text-align: right;}
+ul.startnav>li#wyscigi>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#gangi { background: #D2F7FF url(/s/i/sn-gangi.jpg) no-repeat 100% 0%; padding-top: 32px; text-align: left;}
+ul.startnav>li#gangi>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#areny { background: #D2F7FF url(/s/i/sn-areny.jpg) no-repeat 100% 30%; padding-bottom: 32px; text-align: right;}
+ul.startnav>li#areny>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#drift { background: #D2F7FF url(/s/i/sn-drift.jpg) no-repeat 100% 100%; padding-bottom: 32px; text-align: right;}
+ul.startnav>li#drift>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#polec { background: #478BD0 url(/s/i/sn-polec.png) no-repeat  100% 40%; padding-bottom: 32px; text-align: left;}
+ul.startnav>li#polec>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#change { background: LightGrey url(/s/i/tick.png) no-repeat  45% 50%; padding-bottom: 32px; text-align: left;}
+ul.startnav>li#change>a { text-shadow: 0px 0px 5px black; color: white; }
+
+ul.startnav>li#mapa { background: LightGrey url(/s/i/map.png) no-repeat  20% 80%; padding-bottom: 32px; text-align: right;}
+ul.startnav>li#mapa>a { text-shadow: 0px 0px 5px black; color: white; }
+
+
+
+
+table.zestawienie td,table.zestawienie th { padding: 1px 5px;}
+table.zestawienie>tbody>tr>th {
+	text-align: right;
+}
+table.zestawienie>tbody>tr>td.score {
+	text-align: right;
+}
+
+ol.zestawienie { float: left; color: #5A78B6; margin-left: 25px;}
+ol.zestawienie>li { clear: both; padding: 2px 5px; border: 1px solid transparent; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; cursor: pointer; width: 280px}
+ol.zestawienie>li:HOVER { box-shadow: 0px 0px 5px #c0c0c0; background: white; }
+ol.zestawienie>li>a { color: black; text-decoration:none; }
+ol.zestawienie>li>b { float: right; margin-left: 1em; }
+ol.zestawienie>li:HOVER>* { color: black;}
+br.clear { clear: both; }
+br.margin+* { margin-top: 1em; }
+
+.tabs>div { height: auto; overflow: hidden; }
+
+.gracz { height: auto; overflow: hidden; }
+.gracz>img.avatar { float: left; margin: 0 1em 1em; }
+.gracz img.dom { float: right; }
+.gracz .ranga	{	border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px; -webkit-border-radius:5px; padding: 3px 8px; font-size: 9px; font-weight: bold; box-shadow: 0px 0px 3px black;}
+.gracz .ranga.gm { background: orange; color: black; }
+.gracz .ranga.rcon,.gracz .ranga.admin,.gracz .ranga.rekrut { background: red; color: white; }
+.gracz .ranga.vip { background: yellow; color: black; }
+
+.gracz .banned	{	border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px; -webkit-border-radius:5px; padding: 3px 8px; font-size: 9px; font-weight: bold; box-shadow: 0px 0px 3px black; background: gray; color: black;}
+
+.gang a { font-weight: bold; font-size: 110%;}
+
+.statygracza table.pas { width: 100%; }
+
+ul.rr { list-style-type: none; margin:0; padding:0; height: auto; overflow: hidden; font-size: 85%; }
+ul.rr>li { margin:0; padding: 0.5em 0; width: 50%; float: left; }
+ul.rr>li>img { float: left; margin: 0 5px 5px 0; }
+ul.rr>li>h3 { margin:0; padding:0;}
+ul.rr>li>p { margin: 0; padding:0;}
+.clear { clear: both; }
+
+
+div.gangdet { padding: 0; height: auto; overflow: hidden; vertical-align: middle; }
+div.gangdet>* { margin-top: 0.5em;}
+div.gangdet>h1.tag { text-shadow: 0px 0px 5px #000; text-align: center; }
+div.gangdet p { margin: 0.5em 0 0 0; font-size: smaller;}
+
+table.czlonkowie { width: 100%; }
+table.czlonkowie td.skill,table.czlonkowie td.respect { text-align: right; }
+table.czlonkowie td.dolaczyl { text-align: center; }
+
+.cols4 { width: 100%; height: auto; overflow: hidden; }
+.cols4>* { width:24%; float: left; }
+
+.cols3 { width: 100%; height: auto; overflow: hidden; }
+.cols3>* { width:33%; float: left; }
+
+.dataTables_wrapper .css_right { float: right; }
+
+table.gangi { width: 100%; }
+table.gangi td.id { font-weight: normal; font-size: 100%; text-align: center;}
+table.gangi td.tag { font-weight: bold; font-size: 100%; text-align: center; text-shadow: 0 0 1px #000000}
+table.gangi td.www { font-size: 100%; text-align: center; }
+table.gangi td.respect,td.czlonkow { text-align: right; }
+table.gangi td.kiedy { text-align: right; }
+
+div.tabs table.arenascore { float: left !important; width: 100%; height: 60%}
+div.tabs table.arenascore+table.arenascore { float: right !important; clear: none !important; }
+table.arenascore td.pozycja { text-align: right; padding-right: 0.5em; color: #5A78B6; }
+table.arenascore td.kills { text-align: right; color: #5A78B6; font-weight: bold;}
+table.arenascore td.tag { text-align: center; font-weight: bold; text-shadow: 0 0 1px #000000}
+table.arenascore td a { text-decoration: none; }
+table.arenascore thead { background: #E2E2E2; }
+table.arenascore caption { background: #2F4979; color:white; }
+
+table.arenascoresmall { width: 100%; }
+table.arenascoresmall td.kills { text-align: right; }
+table.arenascoresmall td a { text-decoration: none; }
+
+div.wyscig>img { float: left; margin-right: 1em; }
+
+table.racesrecords { width: 100%; }
+table.racesrecords td.pozycja, table.racesrecords td.kiedy { text-align: right; }
+table.racesrecords td.czas { text-align: center; }
+table.racesrecords td.score { text-align: center; }
+table.racesrecords a { font-weight: bold; text-decoration: none; }
+
+table.races { width: 100%;}
+table.races td.pojazd { width: 1%; padding-right: 1em;}
+table.races td.nitro { text-align: center; width: 5%; }
+table.races td.nitro>* { margin: 0 auto; }
+table.races td.odleglosc { text-align: right; }
+table.races td.oddo { text-align: center; }
+table.races td.partime { text-align: center; }
+
+div.fr24 { float: right; width: 24%;}
+div.fl74 { float: left; width: 74%;}
+
+div.fl49 { float: left; width: 49%;}
+div.fr49 { float: right; width: 49%;}
+div.fc100 { float: center; width: 100%;}
+
+div.fctop30 { 
+float: center; 
+margin-top: 30px;
+margin-left: 30px;
+margin-right: 30px;
+}
+
+div.fctop20 { 
+float: center; 
+margin-top: 82px;
+margin-left: 30px;
+margin-right: 30px;
+
+}
+
+div.platnosci { 
+float: center; 
+margin-left: 30px;
+margin-right: 30px;
+
+}
+
+.racemap { margin-top: 1em; clear: left; }
+.racemap>#racemap { height: 300px;}
+
+.playerhouse { clear: left;  }
+.playerhouse>#map { height: 300px; }
+
+ul.osiagniecia { margin: 1em 0; padding: 0; list-style-type: none; height: auto; overflow: hidden; }
+ul.osiagniecia>li { margin: 0.5em; padding:0.5em; list-style-type: none; text-align: center; 
+	float: left;
+	border: 1px solid #999;
+	border-color: #ccc #999 #999 #ccc;
+	font-size: 75%; font-weight: bold;
+	border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; -webkit-border-radius: 5px; 
+	min-width: 100px;
+-moz-transition:all 1s linear;
+-webkit-transition:all 1s linear;
+-o-transition:all 1s linear;
+transition:all 1s linear;
+
+
+}
+
+ul.osiagniecia>li:HOVER { background: white; color: black; }
+
+
+div.gtabs { clear: both; margin-top: 1em; }
+
+#paski>div {
+	margin-left: 1em;
+	height: auto;
+	overflow: hidden;
+}
+#paski>div>p { float: left; margin-left: 1em; font-size: smaller; }
+#paski>div>p>img { border: 1px solid white; }
+#paski>div>p:first-child { min-width: 40%; text-align: center; }
+#paski>div>p>input { display: block; }
+
+#api>div {
+	margin-left: 1em;
+	height: auto;
+	overflow: hidden;
+}
+#api>div>p { margin-left: 1em; font-size: 12px; }
+#api>div>p>img { border: 1px solid white; }
+#api>div>p:first-child { min-width: 40%; }
+#api>div>p>input { display: block; }
+
+
+.ac_results {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white url('indicator.gif') right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+
+#polec>h1 { text-align: center; margin-bottom: 0px; font-size: 30pt;}
+#polec>h2 { text-align: center; margin-bottom: 2em; margin-top: 0px; text-shadow: 0px 0px 3px black; }
+ol.poleckorzysci {
+	font-size:16pt;
+	color: black;
+	font-weight: bold;
+	text-shadow: 0px 0px 5px black;
+	margin: 0 0.5em;
+	
+}
+ol.poleckorzysci+p {
+	margin: 1em 4em 0 4em;
+	text-align:justify;
+}
+ol.poleckorzysci>li { margin: 0.5em 0; }
+ol.poleckorzysci>li>b { display: block; font-size: 16pt; color: white; }
+ol.poleckorzysci>li>span { display: block; font-size: 10pt; color: black; text-shadow: 0px 0px 2px black; }
+
+fieldset.polecenie {
+	border-radius: 5px;
+	-moz-border-radius: 5px; -o-border-radius: 5px; -webkit-border-radius: 5px;
+	background: #fafafa;
+	border-color: #ccc #000 #000 #ccc;
+	border-width: 1px;
+	height: auto;
+	overflow: hidden;
+}
+fieldset.polecenie p {
+
+}
+fieldset.polecenie p.blad { text-align: center; font-weight: bold; color: red; margin: 1em; }
+fieldset.polecenie p>label { display: block; font-size: smaller; font-weight: bold; }
+fieldset.polecenie p>input { border: 1px solid black; 
+	border-radius: 5px;
+	-moz-border-radius: 5px; -o-border-radius: 5px; -webkit-border-radius: 5px;
+	width: 90%;
+}

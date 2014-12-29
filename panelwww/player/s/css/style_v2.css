@@ -1,0 +1,576 @@
+/**
+The MIT License (MIT)
+
+Copyright (c) 2014 Mateusz Cichon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*
+	Create by 7hd for fullserver.eu
+	Copyright (C) 2013 by fullserver.eu
+*/
+
+@charset 'UTF-8';
+
+/************************************************/
+/* Basic                                        */
+/************************************************/
+	html
+	{
+		padding: 0px;
+	}
+
+	body
+	{
+		background: #f7f7f7;
+		margin: 0px;
+		width: 100%;
+		height: 100%;
+	}
+	
+	body,input,textarea,select
+	{
+		font-family: 'Arial', sans-serif;
+		font-size: 9pt;
+		line-height: 1.75em;
+		color: #404040;
+	}
+	
+	/* Header */
+	
+	#header
+	{
+		width: 100%;
+		height: 86px;
+		background-color: #2f4979;
+		position: fixed;
+		margin: 0px;
+	}
+	
+	#logo
+	{
+		float: left;
+		margin-top: 12px;
+	}
+	
+	#p-search
+	{
+		float: right;
+		margin: 31px;
+	}
+	
+	/* Left panel / menu */
+	
+	#left
+	{
+		margin-top: 86px;
+		height: 100%;
+		min-width: 240px;
+		float: left;
+		position: fixed;
+		background: #1b1b1b;
+		color: #565656;
+		text-decoration: none;
+		box-shadow: -0.25em 0px 0.25em 0px rgba(0, 0, 0, 0.125) inset;
+		line-height: 2.25em;
+		font-size: 10pt;
+	}
+	
+	#left a:active
+	{
+		text-decoration:none;
+		color: #2a406b;
+	}
+	
+	#left a:link 
+	{
+		color: #565656;
+		text-decoration:none;
+	}
+	
+	#left a:visited
+	{
+		color: #565656;
+		text-decoration:none;
+	}
+		
+	#left a:hover
+	{
+		text-decoration:none;
+		color: #2a406b;
+	}
+	
+	/* Menu Left */
+	
+	#l-nav 
+	{
+		display: block;
+		margin-top: 30px;
+	}
+	
+	#l-nav ul
+	{
+		list-style-type: none;
+		margin-left: -40px;
+	}
+	
+	#l-nav ul li
+	{
+		margin-left: 0px;
+		width: 240px;
+	}	
+	
+	#l-nav ul li:active
+	{
+		display: block;
+		background: #0e0e0e;
+		box-shadow: 0px 0px 0.25em 0px rgba(0, 0, 0, 0.125);
+	}
+	
+	#l-nav ul li:hover
+	{
+		display: block;
+		background: #0e0e0e;
+		box-shadow: 0px 0px 0.25em 0px rgba(0, 0, 0, 0.125);
+	}
+	
+	#l-nav ul li a 
+	{
+		width: 240px;
+		margin: 0px;
+		display: block;
+	}
+	
+	#l-nav ul li a span
+	{
+		position: relative;
+		margin-left: 80px;
+		width: 240px;
+	}
+	
+	/* Left menu style for icons */
+	
+	#lhome
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/6.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lhome:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/6.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lachievments
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/27.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lachievments:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/27.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}	
+	
+	#larenas
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/23.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#larenas:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/23.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lgangs
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/14.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lgangs:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/14.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}	
+	
+	#lraces
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/74.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lraces:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/74.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#ldrift
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/58.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#ldrift:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/58.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}	
+	
+	#lrecommend
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/54.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lrecommend:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/54.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lchange
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/10.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lchange:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/10.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}	
+
+	#lmap
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/20.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lmap:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/20.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lsupport
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Gray/38.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}
+	
+	#lsupport:hover
+	{
+		background-image: url('http://rinv.com.pl/fullserver/topsecred/icons/Blue/38.png');
+		background-repeat: no-repeat;
+		background-position: 22% 43%;
+	}	
+	
+	/* Main - container for all informations */
+		
+	#main
+	{
+		float: left;
+		margin-top: 86px;
+		width: 100%;
+		color: #1b1b1b;
+		text-decoration: none;
+	}
+	
+	#main a:hover, #main a:active, #main a:visited, #main a:link
+	{
+		color: #1b1b1b;
+		text-decoration: none;
+	}
+	/* Top bar for menu etc. */
+	
+	#top
+	{
+		color: #1b1b1b;
+		margin-left: 220px;
+	}
+	
+	/* Menu Right */
+	
+	#p-nav 
+	{
+		background: #fff;
+		float: left;
+		margin: 0 auto;
+		line-height: 0.5em;
+		font-size: 8pt;
+		width: 100%;
+		display: block;
+		text-align: center;
+		box-shadow: 0px 0px 0.25em 0px rgba(0, 0, 0, 0.125);
+		padding: 0px;
+	}
+	
+	#p-nav ul
+	{
+		text-align: center;
+		display: inline-block;
+	}
+	
+	#p-nav ul li
+	{
+		height: 100%;
+		list-style-type: none;
+		float: left;
+		text-align: center;	
+		display: block;
+	}	
+	
+	#p-nav ul li a
+	{
+	}
+	
+	#p-nav ul li a:hover
+	{
+		color: #2f4979;
+	}
+	
+	#p-nav ul li a:active
+	{
+		color: #2f4979;
+	}
+	
+	#p-nav ul li a span
+	{
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+	}
+	
+	/* Container !!! */
+	
+	#container
+	{
+		height: 100%;
+		margin-top: 70px;
+		margin-bottom: 40px;
+		margin-left: 280px;
+		margin-right: 40px;
+	}
+	
+	#box
+	{
+		min-height: 800px;
+		height: 100%;
+		width: 80%;
+		background: #fff;
+		box-shadow: 0px 0px 0.25em 0px rgba(0, 0, 0, 0.125);
+		margin: 0 auto;
+	}
+	
+	.title 
+	{
+		padding: 20px;
+		margin: 0 auto;
+		font-size: 26px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 2.25em;
+		color: #2f4979;
+		text-transform:uppercase;
+	}
+	
+	.title2 
+	{
+		padding: 20px;
+		margin: 0 auto;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 2.25em;
+		color: #2f4979;
+		text-transform:uppercase;
+	}
+	
+	.content
+	{
+		padding: 35px;
+		padding-top: 0px;
+	}
+	
+	.stats-top
+	{
+		padding: 0px;
+		color: #d1d1d1;
+		font-size: 10pt;
+		line-height: 2em;
+		border-bottom: 1px solid #f7f7f7;
+		text-transform: uppercase;
+	}
+	
+	.stats-top li
+	{
+		display: inline-block;
+	}
+	
+	.position-top
+	{
+		margin-left: 5px;
+	}
+	
+	.nick-top
+	{
+		margin-left: 10px;
+	}
+	
+	.points-top
+	{
+		float:right;
+		padding-right: 5px;
+	}
+	
+	.stats-content
+	{
+		padding: 0px;
+		color: #1b1b1b;
+		font-size: 10pt;
+		line-height: 1.6em;
+		margin-top: -14px;
+	}
+	
+	.stats-content dt, .stats-content dd
+	{
+		display: inline-block;
+	}
+	
+	.sc-table
+	{
+		list-style-type: none;
+	}
+	
+	.sc-row
+	{
+		border-bottom: 1px solid #f7f7f7;
+		display: table;
+		width: 100%;
+	}
+	
+	.sc-row-in
+	{
+		display: block;
+	}
+	
+	.sc-number
+	{
+		margin-left: 5px;
+		color: #2f4979;
+		width: 20px;
+	}
+	
+	.sc-name
+	{
+		margin-left: 10px;
+	}
+	
+	.sc-score
+	{
+		float:right;
+		padding-right: 5px;
+		color: #2f4979;
+	}
+	
+	.sc-inf1
+	{
+		display: table;
+		margin-left: 38px;
+		width: 30%;
+		float: left;
+	}
+	
+	.sc-inf2
+	{
+		display: table;
+		width: 30%;
+		float: left;
+		text-align: center;
+	}
+	
+	.sc-inf3
+	{
+		float: right;
+		width: 28%;
+		text-align: right;
+		padding-right: 5px;
+	}
+	
+	.ins
+	{
+		font-style: normal;
+		color: #2f4979;
+	}
+	
+	/* Footer */
+	
+	#footer
+	{
+		padding-left: 240px;
+		line-height: none;
+		font-size: 7pt;
+		color: #828282;
+		height: 30px;
+	}
+	
+	#foot-container
+	{
+		width: 550px;
+		margin: 0px auto;
+	}
+	
+	#info
+	{
+		display: inline;
+		margin-left: 20px;
+		float: right;
+	}
+	
+	#copyright
+	{
+		display: inline;
+		float: left;
+	}

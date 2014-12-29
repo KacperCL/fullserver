@@ -26,54 +26,48 @@ SOFTWARE.
 
 stock ContainsIP(const string[])
 {
-    static
-        RegEx:rCIP,
-    RegEx:rTOS;
+  static RegEx:rCIP;
 
-    if ( !rCIP )
-        rCIP = regex_build(".*[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,7}[0-9]{3,5}.*");
-  if ( !rTOS )
-    rTOS = regex_build(".*( TOS | tos| ToS |otherside|OtherSide|OTHERSIDE|otherSide| Tos ).*");
+  if ( !rCIP ) rCIP = regex_build(".*[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,3}[0-9]{1,3}[^0-9]{1,7}[0-9]{3,5}.*");
 
-    if (regex_match_exid(string, rCIP)) return true;
-  else if (regex_match_exid(string, rTOS)) return true;
+  if (regex_match_exid(string, rCIP)) return true;
   else return false;
 }
 
 stock NinjaBan(const string[])
 {
-    static
-    RegEx:rLAG;
-
-  if ( !rLAG )
-    rLAG = regex_build(".*(l+a+g+|aim|s0b|sobe).*");
-
-    if (regex_match_exid(string, rLAG)) return true;
-  else return false;
+   #pragma unused string
+   return false;
 }
 
 stock IsValidEmail(const string[])
 {
-    static
-    RegEx:rEMAIL;
+  static RegEx:rEMAIL;
 
-  if ( !rEMAIL )
-    rEMAIL = regex_build("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
+  if ( !rEMAIL ) rEMAIL = regex_build("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$");
 
-    if (regex_match_exid(string, rEMAIL)) return true;
+  if (regex_match_exid(string, rEMAIL)) return true;
   else return false;
 }
+
 #else
 
 stock ContainsIP(const string[])
+{
+  #pragma unused string
   return false;
+}
 
 stock NinjaBan(const string[])
+{
+  #pragma unused string
   return false;
+}
 
 stock IsValidEmail(const string[])
+{
+  #pragma unused string
   return false;
-
-
+}
 #endif
 // EOF

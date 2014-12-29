@@ -1,0 +1,8 @@
+<map edf:definitions="editor_main">
+    <vehicle id="vehicle (Sentinel) (1)" paintjob="3" interior="0" alpha="255" model="405" plate="Y4QUN3L" dimension="0" color="101,106,121,245,245,245,0,0,0,0,0,0" posX="-2162.8999" posY="293.79999" posZ="35.1" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Stratum) (1)" paintjob="3" interior="0" alpha="255" model="561" plate="IV5NF9Y" dimension="0" color="39,47,75,147,163,150,0,0,0,0,0,0" posX="-2171.3999" posY="306.20001" posZ="35" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (PCJ-600) (1)" paintjob="3" interior="0" alpha="255" model="461" plate="91KDYFZ" dimension="0" color="145,115,71,245,245,245,0,0,0,0,0,0" posX="-2214.30005" posY="307" posZ="34.8" rotX="0" rotY="0" rotZ="2.5"></vehicle>
+    <vehicle id="vehicle (Sultan) (1)" paintjob="3" interior="0" alpha="255" model="560" plate="F475BBO" dimension="0" color="158,164,171,151,149,146,0,0,0,0,0,0" posX="-2196.7998" posY="293.69922" posZ="34.9" rotX="0" rotY="0" rotZ="180"></vehicle>
+    <vehicle id="vehicle (Tram) (1)" paintjob="3" interior="0" alpha="255" model="449" plate="ZG4ZCPS" dimension="0" color="245,245,245,96,26,35,0,0,0,0,0,0" posX="-2264.8999" posY="527.40002" posZ="35.6" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Police SF) (2)" paintjob="3" interior="0" alpha="255" model="597" plate="OLT7584" dimension="0" color="0,0,0,245,245,245,0,0,0,0,0,0" posX="-2241.69922" posY="535.89941" posZ="35" rotX="0" rotY="0" rotZ="27.999"></vehicle>
+</map>

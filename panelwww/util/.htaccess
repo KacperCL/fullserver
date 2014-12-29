@@ -1,0 +1,19 @@
+<FilesMatch ".(.*sql|.*~|.*bak)$">
+  Order deny,allow
+  Deny from all
+</FilesMatch>
+
+# Turn it on
+ExpiresActive On
+# Set a default expiry time.
+ExpiresDefault A604800
+# Turn expiry off for dynamic content (or potentially dynamic content).
+ExpiresByType application/x-httpd-php A0
+ExpiresByType application/x-python-code A0
+ExpiresByType text/html A0
+
+<FilesMatch ".(php|py|pyc|pyo)$">
+  ExpiresActive Off
+</FilesMatch>
+
+Options -Indexes

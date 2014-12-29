@@ -1,0 +1,11 @@
+<map edf:definitions="editor_main">
+    <vehicle id="vehicle (Washington) (1)" paintjob="3" interior="0" alpha="255" model="421" plate="DZ29OIB" dimension="0" color="63,62,69,245,245,245,0,0,0,0,0,0" posX="-2754.6001" posY="364.60001" posZ="4.2" rotX="0" rotY="4" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Police SF) (2)" paintjob="3" interior="0" alpha="255" model="597" plate="N28FWAT" dimension="0" color="0,0,0,245,245,245,0,0,0,0,0,0" posX="-2657.6001" posY="357.29999" posZ="4" rotX="0" rotY="355.75" rotZ="0"></vehicle>
+    <object id="object (CJ_BUSH_PROP) (1)" breakable="true" interior="0" collisions="true" alpha="255" model="1364" doublesided="false" scale="1" dimension="0" posX="-2685.8999" posY="389.79999" posZ="4.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_BUSH_PROP) (2)" breakable="true" interior="0" collisions="true" alpha="255" model="1364" doublesided="false" scale="1" dimension="0" posX="-2685.5" posY="360.89999" posZ="4.2" rotX="0" rotY="0" rotZ="178.25"></object>
+    <object id="object (CJ_BUSH_PROP) (3)" breakable="true" interior="0" collisions="true" alpha="255" model="1364" doublesided="false" scale="1" dimension="0" posX="-2728.69995" posY="390" posZ="4.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (CJ_BUSH_PROP) (4)" breakable="true" interior="0" collisions="true" alpha="255" model="1364" doublesided="false" scale="1" dimension="0" posX="-2728.6001" posY="361.29999" posZ="4.2" rotX="0" rotY="0" rotZ="179"></object>
+    <vehicle id="vehicle (Nebula) (1)" paintjob="3" interior="0" alpha="255" model="516" plate="3FKYUGO" dimension="0" color="38,55,57,245,245,245,0,0,0,0,0,0" posX="-2586.19922" posY="307.7998" posZ="4.8" rotX="0" rotY="0" rotZ="90"></vehicle>
+    <object id="object (veg_procfpatch01) (1)" breakable="true" interior="0" collisions="true" alpha="255" model="875" doublesided="false" scale="1" dimension="0" posX="-2680.3999" posY="398.70001" posZ="5.4" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (veg_Pflowers03) (1)" breakable="true" interior="0" collisions="true" alpha="255" model="876" doublesided="false" scale="1" dimension="0" posX="-2723.3999" posY="400.10001" posZ="5.5" rotX="0" rotY="0" rotZ="0"></object>
+</map>

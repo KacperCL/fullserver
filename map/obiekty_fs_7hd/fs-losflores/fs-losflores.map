@@ -1,0 +1,9 @@
+<map edf:definitions="editor_main">
+    <vehicle id="vehicle (Savanna) (1)" paintjob="3" interior="0" alpha="255" model="567" plate="BTCJWGD" dimension="0" color="68,98,79,245,245,245,0,0,0,0,0,0" posX="2751.69995" posY="-1175.80005" posZ="69.4" rotX="0" rotY="0" rotZ="89.995"></vehicle>
+    <vehicle id="vehicle (Cabbie) (1)" paintjob="3" interior="0" alpha="255" model="438" plate="WWJ0Y2Q" dimension="0" color="215,142,16,164,160,150,0,0,0,0,0,0" posX="2637.8999" posY="-1390" posZ="30.6" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Hermes) (2)" paintjob="3" interior="0" alpha="255" model="474" plate="24OOZWB" dimension="0" color="108,132,149,245,245,245,0,0,0,0,0,0" posX="2558.5" posY="-1195.40002" posZ="61.1" rotX="9.75" rotY="0" rotZ="359.247"></vehicle>
+    <vehicle id="vehicle (Voodoo) (1)" paintjob="3" interior="0" alpha="255" model="412" plate="YVZ5Q30" dimension="0" color="94,112,114,245,245,245,0,0,0,0,0,0" posX="2692.5" posY="-1189.19995" posZ="69.2" rotX="0" rotY="0" rotZ="90"></vehicle>
+    <vehicle id="vehicle (Clover) (1)" paintjob="3" interior="0" alpha="255" model="542" plate="CMUDVCY" dimension="0" color="132,148,171,109,108,110,0,0,0,0,0,0" posX="2597.30005" posY="-1251.5" posZ="47" rotX="5.243" rotY="3.013" rotZ="269.724"></vehicle>
+    <vehicle id="vehicle (Utility Van) (2)" paintjob="3" interior="0" alpha="255" model="552" plate="A7BMMN1" dimension="0" color="173,176,176,173,176,176,0,0,0,0,0,0" posX="2548.09961" posY="-1437.2998" posZ="23.8" rotX="0" rotY="0" rotZ="273.499"></vehicle>
+    <vehicle id="vehicle (Tornado) (1)" paintjob="3" interior="0" alpha="255" model="576" plate="AR641Z7" dimension="0" color="77,50,47,155,159,157,0,0,0,0,0,0" posX="2556.59961" posY="-1215.89941" posZ="53.8" rotX="359.006" rotY="353.496" rotZ="91.884"></vehicle>
+</map>

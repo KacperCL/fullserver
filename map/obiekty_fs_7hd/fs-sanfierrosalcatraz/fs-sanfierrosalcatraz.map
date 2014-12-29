@@ -1,0 +1,8 @@
+<map edf:definitions="editor_main">
+    <object id="object (nw_bit_07) (1)" breakable="true" interior="0" collisions="true" alpha="255" model="11509" doublesided="false" scale="1" dimension="0" posX="-1938.187" posY="2600.143" posZ="93.0625" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (land_SFN15) (1)" breakable="true" interior="0" alpha="255" model="9218" doublesided="false" scale="1" dimension="0" posX="-2277.3" posY="1687" posZ="-80.511" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (nw_bit_06) (2)" breakable="true" interior="0" alpha="255" model="11628" doublesided="false" scale="1" dimension="0" posX="-2227.726" posY="1636.016" posZ="-59.667" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (nw_bit_07) (2)" breakable="true" interior="0" alpha="255" model="11509" doublesided="false" scale="1" dimension="0" posX="-2023.843" posY="1643.024" posZ="-49.394" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (nw_bit_01) (1)" breakable="true" interior="0" alpha="255" model="11629" doublesided="false" scale="1" dimension="0" posX="-2131.859" posY="1865.141" posZ="-54.831" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (land2_sfN08) (1)" breakable="true" interior="0" alpha="255" model="9291" doublesided="false" scale="1" dimension="0" posX="-2359.437" posY="1952.539" posZ="-157.432" rotX="0" rotY="0" rotZ="0"></object>
+</map>

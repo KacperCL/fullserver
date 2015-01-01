@@ -53,7 +53,7 @@ Poziomy zapisane w bazie danych, w tabeli z graczami to:
 	5 - j.w. z malym twistem
 
 Administratorzy RCON, aby sie zalogowac musza posiadac w bazie danych level rowny 4
-lub 5. Haslo zwyklego admina ustawia sie za pomoc¹ komendy /ahaslo <haslo>, lub w
+lub 5. Haslo zwyklego admina ustawia sie za pomoca komendy /ahaslo <haslo>, lub w
 bazie danych, w tabeli fs_config (u¿ywana jest funkcja md5 z sola).
 
 Logowanie administratorow odbywa sie poprzez wpisanie komendy /alogin <haslo><spacja>.

@@ -8,7 +8,7 @@
 <script async src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script async src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{padding-top:20px;padding-bottom:20px;background:rgb(166,147,167) url(/bg-gta1.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center bottom;}.header,.jumbotron{margin-bottom:1em;}.header{border-bottom:1px solid #e5e5e5;}.header h3{padding-bottom:19px;margin-top:0;margin-bottom:0;line-height:40px;}@media (min-width: 868px) {.container{max-width:830px;}}.header h1{color:white;}.nav-pills>li>a{color:white;}.nav>li>a:hover,.nav>li>a:focus{background:navy;}.form-control{width:auto;}</style>
+<style>body{padding-top:20px;padding-bottom:20px;background:rgb(166,147,167) url(bg-gta1.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center bottom;}.header,.jumbotron{margin-bottom:1em;}.header{border-bottom:1px solid #e5e5e5;}.header h3{padding-bottom:19px;margin-top:0;margin-bottom:0;line-height:40px;}@media (min-width: 868px) {.container{max-width:830px;}}.header h1{color:white;}.nav-pills>li>a{color:white;}.nav>li>a:hover,.nav>li>a:focus{background:navy;}.form-control{width:auto;}</style>
 </head>
 <body><div class="container">
 <div class="header">
@@ -43,7 +43,7 @@
 <a target="_blank" href="i/4.JPG"><img src="i/4.JPG" style="max-width: 100%"></a>
 </p>
 <p>Klikamy w link phpMyAdmin i logujemy się za pomocą tych danych.</p>
-<p>Po zalogowaniu klikamy w naszą bazę danych po lewej stronie, po prawej w zakładkę import, wybieramy plik i wskazujemy plik <b>svn/schema/schema_data.sql</b> który znajduje się w archiwum które pobrałeś.<br/>
+<p>Po zalogowaniu klikamy w naszą bazę danych po lewej stronie, po prawej w zakładkę import, wybieramy plik i wskazujemy plik <b>gamemode/schema/schema_data.sql</b> który znajduje się w archiwum które pobrałeś.<br/>
 <a target="_blank" href="i/5.JPG"><img src="i/5.JPG" style="max-width: 100%"></a>
 </p>
 <p>Jeszcze przycisk wykonaj i gotowe.</p>
@@ -53,17 +53,17 @@
 </center><br/>
 <div class="jumbotron">
 <h1>3. Kompilacja</h1>
-<p>Przechodzimy do folderu <b>svn/gamemode/gamememodes</b> i znajdujemy plik <b>make2.bat</b>. Otwieramy go naszym ulubionym edytorem tekstowym (my polecamy <a href="http://notepad-plus-plus.org/download/v6.6.8.html">Notepad++</a>).
+<p>Przechodzimy do folderu <b>gamemode/gamememodes</b> i znajdujemy plik <b>make2.bat</b>. Otwieramy go naszym ulubionym edytorem tekstowym (my polecamy <a href="http://notepad-plus-plus.org/download/v6.6.8.html">Notepad++</a>).
 <br/>
 <a target="_blank" href="i/6.JPG"><img src="i/6.JPG" style="max-width: 100%"></a>
 </p>
-<p>Znajdujemy linijkę <b>set GMHOST=127.0.0.1</b> i zamieniamy IP na adres na którym chcemy odpalić nasz serwer. Tak samo postępujemy z następną linijką (<b>set GMPORT=7777</b>). Teraz lokalizjemy linijkę <b>set GMKEY=TWOJ_KOD_Z_SMSA</b> i zamieniamy jej wartość na kod zwrotny z SMSa.</p>
-<p>Teraz przechodzimy do katalog <b>svn/gamemode/include/fullserver</b> i lokalizujemy plik <b>fs_header.inc</b>. Znowu otwieramy go edytorem tekstu i znajdujemy linijkę <b>#define SALT_ALOGIN         "KiciaWielebny"</b>. Zamieniamy treść pomiędzy cudzysłowiami na losowy ciąg znaków. To będzie unikalna sól służąca do zabezpieczenia hasła admina przechowywanego w bazie. Następnie przechodzimy do pliku <b>utility_functions.inc</b> i do linijki <b>format(hashed, sizeof hashed, "%s<u>nhugdij89^Dhcd</u>%s", playerName, password);</b>. Zastępujemy ciąg znaków pomiędzy dwoma <i>%s</i> na inny losowy ciąg. To będzie nasza sól służąca zabezpieczeniu haseł graczy. BARDZO WAŻNE JEST ABYŚ NIE POMIJAŁ TEGO PUNKTU. W PRZECIWNYM WYPADKU TWÓJ SERWER MOŻE BYĆ NARAŻONY NA ATAKI W PRZYPADKU WYCIEKU BAZY DANYCH!</p>
-<p>Ponownie wracamy do <b>svn/gamemode/gamememodes</b> i klikamy dwukrotnie na <b>make2.bat</b>. Otworzy się okno konsoli:<br/>
+<p>Znajdujemy linijkę <b>set GMHOST=127.0.0.1</b> i zamieniamy IP na adres na którym chcemy odpalić nasz serwer. Tak samo postępujemy z następną linijką (<b>set GMPORT=7777</b>).</p>
+<p>Teraz przechodzimy do katalog <b>gamemode/include/fullserver</b> i lokalizujemy plik <b>fs_header.inc</b>. Znowu otwieramy go edytorem tekstu i znajdujemy linijkę <b>#define SALT_ALOGIN         "KiciaWielebny"</b>. Zamieniamy treść pomiędzy cudzysłowiami na losowy ciąg znaków. To będzie unikalna sól służąca do zabezpieczenia hasła admina przechowywanego w bazie. Następnie przechodzimy do pliku <b>utility_functions.inc</b> i do linijki <b>format(hashed, sizeof hashed, "%s<u>nhugdij89^Dhcd</u>%s", playerName, password);</b>. Zastępujemy ciąg znaków pomiędzy dwoma <i>%s</i> na inny losowy ciąg. To będzie nasza sól służąca zabezpieczeniu haseł graczy. BARDZO WAŻNE JEST ABYŚ NIE POMIJAŁ TEGO PUNKTU. W PRZECIWNYM WYPADKU TWÓJ SERWER MOŻE BYĆ NARAŻONY NA ATAKI W PRZYPADKU WYCIEKU BAZY DANYCH!</p>
+<p>Ponownie wracamy do <b>gamemode/gamememodes</b> i klikamy dwukrotnie na <b>make2.bat</b>. Otworzy się okno konsoli:<br/>
 <a target="_blank" href="i/7.JPG"><img src="i/7.JPG" style="max-width: 100%"></a>
 </p>
 <p>Poczekaj aż konsola wyświetli tekst <b>Press any key to continue...</b> i zamknij ją wciskając dowolny klawisz.</p>
-<p>Przejdź do pliku <b>build.log</b> w katalogu <b>svn/gamemode/gamememodes</b> i otwórz go edytorem tekstu. Zweryfikuj, że kompilator nie zwrócił żadnych błędów. Jeżeli wszystko się udało log powinien wyglądać podobnie do tego:<br/>
+<p>Przejdź do pliku <b>build.log</b> w katalogu <b>gamemode/gamememodes</b> i otwórz go edytorem tekstu. Zweryfikuj, że kompilator nie zwrócił żadnych błędów. Jeżeli wszystko się udało log powinien wyglądać podobnie do tego:<br/>
 <a target="_blank" href="i/8.JPG"><img src="i/8.JPG" style="max-width: 100%"></a>
 </p>
 </div>
@@ -79,11 +79,11 @@
 <ul class="">
 <li>Usuwamy zawartość katalogów <b>gamemodes</b>, <b>filterscripts</b>, <b>plugins</b>, <b>scriptfiles</b>, <b>npcmodes</b></li>
 <li>Usuwamy katalog <b>include</b></li>
-<li>Do katalogu <b>gamemodes</b> kopiujemy skompilowany plik <b>svn/gamemode/gamemodes/fs.amx</b></li>
-<li>Do katalogu <b>scriptfiles</b> kopiujemy katalog <b>svn/gamemode/scriptfiles/FullServer</b></li>
-<li>Do katalogu <b>plugins</b> kopiujemy wszystkie pliki z końcówką <b>.so</b> z katalogu <b>svn/gamemode/plugins</b></li>
-<li>Do katalogu <b>filterscripts</b> kopiujemy wszystkie pliki z końcówką <b>.amx</b> z katalogu <b>svn/gamemode/filterscripts</b></li>
-<li>Kopiujemy katalog <b>audiopacks</b> i plik <b>audio.ini</b> z <b>svn/gamemode</b></li>
+<li>Do katalogu <b>gamemodes</b> kopiujemy skompilowany plik <b>gamemode/gamemodes/fs.amx</b></li>
+<li>Do katalogu <b>scriptfiles</b> kopiujemy katalog <b>gamemode/scriptfiles/FullServer</b></li>
+<li>Do katalogu <b>plugins</b> kopiujemy wszystkie pliki z końcówką <b>.so</b> z katalogu <b>gamemode/plugins</b></li>
+<li>Do katalogu <b>filterscripts</b> kopiujemy wszystkie pliki z końcówką <b>.amx</b> z katalogu <b>gamemode/filterscripts</b></li>
+<li>Kopiujemy katalog <b>audiopacks</b> i plik <b>audio.ini</b> z <b>gamemode</b></li>
 <li>Otwieramy plik server.cfg z FTP i edytujemy go w następujący sposób:
 <ul>
 <li>Zmianiamy <b>rcon_password</b> na swoje hasło RCON. Hasło RCON musi zostać zakodowane poprzez <a href="http://rot13.com/">http://rot13.com/</a></li>

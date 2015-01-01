@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+<title>FullServer - GitHub</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css"/>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script async src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script async src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{padding-top:20px;padding-bottom:20px;background:rgb(166,147,167) url(/bg-gta1.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center bottom;}.header,.jumbotron{margin-bottom:1em;}.header{border-bottom:1px solid #e5e5e5;}.header h3{padding-bottom:19px;margin-top:0;margin-bottom:0;line-height:40px;}@media (min-width: 868px) {.container{max-width:830px;}}.header h1{color:white;}.nav-pills>li>a{color:white;}.nav>li>a:hover,.nav>li>a:focus{background:navy;}.form-control{width:auto;}</style>
+</head>
+<body><div class="container">
+<div class="header">
+<ul class="nav nav-pills pull-right">
+<li class="active"><a href="#">Obiekty</a></li>
+<li><a href="index.html">Pomoc</a></li>
+<li><a href="https://github.com/eider-i128/fullserver">GitHub</a></li>
+</ul>
+<h3 class="etext-muted">FullServer - Wiki (Obiekty)</h3>
+</div>
+<div class="jumbotron">
+<h1>Obiekty</h1>
+<p>Obiekty podzielone są na dwie częsci - TXT (w pliku .txt linijki z CreateDynamicObject) oraz MAP (plik .map bezpośrednio z MTA). Za ładowanie obiektów TXT odpowiada skrypt objs.p a za ładowanie obiektów MAP odpowiada skrypt mtaloader.p</p>
+<p>Pierwszym etapem będzie wypakowanie archiwum z obiektami. Po wypakowaniu powinniśmy ujrzeć następujące drzewo katalogów:<br/>
+<a target="_blank" href="i/14.JPG"><img src="i/14.JPG" style="max-width: 100%"></a>
+</p>
+<p>Poświęćmy chwilę na wytłumaczenie od czego konkretne pliki są. Wiemy już, że objs.p ładuje obiekty TXT a mtaloader ładuje obiekty MAP. Czym więc jest plik objectloader-template.p? Jest to po prostu kopia objs.p. Używaliśmy pojedycznych skryptów do ładowania osobnych plików od osobnych maperów. Nie powinieneś na razie zawracać sobie głowy tym plikiem.</p>
+<p>Zobaczmy jak wygląda plik objs.p:<br/>
+<a target="_blank" href="i/15.JPG"><img src="i/15.JPG" style="max-width: 100%"></a>
+</p>
+<p>Jak widzimy ścieżki do include są identyczne jak w gamemodzie. Ma to związek ze sposobem kompilowania skryptów jakiego używaliśmy. Możesz zamienić te ścieżki na inne, tak abyś mógł kompilować te skrypty normalnie. Pamiętaj tylko aby include zgadzały się z tymi których używasz do gamemode.</p>
+<p>Zobaczmy teraz na tablicę pliki[]. Jest to po prostu lista plików z katalogu <b>scriptfiles</b>. Jeżeli chcesz załadować inne pliki musisz dodać kolejny wpis w tablicy i skompilować skrypt na nowo. Jeżeli któregoś z plików nie ma - serwer nie uruchomi się! W pliku mtaloader.p znajduje się identyczna tablica z listą plików, z tym wyjątkiem, że pliki muszą znajdować się w katalogu <b>scriptfiles/mta</b>.</p>
+<p>Skopiujmy więc pliki do odpowiednich katalogów. Pliki znajdują się w katalogu <b>obiekty_fs</b> w wypakowanych archiwum. W tym przykładzie załadujemy zarówno obiekty MTA jak i TXT. Pamiętaj, że niektóre obiekty (np. areny do zabaw) są w obiektach TXT. W obiektach MAP znajdują się głównie pojazdy. Po skopiowaniu drzewo katalogów na FTP powinno wyglądać mniej więcej tak:<br/>
+<a target="_blank" href="i/16.JPG"><img src="i/16.JPG" style="max-width: 100%"></a>
+</p>
+<p>Teraz musimy w <b>server.cfg</b> w linijce <b>filterscripts</b> na końcu dopisać <b>mtaloader objs</b> aby serwer załadował nasze skrypty.</p>
+<p>Uruchamiamy nasz serwer i czekamy chwilę aż się załaduje. Jeżeli wszystko się udało to serwer powinien być online a obiekty powinny być załadowane. Aby to sprawdzić zaglądamy do logów serwera. Powinniśmy znaleźć w nich takie linijki:<br/>
+<a target="_blank" href="i/17.JPG"><img src="i/17.JPG" style="max-width: 100%"></a>
+</p>
+</div>
+<br/>
+<center>
+</center>
+</body>
+</html>

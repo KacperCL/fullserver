@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+<title>FullServer - GitHub</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css"/>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script async src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script async src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{padding-top:20px;padding-bottom:20px;background:rgb(166,147,167) url(/bg-gta1.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center bottom;}.header,.jumbotron{margin-bottom:1em;}.header{border-bottom:1px solid #e5e5e5;}.header h3{padding-bottom:19px;margin-top:0;margin-bottom:0;line-height:40px;}@media (min-width: 868px) {.container{max-width:830px;}}.header h1{color:white;}.nav-pills>li>a{color:white;}.nav>li>a:hover,.nav>li>a:focus{background:navy;}.form-control{width:auto;}</style>
+</head>
+<body><div class="container">
+<div class="header">
+<ul class="nav nav-pills pull-right">
+<li class="active"><a href="#">Launcher</a></li>
+<li><a href="index.html">Pomoc</a></li>
+<li><a href="https://github.com/eider-i128/fullserver">GitHub</a></li>
+</ul>
+<h3 class="etext-muted">FullServer - Wiki (Launcher)</h3>
+</div>
+<div class="jumbotron">
+<h1>1. Przygotowania</h1>
+<p>Projekt jest przygotowany pod Visual Studio 2013, więc musimy go pobrać. Visual Studio 2013 nie działa pod systemem <b>Windows XP</b>. Pobieramy wersję <b>Desktop</b> ponieważ tworzymy aplikację desktopową, a nie ModernUI.</p>
+<p>Visual Studio 2013 możemy pobrać z oficjalnej strony Microsoftu - <a href="http://www.visualstudio.com/en-us/downloads">http://www.visualstudio.com/en-us/downloads</a><br/>
+<a target="_blank" href="i/18.JPG"><img src="i/18.JPG" style="max-width: 100%"></a></p>
+<p>W celu pobrania Visual Studio musimy posiadać konto Microsoft. Jeżeli go nie posiadamy przechodzimy do punktu 2. Jeżeli je posiadamy przechodzimy do punktu 3.<br/>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>2. Rejestracja konta Microsoft</h1>
+<p>W celu pobrania Visual Studio 2013 musimy stworzyć konto Microsoft. Na ekranie logowania klikamy <b>Nie masz konta Microsoft? Utwórz konto teraz</b><br/>
+<a target="_blank" href="i/19.JPG"><img src="i/19.JPG" style="max-width: 100%"></a>
+</p>
+<p>Wypełniamy wszystkie pola i klkamy przycisk 'utwórz konto'<br/>
+<a target="_blank" href="i/20.JPG"><img src="i/20.JPG" style="max-width: 100%"></a>
+</p>
+<p>Odbieramy email od Microsoftu i klikamy w link aktywacyjny.</p>
+<p>Ponownie przechodzimy do strony pobierania Visual Studio i logujemy się naszym nowo utworzonym kontem Microsoft.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>3. Pobieranie Visual Studio 2013</h1>
+<p>Po zalogowaniu się kontem Microsoft ujrzymy ekran wyboru wersji zachęcający nas do wybróbowania wersji Ultimate. Wybieramy wersję <b>Express</b>.
+<br/>
+<a target="_blank" href="i/21.JPG"><img src="i/21.JPG" style="max-width: 100%"></a>
+</p>
+<p>W tej chwili przeglądarka zapyta nas o pobranie pliku. Pobieramy go i otwieramy.</p>
+<p>W oknie instalatora postępujemy zgodnie z instrukcjami. Nie powinno być to trudne.</p>
+<p>Po instalacji otwieramy Visual Studio 2013 i wybieramy z prawego górnego rogu opcję 'Sign In'<br/>
+<a target="_blank" href="i/22.JPG"><img src="i/22.JPG" style="max-width: 100%"></a>
+</p>
+<p>Po zalogowaniu ignorujemy pole do wypełnienia nazwy domeny i stworzenia konta Visual Studio Online i klikamy 'Kontynuuj'.</p>
+<p>Teraz kiedy jesteśmy już zalogowani i Visual Studio jest aktywowane możemy otworzyć nasz projekt. Klikamy 'FILE' i 'Open Project'. Znajdujemy i otwieramy plik <b>fsLauncher.sln</b></p>
+<p>Ponieważ Visual Studio jest cały czas aktualizowane, może nam pojawić się komunikat o aktualizacji projektu. W takim wypadku zgadzamy się na to.<br/>
+<a target="_blank" href="i/23.JPG"><img src="i/23.JPG" style="max-width: 100%"></a>
+</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>4. Edycja</h1>
+<p>Ponieważ edycja form wymaga wygenerowania nowych plików które są usunięte aby zmniejszyć wielkość arhiwum najpierw musimy skompilować projekt. Wybieramy 'BUILD' i 'Build Solution'.</p>
+<p>Po udanej kompilacji z menu z boku wybieramy 'Header files' i zaznaczamy 'mainWindow.h'. Czekamy aż Visual Studio załaduje dynamiczny projekt formy i możemy edytować wygląd formy.<br/>
+<a target="_blank" href="i/24.JPG"><img src="i/24.JPG" style="max-width: 100%"></a>
+<p>Większość tekstu na formie mainWindow.h jest w postaci obrazków. Obrazki te znajdują się w folderze <b>fsLauncher</b>.</p>
+<p>W celu edycji kodu klikamy PPM na białym obszarze edytora formy i wybieramy 'View Code'.</p>
+<p>W celu edycji adresu serwera SA-MP znajdujemy kod <b>gethostbyname("samp.fullserver.eu");</b> i podmieniamy go na swoją nazwę domeny lub wpisujemy <b>nodomain.tld</b> jeżeli nie mamy. Następnie znajdujemy <b>runGame(nickName, "178.19.106.171", 7777, "");</b> i zamieniamy adres IP na swój.</p>
+<p>W celu edycji adresu buttona Facebooka znajdujemy <b>openBrowser("https://www.facebook.com/fullserver");</b> i zamieniamy adres URL na swój.</p>
+<p>W celu edycji adresu forum znajdujemy <b>openBrowser("http://fullserver.eu");</b> i zamieniamy adres URL na swój.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>5. Pliki newsów i aktualizacji.</h1>
+<p>Za newsy odpowiada plik <b>news.htm</b> a za tło newsów plik <b>news_feed_background.png</b>. Oba pliki musisz skopiować na swój serwer WWW a potem znaleźć kod <b>this->newsBrowser->Navigate("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/news.htm");</b> i podmienić adres URL na swój.</p>
+<p>Za aktualizację odpowiada plik <b>checkin.xml</b>. Musisz go skopiować na swój adres WWW a potem znaleźć kod <b>XmlTextReader^ reader = gcnew XmlTextReader("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/checkin.xml");</b> i podmienić adres URL na swój.</p>
+<p>W pliku checkin.xml wpis <b>updater</b> oznacza wersję Launchera, która zapisana jest w pliku <b>main.h</b>. Za wersję SA-MP odpowiada wpis <b>samp</b>. W tym wpisie znajduje się suma MD5 pliku samp.dll. Aby launcher mógł prawidłowo sprawdzić wersję SA-MP musi być w tym samym katalogu co GTA San Andreas. W celu obliczenia ręcznie sumy MD5 pliku samp.dll można wykorzystać np. program <a href="http://winmd5.com/">WinMD5Free</a>.</p>
+<p>Po wykonaniu wszystkich zmian kompilujemy ponownie projekt używająć 'BUILD' i 'Build Solution'.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>6. Instalator</h1>
+<p>Projekt instalatora przygotowany jest pod NSIS. Pobieramy NSIS z linku <a href="http://nsis.sourceforge.net/Download">http://nsis.sourceforge.net/Download</a></p>
+<p>Po zainstalowaniu NSIS klikamy PPM na plik <b>fsLauncher.nsi</b> i wybieramy 'Compile Script'. Opcjonalnie możemy zedytować plik .nsi w celu edycji numeru wersji albo nazwy Launchera.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>7. Informacje</h1>
+<p>Trochę przydatnych informacji:
+<ul>
+<li>Instalator uwzględnia automatyczna instalację pakietu pomocniczego bibliotek Visual Studio 2013. Jeżeli korzystasz z nowszej wersji Visual Studio musisz pobrać odpowiedni pakiet w wersji x86 i wsadzić go do folderu <b>fsLauncher</b>. Plik powinien mieć nazwę <b>vcredist_x86.exe</b>.</li>
+<li>W katalogu <b>fsLauncher</b> znajduje się program <b>depends22_x86.zip</b>. Używaj go w celu wykrycia brakujących zależności jeżeli Launcher nie chce się włączyć na jakimś systemie.</li>
+<li>Wersję Launchera należy także zmienić w pliku <b>fsLuancher.rc</b>. Wersja Express Visual Studio nie umożliwia edycji plików Resource, więc musisz w tym celu użyć edytora tekstowego.</li>
+<li>Korzystamy z kontrolki SHDocVw w wersji 1.1 w celu kontroli zachowania WebBrowser wewnątrz launchera.</li>
+<li>Każdy z buttonów ma dwie wersję - zwykłą i hover (po najechaniu zmienia kolor).</li>
+<li>Plik tła launchera możesz edytować otwierając plik <b>sao_loader.xcf</b> w programie graficznym, np. GIMP.</li>
+<li>Czcionka użyta do buttonów Launchera to <b>White Rabbit</b>.</li>
+</div>
+<br/>
+<center>
+</center>
+</body>
+</html>

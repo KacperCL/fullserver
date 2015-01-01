@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+<title>FullServer - GitHub</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css"/>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script async src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script async src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{padding-top:20px;padding-bottom:20px;background:rgb(166,147,167) url(/bg-gta1.jpg);background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center bottom;}.header,.jumbotron{margin-bottom:1em;}.header{border-bottom:1px solid #e5e5e5;}.header h3{padding-bottom:19px;margin-top:0;margin-bottom:0;line-height:40px;}@media (min-width: 868px) {.container{max-width:830px;}}.header h1{color:white;}.nav-pills>li>a{color:white;}.nav>li>a:hover,.nav>li>a:focus{background:navy;}.form-control{width:auto;}</style>
+</head>
+<body><div class="container">
+<div class="header">
+<ul class="nav nav-pills pull-right">
+<li class="active"><a href="#">Gamemode XyzzyDM</a></li>
+<li><a href="index.html">Pomoc</a></li>
+<li><a href="https://github.com/eider-i128/fullserver">GitHub</a></li>
+</ul>
+<h3 class="etext-muted">FullServer - Wiki (XyzzyDM)</h3>
+</div>
+<div class="jumbotron">
+<h1>1. Konto na hostingu</h1>
+<p>Najpierw musimy utworzyć konto na hostingu. Z całego serca polecamy <a href="http://serverproject.pl">ServerProject.pl</a> który wspierał FullServer przez cały okres jego działania i nigdy nas nie zawiódł.</p>
+<p>Aby zarejestrować konto przechodzimy pod adres <a href="https://admin.serverproject.pl/register.php">https://admin.serverproject.pl/register.php</a> i wypełniamy formularz. Następnie odbieramy e-mail potwierdzający rejestrację i logujemy się na swoje konto.</p>
+<p>W zakładce 'zamówienie > utwórz nowe zamówienie' tworzymy nowy serwer tak jak na poniższym zrzucie ekranu (kliknij żeby powiększyć):<br/>
+<a target="_blank" href="i/1.JPG"><img src="i/1.JPG" style="max-width: 100%"></a>
+</p>
+<p>Teraz musimy opłacić nasze serwery aby zostały aktywowane:<br/>
+<a target="_blank" href="i/2.JPG"><img src="i/2.JPG" style="max-width: 100%"></a>
+</p>
+<p>Kiedy już opłacimy nasze serwery przechodzimy do kolejnego punktu.<br/></p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>2. Baza danych MySQL</h1>
+<p>W Panelu ServerProject przechodzimy do 'usługi' i klikamy 'instaluj' obok bazy danych MySQL:<br/>
+<a target="_blank" href="i/3.JPG"><img src="i/3.JPG" style="max-width: 100%"></a>
+</p>
+<p>Przechodzimy do 'zarządzanie' i spisujemy dane dostępowe do naszej bazy danych. Pamiętaj aby zapisać je w bezpiecznym miejscu i nie podawać losowym osobom!<br/>
+<a target="_blank" href="i/4.JPG"><img src="i/4.JPG" style="max-width: 100%"></a>
+</p>
+<p>Klikamy w link phpMyAdmin i logujemy się za pomocą tych danych.</p>
+<p>Po zalogowaniu klikamy w naszą bazę danych po lewej stronie, po prawej w zakładkę import, wybieramy plik i wskazujemy plik <b>svn/schema/schema_data.sql</b> który znajduje się w archiwum które pobrałeś.<br/>
+<a target="_blank" href="i/5.JPG"><img src="i/5.JPG" style="max-width: 100%"></a>
+</p>
+<p>Jeszcze przycisk wykonaj i gotowe.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>3. Kompilacja</h1>
+<p>Przechodzimy do folderu <b>svn/gamemode/gamememodes</b> i znajdujemy plik <b>make2.bat</b>. Otwieramy go naszym ulubionym edytorem tekstowym (my polecamy <a href="http://notepad-plus-plus.org/download/v6.6.8.html">Notepad++</a>).
+<br/>
+<a target="_blank" href="i/6.JPG"><img src="i/6.JPG" style="max-width: 100%"></a>
+</p>
+<p>Znajdujemy linijkę <b>set GMHOST=127.0.0.1</b> i zamieniamy IP na adres na którym chcemy odpalić nasz serwer. Tak samo postępujemy z następną linijką (<b>set GMPORT=7777</b>). Teraz lokalizjemy linijkę <b>set GMKEY=TWOJ_KOD_Z_SMSA</b> i zamieniamy jej wartość na kod zwrotny z SMSa.</p>
+<p>Teraz przechodzimy do katalog <b>svn/gamemode/include/fullserver</b> i lokalizujemy plik <b>fs_header.inc</b>. Znowu otwieramy go edytorem tekstu i znajdujemy linijkę <b>#define SALT_ALOGIN         "KiciaWielebny"</b>. Zamieniamy treść pomiędzy cudzysłowiami na losowy ciąg znaków. To będzie unikalna sól służąca do zabezpieczenia hasła admina przechowywanego w bazie. Następnie przechodzimy do pliku <b>utility_functions.inc</b> i do linijki <b>format(hashed, sizeof hashed, "%s<u>nhugdij89^Dhcd</u>%s", playerName, password);</b>. Zastępujemy ciąg znaków pomiędzy dwoma <i>%s</i> na inny losowy ciąg. To będzie nasza sól służąca zabezpieczeniu haseł graczy. BARDZO WAŻNE JEST ABYŚ NIE POMIJAŁ TEGO PUNKTU. W PRZECIWNYM WYPADKU TWÓJ SERWER MOŻE BYĆ NARAŻONY NA ATAKI W PRZYPADKU WYCIEKU BAZY DANYCH!</p>
+<p>Ponownie wracamy do <b>svn/gamemode/gamememodes</b> i klikamy dwukrotnie na <b>make2.bat</b>. Otworzy się okno konsoli:<br/>
+<a target="_blank" href="i/7.JPG"><img src="i/7.JPG" style="max-width: 100%"></a>
+</p>
+<p>Poczekaj aż konsola wyświetli tekst <b>Press any key to continue...</b> i zamknij ją wciskając dowolny klawisz.</p>
+<p>Przejdź do pliku <b>build.log</b> w katalogu <b>svn/gamemode/gamememodes</b> i otwórz go edytorem tekstu. Zweryfikuj, że kompilator nie zwrócił żadnych błędów. Jeżeli wszystko się udało log powinien wyglądać podobnie do tego:<br/>
+<a target="_blank" href="i/8.JPG"><img src="i/8.JPG" style="max-width: 100%"></a>
+</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>4. Wgrywanie plików</h1>
+<p>Instalujemy serwer SA-MP identycznie jak w przypadku serwera MySQL. Pamiętaj aby wybrać najnowszą dostępną wersję SA-MP. Po zainstalowaniu spisz dane dostępowe do konta FTP i zainstaluj klienta FTP. My polecamy program <a href="https://filezilla-project.org/download.php?type=client">FileZilla</a><br/>
+<a target="_blank" href="i/9.JPG"><img src="i/9.JPG" style="max-width: 100%"></a>
+</p>
+<p>Łączymy się przy użyciu wcześniej zapisanych danych i wykonujemy po kolei te polecenia:
+<ul class="">
+<li>Usuwamy zawartość katalogów <b>gamemodes</b>, <b>filterscripts</b>, <b>plugins</b>, <b>scriptfiles</b>, <b>npcmodes</b></li>
+<li>Usuwamy katalog <b>include</b></li>
+<li>Do katalogu <b>gamemodes</b> kopiujemy skompilowany plik <b>svn/gamemode/gamemodes/fs.amx</b></li>
+<li>Do katalogu <b>scriptfiles</b> kopiujemy katalog <b>svn/gamemode/scriptfiles/FullServer</b></li>
+<li>Do katalogu <b>plugins</b> kopiujemy wszystkie pliki z końcówką <b>.so</b> z katalogu <b>svn/gamemode/plugins</b></li>
+<li>Do katalogu <b>filterscripts</b> kopiujemy wszystkie pliki z końcówką <b>.amx</b> z katalogu <b>svn/gamemode/filterscripts</b></li>
+<li>Kopiujemy katalog <b>audiopacks</b> i plik <b>audio.ini</b> z <b>svn/gamemode</b></li>
+<li>Otwieramy plik server.cfg z FTP i edytujemy go w następujący sposób:
+<ul>
+<li>Zmianiamy <b>rcon_password</b> na swoje hasło RCON. Hasło RCON musi zostać zakodowane poprzez <a href="http://rot13.com/">http://rot13.com/</a></li>
+<li>Zmieniamy <b>gamemode0</b> na <b>gamemode0 fs</b></li>
+<li>Zmieniamy <b>filterscripts</b> na <b>filterscripts check tiry latanie jetmax fishing fsradio biznesy wheel burdele bordy</b></li>
+<li>Zmieniamy <b>plugins</b> na <b>plugins regex.so streamer.so sscanf.so crashdetect.so mysql.so MapAndreas.so audio.so dc_cmd.so</b></li>
+<li>Zmieniamy <b>rcon</b> na <b>rcon 0</b> aby zablokować potencjalne próby włamania na konsolę RCON. To ustawienie wyłączy zdalną konsolę RCON. Na niektórych hostingach może ograniczyć możliwości panelu. To ustawienie NIE zablokuje /rcon login w grze.</li>
+<li>Zmieniamy <b>announce</b> na <b>announce 1</b></li>
+</li>
+</ul>
+</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>5. Pierwszy start</h1>
+<p>Uruchamiamy serwer i czekamy chwilę. Serwer powinien sam się wyłączyć. Sprawdzamy logi. W tej chwili ostatnie linijki w logach powinny wyglądać tak jak na zrzucie poniżej. Jeżeli z jakiegoś powodu nie wyglądają tak sprawdź ponownie wszystkie kroki powyżej.<br/>
+<a target="_blank" href="i/10.JPG"><img src="i/10.JPG" style="max-width: 100%"></a>
+</p>
+<p>Jeżeli wszystko się zgadza przechodzimy w FTP do folderu <b>scriptfiles/FullServer</b> i pobieramy plik <b>config.db</b></p>
+<p>Teraz musimy zainstalować edytor SQLite. My polecamy <a href="http://www.sqliteexpert.com/download.html">SQLite Expert Personal</a></p>
+<p>Po zainstalowaniu edytora SQLite otwieramy nasz plik <b>config.db</b> i zaznaczamy tabelę <b>mysql_config</b>
+<p>Klikamy ikonkę [+] aby dodać nowy rekord<br/>
+<a target="_blank" href="i/11.JPG"><img src="i/11.JPG" style="max-width: 100%"></a>
+</p>
+<p>Teraz klikamy 2x na puste pole gdzie pisze (null) i powinno nam się otworzyć okno edycji rekordu.<br/>
+<a target="_blank" href="i/12.JPG"><img src="i/12.JPG" style="max-width: 100%"></a>
+</p>
+<p>Wypełniamy po kolei pola pomijając pierwsze (<b>RecNo</b>)
+<ul>
+<li>W <b>prefix</b> wpisujemy <b>fs_</b></li>
+<li>W <b>database</b> wpisujemy nazwę bazy danych</li>
+<li>W <b>username</b> wpisujemy nazwę użytkownika</li>
+<li>W <b>password</b> wpisujemy hasło użytkownika po zakodowaniu poprzez <a href="http://rot13.com/">http://rot13.com/</a></li>
+<li>W <b>hostname</b> wpisujemy adres IP bazy danych (nie adres WWW do phpMyAdmin)</li>
+</ul></p>
+<p>Zapisujemy plik i wgrywamy na serwer FTP.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>6. Drugi start</h1>
+<p>Ponownie uruchamiamy serwer. Czekamy chwilę i serwer powinien być już online. Aby się upewnić że wszystko jest okej otwieramy logi i sprawdzamy ostatnie linijki. Powinny wyglądać tak jak na zrzucie poniżej:<br/>
+<a target="_blank" href="i/13.JPG"><img src="i/13.JPG" style="max-width: 100%"></a>
+</p>
+<p>Wchodzimy na serwer i rejestrujemy konto które będzie kontem RCON.</p>
+<p>Ponownie logujemy się do phpMyAdmin i przechodzimy do tabeli <b>fs_players</b>. Znajdujemy nasze konto i klikamy 'edytuj'.</p>
+<p>Przy wartości <b>level</b> wpisujemy 4 i klikamy 'zapisz'.</p>
+<p>Ponownie wchodzimy na serwer i logujemy się. Po zalogowaniu się wpisujemy <b>/rcon login hasloRCON</b> gdzie <i>hasloRCON</i> to hasło RCON jakie ustawiliśmy.</p>
+<p>Wyświetli się informacje, że zalogowaliśmy się na RCON. Wpisujemy teraz komendę <b>/ahaslo hasloADMIN</b> gdzie <i>hasloADMIN</i> to hasło admina jakie chcemy ustawić. Podajemy je tylko adminom. Pamiętaj, że admin musi wpisać hasło ze spacją na końcu - tej spacji nie podaje się przy ustawianiu hasła.</p>
+</div>
+<br/>
+<center>
+</center><br/>
+<div class="jumbotron">
+<h1>7. Informacje</h1>
+<p>Trochę przydatnych informacji:
+<ul>
+<li>Poziom RCON to 4</li>
+<li>Poziom ukrytego RCON to 5</li>
+<li>Poziom admina to 3 lub 2 dla rekruta</li>
+<li>Poziom moderatora to 1 (loguje się bez hasła poprzez /gmlogin)</li>
+<li>Jeżeli z jakiegoś powodu po uruchomieniu serwera wszystkie wiadomości są na czarno a atrakcje startują co kilka sekund pobierz <a href="files/config.db">ten plik config.db</a> i podmień go. Pamiętaj o uzupełnieniu go danymi do MySQL.</li>
+<li>Lista komend dostępna jest pod <a href="files/commands.rar">tym linkiem</a></li>
+<li>Dodatkowe informacje dostępne w <a target="_blank" href="//github.com/lpiob/FullServer-XyzzyDM/wiki">oficjalnym repozytorium starszej wersji XyzzyDM</a></li>
+<li>Plugin MySQL którego używamy nie lubi hostname w postaci FQDN (np. mysql-1.ServerProject.pl) dlatego przed uzupełnieniem konfiguracji MySQL musimy sprawdzić prawdziwy adres IP dla domeny (np. poprzez komendę 'ping'). Dla podanego wcześniej przykładu adres IP to 178.19.106.174</li>
+</div>
+<br/>
+<center>
+</center>
+</body>
+</html>

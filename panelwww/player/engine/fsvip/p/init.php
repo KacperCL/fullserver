@@ -49,15 +49,5 @@ function sendmail($rcpt,$subj,$txt,$html=false) {
     'Reply-To: hostmaster@fullserver.eu' . "\r\n" .
     'X-Mailer: FSADM v2';
 	return mail($rcpt,$subj,$txt,$headers);
-    /*require_once("libs/Swift-4.0.6/lib/swift_required.php");
-    $transport = Swift_SmtpTransport::newInstance('localhost', 25);
-    $mailer = Swift_Mailer::newInstance($transport);
-    $message= Swift_Message::newInstance()
-        ->setFrom(array('hostmaster@fullserver.eu'=>'FullServer™'))
-        ->setTo($rcpt)
-        ->setSubject($subj)
-		->setBody($txt,'text/plain');
-	if ($html) $message->addPart($html,'text/html');
-	return $mailer->send($message);*/
 }
 // EOF

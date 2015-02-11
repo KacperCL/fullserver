@@ -1,17 +1,14 @@
 #!/bin/bash
 
-PWD=`pwd | grep l10n`
-if [ $PWD ]; then
-	print "Ten skrypt przeznaczony jest dla oryginalnej (polskiej) wersji jezykowej."
-	exit
-fi
-
 date
 
-SVER=`svnversion ../..`
-_SVER=${SVER:0:2}
-LOG=`echo "l($_SVER)/l(2)" | bc -l`
-LOG=${LOG:0:3}
+SVER=`git rev-parse HEAD`
+_SVER=${SVER:0:6}
+
+NUM=`git rev-list HEAD --count`
+
+LOG=`echo "l($NUM)/l(2)" | bc -l`
+LOG=${LOG:0:4}
 
 echo "/**
 The MIT License (MIT)
@@ -38,10 +35,10 @@ SOFTWARE.
 */
  " > ../include/fullserver/version.inc
  
-echo \#define GMVERSION \"$LOG\r$SVER\" >> ../include/fullserver/version.inc
+echo \#define GMVERSION \"$LOG\r$NUM-$_SVER\" >> ../include/fullserver/version.inc
 KIEDY=`date +%x\ %T`
 GDZIE=`hostname`
-GMHOST="192.168.1.100"
+GMHOST="127.0.0.1"
 GMPORT="7777"
 
 echo \#define GMCOMPILED \"skompilowana $KIEDY przez $USER@$GDZIE\" >> ../include/fullserver/version.inc

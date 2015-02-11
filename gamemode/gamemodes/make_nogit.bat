@@ -8,7 +8,7 @@ setlocal enabledelayedexpansion
 FOR /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set DATE=%%c-%%a-%%b)
 FOR /f "tokens=1-2 delims=/:" %%a in ('time /t') do (set TIME=%%a:%%b)
 
-set USER=none
+set USER=git
 set GDZIE=builder
 set GMHOST=127.0.0.1
 set GMPORT=7777

@@ -48,7 +48,7 @@ public OnFilterScriptInit(){
     lnum++;
     if (line[0]!='/' && strfind(line,"CreateDynamicObject",true)!=-1) {
       cnt++;
-      new objectid, Float:X,Float:Y,Float:Z,  Float:rx,Float:ry,Float:rz, worldid=-1, interiorid=-1,playerid=-1,Float:distance=300;
+      new objectid, Float:X,Float:Y,Float:Z,  Float:rx,Float:ry,Float:rz, worldid=-1, interiorid=-1,playerid=-1,Float:distance=200.0;
       if (sscanf(line,"p<,>'('iffffffD(-1)D(-1)D(-1)p<)>F(-1)",objectid,X,Y,Z,rx,ry,rz, worldid, interiorid, playerid, distance)) {
         if (sscanf(line,"p<,>'('ifffffp<)>f",objectid,X,Y,Z,rx,ry,rz)) {
           format(buf,sizeof buf,"%s, linia %d, blad w parsowaniu: %s", pliki[i],lnum, line);
@@ -69,7 +69,7 @@ public OnFilterScriptInit(){
  return 1;
 }
 
-CalculateObjectDistance(objectid){
+Float:CalculateObjectDistance(objectid){
   switch (objectid){
     case
       // wszystko z http://wiki.sa-mp.com/wiki/Object_Transportation_Roads%2C_Bridges%2C_and_Tunnels
@@ -108,14 +108,14 @@ CalculateObjectDistance(objectid){
       18788..18807,   // drogi 0.3c
       19300..19307, // ltalc bridge 0.3c
       12814:  // duza plyta
-      return 600;
+      return 600.0;
     case
       6959, // plyta srednia
       8661, // plyta srednia
       10828,  // duza brama
       16501,  // plyta mala ale moze uzywana do budow
       16775:  // plyta - brama garazowa
-      return 200;
+      return 200.0;
     case
       973,  // barierki
       3361, // schody
@@ -125,7 +125,7 @@ CalculateObjectDistance(objectid){
       9339, // murek
       9583, // lamp post
       16090:  // konstrukcja metalowa nad droga
-      return 150;
+      return 150.0;
     case
       718,  // palma
       1257, // przystanek
@@ -134,8 +134,8 @@ CalculateObjectDistance(objectid){
       3472: // lampa
 
 
-      return 100;
+      return 200.0;
   }
-  return 300;
+  return 200.0;
 }
 // EOF

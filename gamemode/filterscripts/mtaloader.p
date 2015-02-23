@@ -112,7 +112,7 @@ public OnFilterScriptExit()
 #define MAX_LOADED_ELEMENTS         8000	//Max number of vehicles + objects
 #define MAX_MAP_FILE_PATH           80
 #define VEHICLE_RESPAWN_DELAY 		300
-#define MAP_STREAM_DISTANCE          300.0
+#define MAP_STREAM_DISTANCE          200.0
 
 #define ADD_OBJECT(%1) 				CreateDynamicObject(%1, interior, world, -1, MAP_STREAM_DISTANCE)
 #define DELETE_OBJECT(%1)       	DestroyDynamicObject(%1)

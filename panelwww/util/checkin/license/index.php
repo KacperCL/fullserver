@@ -23,10 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+$fp=fopen("logs.txt", "a");
+flock($fp, 2);
+fwrite($fp, 'REMOTE_ADDR: '.$_SERVER['REMOTE_ADDR']."\n");
+fwrite($fp, 'GMVERSION: '.$_GET['GMV']."\n");
+fwrite($fp, 'HOST: '.$_GET['host']."\n");
+fwrite($fp, 'PORT: '.$_GET['port']."\n\n");
+flock($fp, 3);
+fclose($fp);
 
-$__dbName="dbname";
-$__dbUser="dbuser";
-$__dbHost="dbhost";
-$__dbPass="dbpass";
-// EOF
+echo '(c) FullServer 2011-2014';
+
+?>

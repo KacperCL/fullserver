@@ -182,8 +182,6 @@ public OnGameModeInit()
     fread(File:EXIT, gstr); // crash server asap!
   }
 
-  SendRconCommand("hostname ×× [0.3z] [PL] FullServer.eu ×× @ServerProject.pl");
-  //SendRconCommand("hostname ×••• [PL]  [FullServer.eu] •••× @ServerProject.pl");
   SetGameModeText("Polski/PL FullServer DM");
   SendRconCommand("mapname × Full Andreas ×");
 

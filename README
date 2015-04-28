@@ -26,6 +26,10 @@ Pomoc (Wiki)
 ====================================================================
 Objasnienia instalacji poszczegolnych modulow znajduja sie na https://eider-i128.github.io/fullserver/
 
+Nowa grupa FullServer.eu
+====================================================================
+Ten projekt open-source przedstawia pelny kod umozliwiajacy uruchomienie identycznej kopii serwera oraz panelu graczy dawnego FullServer.eu. FullServer.eu zostal oficjalnie zamkniety w kwietniu 2014 roku przez jego obecna ekipe. Prawa do nazwy oraz do domeny zostaly przekazane Lukaszowi "Wielebny" Biegaj, a w kwietniu 2015 roku oddane w rece nowej grupy ktorej celem jest reaktywacja serwera. Jako glowny administrator i obecny wlasciciel tego projektu open-source pragne poinformowac ze nie mam zadnego zwiazku z nowa grupa FullServer.eu i w pelni szanuje oraz respektuje ich prawa do nazwy oraz domeny ktore posiadaja. Ten projekt open-source pozostanie w obecnej formie bez wzgledu na sytuacje nowej grupy FullServer.eu. Opis oraz plik README projektu na GitHub zostaly zaktualizowane aby uniknac ewentualnych nieporozumien.
+
 Licencja:
 ====================================================================
 The MIT License (MIT)
@@ -82,7 +86,7 @@ Poziomy zapisane w bazie danych, w tabeli z graczami to:
 
 Administratorzy RCON, aby sie zalogowac musza posiadac w bazie danych level rowny 4
 lub 5. Haslo zwyklego admina ustawia sie za pomoca komendy /ahaslo <haslo>, lub w
-bazie danych, w tabeli fs_config (u¿ywana jest funkcja md5 z sola).
+bazie danych, w tabeli fs_config (uzywana jest funkcja md5 z sola).
 
 Logowanie administratorow odbywa sie poprzez wpisanie komendy /alogin <haslo><spacja>.
 Spacja jest zawsze na koncu, ale nie podaje sie jej przy ustawianiu hasla.

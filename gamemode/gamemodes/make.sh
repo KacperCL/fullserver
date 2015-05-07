@@ -36,12 +36,10 @@ SOFTWARE.
  " > ../include/fullserver/version.inc
  
 echo \#define GMVERSION \"$LOG\r$NUM-$_SVER\" >> ../include/fullserver/version.inc
-KIEDY=`date +%x\ %T`
+KIEDY=`date +%F\ %T`
 GDZIE=`hostname`
 
 echo \#define GMCOMPILED \"skompilowana $KIEDY przez $USER@$GDZIE\" >> ../include/fullserver/version.inc
-echo \#define GMHOST \"$GMHOST\" >> ../include/fullserver/version.inc
-echo \#define GMPORT $GMPORT >> ../include/fullserver/version.inc
 echo \#define SERVER_NUM 1 >> ../include/fullserver/version.inc
 
 ../pawno/pawncc.exe -A4 -v2 -d2 -i..\\include\\fullserver -i..\\include\\3rdparty -i..\\include\\samp fs.pwn  -\;\+ -\\ -\(\+

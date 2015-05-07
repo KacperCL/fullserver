@@ -3282,7 +3282,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            szList[1024],
            File:hFile;
 
-          hFile = fopen("fullserver/cenzura.ini", io_read);
+          hFile = fopen("FullServer/cenzura.ini", io_read);
 
           while(fread(hFile, buffer))
           {
@@ -3313,7 +3313,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            szList[1024],
            File:hFile;
 
-          hFile = fopen("fullserver/cenzura.ini", io_read);
+          hFile = fopen("FullServer/cenzura.ini", io_read);
 
           while(fread(hFile, buffer))
           {
@@ -3371,7 +3371,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         return 1;
       }
 
-      hFile = fopen("fullserver/cenzura.ini", io_append);
+      hFile = fopen("FullServer/cenzura.ini", io_append);
 
       format(buffer, sizeof buffer, "%s\n", inputtext);
       fwrite(hFile, buffer);
@@ -3405,8 +3405,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        File:hFileTmp,
        __count = 0;
 
-      hFile = fopen("fullserver/cenzura.ini", io_read);
-      hFileTmp = fopen("fullserver/cenzura.tmp", io_write);
+      hFile = fopen("FullServer/cenzura.ini", io_read);
+      hFileTmp = fopen("FullServer/cenzura.tmp", io_write);
 
       while(fread(hFile, buffer))
       {
@@ -3419,8 +3419,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
       fclose(hFileTmp);
       fclose(hFile);
 
-      hFile = fopen("fullserver/cenzura.ini", io_write);
-      hFileTmp = fopen("fullserver/cenzura.tmp", io_read);
+      hFile = fopen("FullServer/cenzura.ini", io_write);
+      hFileTmp = fopen("FullServer/cenzura.tmp", io_read);
 
       while(fread(hFileTmp, buffer))
       {
@@ -3429,7 +3429,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
       fclose(hFileTmp);
       fclose(hFile);
-      fremove("fullserver/cenzura.tmp");
+      fremove("FullServer/cenzura.tmp");
 
       format(buffer, sizeof buffer, TXT(playerid, 347), inputtext);
       Msg(playerid, COLOR_INFO, buffer);

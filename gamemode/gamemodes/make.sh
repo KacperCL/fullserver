@@ -44,5 +44,5 @@ echo \#define GMHOST \"$GMHOST\" >> ../include/fullserver/version.inc
 echo \#define GMPORT $GMPORT >> ../include/fullserver/version.inc
 echo \#define SERVER_NUM 1 >> ../include/fullserver/version.inc
 
-../pawno/pawncc.exe -A4 -v2 -d2 -i..\\include -i..\\include_3z fs.pwn  -\;\+ -\\ -\(\+
+../pawno/pawncc.exe -A4 -v2 -d2 -i..\\include\\fullserver -i..\\include\\3rdparty -i..\\include\\samp fs.pwn  -\;\+ -\\ -\(\+
 date

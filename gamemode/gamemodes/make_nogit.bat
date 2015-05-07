@@ -18,6 +18,6 @@ echo #define SERVER_NUM 1 >> ../include/fullserver/version.inc
 endlocal
 
 echo Please wait...
-..\pawno\pawncc.exe -A4 -v2 -d2 -i..\\include -i..\\include_3z fs.pwn  -\;\+ -\\ -\(\+
+..\pawno\pawncc.exe -A4 -v2 -d2 -i..\\include fs.pwn  -\;\+ -\\ -\(\+
 time /T
 pause

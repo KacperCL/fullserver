@@ -23,8 +23,8 @@ SOFTWARE.
 */
 
 // SA-MP includes
-#include <a_samp>
-#tryinclude <a_http>
+#include <samp/a_samp>
+#tryinclude <samp/a_http>
 
 // some pre-defines
 #define DYNAMIC_HP
@@ -45,57 +45,57 @@ SOFTWARE.
 #include <3rdparty/regex>
 
 // main gamemode includes
-#include "fullserver/version"
-#include "fullserver/fs_header"
-#include "fullserver/money"
-#include "fullserver/atms"
-#include "fullserver/utility_functions"
-#include "fullserver/factions"
-#include "fullserver/logging"
-#include "fullserver/audio_functions"
-#include "fullserver/domy"
-#include "fullserver/gangzones"
-//#include "fullserver/mo/rakieta"
-#include "fullserver/mo/balony"
-#include "fullserver/paczki"
-#include "fullserver/objects"
-#include "fullserver/gangs"
-#include "fullserver/scripting_functions"
-#include "fullserver/regexp"  // wyrazenia regularne
-#include "fullserver/spawns"
-#include "fullserver/areny"
-#include "fullserver/poczta"
-#include "fullserver/timers"
-#include "fullserver/vehicles"
-#include "fullserver/solo"
-#include "fullserver/artefact"
-#include "fullserver/textdraws"
-#include "fullserver/score"
-#include "fullserver/prezenty"
-#include "fullserver/gz_wars"
-#include "fullserver/jail"
-#include "fullserver/warsztat"
-#include "fullserver/exports"
-#include "fullserver/quiz"
+#include <fullserver/version>
+#include <fullserver/fs_header>
+#include <fullserver/money>
+#include <fullserver/atms>
+#include <fullserver/utility_functions>
+#include <fullserver/factions>
+#include <fullserver/logging>
+#include <fullserver/audio_functions>
+#include <fullserver/domy>
+#include <fullserver/gangzones>
+//#include <fullserver/mo/rakieta>
+#include <fullserver/mo/balony>
+#include <fullserver/paczki>
+#include <fullserver/objects>
+#include <fullserver/gangs>
+#include <fullserver/scripting_functions>
+#include <fullserver/regexp>  // wyrazenia regularne
+#include <fullserver/spawns>
+#include <fullserver/areny>
+#include <fullserver/poczta>
+#include <fullserver/timers>
+#include <fullserver/vehicles>
+#include <fullserver/solo>
+#include <fullserver/artefact>
+#include <fullserver/textdraws>
+#include <fullserver/score>
+#include <fullserver/prezenty>
+#include <fullserver/gz_wars>
+#include <fullserver/jail>
+#include <fullserver/warsztat>
+#include <fullserver/exports>
+#include <fullserver/quiz>
 // attraction includes
-#include "fullserver/attraction_derby"
-#include "fullserver/attraction_race"
-#include "fullserver/attraction_drifting"
-#include "fullserver/attraction_ctf"
-#include "fullserver/attraction_hay"
-#include "fullserver/attraction_wg"
-#include "fullserver/attraction_chowany"
-#include "fullserver/attraction_strzelnica"
-#include "fullserver/attraction_gungame"
+#include <fullserver/attraction_derby>
+#include <fullserver/attraction_race>
+#include <fullserver/attraction_drifting>
+#include <fullserver/attraction_ctf>
+#include <fullserver/attraction_hay>
+#include <fullserver/attraction_wg>
+#include <fullserver/attraction_chowany>
+#include <fullserver/attraction_strzelnica>
+#include <fullserver/attraction_gungame>
 // commands includes
-#include "fullserver/commands_admin"
-#include "fullserver/commands_rcon"
-#include "fullserver/commands_gm"
-#include "fullserver/commands_other"
-#include "fullserver/commands_eng"
-#include "fullserver/commands_anim"
-#include "fullserver/commands_vip"
-#include "fullserver/commands_zaloz"
+#include <fullserver/commands_admin>
+#include <fullserver/commands_rcon>
+#include <fullserver/commands_gm>
+#include <fullserver/commands_other>
+#include <fullserver/commands_eng>
+#include <fullserver/commands_anim>
+#include <fullserver/commands_vip>
+#include <fullserver/commands_zaloz>
 
 main()
 {
@@ -116,6 +116,21 @@ public OnVehicleMod(playerid,vehicleid,componentid)
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
   return 1; // consider adding some checks here? we can return 0 to prevent server from updating internal vehicle pool informations.
+}
+
+public OnVehicleSirenStateChange(playerid, vehicleid, newstate)
+{
+   return 1;
+}
+
+public OnActorStreamIn(actorid, forplayerid)
+{
+   return 1;
+}
+
+public OnActorStreamOut(actorid, forplayerid)
+{
+   return 1;
 }
 
 public OnTrailerUpdate(playerid, vehicleid)
@@ -176,6 +191,7 @@ public OnGameModeInit()
 
   SetGameModeText("Polski/PL FullServer DM");
   SendRconCommand("mapname × Full Andreas ×");
+  SendRconCommand("language Polish");
 
   UsePlayerPedAnims();
   DisableInteriorEnterExits();
@@ -490,8 +506,7 @@ public OnPlayerConnect(playerid)
   // logujemy wszystkie seriale
   printf("SL %s %d %s %s %s", PlayerName, playerid, serial, IP, version);
 
-  if (gmTemp[highestPlayerID]<playerid)
-    gmTemp[highestPlayerID]=playerid;
+  if (gmTemp[highestPlayerID]<playerid) gmTemp[highestPlayerID]=playerid; // this should be faster then calling to GetPlayerPoolSize
 
   pTemp[playerid][uglyRejoinHack]=true;
   
@@ -919,11 +934,10 @@ OnPlayerLogin(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
-    if(IsPlayerNPC(playerid)) return 1;
-  for (new i=gmTemp[highestPlayerID]; i>=0; i--)
-    if ((IsPlayerConnected(i) && i!=playerid) || i==0) {
-      gmTemp[highestPlayerID]=i; break;
-    }
+  if(IsPlayerNPC(playerid)) return 1;
+  
+  gmTemp[highestPlayerID] = GetPlayerPoolSize();
+    
   DestroyDynamic3DTextLabel(pTemp[playerid][FactionName]);
   pTemp[playerid][FactionName]=Text3D:-1;
   DestroyDynamic3DTextLabel(pTemp[playerid][p3d_status]);
@@ -3268,7 +3282,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            szList[1024],
            File:hFile;
 
-          hFile = fopen("FullServer/cenzura.ini", io_read);
+          hFile = fopen("fullserver/cenzura.ini", io_read);
 
           while(fread(hFile, buffer))
           {
@@ -3299,7 +3313,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            szList[1024],
            File:hFile;
 
-          hFile = fopen("FullServer/cenzura.ini", io_read);
+          hFile = fopen("fullserver/cenzura.ini", io_read);
 
           while(fread(hFile, buffer))
           {
@@ -3357,7 +3371,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         return 1;
       }
 
-      hFile = fopen("FullServer/cenzura.ini", io_append);
+      hFile = fopen("fullserver/cenzura.ini", io_append);
 
       format(buffer, sizeof buffer, "%s\n", inputtext);
       fwrite(hFile, buffer);
@@ -3391,8 +3405,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
        File:hFileTmp,
        __count = 0;
 
-      hFile = fopen("FullServer/cenzura.ini", io_read);
-      hFileTmp = fopen("FullServer/cenzura.tmp", io_write);
+      hFile = fopen("fullserver/cenzura.ini", io_read);
+      hFileTmp = fopen("fullserver/cenzura.tmp", io_write);
 
       while(fread(hFile, buffer))
       {
@@ -3405,8 +3419,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
       fclose(hFileTmp);
       fclose(hFile);
 
-      hFile = fopen("FullServer/cenzura.ini", io_write);
-      hFileTmp = fopen("FullServer/cenzura.tmp", io_read);
+      hFile = fopen("fullserver/cenzura.ini", io_write);
+      hFileTmp = fopen("fullserver/cenzura.tmp", io_read);
 
       while(fread(hFileTmp, buffer))
       {
@@ -3415,7 +3429,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
       fclose(hFileTmp);
       fclose(hFile);
-      fremove("FullServer/cenzura.tmp");
+      fremove("fullserver/cenzura.tmp");
 
       format(buffer, sizeof buffer, TXT(playerid, 347), inputtext);
       Msg(playerid, COLOR_INFO, buffer);

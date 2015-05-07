@@ -13,7 +13,7 @@ set GDZIE=builder
 set GMHOST=127.0.0.1
 set GMPORT=7777
 
-echo #define GMCOMPILED "skompilowana %DATE% %TIME% przez %USER%@%GDZIE%" >> ../include/fullserver/version.incc
+echo #define GMCOMPILED "skompilowana %DATE% %TIME% przez %USER%@%GDZIE%" >> ../include/fullserver/version.inc
 echo #define SERVER_NUM 1 >> ../include/fullserver/version.inc
 endlocal
 

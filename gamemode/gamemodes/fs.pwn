@@ -24,7 +24,7 @@ SOFTWARE.
 
 // SA-MP includes
 #include <samp/a_samp>
-#tryinclude <samp/a_http>
+#include <samp/a_http>
 
 // some pre-defines
 #define DYNAMIC_HP

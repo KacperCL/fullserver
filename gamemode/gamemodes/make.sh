@@ -38,8 +38,6 @@ SOFTWARE.
 echo \#define GMVERSION \"$LOG\r$NUM-$_SVER\" >> ../include/fullserver/version.inc
 KIEDY=`date +%x\ %T`
 GDZIE=`hostname`
-GMHOST="127.0.0.1"
-GMPORT="7777"
 
 echo \#define GMCOMPILED \"skompilowana $KIEDY przez $USER@$GDZIE\" >> ../include/fullserver/version.inc
 echo \#define GMHOST \"$GMHOST\" >> ../include/fullserver/version.inc

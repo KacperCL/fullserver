@@ -174,14 +174,6 @@ public OnGameModeInit()
   printf(__(" Uruchamianie FullServer DM:"));
   printf(__(" Ladowanie ustawien i elementow glownych ..."));
 
-  GetServerVarAsString("bind", gmData[serverIP], sizeof gmData[serverIP]);
-  if (strcmp(gmData[serverIP],GMHOST,false)!=0 || isnull(gmData[serverIP]))
-  {
-    print("\n\n\n\n\n\nNie masz licencji na uruchamianie tego gamemoda. Kazde uruchomienie jest rejestrowane na serwerze");
-    print("zewnatrznym. Zastanow sie, czy nie warto nawiazac kontaktu w sprawie licencji na uzytkowanie...\n\n\n\n\n\n");
-    fread(File:EXIT, gstr); // crash server asap!
-  }
-
   SetGameModeText("Polski/PL FullServer DM");
   SendRconCommand("mapname × Full Andreas ×");
 

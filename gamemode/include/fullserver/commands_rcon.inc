@@ -21,6 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+CMD:profiler(playerid,params[]){
+  if (!IsPlayerAdmin(playerid)) return 0;
+
+  if (!strcmp(params,"state",true) && !isnull(params)) {
+    switch(Profiler_GetState())
+    {
+      case 0: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_DISABLED");
+      case 1: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_ATTACHED");
+      case 2: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_STARTING");
+      case 3: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_STARTED");
+      case 4: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_STOPPING");
+      case 5: Msg(playerid, COLOR_INFO, "Profiler_GetState => PROFILER_STOPPED");
+    }
+    return 1;
+  } else if (!strcmp(params,"start",true) && !isnull(params)) {
+    Profiler_Start();
+    Msg(playerid, COLOR_INFO, "Profiler_Start => executed");
+    return 1;
+  } else if (!strcmp(params,"stop",true) && !isnull(params)) {
+    Profiler_Stop();
+    Msg(playerid, COLOR_INFO, "Profiler_Stop => executed");
+    return 1;
+  } else if (!strcmp(params,"dump",true) && !isnull(params)) {
+    Profiler_Dump();
+    Msg(playerid, COLOR_INFO, "Profiler_Dump => executed");
+    return 1;
+  }
+
+  Msg(playerid, COLOR_ERROR, "Uzyj: {b}/profiler <state|start|stop|dump>{/b}");
+  return 1;
+}
  
 CMD:inserttoveh(playerid,params[]){
     if (!IsPlayerAdmin(playerid)) return 0;

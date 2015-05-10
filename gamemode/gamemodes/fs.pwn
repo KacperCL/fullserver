@@ -43,6 +43,7 @@ SOFTWARE.
 #include <3rdparty/a_mysql>
 #include <3rdparty/mapandreas>
 #include <3rdparty/regex>
+#include <3rdparty/profiler>
 
 // main gamemode includes
 #include <fullserver/version>
@@ -325,12 +326,17 @@ public OnGameModeInit()
   gmData[death_count]=StringToInt(GetServerStat("death_count"));
 
   printf(" FullServer DM zaladowany pomyslnie (%0.3f sekund)\r\n", float(GetTickCount() - gmTemp[startTime]) / 1000);
+  
+  Profiler_Start();
 
   return 1;
 }
 
 public OnGameModeExit()
 {
+  Profiler_Stop();
+  Profiler_Dump();
+
   printf(" Wylaczanie gamemode. Zapisywanie danych graczy i statystyk serwera");
   foreach(playerid){
     if(pData[playerid][loggedIn]){
@@ -344,7 +350,7 @@ public OnGameModeExit()
   SetServerStatInt("kill_count", gmData[kill_count]);
   SetServerStatInt("join_count", gmData[join_count]);
   printf("Dane graczy i statystyki serwera zapisane");
-  mysql_close(hMySQL);
+  //mysql_close(hMySQL);
 
   return 1;
 }
@@ -455,9 +461,8 @@ public OnPlayerConnect(playerid)
     GetPlayerIp(playerid,IP,sizeof(IP));
     GetPlayerName(playerid,PlayerName,sizeof(PlayerName));
 
-    if (strcmp(version,"0.3z",true)!=0 &&
-      strcmp(version,"0.3z-R1-2",true)!=0 && strcmp(version,"0.3z-R2",true)!=0) {
-        printf("Zla wersja klienta SA-MP z IP %s - ZBANOWANY",IP);
+    if (strcmp(version,"0.3.7",true)!=0 && strcmp(version,"0.3.7-R1-2",true)!=0 && strcmp(version,"0.3.7-R2",true)!=0) {
+        printf("Zla wersja (%s) klienta SA-MP z IP %s - ZBANOWANY",version, IP);
         BanEx(playerid,"Zla wersja klienta SA-MP");
         return 0;
     }

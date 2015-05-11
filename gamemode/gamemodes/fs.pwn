@@ -1144,7 +1144,7 @@ public OnPlayerDisconnect(playerid, reason)
 
 public OnPlayerSpawn(playerid)
 {
-    if(IsPlayerNPC(playerid)) return 1;
+  if(IsPlayerNPC(playerid)) return 1;
     if(GetPVarInt(playerid,"Zaladowano")>0) {
     SetPVarInt(playerid,"Zaladowano",0);
   }
@@ -1239,7 +1239,7 @@ public OnPlayerSpawn(playerid)
     SetSpawnInfo(playerid,playerid,pTemp[playerid][skinBeforeChange],0.0, 0.0, 0.0,0.0,0,0,0,0,0,0);
     SpawnPlayer(playerid);
     SetPlayerSkin(playerid,pTemp[playerid][skinBeforeChange]);
-        pTemp[playerid][skinBeforeChange]=-1;
+    pTemp[playerid][skinBeforeChange]=-1;
   }
 
   new
@@ -1264,9 +1264,13 @@ public OnPlayerSpawn(playerid)
     }
     case 3: //gang
     {
-            if(pData[playerid][gang]!=NO_GANG) gangs_TeleportPlayerToBaseSpawn(playerid,true);
-            else {
-            switch (random(3))
+      if(pData[playerid][gang]!=NO_GANG) 
+      {
+         gangs_TeleportPlayerToBaseSpawn(playerid,true);
+      }
+      else 
+      {
+        switch (random(3))
         {
           case 0://CITY_LS:
           {
@@ -1313,7 +1317,7 @@ public OnPlayerSpawn(playerid)
     }
     case 5: //randomowy spawn w miescie
     {
-        switch (random(3))
+      switch (random(3))
       {
         case 0://CITY_LS:
         {

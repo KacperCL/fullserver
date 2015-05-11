@@ -318,6 +318,7 @@ public Derby_Countdown()
       case 0: {
         PlaySound(gmTemp[aDerbyPlayers][playerid], 1057);
         TogglePlayerControllable(gmTemp[aDerbyPlayers][playerid], true);
+        SetPlayerColor(playerid, pData[playerid][currentColor] * 256+PLAYER_COLOR_ALPHA); // force non-invisible color, will be changed back after respawn or first call to SetPlayerProperColor
       }
       case 1: {
         PlaySound(gmTemp[aDerbyPlayers][playerid], 1057);

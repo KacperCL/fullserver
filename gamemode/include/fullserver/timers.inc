@@ -256,6 +256,7 @@ Timer:fixServer[1800000](){
     SendRconCommand("unbanip *.*.*.*");
     SendRconCommand("reloadbans");
     SendRconCommand("reloadlog");
+    Profiler_Dump();
 }
 
 Timer:TimeSync[20000](){  // aktualizacja daty na pasku u dolu ekranu co 20/40 sekund + powiadomienie o minieciu polnocy

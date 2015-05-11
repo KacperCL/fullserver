@@ -106,19 +106,19 @@ public OnFilterScriptExit(){
 }
 
 CMD:biznesy(playerid){
-  format(gstr,sizeof gstr,"");
+  format(gstr,sizeof gstr,"Nazwa\tKoszt\tWlasciciel\n");
   for (new i=0;i<sizeof Biznesy;i++) {
     if (IsPlayerConnected(Biznesy[i][eb_owner])) {
         if(Biznesy[i][eb_owner]==playerid){
-          format(gstr,sizeof gstr,"%s%s{FFFF00}%24s\tWLASCICIEL", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa]);
+          format(gstr,sizeof gstr,"%s%s{FFFF00}%24s\t%d$\tWLASCICIEL", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa], Biznesy[i][eb_koszt]);
         }else{
-          format(gstr,sizeof gstr,"%s%s{FF0000}%24s\t%s", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa], GetPlayerNick(Biznesy[i][eb_owner]));
+          format(gstr,sizeof gstr,"%s%s{FF0000}%24s\t%d$\t%s", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa], Biznesy[i][eb_koszt], GetPlayerNick(Biznesy[i][eb_owner]));
       }
     } else {
-      format(gstr,sizeof gstr,"%s%s{00FF00}%24s\t%d$", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa], Biznesy[i][eb_koszt]);
+      format(gstr,sizeof gstr,"%s%s{00FF00}%24s\t%d$\tWOLNY", gstr, i>0?("\n"):(""), Biznesy[i][eb_nazwa], Biznesy[i][eb_koszt]);
     }
   }
-  ShowPlayerDialog(playerid,DLG_BIZNESY_LIST, DIALOG_STYLE_LIST, "Lista biznesow do kupienia", gstr, "Zamknij", "");
+  ShowPlayerDialog(playerid,DLG_BIZNESY_LIST, DIALOG_STYLE_TABLIST_HEADERS, "Lista biznesow do kupienia", gstr, "Zamknij", "");
   return 1;
 
 }

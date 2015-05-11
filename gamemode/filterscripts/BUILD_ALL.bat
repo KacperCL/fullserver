@@ -4,7 +4,7 @@ del *.amx
 cd .
 for /f "tokens=*" %%G in ('dir /b /a "."') do (
    echo Building %%G
-   ..\pawno\pawncc.exe -A4 -v2 -d2 -i..\\include_3z %%G  -\;\+ -\\ -\(\+
+   ..\pawno\pawncc.exe -A4 -v2 -d2 -i..\\include\\samp -i..\\include\3rdparty %%G  -\;\+ -\\ -\(\+
 )
-echo sequence completed!
+echo Sequence completed!
 pause

@@ -1,3 +1,4 @@
 gamemode/gamemodes/fs.amx
 gamemode/include/fullserver/version.inc
 gamemode/gamemodes/make_liveserver.sh
+gamemode/filterscripts/*.amx

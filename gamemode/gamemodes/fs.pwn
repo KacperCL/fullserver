@@ -233,19 +233,21 @@ public OnGameModeInit()
 
   AddPlayerClass(292, -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0); // gracze zarejestrowani zobacza zamiast niego swoj wlasny skin
 
-  for(new skinid = 0; skinid <= 299; skinid++)  // bylo 288
+  for(new skinid = 0; skinid <= 311; skinid++)
+  {
     switch(skinid)
     {
       case 74:
         continue;
       default:
-        if (!SkinKobiecy(skinid))
-        AddPlayerClass(skinid, -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
+        if (!SkinKobiecy(skinid)) AddPlayerClass(skinid, -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
     }
+  }
 
-  for(new skinid = 300; skinid >0; skinid--)  // bylo 288
-    if (SkinKobiecy(skinid))
-      AddPlayerClass(skinid, -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
+  for(new skinid = 312; skinid >0; skinid--)
+  {
+    if (SkinKobiecy(skinid)) AddPlayerClass(skinid, -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
+  }
 
   printf(" Inicjalizowanie GangZones...");
   GZ_Init();

@@ -791,7 +791,7 @@ public vehicles_LoadStatic(sourceId){
     SetVehicleHealth(v, VEHICLE_DEFAULT_HP);
   }
   ////////////////// neony ////////////////////////
-  new Float:neonX[2],Float:neonY[2],Float:neonZ[2];
+  /*new Float:neonX[2],Float:neonY[2],Float:neonZ[2];
   vehicles_getNeonOffset(0,neonX[0],neonY[0],neonZ[0]);
   vehicles_getNeonOffset(1,neonX[1],neonY[1],neonZ[1]);
   
@@ -806,6 +806,6 @@ public vehicles_LoadStatic(sourceId){
     AttachObjectToVehicle(neony[i][0], neonVehicle, neonX[0], neonY[0], neonZ[0], 0.0, 0.0, 0.0);
     AttachObjectToVehicle(neony[i][1], neonVehicle, neonX[1], neonY[1], neonZ[1], 0.0, 0.0, 0.0);
     neony[i][2]=neonVehicle;
-  }
+  }*/
 }
 // EOF

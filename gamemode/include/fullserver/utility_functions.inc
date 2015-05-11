@@ -105,8 +105,11 @@ stock AC_ChangeVehicleColor(vehicleid, color1, color2){
 #endif
 #define ChangeVehicleColor AC_ChangeVehicleColor
 
-stock AC_CreateVehicle(modelid, Float:x, Float:y, Float:z, Float:angle, color1, color2, respawn_delay){
-  new vehicleid = CreateVehicle(modelid, Float:x, Float:y, Float:z, Float:angle, color1, color2, respawn_delay);
+stock AC_CreateVehicle(modelid, Float:x, Float:y, Float:z, Float:angle, color1, color2, respawn_delay, addsiren=0){
+  new vf=GetVehicleFlagsByModel(modelid);
+  if (vf&VF_POLICE==VF_POLICE) addsiren = 1;
+  
+  new vehicleid = CreateVehicle(modelid, Float:x, Float:y, Float:z, Float:angle, color1, color2, respawn_delay, addsiren);
   if(vehicleid==INVALID_VEHICLE_ID) {
       print("[DBG DATA] Reached vehicles limit!");
     RespawnVehicles(true);
@@ -145,8 +148,11 @@ stock AC_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, 
 #endif
 #define AddStaticVehicle AC_AddStaticVehicle
 
-stock AC_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:angle, color1, color2, respawn_delay){
-  new vehicleid = AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:angle, color1, color2, respawn_delay);
+stock AC_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:angle, color1, color2, respawn_delay, addsiren=0){
+  new vf=GetVehicleFlagsByModel(modelid);
+  if (vf&VF_POLICE==VF_POLICE) addsiren = 1;
+  
+  new vehicleid = AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, Float:angle, color1, color2, respawn_delay, addsiren);
   if(vehicleid==INVALID_VEHICLE_ID) {
       print("[DBG DATA] Reached vehicles limit!");
     RespawnVehicles(true);
@@ -1863,6 +1869,12 @@ stock GetVehicleFlags(vehicleid){
       )   r+=VF_TOWABLE;
 
   }
+  
+  // police
+  switch(vm){
+    case 416,523,427,490,407,544,596,598,597,599:
+      r+=VF_POLICE;
+  }
   return r;
 }
 
@@ -1931,6 +1943,12 @@ stock GetVehicleFlagsByModel(vm){
           r&VF_BIKES!=VF_BIKES
       )   r+=VF_TOWABLE;
 
+  }
+  
+  // police
+  switch(vm){
+    case 416,523,427,490,407,544,596,598,597,599:
+      r+=VF_POLICE;
   }
   return r;
 }

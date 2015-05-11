@@ -536,6 +536,7 @@ SOFTWARE.
 #define VF_BIKES    512 // motory i rowery
 #define VF_TRAILER    1024
 #define VF_TOWABLE    2048  // mozliwe do holowania
+#define VF_POLICE     4096
 
 #define SQL_RI_BACKGROUND (-1)  // uzywane przy mysql_query, dla wykonywania zapytan w tle, bez koneicznosci przetwarzania odpowiedz
 #define SQL_RI_DOMY_LISTA (2)

@@ -787,7 +787,6 @@ public vehicles_LoadStatic(sourceId){
   for(new v=0; v<staticVehicleCount; v++) {
     tVehicles[v][vo_static]=true;
     tVehicles[v][vo_driver]=INVALID_PLAYER_ID;
-    SetVehicleParamsEx(v, VEHICLE_PARAMS_ON, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, DOOR_OPENED, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF);
     SetVehicleHealth(v, VEHICLE_DEFAULT_HP);
   }
   ////////////////// neony ////////////////////////

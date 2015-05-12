@@ -198,7 +198,6 @@ public OnGameModeInit()
   DisableInteriorEnterExits();
   EnableStuntBonusForAll(false);
   ShowPlayerMarkers(PLAYER_MARKERS_MODE_GLOBAL);
-  ManualVehicleEngineAndLights();
 
   gmTemp[lastHour] = -1;
   gmTemp[lastDay] = -1;
@@ -1783,12 +1782,9 @@ public OnVehicleSpawn(vehicleid)
 
   if (tVehicles[vehicleid][vo_static]) {
     vehicleDoorState[vehicleid] = DOOR_OPENED;
-    SetVehicleParamsEx(vehicleid, 1, 0, 0, 0, 0, 0, 0);
   }
 
   SetVehicleHealth(vehicleid, VEHICLE_DEFAULT_HP);
-
-  SetVehicleParamsEx(vehicleid, 1, 0, 0, 0, 0, 0, 0);
 
   if (!tVehicles[vehicleid][vo_licensePlateSet]) {
     new string[50];
@@ -2043,10 +2039,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
   tVehicles[vehicleid][vo_used]=true;
   if (GetPlayerVehicleSeat(playerid)==0) {  // wysiadl kierowca
     tVehicles[vehicleid][vo_occupied]=false;
-    new engine, lights, alarm, doors, bonnet, boot, objective;
-    GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
-    if (lights) lights=0;
-    SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
   }
 
   ShowElement(playerid, TDE_VEHICLEBOX,false);
@@ -2100,9 +2092,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
       }
     }
     if (newstate==PLAYER_STATE_DRIVER) {
-      new engine, lights, alarm, doors, bonnet, boot, objective;
-      GetVehicleParamsEx(pData[playerid][lastVehicle], engine, lights, alarm, doors, bonnet, boot, objective);
-      SetVehicleParamsEx(pData[playerid][lastVehicle], engine, 1, alarm, doors, bonnet, boot, objective);
+    
     }
   }
 
@@ -2131,11 +2121,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
       SetPVarInt(playerid,"Zaladowano",0);
       Msg(playerid,COLOR_ERROR,"Zostales okradziony i straciles paczki z samolotu!");
     }
-
-    new engine, lights, alarm, doors, bonnet, boot, objective;
-    GetVehicleParamsEx(pData[playerid][lastVehicle], engine, lights, alarm, doors, bonnet, boot, objective);
-    if (lights) lights=0;
-    SetVehicleParamsEx(pData[playerid][lastVehicle], engine, 0, alarm, doors, bonnet, boot, objective);
   }
   // dzwieki w pojazdach
   if (newstate==PLAYER_STATE_DRIVER || oldstate==PLAYER_STATE_DRIVER)
@@ -2520,6 +2505,7 @@ public OnPlayerStreamIn(playerid, forplayerid){
 
 public OnVehicleStreamIn(vehicleid, forplayerid){
   new doors,bool:objective;
+  
   doors=vehicleDoorState[vehicleid];
 
   if ((forplayerid == vehicleDoorOwner[vehicleid]) ||  (tVehicles[vehicleid][vo_private] && tVehicles[vehicleid][vo_owningPlayerId]==forplayerid ))

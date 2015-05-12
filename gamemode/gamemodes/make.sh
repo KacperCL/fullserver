@@ -6,6 +6,7 @@ SVER=`git rev-parse HEAD`
 _SVER=${SVER:0:6}
 
 NUM=`git rev-list HEAD --count`
+UNTR=`expr $(git status --porcelain 2>/dev/null| egrep "^(M| M)" | wc -l)`
 
 LOG=`echo "l($NUM)/l(2)" | bc -l`
 LOG=${LOG:0:4}
@@ -35,7 +36,7 @@ SOFTWARE.
 */
  " > ../include/fullserver/version.inc
  
-echo \#define GMVERSION \"$LOG\r$NUM-$_SVER\" >> ../include/fullserver/version.inc
+echo \#define GMVERSION \"$LOG\r$NUM-$_SVER\+$UNTR\" >> ../include/fullserver/version.inc
 KIEDY=`date +%F\ %T`
 GDZIE=`hostname`
 

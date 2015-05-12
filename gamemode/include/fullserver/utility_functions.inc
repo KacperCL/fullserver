@@ -117,7 +117,6 @@ stock AC_CreateVehicle(modelid, Float:x, Float:y, Float:z, Float:angle, color1, 
   }
   tVehicles[vehicleid][vo_color][0]=color1;
   tVehicles[vehicleid][vo_color][1]=color2;
-  SetVehicleParamsEx(vehicleid, VEHICLE_PARAMS_ON, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, DOOR_OPENED, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF);
   return vehicleid;
 }
 
@@ -137,7 +136,6 @@ stock AC_AddStaticVehicle(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z, 
   }
   tVehicles[vehicleid][vo_color][0]=color1;
   tVehicles[vehicleid][vo_color][1]=color2;
-  SetVehicleParamsEx(vehicleid, VEHICLE_PARAMS_ON, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, DOOR_OPENED, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF);
   return vehicleid;
 }
 
@@ -160,7 +158,6 @@ stock AC_AddStaticVehicleEx(modelid, Float:spawn_x, Float:spawn_y, Float:spawn_z
   }
   tVehicles[vehicleid][vo_color][0]=color1;
   tVehicles[vehicleid][vo_color][1]=color2;
-  SetVehicleParamsEx(vehicleid, VEHICLE_PARAMS_ON, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, DOOR_OPENED, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF, VEHICLE_PARAMS_OFF);
   return vehicleid;
 }
 
@@ -1663,9 +1660,6 @@ spawnVehicleNearPlayer(playerid,vehicleid){
   vehid=CreateVehicle(vehicleid, P[0],P[1],P[2],P[3],-1,-1,600);
   tVehicleSpawned[vehid]=true;
 
-  new engine, lights, alarm, doors, bonnet, boot, objective;
-  GetVehicleParamsEx(vehid, engine, lights, alarm, doors, bonnet, boot, objective);
-  SetVehicleParamsEx(vehid, 1, 1, 0, 0, bonnet, boot, objective);
   SetVehicleParamsForPlayer(vehid, playerid, 0, DOOR_OPENED);
   vehicleDoorState[vehid] = DOOR_OPENED;
   vehicleDoorOwner[vehid] = playerid;
@@ -1720,14 +1714,6 @@ public spawnVehicleForPlayer(playerid,vehicleid,bool:replace){
 
     tVehicleSpawned[vehid]=true;
 
-  new engine, lights, alarm, doors, bonnet, boot, objective;
-    GetVehicleParamsEx(vehid, engine, lights, alarm, doors, bonnet, boot, objective);
-    new Hour, Minute, Second;
-  gettime(Hour, Minute, Second);
-  switch(Hour){
-    case 7..22: lights=1;
-  }
-  SetVehicleParamsEx(vehid, 1, lights, 0, 0, bonnet, boot, objective);
   SetVehicleParamsForPlayer(vehid, playerid, 0, DOOR_OPENED);
   vehicleDoorState[vehid] = DOOR_OPENED;
   vehicleDoorOwner[vehid] = playerid;

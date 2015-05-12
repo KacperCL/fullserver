@@ -1725,6 +1725,11 @@ obiekty_Fotokomorka(playerid){
   if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER) return 1;
   if (pData[playerid][pAttraction]!=A_NONE) return 1;
   new vid=GetPlayerVehicleID(playerid);
+  
+  new vf=GetVehicleFlags(vid);
+  if (vf&VF_MILITARY==VF_MILITARY || vf&VF_AIRBORNE==VF_AIRBORNE || vf&VF_NATATORIAL==VF_NATATORIAL || vf&VF_POLICE==VF_POLICE) return 1;
+  if (pTemp[playerid][faction]==FACTION_POLICE || pTemp[playerid][faction]==FACTION_ARMY) return 1;
+  
   new spd=GetVehicleSpeed(vid);
   new Float:VV[3];
   GetVehicleVelocity(vid,VV[0],VV[1],VV[2]);
@@ -1735,11 +1740,6 @@ obiekty_Fotokomorka(playerid){
       GameTextForPlayer(playerid, buf, 4000, 6);
       if (Audio_IsClientConnected(playerid))
         Audio_Play(playerid,50,false,false,true);
-
-      if (pTemp[playerid][faction]==FACTION_POLICE || pTemp[playerid][faction]==FACTION_ARMY) {
-          SendClientMessage(playerid,-1,"[FOTORADAR] {ff5050}Przekroczyles dopuszczalna predkosc, jednak jestes uprzywilejowany i nie otrzymujesz mandatu");
-          return 1;
-      }
 
       if(GetPlayerMoney(playerid)>=(floatround(spd)*3)){
         format(buf,sizeof buf,__("[FOTORADAR] {ff5050}Przekroczyles dopuszczalna predkosc! {50ff50}Mandat: {ffffff}%d$"), (floatround(spd)*3));

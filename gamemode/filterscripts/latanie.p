@@ -77,15 +77,15 @@ public OnPlayerConnect(playerid){
 public OnFilterScriptInit(){
   for (new i=0;i<sizeof CeleLotnicze;i++) {
     CeleLotnicze[i][ecl_cp]=CreateDynamicRaceCP(3, CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 0, 0, 0, 14, 0,0,-1,1200);
-        CeleLotnicze[i][ecl_lastplayerid]=-1;
+    CeleLotnicze[i][ecl_lastplayerid]=-1;
     CeleLotnicze[i][ecl_3dlabel]=CreateDynamic3DTextLabel("Wlec tu aby\ndokonac zrzutu", -1, CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 100, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0, -1);
-        CeleLotnicze[i][ecl_mapic]=CreateDynamicMapIcon(CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 57, 1, 0,0,-1,100);
+    CeleLotnicze[i][ecl_mapic]=CreateDynamicMapIcon(CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 57, 1, 0,0,-1,100);
   }
   for (new i=0;i<sizeof BazySpedycyjne;i++) {
     BazySpedycyjne[i][ebs_cp]=CreateDynamicCP(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2],10, 0,0,-1,100);
-        BazySpedycyjne[i][ebs_lastplayerid]=-1;
+    BazySpedycyjne[i][ebs_lastplayerid]=-1;
     BazySpedycyjne[i][ebs_3dlabel]=CreateDynamic3DTextLabel("Zaladunek\nlotniczy", -1, BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 100, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0, -1);
-        BazySpedycyjne[i][ebs_mapic]=CreateDynamicMapIcon(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 5, 1, 0,0,-1,100);
+    BazySpedycyjne[i][ebs_mapic]=CreateDynamicMapIcon(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 5, 1, 0,0,-1,100);
   }
   for (new i=0;i<MAX_PLAYERS;i++) SetPVarInt(i,"Zaladowano",0);
   SendClientMessageToAll(-1,"[SPEDYCJA] Misje spedycyjne (latanie) zostaly przeladowane");
@@ -93,20 +93,21 @@ public OnFilterScriptInit(){
 }
 
 public OnPlayerUpdate(playerid){
-    if (GetTickCount()%2==0) return 1;    // raz na 2 razy kontynuujemy
+  if (GetTickCount()%2==0) return 1;    // raz na 2 razy kontynuujemy
 
   if (GetPVarInt(playerid,"Zaladowano")>0)
   {
     if(GetVehicleModel(GetPlayerVehicleID(playerid)) != mg_spedycja_model[playerid]){
-        SetPVarInt(playerid,"Zaladowano",0);
+      SetPVarInt(playerid,"Zaladowano",0);
       CallRemoteFunction("MsgExport","iis",playerid,1,"Zostales okradziony i straciles paczki z samolotu!");
     }
   }
   return 1;
 }
 
-public OnPlayerEnterDynamicCP(playerid,checkpointid){
-    new model = GetVehicleModel(GetPlayerVehicleID(playerid));
+public OnPlayerEnterDynamicCP(playerid,checkpointid)
+{
+  new model = GetVehicleModel(GetPlayerVehicleID(playerid));
   for (new i=0;i<sizeof BazySpedycyjne;i++){
     if (checkpointid==BazySpedycyjne[i][ebs_cp]){
       if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER) {
@@ -119,16 +120,22 @@ public OnPlayerEnterDynamicCP(playerid,checkpointid){
           SendClientMessage(playerid,-1,"[SPEDYCJA] Dokona³eœ za³adunku w tym miejscu ostatnim razem. Udaj siê do innego punktu.");
           SendClientMessage(playerid,-1,"[SPEDYCJA] Dostepne punkty zaladunku: /LVLOT /SFLOT /LSLOT");
         }
-      } else {
-          new paczki;
-          if(model == 593 || model==476){
+      } else 
+      {
+        new paczki;
+        if(model == 593 || model==476)
+        {
           paczki=random(2)+3;
-        } else if (model == 553){
+        }
+        else if (model == 553)
+        {
           paczki=random(4)+6;
-        } else if (model == 577){
+        } 
+        else if (model == 577)
+        {
           paczki=random(5)+10;
         }
-          format(gstr,sizeof gstr,"~g~||~w~Zaladowano %d paczki~g~||",paczki);
+        format(gstr,sizeof gstr,"~g~||~w~Zaladowano %d paczki~g~||",paczki);
         GameTextForPlayer(playerid,gstr,1000,1);
         format(gstr,sizeof gstr,"[SPEDYCJA] Zaladowano %d paczki, mozesz leciec dokonac zrzutu",paczki);
         SendClientMessage(playerid,-1,gstr);
@@ -137,8 +144,10 @@ public OnPlayerEnterDynamicCP(playerid,checkpointid){
         mg_spedycja_model[playerid]=model;
         for (new cele=0;cele<sizeof CeleLotnicze;cele++)
           if(CeleLotnicze[cele][ecl_lastplayerid]==playerid) CeleLotnicze[cele][ecl_lastplayerid]=-1;
-                for (new bazy=0;bazy<sizeof BazySpedycyjne;bazy++)
+
+        for (new bazy=0;bazy<sizeof BazySpedycyjne;bazy++)
           if(BazySpedycyjne[bazy][ebs_lastplayerid]==playerid) BazySpedycyjne[bazy][ebs_lastplayerid]=-1;
+          
         BazySpedycyjne[i][ebs_lastplayerid] = playerid;
       }
       return 1;
@@ -170,9 +179,8 @@ public OnPlayerEnterDynamicRaceCP(playerid,checkpointid){
         new Float:NP[3];
         GetPlayerPos(playerid, NP[0], NP[1],NP[2]);
 
-          SetPVarInt(playerid,"Zaladowano",GetPVarInt(playerid,"Zaladowano")-1);
-          if (GetPVarInt(playerid,"Zaladowano")==0)
-          SendClientMessage(playerid,-1,"[SPEDYCJA] Zrzuciles ostatnia paczke. Udaj sie na lotnisko po nowe");
+        SetPVarInt(playerid,"Zaladowano",GetPVarInt(playerid,"Zaladowano")-1);
+        if (GetPVarInt(playerid,"Zaladowano")==0) SendClientMessage(playerid,-1,"[SPEDYCJA] Zrzuciles ostatnia paczke. Udaj sie na lotnisko po nowe");
 
         GameTextForPlayer(playerid,"~b~||~w~Zrzut~b~||",1000,1);
         CeleLotnicze[i][ecl_paraDropActive]=true;
@@ -187,27 +195,40 @@ public OnPlayerEnterDynamicRaceCP(playerid,checkpointid){
           false,"dfff",i,NP[0],NP[1],NP[2]+1);
 
         if(model == 593 || model==476){
-            if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5){
-            CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2+1);
-            CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH+800);
-          }else{
-              CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2);
-            CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH+800);
+            if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5)
+            {
+               CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2+1);
+               CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH+800);
+            }
+            else
+            {
+               CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2);
+               CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH+800);
           }
-        } else if (model == 553){
-          if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5){
+        } 
+        else if (model == 553)
+        {
+          if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5)
+          {
             CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*3);
             CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH*3);
-          }else{
-              CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*2);
+          }
+          else
+          {
+            CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*2);
             CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH*2);
           }
-        } else if (model == 577){
-          if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5){
+        } 
+        else if (model == 577)
+        {
+          if(CallRemoteFunction("GetPlayerFactionID","d",playerid)==5)
+          {
             CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*5);
             CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH*5);
-          }else{
-              CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*4);
+          }
+          else
+          {
+            CallRemoteFunction("GivePlayerScoreEx","dd",playerid,2*4);
             CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,CASH*4);
           }
         }
@@ -219,45 +240,49 @@ public OnPlayerEnterDynamicRaceCP(playerid,checkpointid){
 }
 
 forward ParaLadowanie(i,Float:X,Float:Y,Float:Z);
-public ParaLadowanie(i,Float:X,Float:Y,Float:Z) {
+public ParaLadowanie(i,Float:X,Float:Y,Float:Z) 
+{
   new pickupid=CreateDynamicPickup(1240+random(2),2,X,Y,Z,0,0,-1,300);
   DestroyDynamicObject(CeleLotnicze[i][ecl_paraObject]);
   CeleLotnicze[i][ecl_paraDropActive]=false;
   SetTimerEx("UsunPickup",10000,false,"d",pickupid);
-
   return 1;
 }
 
 forward UsunPickup(pickupid);
 public UsunPickup(pickupid){
-  DestroyDynamicPickup(pickupid);
+   DestroyDynamicPickup(pickupid);
 }
 
 forward restartCeleLotniczePid();
-public restartCeleLotniczePid(){
+public restartCeleLotniczePid()
+{
   // remove it first
-  for (new i=0;i<sizeof CeleLotnicze;i++) {
+  for (new i=0;i<sizeof CeleLotnicze;i++) 
+  {
     DestroyDynamicRaceCP(CeleLotnicze[i][ecl_cp]);
     DestroyDynamic3DTextLabel(CeleLotnicze[i][ecl_3dlabel]);
-        DestroyDynamicMapIcon(CeleLotnicze[i][ecl_mapic]);
+    DestroyDynamicMapIcon(CeleLotnicze[i][ecl_mapic]);
   }
   for (new i=0;i<sizeof BazySpedycyjne;i++) {
     DestroyDynamicCP(BazySpedycyjne[i][ebs_cp]);
     DestroyDynamic3DTextLabel(BazySpedycyjne[i][ebs_3dlabel]);
-        DestroyDynamicMapIcon(BazySpedycyjne[i][ebs_mapic]);
+    DestroyDynamicMapIcon(BazySpedycyjne[i][ebs_mapic]);
   }
   // recreate now
-    for (new i=0;i<sizeof CeleLotnicze;i++) {
+  for (new i=0;i<sizeof CeleLotnicze;i++) 
+  {
     CeleLotnicze[i][ecl_cp]=CreateDynamicRaceCP(3, CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 0, 0, 0, 14, 0,0,-1,1200);
-        CeleLotnicze[i][ecl_lastplayerid]=-1;
+    CeleLotnicze[i][ecl_lastplayerid]=-1;
     CeleLotnicze[i][ecl_3dlabel]=CreateDynamic3DTextLabel("Wlec tu aby\ndokonac zrzutu", -1, CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 100, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0, -1);
-        CeleLotnicze[i][ecl_mapic]=CreateDynamicMapIcon(CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 57, 1, 0,0,-1,100);
+    CeleLotnicze[i][ecl_mapic]=CreateDynamicMapIcon(CeleLotnicze[i][ecl_loc][0], CeleLotnicze[i][ecl_loc][1], CeleLotnicze[i][ecl_loc][2], 57, 1, 0,0,-1,100);
   }
-  for (new i=0;i<sizeof BazySpedycyjne;i++) {
+  for (new i=0;i<sizeof BazySpedycyjne;i++) 
+  {
     BazySpedycyjne[i][ebs_cp]=CreateDynamicCP(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2],10, 0,0,-1,100);
-        BazySpedycyjne[i][ebs_lastplayerid]=-1;
+    BazySpedycyjne[i][ebs_lastplayerid]=-1;
     BazySpedycyjne[i][ebs_3dlabel]=CreateDynamic3DTextLabel("Zaladunek\nlotniczy", -1, BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 100, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0, -1);
-        BazySpedycyjne[i][ebs_mapic]=CreateDynamicMapIcon(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 5, 1, 0,0,-1,100);
+    BazySpedycyjne[i][ebs_mapic]=CreateDynamicMapIcon(BazySpedycyjne[i][ebs_loc][0], BazySpedycyjne[i][ebs_loc][1],  BazySpedycyjne[i][ebs_loc][2], 5, 1, 0,0,-1,100);
   }
 }
 // EOF

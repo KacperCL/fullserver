@@ -91,8 +91,8 @@ public OnPlayerEnterDynamicCP(playerid,checkpointid){
         SendClientMessage(playerid,-1,"[POCIAGI] Podjedz pociagiem towarowym (Freight), aby rozpoczac zadanie spedycyjne");
       } else if (mg_spedycja_cel[playerid]==i) {  // klient dojechal do celu!
         mg_spedycja_Cel(playerid);
-            } else if (mg_spedycja_cel[playerid]>-1) {
-                SendClientMessage(playerid,-1,"[POCIAGI] To jescze nie ta stacja... Jedz dalej!");
+      } else if (mg_spedycja_cel[playerid]>-1) {
+        SendClientMessage(playerid,-1,"[POCIAGI] To jescze nie ta stacja... Jedz dalej!");
       } else {
         // rozpoczynamy transport
         mg_spedycja_Inicjuj(playerid,i);

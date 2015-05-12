@@ -35,40 +35,6 @@ public OnRconCommand(cmd[])
     return 0;
 }
 
-public OnFilterScriptInit(){
- new buf[255],line[255];
- new File:olist;
- new cnt,lnum;
- SendClientMessageToAll(0xff0000ff,"[IMPORTANT] Trwa przeladowywanie obiektow i pojazdow...");
- for(new i=0;i<sizeof pliki;i++)
- {
-  olist = fopen(pliki[i], io_read);
-  cnt=0; lnum=0;
-  while(fread(olist, line)) {
-    lnum++;
-    if (line[0]!='/' && strfind(line,"CreateDynamicObject",true)!=-1) {
-      cnt++;
-      new objectid, Float:X,Float:Y,Float:Z,  Float:rx,Float:ry,Float:rz, worldid=-1, interiorid=-1,playerid=-1,Float:distance=200.0;
-      if (sscanf(line,"p<,>'('iffffffD(-1)D(-1)D(-1)p<)>F(-1)",objectid,X,Y,Z,rx,ry,rz, worldid, interiorid, playerid, distance)) {
-        if (sscanf(line,"p<,>'('ifffffp<)>f",objectid,X,Y,Z,rx,ry,rz)) {
-          format(buf,sizeof buf,"%s, linia %d, blad w parsowaniu: %s", pliki[i],lnum, line);
-          printf("%s",buf);
-          continue;
-        }
-        worldid=-1;interiorid=-1;playerid=-1;distance=-1;
-      }
-      if (distance==-1) distance=CalculateObjectDistance(objectid);
-      CreateDynamicObject(objectid, X,Y,Z, rx,ry,rz,  worldid, interiorid, playerid, distance);
-    }
-  }
-  fclose(olist);
-  format(line,sizeof line,"%s, linii: %d, obiektow: %d",pliki[i],lnum,cnt);
-  printf("%s",line);
-  CallRemoteFunction("NotifyAdmins","s",line);
- }
- return 1;
-}
-
 Float:CalculateObjectDistance(objectid){
   switch (objectid){
     case
@@ -138,4 +104,39 @@ Float:CalculateObjectDistance(objectid){
   }
   return 200.0;
 }
+
+public OnFilterScriptInit(){
+ new buf[255],line[255];
+ new File:olist;
+ new cnt,lnum;
+ SendClientMessageToAll(0xff0000ff,"[IMPORTANT] Trwa przeladowywanie obiektow i pojazdow...");
+ for(new i=0;i<sizeof pliki;i++)
+ {
+  olist = fopen(pliki[i], io_read);
+  cnt=0; lnum=0;
+  while(fread(olist, line)) {
+    lnum++;
+    if (line[0]!='/' && strfind(line,"CreateDynamicObject",true)!=-1) {
+      cnt++;
+      new objectid, Float:X,Float:Y,Float:Z,  Float:rx,Float:ry,Float:rz, worldid=-1, interiorid=-1,playerid=-1,Float:distance=200.0;
+      if (sscanf(line,"p<,>'('iffffffD(-1)D(-1)D(-1)p<)>F(-1)",objectid,X,Y,Z,rx,ry,rz, worldid, interiorid, playerid, distance)) {
+        if (sscanf(line,"p<,>'('ifffffp<)>f",objectid,X,Y,Z,rx,ry,rz)) {
+          format(buf,sizeof buf,"%s, linia %d, blad w parsowaniu: %s", pliki[i],lnum, line);
+          printf("%s",buf);
+          continue;
+        }
+        worldid=-1;interiorid=-1;playerid=-1;distance=-1;
+      }
+      if (distance==-1) distance=CalculateObjectDistance(objectid);
+      CreateDynamicObject(objectid, X,Y,Z, rx,ry,rz,  worldid, interiorid, playerid, distance);
+    }
+  }
+  fclose(olist);
+  format(line,sizeof line,"%s, linii: %d, obiektow: %d",pliki[i],lnum,cnt);
+  printf("%s",line);
+  CallRemoteFunction("NotifyAdmins","s",line);
+ }
+ return 1;
+}
+
 // EOF

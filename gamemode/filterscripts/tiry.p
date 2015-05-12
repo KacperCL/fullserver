@@ -208,7 +208,7 @@ mg_spedycja_Cel(playerid){
       score = 6;
     }
     ////// distance processing //////
-    kwota = kwota+(floatround(mg_spedycja_odleglosc[playerid])*2)
+    kwota = kwota+(floatround(mg_spedycja_odleglosc[playerid])*2);
     score = score+(floatround(mg_spedycja_odleglosc[playerid])/400);
     ////// end distance processing ///////
     CallRemoteFunction("GivePlayerMoneyEx","dd",playerid,kwota);

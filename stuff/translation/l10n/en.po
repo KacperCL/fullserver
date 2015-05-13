@@ -1,0 +1,1967 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-04 20:30+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Wielebny <wielebny@fullserver.eu>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: /vol/n/.wg/drive_d/xyzzydm/gamemode\n"
+
+#: gamemodes/fs.pwn:120
+msgid "NIEUDANE"
+msgstr "FAILED"
+
+#: gamemodes/fs.pwn:135
+msgid "Uruchamianie FullServer DM:"
+msgstr "Starting FullServer DM:"
+
+#: gamemodes/fs.pwn:136
+msgid " Ladowanie ustawien i elementow glownych ..."
+msgstr " Loading settings and root elements ..."
+
+#: gamemodes/fs.pwn:358
+msgid "Wcisnij {b}shift lub enter{/b}, aby wybrac swoj ostatni skin, lub wybierz nowy."
+msgstr "Press {b}shift or enter{/b} to select your last skin, or choose a new one."
+
+#: gamemodes/fs.pwn:360
+msgid "Wybierz skin, ktorego chcesz uzywac w grze. "
+msgstr "Select skin you would like to use."
+
+#: gamemodes/fs.pwn:361
+msgid "Przewijaj w lewo aby przegladac skiny kobiece, w prawo aby przegladac skiny meskie."
+msgstr "Press left to see female or right to see male skins."
+
+#: gamemodes/fs.pwn:362
+msgid "Jesli znasz ID skina, mozesz wpisac {b}/skin id{/b}, aby wybrac go od razu"
+msgstr "If you know ID, you can choose skin directly by {b}/skin id{/b}"
+
+#: gamemodes/fs.pwn:368
+msgid "~n~~n~~n~~n~~n~~n~~n~~n~<< kobiety  |  mezczyzni >>"
+msgstr "~n~~n~~n~~n~~n~~n~~n~~n~<< female   |    male >>"
+
+#: gamemodes/fs.pwn:371
+#, c-format
+msgid "~n~~n~~n~~n~~n~~n~~n~~n~Skin ~y~%d"
+msgstr ""
+
+#: gamemodes/fs.pwn:506
+msgid "Limit graczy osiagniety"
+msgstr "Player limit reached"
+
+#: gamemodes/fs.pwn:558
+#, c-format
+msgid "Twoj adres IP jest zbanowany na %d %s."
+msgstr "Your IP address is banned for %d %s."
+
+#: gamemodes/fs.pwn:561
+msgid "Jezeli uwazasz, ze to pomylka, zglos to do administratora lub napisz prosbe o odbanowanie na {b}FullServer.eu{/b}"
+msgstr "If you think it's a mistake, contact with us at {b}http://fullserver.eu{/b}"
+
+#: gamemodes/fs.pwn:563
+#, c-format
+msgid "Gracz {b}%s{/b} nie dolaczyl z powodu aktywnego bana na IP {b}+%d %s"
+msgstr "Player {b}%s{/b} didn't join because of active IP ban {b}+%d %s"
+
+#: gamemodes/fs.pwn:681
+msgid "Wyglada na to, ze jestes obecnie polaczony na naszym drugim serwerze! Nie mozesz grac na obu naraz."
+msgstr "It looks like you're currently connected to other FullServer! You cannot play on both at one time."
+
+#: gamemodes/fs.pwn:682
+msgid "Jesli jestes w trakcie przelaczania serwerow, odczekaj chwile i sprobuj ponownie."
+msgstr "If you're currently switching servers, please wait a moment and retry."
+
+#: gamemodes/fs.pwn:689 gamemodes/fs.pwn:861
+#, c-format
+msgid "Nieautoryzowane logowanie na admina RCON przez %s (%d)! Wykopany."
+msgstr "Unauthorised RCON access by %s (%d)! Kicked."
+
+#: gamemodes/fs.pwn:753
+#, c-format
+msgid "Nowy rekord graczy na serwerze!~n~~n~~r~~h~%i!"
+msgstr "New player count record!~n~~n~~r~~h~%i!"
+
+#: gamemodes/fs.pwn:762 gamemodes/fs.pwn:2530
+msgid "Witaj na FullServerze!"
+msgstr "Welcome to FullServer!"
+
+#: gamemodes/fs.pwn:762 gamemodes/fs.pwn:2530
+msgid "Zaloguj sie uzywajac swojego hasla podanego podczas rejestracji."
+msgstr "Enter your password to log in."
+
+#: gamemodes/fs.pwn:762 gamemodes/fs.pwn:2530
+msgid "Zaloguj"
+msgstr "Log in"
+
+#: gamemodes/fs.pwn:762 gamemodes/fs.pwn:2530 gamemodes/fs.pwn:3317
+#: gamemodes/fs.pwn:3318 gamemodes/fs.pwn:3319 gamemodes/fs.pwn:3320
+#: gamemodes/fs.pwn:3321 gamemodes/fs.pwn:3338 gamemodes/fs.pwn:3339
+#: gamemodes/fs.pwn:3340 gamemodes/fs.pwn:3341 gamemodes/fs.pwn:3343
+#: gamemodes/fs.pwn:3345 gamemodes/fs.pwn:3368 gamemodes/fs.pwn:3414
+#: gamemodes/fs.pwn:3458 gamemodes/fs.pwn:3540 gamemodes/fs.pwn:3615
+#: gamemodes/fs.pwn:3641 gamemodes/fs.pwn:3757 gamemodes/fs.pwn:3786
+#: gamemodes/fs.pwn:3815 gamemodes/fs.pwn:3846 gamemodes/fs.pwn:3879
+#: gamemodes/fs.pwn:3908 include/fullserver/commands_admin.inc:3316
+#: include/fullserver/commands_other.inc:18
+#: include/fullserver/commands_other.inc:27
+#: include/fullserver/commands_other.inc:192
+#: include/fullserver/commands_other.inc:512
+#: include/fullserver/commands_other.inc:519
+#: include/fullserver/commands_other.inc:866
+#: include/fullserver/commands_other.inc:3003
+#: include/fullserver/commands_other.inc:3400 include/fullserver/gangs.inc:438
+#: include/fullserver/objects.inc:1115 include/fullserver/solo.inc:61
+msgid "Wyjdz"
+msgstr "Leave"
+
+#: gamemodes/fs.pwn:801
+msgid "Uwaga! Obecnie wszyscy gracze na serwerze posiadaja imunitet!"
+msgstr "Notice! Immunity is currently granted to all players."
+
+#: gamemodes/fs.pwn:839
+#, c-format
+msgid "Powod: {b}%s{/b}"
+msgstr "Reason: {b}%s{/b}"
+
+#: gamemodes/fs.pwn:842
+msgid "Jesli uwazasz ze ban byl niesluszny, badz tez pragniesz byc odbanowany przed uplywem podanego czasu"
+msgstr "If you think thats a mistake, or you want to apply for unban"
+
+#: gamemodes/fs.pwn:843
+msgid "zloz {b}podanie o odbanowanie{/b} na stronie {b}WWW.FULLSERVER.EU{/b}."
+msgstr "please post unban request us on {b}http://fullserver.eu/{/b}"
+
+#: gamemodes/fs.pwn:845
+#, c-format
+msgid "Gracz {b}%s{/b} nie dolaczyl z powodu aktywnego bana {b}%s:+%d %s"
+msgstr "Player {b}%s{/b} didn't join because of active ban {b}%s:+%d %s"
+
+#: gamemodes/fs.pwn:984
+#, c-format
+msgid "({FACB00}VIP{A0A0A0}) Do gry dolacza {FACB00}%s{A0A0A0}."
+msgstr "({FACB00}VIP{A0A0A0}) {FACB00}%s{A0A0A0} has joined."
+
+#: gamemodes/fs.pwn:995
+#, c-format
+msgid "*** %s zalogowal sie jako maper."
+msgstr "*** %s has logged in as mapper."
+
+#: gamemodes/fs.pwn:1406
+msgid "Zabijanie w strefie bez DM jest zakazane."
+msgstr "Killing in no-DM zone is prohibited."
+
+#: gamemodes/fs.pwn:1595 gamemodes/fs.pwn:1652
+msgid "Twoj pojazd wrocil pod Twoj dom."
+msgstr "Your vehicle has returned to your house."
+
+#: gamemodes/fs.pwn:1679 gamemodes/fs.pwn:4021
+msgid "Najpierw musisz dolaczyc do gry."
+msgstr "Join the game, first."
+
+#: gamemodes/fs.pwn:1686 gamemodes/fs.pwn:4013
+msgid "Niestety - siedzisz w paczce."
+msgstr "Sorry, you're in jail."
+
+#: gamemodes/fs.pwn:1723
+msgid "Nie jestes GM-em!"
+msgstr "You're not GM!"
+
+#: gamemodes/fs.pwn:1734 gamemodes/fs.pwn:1740
+msgid "Nie jestes adminem!"
+msgstr "You're not admin!"
+
+#: gamemodes/fs.pwn:1750
+msgid "Nie nalezysz do zadnej frakcji!"
+msgstr "You are not in any faction."
+
+#: gamemodes/fs.pwn:1762
+msgid "Nie jestes w gangu!"
+msgstr "You're not in any gang!"
+
+#: gamemodes/fs.pwn:1789
+msgid "Czat jest obecnie wylaczony."
+msgstr "Chat is currently disabled."
+
+#: gamemodes/fs.pwn:1796 include/fullserver/commands_other.inc:273
+#, c-format
+msgid "Ninjabanowana proba reklamy przez {b}%s (%d){/b}."
+msgstr "Ninjabanned advertising by {b}%s (%d){/b}."
+
+#: gamemodes/fs.pwn:2531
+msgid "Nieprawidlowe haslo."
+msgstr "Incorrect password."
+
+#: gamemodes/fs.pwn:2533
+msgid "Masz problem z zalogowaniem? Nie pamietasz hasla? Napisz na forum, pomozemy. http://fullserver.eu/"
+msgstr "Can't access your account? Forgot your password? Contact us on forum: http://fullserver.eu/"
+
+#: gamemodes/fs.pwn:2565 gamemodes/fs.pwn:2566 gamemodes/fs.pwn:2638
+#: gamemodes/fs.pwn:3322 include/fullserver/commands_admin.inc:3316
+#: include/fullserver/commands_other.inc:18
+#: include/fullserver/commands_other.inc:27
+#: include/fullserver/commands_other.inc:192
+#: include/fullserver/commands_other.inc:512
+#: include/fullserver/commands_other.inc:519
+#: include/fullserver/commands_other.inc:3003 include/fullserver/gangs.inc:59
+#: include/fullserver/gangs.inc:354 include/fullserver/gangs.inc:370
+#: include/fullserver/gangs.inc:373 include/fullserver/objects.inc:1115
+#: include/fullserver/solo.inc:61
+msgid "Wybierz"
+msgstr "Select"
+
+#: gamemodes/fs.pwn:2565 gamemodes/fs.pwn:2566 gamemodes/fs.pwn:2567
+#: gamemodes/fs.pwn:2568 gamemodes/fs.pwn:2569 gamemodes/fs.pwn:2638
+#: gamemodes/fs.pwn:2687 gamemodes/fs.pwn:2692 gamemodes/fs.pwn:2720
+#: gamemodes/fs.pwn:2848 gamemodes/fs.pwn:2854 gamemodes/fs.pwn:2860
+#: gamemodes/fs.pwn:3317 gamemodes/fs.pwn:3318 gamemodes/fs.pwn:3319
+#: gamemodes/fs.pwn:3320 gamemodes/fs.pwn:3321 gamemodes/fs.pwn:3322
+#: gamemodes/fs.pwn:3338 gamemodes/fs.pwn:3339 gamemodes/fs.pwn:3340
+#: gamemodes/fs.pwn:3341 gamemodes/fs.pwn:3343 gamemodes/fs.pwn:3345
+#: gamemodes/fs.pwn:3368 gamemodes/fs.pwn:3370 gamemodes/fs.pwn:3371
+#: gamemodes/fs.pwn:3372 gamemodes/fs.pwn:3414 gamemodes/fs.pwn:3458
+#: gamemodes/fs.pwn:3489 gamemodes/fs.pwn:3540 gamemodes/fs.pwn:3615
+#: gamemodes/fs.pwn:3641 gamemodes/fs.pwn:3757 gamemodes/fs.pwn:3786
+#: gamemodes/fs.pwn:3815 gamemodes/fs.pwn:3846 gamemodes/fs.pwn:3879
+#: gamemodes/fs.pwn:3908 include/fullserver/commands_other.inc:3400
+#: include/fullserver/gangs.inc:59 include/fullserver/gangs.inc:354
+#: include/fullserver/gangs.inc:370 include/fullserver/gangs.inc:373
+#: include/fullserver/gangs.inc:438
+#: include/fullserver/scripting_functions.inc:2014
+#: include/fullserver/scripting_functions.inc:2022
+#: include/fullserver/scripting_functions.inc:2750
+msgid "Wroc"
+msgstr "Back"
+
+#: gamemodes/fs.pwn:2567 gamemodes/fs.pwn:2568 gamemodes/fs.pwn:2569
+#: gamemodes/fs.pwn:2692 gamemodes/fs.pwn:2720 gamemodes/fs.pwn:2848
+#: gamemodes/fs.pwn:2854 gamemodes/fs.pwn:2860
+#: include/fullserver/scripting_functions.inc:2014
+#: include/fullserver/scripting_functions.inc:2022
+#: include/fullserver/scripting_functions.inc:2750
+msgid "Zapisz"
+msgstr "Save"
+
+#: gamemodes/fs.pwn:3529
+msgid "Tak"
+msgstr "Yes"
+
+#: gamemodes/fs.pwn:3529
+msgid "Nie"
+msgstr "No"
+
+#: gamemodes/fs.pwn:3908
+msgid "Top lista > Gangi"
+msgstr "Top lists > Gangs"
+
+#: gamemodes/fs.pwn:3928
+msgid "Wszystkie ustawienia HUD przelaczone."
+msgstr "All settings toggled."
+
+#: gamemodes/fs.pwn:3936
+#, c-format
+msgid "Element {b}%s{/b} zostal wlaczony"
+msgstr "Switching {b}%s{/b} ON."
+
+#: gamemodes/fs.pwn:3938
+#, c-format
+msgid "Element {b}%s{/b} zostal wylaczony"
+msgstr "Switching {b}%s{/b} OFF."
+
+#: gamemodes/fs.pwn:3954
+#, c-format
+msgid ""
+"Gracz: %s\n"
+"ID: %i\n"
+"Powod: %s\n"
+"Zlozone przez: %s"
+msgstr ""
+"Player: %s\n"
+"ID: %i\n"
+"Reason: %s\n"
+"Reported by: %s"
+
+#: gamemodes/fs.pwn:3955
+msgid "Raporty"
+msgstr "Reports"
+
+#: gamemodes/fs.pwn:3955
+msgid "Spec"
+msgstr "Spec"
+
+#: gamemodes/fs.pwn:3955
+msgid "Usun"
+msgstr "Remove"
+
+#: gamemodes/fs.pwn:3961
+msgid "Gracz nie jest juz polaczony."
+msgstr "Player is not connected."
+
+#: gamemodes/fs.pwn:3965
+msgid "Nie mozesz w tym momencie obserwowac graczy"
+msgstr "You cannot spectate at this moment"
+
+#: gamemodes/fs.pwn:3969
+#, c-format
+msgid "Obserwujesz gracza {b}%s (%i){/b}"
+msgstr "Started spectating {b}%s (%i){/b}"
+
+#: gamemodes/fs.pwn:3974
+#, c-format
+msgid "Gracz {b}%s{/b} zostal usuniety z listy raportow."
+msgstr "Player {b}%s{/b} was removed from report list."
+
+#: gamemodes/fs.pwn:4017
+msgid "{b}Jestes ocenzurowany/-a{/b}! Nie mozesz wpisywac komend."
+msgstr "{b}You're censored{/b} and can't type commands."
+
+#: gamemodes/fs.pwn:4038
+msgid "Spamowanie nie bedzie tolerowane."
+msgstr "Spamming won't be tolerated"
+
+#: gamemodes/fs.pwn:4046
+msgid "Nie spamuj! Kolejne ostrzezenia moga skonczyc sie wyrzuceniem z serwera."
+msgstr "Don't repeat yourself! Further warning will end in kick."
+
+#: gamemodes/fs.pwn:4074
+msgid "Nieznana komenda, uzyj /komendy aby zobaczyc pelna liste komend."
+msgstr "Unknown command, use /commands to see whole list."
+
+#: gamemodes/fs.pwn:4085
+#, c-format
+msgid "Nieautoryzowane logowanie na admina RCON przez %s (%d)! Poziom %d/%d Wykopany."
+msgstr "Unauthorised RCON access by %s (%d). Level %d/%d. Kicked out."
+
+#: gamemodes/fs.pwn:4094
+#, c-format
+msgid "{b}%s{/b} zalogowal(a) sie na admina (poziom %i)."
+msgstr "{b}%s{/b} has logged in as admin (lvl %i)."
+
+#: gamemodes/fs.pwn:4135
+msgid "Ostatnio uciekles z wiezienia... Ta minute musisz odsiedziec!"
+msgstr "You have to spend one minute in prison due to your last prison-break."
+
+#: include/fullserver/areny.inc:44 include/fullserver/areny.inc:317
+#: include/fullserver/areny.inc:341 include/fullserver/areny.inc:365
+#: include/fullserver/areny.inc:387 include/fullserver/areny.inc:404
+#: include/fullserver/areny.inc:427 include/fullserver/areny.inc:443
+#: include/fullserver/areny.inc:460 include/fullserver/areny.inc:476
+#: include/fullserver/areny.inc:492 include/fullserver/commands_admin.inc:135
+#: include/fullserver/commands_other.inc:1080
+#: include/fullserver/commands_other.inc:1115
+#: include/fullserver/commands_other.inc:1142
+#: include/fullserver/commands_other.inc:1152
+#: include/fullserver/commands_other.inc:1162
+#: include/fullserver/commands_other.inc:1172
+#: include/fullserver/commands_other.inc:1182
+#: include/fullserver/commands_other.inc:1192
+#: include/fullserver/commands_other.inc:1202
+#: include/fullserver/commands_other.inc:1212
+#: include/fullserver/commands_other.inc:1222
+#: include/fullserver/commands_other.inc:1234
+#: include/fullserver/commands_other.inc:1244
+#: include/fullserver/commands_other.inc:1255
+#: include/fullserver/commands_other.inc:1265
+#: include/fullserver/commands_other.inc:1292
+#: include/fullserver/commands_other.inc:1302
+#: include/fullserver/commands_other.inc:1312
+#: include/fullserver/commands_other.inc:1330
+#: include/fullserver/commands_other.inc:1376
+#: include/fullserver/commands_other.inc:1404
+#: include/fullserver/commands_other.inc:1419
+#: include/fullserver/commands_other.inc:1429
+#: include/fullserver/commands_other.inc:1439
+#: include/fullserver/commands_other.inc:1449
+#: include/fullserver/commands_other.inc:1459
+#: include/fullserver/commands_other.inc:1469
+#: include/fullserver/commands_other.inc:1479
+#: include/fullserver/commands_other.inc:1489
+#: include/fullserver/commands_other.inc:1501
+#: include/fullserver/commands_other.inc:1511
+#: include/fullserver/commands_other.inc:1522
+#: include/fullserver/commands_other.inc:1532
+#: include/fullserver/commands_other.inc:1542
+#: include/fullserver/commands_other.inc:1552
+#: include/fullserver/commands_other.inc:1567
+#: include/fullserver/commands_other.inc:1577
+#: include/fullserver/commands_other.inc:1599
+#: include/fullserver/commands_other.inc:1615
+#: include/fullserver/commands_other.inc:1634
+#: include/fullserver/commands_other.inc:1644
+#: include/fullserver/commands_other.inc:1658
+#: include/fullserver/commands_other.inc:1671
+#: include/fullserver/commands_other.inc:1695
+#: include/fullserver/commands_other.inc:1736
+#: include/fullserver/commands_other.inc:1780
+#: include/fullserver/commands_other.inc:1808
+#: include/fullserver/commands_other.inc:1816
+#: include/fullserver/commands_other.inc:1826
+#: include/fullserver/commands_other.inc:1836
+#: include/fullserver/commands_other.inc:1847
+#: include/fullserver/commands_other.inc:1857
+#: include/fullserver/commands_other.inc:1866
+#: include/fullserver/commands_other.inc:1894
+#: include/fullserver/commands_other.inc:1904
+#: include/fullserver/commands_other.inc:1914
+#: include/fullserver/commands_other.inc:1925
+#: include/fullserver/commands_other.inc:1935
+#: include/fullserver/commands_other.inc:1945
+#: include/fullserver/commands_other.inc:1955
+#: include/fullserver/commands_other.inc:1965
+#: include/fullserver/commands_other.inc:1975
+#: include/fullserver/commands_other.inc:1985
+#: include/fullserver/commands_other.inc:1995
+#: include/fullserver/commands_other.inc:2005
+#: include/fullserver/commands_other.inc:2015
+#: include/fullserver/commands_other.inc:2025
+#: include/fullserver/commands_other.inc:2038
+#: include/fullserver/commands_other.inc:2048
+#: include/fullserver/commands_other.inc:2058
+#: include/fullserver/commands_other.inc:2613
+#: include/fullserver/commands_other.inc:2639
+#: include/fullserver/commands_other.inc:2664
+#: include/fullserver/commands_other.inc:2719
+#: include/fullserver/commands_other.inc:2763
+#: include/fullserver/commands_other.inc:2799
+#: include/fullserver/commands_other.inc:2838
+#: include/fullserver/commands_other.inc:2879
+#: include/fullserver/commands_other.inc:2920
+#: include/fullserver/commands_other.inc:2967
+#: include/fullserver/commands_other.inc:3252
+#: include/fullserver/commands_other.inc:3312
+#: include/fullserver/commands_other.inc:3407
+#: include/fullserver/commands_other.inc:3419
+#: include/fullserver/commands_other.inc:3446
+#: include/fullserver/commands_other.inc:3474
+#: include/fullserver/commands_other.inc:3501
+#: include/fullserver/commands_other.inc:3528
+#: include/fullserver/commands_other.inc:3559
+#: include/fullserver/commands_other.inc:3568
+#: include/fullserver/commands_other.inc:3580
+#: include/fullserver/commands_other.inc:3590
+#: include/fullserver/commands_other.inc:3616
+#: include/fullserver/commands_other.inc:3644
+#: include/fullserver/commands_other.inc:3660
+#: include/fullserver/commands_other.inc:3691
+#: include/fullserver/commands_other.inc:3715
+#: include/fullserver/commands_other.inc:3725
+#: include/fullserver/commands_other.inc:3727
+#: include/fullserver/commands_other.inc:3751
+#: include/fullserver/commands_other.inc:3761
+#: include/fullserver/commands_other.inc:3772
+#: include/fullserver/commands_other.inc:3782
+#: include/fullserver/commands_other.inc:3792
+#: include/fullserver/commands_other.inc:3802
+#: include/fullserver/commands_other.inc:3816 include/fullserver/domy.inc:433
+#: include/fullserver/gangs.inc:279 include/fullserver/gangs.inc:299
+#: include/fullserver/gangs.inc:312 include/fullserver/gangs.inc:326
+#: include/fullserver/objects.inc:1347
+msgid "Ta komenda jest teraz niedostepna."
+msgstr "This command is currently unavailable."
+
+#: include/fullserver/areny.inc:78
+msgid "Nie jestes na zadnej arenie!"
+msgstr "You're not on any arena!"
+
+#: include/fullserver/areny.inc:83
+msgid "Opusciles arene"
+msgstr "You have left the arena."
+
+#: include/fullserver/areny.inc:93
+#, c-format
+msgid "Twoja ilosc FPS jest nizsza od wymaganej na tej arenie ({b}%d{/b}FPS)."
+msgstr "Your FPS count is lower that required on this arena ({b}%d{/b}FPS)."
+
+#: include/fullserver/areny.inc:96
+msgid "Zostajesz usuniety z tej areny."
+msgstr "You are forced to leave this arena."
+
+#: include/fullserver/areny.inc:106
+msgid "Niestety! Twoj sredni ping przekracza {b}120ms{/b} - nie mozesz dolaczyc do tej areny!"
+msgstr "Your average ping is above {b}120ms{/b} - you can't join this arena!"
+
+#: include/fullserver/areny.inc:319
+msgid "Niestety! Twoj sredni ping przekracza {b}100ms{/b} - nie mozesz dolaczyc do tej areny!"
+msgstr "Your average ping is above {b}100ms{/b} - you can't join this arena!"
+
+#: include/fullserver/areny.inc:378
+msgid "Arena {b}ONEDE2{/b} - desert eagle, 1 hit = 1 kill, max. ping 100ms"
+msgstr "{b}ONEDE2{/b} arena - desert eagle, 1 hit = 1 kill, max. ping 100ms"
+
+#: include/fullserver/artefact.inc:12
+msgid "Artefakt pojawil sie w okolicach teleportu /statek"
+msgstr "Artefact has appeared near /ship"
+
+#: include/fullserver/artefact.inc:16
+msgid "Artefakt pojawil sie gdzies w kanalach."
+msgstr "Artefact has appeared somewhere in canals."
+
+#: include/fullserver/artefact.inc:20
+msgid "Artefakt pojawil sie w jaskinii "
+msgstr "Artefact has appeared somewhere in cave."
+
+#: include/fullserver/artefact.inc:24
+msgid "Artefakt pojawil sie w bazie wojskowej"
+msgstr "Artefact has appeared in military base."
+
+#: include/fullserver/attraction_chowany.inc:33
+#: include/fullserver/attraction_derby.inc:26
+#: include/fullserver/attraction_drifting.inc:85
+#: include/fullserver/attraction_labirynt.inc:21
+#: include/fullserver/attraction_race.inc:50
+#: include/fullserver/attraction_sps.inc:66
+#: include/fullserver/attraction_wg.inc:81
+#: include/fullserver/scripting_functions.inc:2520
+msgid "Jestes nieosiegalny/a i zostajesz usuniety/a z kolejki na ta atrakcje."
+msgstr "You're unreachable atm, removing from attraction queue."
+
+#: include/fullserver/attraction_chowany.inc:58
+#: include/fullserver/attraction_chowany.inc:69
+#: include/fullserver/attraction_chowany.inc:118
+#: include/fullserver/attraction_chowany.inc:130
+#: include/fullserver/attraction_chowany.inc:174
+#: include/fullserver/attraction_chowany.inc:186
+msgid "Chowany nie wystartowal - nie znaleziono odpowiedniej areny"
+msgstr "Hide'n'Seek aborted - no matching arena found."
+
+#: include/fullserver/attraction_chowany.inc:263
+msgid "Zostajesz wyrzucony z {b}chowanego{/b} za bycie {b}AFK{/b}"
+msgstr "You have been forced to left {b}hide'n'seek{/b} because of {b}AFK{/b}"
+
+#: include/fullserver/attraction_chowany.inc:298
+#, c-format
+msgid "~r~Wracaj na arene!~n~~w~ %d s"
+msgstr "~r~Return to arena!~n~~w~ %d s"
+
+#: include/fullserver/attraction_chowany.inc:371
+msgid "{b}Chowany{/b} zostal przerwany z powodu braku graczy chowajacych sie."
+msgstr "{b}Hide'n'seek{/b} cancelled (not enough hiding players)"
+
+#: include/fullserver/attraction_chowany.inc:380
+msgid "{b}Chowany{/b} zostal przerwany z powodu braku graczy szukajacych."
+msgstr "{b}Hide'n'seek{/b} cancelled (not enough searching players)"
+
+#: include/fullserver/attraction_chowany.inc:388
+#, c-format
+msgid "Chowanego wygrywa {b}%s{/b} i otrzymuje {b}%d respektu{/b}!"
+msgstr "{b}%s{/b} wins hide'n'seek! Reward: {b}%d respect points{/b}!"
+
+#: include/fullserver/attraction_chowany.inc:393
+#, c-format
+msgid "Wygrywasz chowanego i otrzymujesz {b}%d respektu{/b}!"
+msgstr "You win in hide'n'seek! Reward: {b}%d respect points{/b}!"
+
+#: include/fullserver/commands_admin.inc:86
+#, c-format
+msgid "{b}%s{/b} zalogowala sie jako administratorka%s"
+msgstr "{b}%s{/b} has logged in as admin%s"
+
+#: include/fullserver/commands_admin.inc:88
+#, c-format
+msgid "{b}%s{/b} zalogowal sie jako administrator%s"
+msgstr "{b}%s{/b} has logged in as admin%s"
+
+#: include/fullserver/commands_admin.inc:99
+#, c-format
+msgid "Nieudana proba autoryzacji admina: {b}%s{/b} (%d)."
+msgstr "Unsuccessfull admin auth: {b}%s{/b} (%d)."
+
+#: include/fullserver/commands_admin.inc:101
+#, c-format
+msgid "{b}%s{/b} (%d) wprowadzil haslo: '{b}%s{/b}'"
+msgstr "{b}%s{/b} (%d) tried password: '{b}%s{/b}'"
+
+#: include/fullserver/commands_admin.inc:106
+msgid "Bledne haslo. Twoja proba zostala zarejestrowana, zastanow sie czy chcesz zgadywac dalej..."
+msgstr "Incorrect password. Your access has been logged, are you sure you want to continue guessing?"
+
+#: include/fullserver/commands_other.inc:68
+msgid "Zarejestrowany gracz!"
+msgstr "Registered player!"
+
+#: include/fullserver/commands_other.inc:75
+msgid "Zostalas automatycznie zalogowana, milej gry!"
+msgstr "You have been logged in, have fun!"
+
+#: include/fullserver/commands_other.inc:77
+msgid "Zostales automatycznie zalogowany, milej gry!"
+msgstr "You have been logged in, have fun!"
+
+#: include/fullserver/commands_other.inc:228
+#: include/fullserver/commands_other.inc:358
+#: include/fullserver/commands_other.inc:388
+msgid "Jesteś wyciszony - nie możesz pisać."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:235
+#: include/fullserver/commands_other.inc:334
+#: include/fullserver/commands_other.inc:363
+msgid "Wprowadzony tekst jest zbyt dlugi!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:254
+#, c-format
+msgid "{b}%s{/b} nie przyjmuje zadnych wiadomosci prywatnych."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:312
+#, c-format
+msgid "{b}%s{/b} jest AFK."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:317
+#, c-format
+msgid "{b}%s{/b} jest obecnie wyciszony, nie bedzie w stanie Ci odpisac."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:329
+#, fuzzy
+msgid "Uzywaj: {b}/toadmin <tresc>{/b}"
+msgstr "Use: {b}/v <tekst>{/b}"
+
+#: include/fullserver/commands_other.inc:338
+#, c-format
+msgid "DO ADMINOW >>> {b}%s{/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:346
+msgid "Obecnie brak jest zalogowanych adminow..."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:355
+#, fuzzy
+msgid "Uzywaj: {b}/togm <tresc>{/b}"
+msgstr "Use: {b}/v <tekst>{/b}"
+
+#: include/fullserver/commands_other.inc:365
+#, c-format
+msgid "DO GMOW >>> {b}%s{/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:373
+msgid "Obecnie brak jest zalogowanych moderatorow, sprobuj {b}/toadmin{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:375
+msgid "Obecnie brak jest zalogowanych moderatorow..."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:435
+#: include/fullserver/commands_other.inc:450
+#, fuzzy
+msgid "Czat jest wylaczony."
+msgstr "Chat is currently disabled."
+
+#: include/fullserver/commands_other.inc:438
+#, c-format
+msgid "%s {%s}zaraz wraca."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:453
+#, c-format
+msgid "%s {%s}juz jest!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:456
+#, c-format
+msgid "%s {%s}wrocila."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:458
+#, c-format
+msgid "%s {%s}wrocil."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:476
+msgid "Krzyczysz {b}HEJ{/b}, ale nikt Cie nie slyszy."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:479
+#, c-format
+msgid "%s {%s}mowi siema!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:481
+#, c-format
+msgid "%s {%s}mowi hej!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:485
+#, c-format
+msgid "[CHAT] %s(%d) /siema"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:494
+msgid "Krzyczysz {b}NARA{/b}, ale nikt Cie nie slyszy."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:497
+#, c-format
+msgid "%s {%s}mowi nara!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:499
+#, c-format
+msgid "%s {%s}mowi narazie!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:569
+msgid "Wsiadz, lub stan obok pojazdu ktory chcesz otworzyc."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:571
+msgid "Nie masz klucza do tego pojazdu."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:653
+#, fuzzy
+msgid "Niestety! Twoj sredni ping przekracza {b}150ms{/b} - nie mozesz zapisac sie na ta atrakcje!"
+msgstr "Your average ping is above {b}120ms{/b} - you can't join this arena!"
+
+#: include/fullserver/commands_other.inc:657
+msgid "Jestes juz w kolejce na {b}/drifting{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:658
+msgid "Kolejka jest pelna."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:661
+msgid "Zapisales/as sie do kolejki na {b}/drifting{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:708
+#, fuzzy
+msgid "Nie masz tyle gotowki!"
+msgstr "You don't have enough money!"
+
+#: include/fullserver/commands_other.inc:730
+msgid "Za tego gracza wystawiona juz jest {b}maksymalna{/b}\t nagroda!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:736
+#, c-format
+msgid "Stawka za zabojstwo gracza {b}%s{/b} zwiekszona przez {b}%s{/b} z %d do %d$!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:818
+msgid "Takie kwoty musisz ustalac z $KOMORNIKIEM$"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:825
+msgid "Splaciles/as swoje mandaty/grzywne."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:913
+#, fuzzy
+msgid "Ten gracz sie dopiero polaczyl."
+msgstr "Player is not connected."
+
+#: include/fullserver/commands_other.inc:931
+msgid "[RAPORT] {ffffff}Nowy raport!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:935
+msgid "~n~~n~~n~~n~~r~Raport!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:1090
+#: include/fullserver/commands_other.inc:1125
+#: include/fullserver/commands_other.inc:1273
+#: include/fullserver/commands_other.inc:1386
+#: include/fullserver/commands_other.inc:1680
+#: include/fullserver/commands_other.inc:1704
+#: include/fullserver/commands_other.inc:1790
+#: include/fullserver/commands_other.inc:2622
+#: include/fullserver/commands_other.inc:2647
+#: include/fullserver/commands_other.inc:2672
+#: include/fullserver/commands_other.inc:2730
+#: include/fullserver/commands_other.inc:2772
+#: include/fullserver/commands_other.inc:2808
+#: include/fullserver/commands_other.inc:2847
+#: include/fullserver/commands_other.inc:2887
+#: include/fullserver/commands_other.inc:3426
+#: include/fullserver/commands_other.inc:3453
+#: include/fullserver/commands_other.inc:3481
+#: include/fullserver/commands_other.inc:3508
+#: include/fullserver/commands_other.inc:3597
+#: include/fullserver/commands_other.inc:3623
+#: include/fullserver/commands_other.inc:3667
+#: include/fullserver/commands_other.inc:3698
+#: include/fullserver/commands_other.inc:3734
+msgid "Pojazdy wojskowe nie moga sie tam teleportowac!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:1101
+msgid "~y~Bezludna ~h~wyspa"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:1133
+msgid "Nie mozesz sie tam przeniesc {b}tym{/b} pojazdem ;-)"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:1136
+msgid "~y~Wyspa ~h~skarbow"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2250
+msgid "Wyposazyles swoj motor w TURBO. Wcisnij ALT aby uzyc."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2279
+#: include/fullserver/commands_other.inc:2323
+msgid "To pojazd drifterski - mozesz go naprawic i obrocic szybciej, wciskajac 2"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2285
+msgid "Pojazd nie wymaga naprawy"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2390
+msgid "Nie mozesz teraz z tego skorzystac."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2393
+msgid "Jestes martwa!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2393
+msgid "Jestes martwy!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2396
+msgid "Jestes AFK! Prawdopodobnie jestes zdesynchronizowany i musisz polaczyc sie ponownie z serwerem!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2403
+msgid "Wysiadz z pojazdu zanim uzyjesz {b}/rsp{/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2492
+msgid "Uleczenie sie kosztuje {b}3000${/b}. Nie stac Cie!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2506
+msgid "Zostales wypisany/-a z /race"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2509
+msgid "Zrezygnowales/as z zapisow na /race"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2519
+msgid "Zostales wypisany/-a z /drifting"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2522
+msgid "Zrezygnowales/as z zapisow na /drifting"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2536
+msgid "Zostales wypisany/-a z /derby"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2539
+msgid "Zrezygnowales/as z zapisow na /derby"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2550
+#, fuzzy
+msgid "Opusciles chowanego."
+msgstr "You have left the arena."
+
+#: include/fullserver/commands_other.inc:2554
+msgid "Zrezygnowales/as z zapisow na /chowany"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2565
+#, fuzzy
+msgid "Opusciles WG."
+msgstr "You have left the arena."
+
+#: include/fullserver/commands_other.inc:2570
+msgid "Zrezygnowales/as z zapisow na /wg"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2581
+#, fuzzy
+msgid "Opusciles labirynt."
+msgstr "You have left the arena."
+
+#: include/fullserver/commands_other.inc:2587
+msgid "Zrezygnowales/as z zapisow na /labirynt"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2624
+msgid "Pojazdy powietrzne nie moga sie tam teleportowac!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2632
+msgid "~r~Getto ~h~LS"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2656
+msgid "~b~Lodz podwodna"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2676
+msgid "Pojazdy wodne nie moga sie tam teleportowac!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2720
+msgid "Szukasz {b}Groove Street{/b}? Skorzystaj z teleportu {b}/gs{/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2737
+msgid "Zacumowales przy najblizszym porcie."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2776
+#: include/fullserver/commands_other.inc:2812
+msgid "Pojazdy plywajace nie moga sie tam teleportowac! Najbliszy teleport wodny: {b}/portsf{/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2852
+msgid "Zostales przeniesiony do najblizszego portu. Bank znajduje sie w centrum {b}Palomino Creek{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2859
+msgid "~y~Bank w ~b~Palomino Creek"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2898
+msgid "~b~Port wodny ~h~San Fierro"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2932
+msgid "Pojazdy plywajace nie moga sie tam przenosic. Najblizszy teleport: {b}/tama{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:2989
+msgid "~r~Wietnam"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3001
+#, fuzzy
+msgid "Nie mozesz teraz kupic broni!"
+msgstr "You cannot buy weapons at this moment!"
+
+#: include/fullserver/commands_other.inc:3003
+msgid "Zakup broni"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3010
+#, fuzzy
+msgid "Nie mozesz teraz kupic spadochronu"
+msgstr "Gang spawn cannot be set here!"
+
+#: include/fullserver/commands_other.inc:3012
+#: include/fullserver/scripting_functions.inc:3157
+msgid "Nie masz wystarczajacej ilosc gotowki!"
+msgstr "You don't have enough money!"
+
+#: include/fullserver/commands_other.inc:3022
+msgid "Musisz byc w pojezdzie"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3025
+#: include/fullserver/commands_other.inc:3049
+msgid "Nie mozesz uzyc {b}/tune{/b} bedac pasazerem"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3028
+#: include/fullserver/commands_other.inc:3203
+#, fuzzy
+msgid "Nie mozesz tego teraz zrobic!"
+msgstr "You cannot buy weapons at this moment!"
+
+#: include/fullserver/commands_other.inc:3032
+msgid "Nie stac Cie na to! Automatyczny tuning kosztuje {b}5000${/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3037
+msgid "Twoj pojazd zostal ztuningowany!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3039
+msgid "Tego pojazdu nie da sie stuningowac!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3046
+msgid "Musisz byc w pojeździe"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3053
+msgid "Nie stac Cie na to! Automatyczne malowanie kosztuje {b}500${/b}"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3065
+msgid "Komendy za respekt:"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3072
+#: include/fullserver/commands_other.inc:3089
+#: include/fullserver/commands_other.inc:3108
+#: include/fullserver/commands_other.inc:3128
+#: include/fullserver/commands_other.inc:3149
+#, fuzzy
+msgid "Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."
+msgstr "Only registered players can buy houses. Type {b}/register{/b} to register!"
+
+#: include/fullserver/commands_other.inc:3074
+msgid "Masz za malo respektu! Wymagane {b}10{/b}!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3076
+#, fuzzy
+msgid "Nie mozesz teraz kupic armora!"
+msgstr "You cannot buy weapons at this moment!"
+
+#: include/fullserver/commands_other.inc:3082
+#, fuzzy
+msgid "Kupiles {b}armor{/b} za {b}10 punktow{/b} respektu."
+msgstr "You've bought {b}%s{/b} for {b}%d{/b}$."
+
+#: include/fullserver/commands_other.inc:3091
+msgid "Masz za malo respektu! Wymagane {b}20{/b}!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3093
+#: include/fullserver/commands_other.inc:3113
+#: include/fullserver/commands_other.inc:3133
+#: include/fullserver/commands_other.inc:3154
+msgid "Nie mozesz teraz tego zrobic."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3100
+msgid "Kupiles {b}niewidzialnosc{/b} za {b}15 punktow{/b} respektu."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3110
+#: include/fullserver/commands_other.inc:3130
+#: include/fullserver/commands_other.inc:3151
+msgid "Masz za malo respektu! Wymagane {b}30{/b}!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3121
+msgid "Kupiles {b}mozliwosc strzelania oburacz z dualso{/b} za {b}30 punktow{/b} respektu."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3141
+msgid "Kupiles {b}mozliwosc strzelania oburacz z UZI{/b} za {b}30 punktow{/b} respektu."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3164
+msgid "Kupiles {b}mozliwosc strzelania oburacz z pistoletow{/b} za {b}60 punktow{/b} respektu."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3171
+#, fuzzy
+msgid "Uzyj: {b}/id <id/fragment nicku>{/b}"
+msgstr "Use: {b}/v <tekst>{/b}"
+
+#: include/fullserver/commands_other.inc:3186
+#, fuzzy, c-format
+msgid "Znaleziono: {b}%s{/b}, ID: {b}%d{/b}"
+msgstr "You've bought {b}%s{/b} for {b}%d{/b}$."
+
+#: include/fullserver/commands_other.inc:3193
+msgid "Nie akceptujesz {b}zadnych /pm{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3198
+msgid "Przyjmujesz {b}wszystkie /pm{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3217
+msgid "Nie mozesz tego teraz zrobic."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3220
+msgid "Komendy {b}/skok{/b} mozna uzywac tylko na zewnatrz!"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3224
+#, fuzzy
+msgid "Uzyj: {b}/skok <wysokosc:500-20000>{/b}"
+msgstr "Use: {b}/vsay <tekst>{/b}"
+
+#: include/fullserver/commands_other.inc:3227
+msgid "Podaj wartosc z zakresu {b}500-20000{/b}."
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3764
+msgid "~y~Tor ~h~DRAG ~h~II"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3775
+msgid "~r~Zjazd ~h~EXTREME"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3785
+msgid "~r~Zjazd ~h~III"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3795
+msgid "~b~S~h~K~h~Y"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3805
+msgid "~y~Pomnik ~h~kultowego ~y~autokaru"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3814
+#, fuzzy
+msgid "Tylko dla czlonkow gangu."
+msgstr "Only for members of gang {b}%s{/b} gang!"
+
+#: include/fullserver/commands_other.inc:3818
+msgid "Najpierw wysiadz z pojazdu"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3822
+msgid "~w~Lobby ~r~A/D"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3832
+msgid "Wylaczono pokazywanie nametagow"
+msgstr ""
+
+#: include/fullserver/commands_other.inc:3837
+msgid "Wlaczono pokazywanie nametagow"
+msgstr ""
+
+#: include/fullserver/commands_vip.inc:5
+#: include/fullserver/commands_vip.inc:45
+#: include/fullserver/commands_vip.inc:79
+#: include/fullserver/commands_vip.inc:113
+#: include/fullserver/commands_vip.inc:151
+#: include/fullserver/commands_vip.inc:193
+msgid "Musisz posiadac konto VIP aby uzywac tej komendy."
+msgstr "This command is available only to VIP players."
+
+#: include/fullserver/commands_vip.inc:8
+msgid "Uzyj: {b}/vsay <tekst>{/b}"
+msgstr "Use: {b}/vsay <tekst>{/b}"
+
+#: include/fullserver/commands_vip.inc:31
+msgid "Uzyj: {b}/v <tekst>{/b}"
+msgstr "Use: {b}/v <tekst>{/b}"
+
+#: include/fullserver/domy.inc:235
+#, c-format
+msgid "Czynsz Twojego domu jest oplacony do {b}%s{/b} ({b}%d{/b} %s)"
+msgstr "Your house is paid to date {b}%s{/b} ({b}%d{/b} %s)"
+
+#: include/fullserver/domy.inc:557 include/fullserver/domy.inc:591
+msgid "Tylko zarejestrowani gracze moga kupowac domy. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac!"
+msgstr "Only registered players can buy houses. Type {b}/register{/b} to register!"
+
+#: include/fullserver/domy.inc:560
+msgid "Mozliwosc kupowania domow za sms jest obecnie wylaczona."
+msgstr "You cannot buy this house with SMS currently."
+
+#: include/fullserver/domy.inc:563
+msgid "Masz juz dom!"
+msgstr "You already own a house!"
+
+#: include/fullserver/domy.inc:569 include/fullserver/domy.inc:575
+#: include/fullserver/domy.inc:594
+msgid "Podano nieprawidlowa wartosc!"
+msgstr "Invalid value given!"
+
+#: include/fullserver/domy.inc:579
+#, c-format
+msgid "Nie masz wystarczajacej ilosci respektu! Sprobuj za jakis czas, badz tez oplac dom SMSem na stronie {F4FF29}www.fullserver.eu/domy/%d"
+msgstr "You don't have enough respect! Try again in some time, or buy your house with SMS on {F4FF29}www.fullserver.eu/domy/%d"
+
+#: include/fullserver/domy.inc:583
+#, c-format
+msgid ""
+"Ilosc respektu: %d\n"
+"Ilosc dni: %d"
+msgstr ""
+"Respect amount: %d\n"
+"Number of days: %d"
+
+#: include/fullserver/domy.inc:584
+msgid "Potwierdz wplate"
+msgstr "Confirm payment"
+
+#: include/fullserver/domy.inc:584 include/fullserver/warsztat.inc:12
+#: include/fullserver/warsztat.inc:14
+msgid "OK"
+msgstr "OK"
+
+#: include/fullserver/domy.inc:584 include/fullserver/warsztat.inc:12
+#: include/fullserver/warsztat.inc:14
+msgid "Anuluj"
+msgstr "Cancel"
+
+#: include/fullserver/domy.inc:597
+msgid "Nie masz wystarczajacej ilosci respektu! Sprobuj ponownie, lub skorzystaj z mozliwosci oplacenia domu przez SMS."
+msgstr "You don't have enough respect! Try again in some time, or buy your house with SMS."
+
+#: include/fullserver/domy.inc:600
+msgid "Wystapil blad. Nie odnaleziono domu. Operacja anulowana."
+msgstr "Error occured, house not found - operation aborted."
+
+#: include/fullserver/domy.inc:607
+msgid "Wystapil blad podczas dokonywania operacji. Zostala ona anulowana."
+msgstr "Unspecified error occured, operation aborted."
+
+#: include/fullserver/domy.inc:608
+msgid "Gratulacje! Oplaciles swoj dom!"
+msgstr "Congratulations! You have paid for your house!"
+
+#: include/fullserver/domy.inc:632
+msgid "Wystapil blad! Ten dom nie nalezy do Ciebie!"
+msgstr "Error occured! This house does not belong to you."
+
+#: include/fullserver/domy.inc:638
+#, c-format
+msgid "Dostajesz {b}%d${/b} zwrotu za pozostaly czynsz."
+msgstr "You receive {b}%d${/b} in return for remaining rent."
+
+#: include/fullserver/domy.inc:682
+msgid "Witaj w domu"
+msgstr "Welcome home"
+
+#: include/fullserver/domy.inc:685
+#, c-format
+msgid "Dom %s"
+msgstr "%s house"
+
+#: include/fullserver/domy.inc:689
+msgid "Dom na sprzedaz"
+msgstr "House for sale"
+
+#: include/fullserver/gangs.inc:9
+#, c-format
+msgid "*** Zalozyciel %s - %s (%d) dolacza do gry."
+msgstr "*** Founder of %s - %s (%d) has joined."
+
+#: include/fullserver/gangs.inc:12
+#, c-format
+msgid "*** Lider %s - %s (%d) dolacza do gry."
+msgstr "*** Leader of %s - %s (%d) has joined."
+
+#: include/fullserver/gangs.inc:59
+msgid "Statystyki > gangi"
+msgstr "Stats > gangs"
+
+#: include/fullserver/gangs.inc:104
+#, c-format
+msgid "LIDERZY> {%06x}%s{ffffff}: %s"
+msgstr "LEADERS> {%06x}%s{ffffff}: %s"
+
+#: include/fullserver/gangs.inc:154 include/fullserver/gangs.inc:198
+msgid "Funkcja tylko dla liderow/wlascicieli gangow"
+msgstr "Only for gang founders/leaders"
+
+#: include/fullserver/gangs.inc:165 include/fullserver/gangs.inc:209
+msgid "Nie ma takiego gracza!"
+msgstr "No such player!"
+
+#: include/fullserver/gangs.inc:167 include/fullserver/gangs.inc:211
+msgid "Gracz nie jest zarejestrowany!"
+msgstr "Player is not registered."
+
+#: include/fullserver/gangs.inc:169
+msgid "Gracz jest juz czlonkiem Twojego gangu"
+msgstr "Player is not your gang member"
+
+#: include/fullserver/gangs.inc:171
+msgid "Gracz nalezy juz do innego gangu"
+msgstr "Player is another gang member"
+
+#: include/fullserver/gangs.inc:178
+#, c-format
+msgid "_~n~_~n~_~n~~w~Witaj w~n~~b~%s"
+msgstr "_~n~_~n~_~n~~w~Welcome to~n~~b~%s"
+
+#: include/fullserver/gangs.inc:183
+#, c-format
+msgid "%s (%d) dolaczyla do gangu %s"
+msgstr "%s (%d) has joined gang %s"
+
+#: include/fullserver/gangs.inc:185
+#, c-format
+msgid "%s (%d) dolaczyl do gangu %s"
+msgstr "%s (%d) has joined gang %s"
+
+#: include/fullserver/gangs.inc:213
+msgid "Gracz nie nalezy do zadnego klanu"
+msgstr "Player doesn't belong to any gang."
+
+#: include/fullserver/gangs.inc:215
+msgid "Gracz nie jest czlonkiem!"
+msgstr "Player is not gang member!"
+
+#: include/fullserver/gangs.inc:217
+msgid "Nie mozna wyrzucic zalozyciela!"
+msgstr "You cannot throw out gang-founder!"
+
+#: include/fullserver/gangs.inc:263
+#, c-format
+msgid "%s (%d) opuscila gang %s"
+msgstr "%s (%d) has left gang %s"
+
+#: include/fullserver/gangs.inc:265
+#, c-format
+msgid "%s (%d) opuscil gang %s"
+msgstr "%s (%d) has left gang %s"
+
+#: include/fullserver/gangs.inc:277 include/fullserver/gangs.inc:310
+#: include/fullserver/gangs.inc:324
+msgid "Nie nalezysz do zadnego gangu!"
+msgstr "You do not belong in any gang!"
+
+#: include/fullserver/gangs.inc:282
+msgid "Nie mozesz tutaj ustawic spawnu gangu!"
+msgstr "Gang spawn cannot be set here!"
+
+#: include/fullserver/gangs.inc:285
+msgid "Spawn gangu moze byc zapisany tylko na zewnatrz"
+msgstr "Gang spawn can only be set outside."
+
+#: include/fullserver/gangs.inc:316
+msgid "~y~Spawn gangu"
+msgstr "~y~Gang spawn"
+
+#: include/fullserver/gangs.inc:330
+msgid "~y~Baza gangu"
+msgstr "~<~ Gang base ~>~__"
+
+#: include/fullserver/money.inc:36
+#, c-format
+msgid "Prawdopodobny money hack: %s (%d) ma %d$ a powinien %d$"
+msgstr "Probable money-hack: %s (%d) has %d$, should have %d$"
+
+#: include/fullserver/objects.inc:892
+msgid "Najdluzej grajace osoby"
+msgstr "Longest playing"
+
+#: include/fullserver/objects.inc:899
+msgid ""
+"Urodzeni zabojcy\n"
+"gracze z najwiekszym skillem"
+msgstr ""
+"Natural born killers\n"
+"players with highest skill"
+
+#: include/fullserver/objects.inc:906
+msgid "Poszukiwacze bonusow"
+msgstr "Bonus seekers"
+
+#: include/fullserver/objects.inc:917
+msgid "Gracze z najnizszym skillem"
+msgstr "Players with lowest skill"
+
+#: include/fullserver/objects.inc:924
+msgid "Mistrzowie /derby"
+msgstr "Masters of /derby"
+
+#: include/fullserver/objects.inc:931
+msgid "Najczesciej wykopywani"
+msgstr "Players most often kicked"
+
+#: include/fullserver/objects.inc:939
+msgid ""
+"Mistrzowie /race\n"
+"Najwiecej przejechanych km."
+msgstr ""
+"Masters of /race\n"
+"Longest driven distance."
+
+#: include/fullserver/objects.inc:947
+msgid ""
+"Mistrzowie /solo\n"
+"Najwiecej wygranych solowek."
+msgstr ""
+"Masters of /solo\n"
+"Highest count of solos won."
+
+#: include/fullserver/objects.inc:955
+msgid ""
+"Najwieksi piraci drogowi\n"
+"Najwieksze mandaty za predkosc"
+msgstr ""
+"Biggest careless drivers\n"
+"Highest speeding ticket sum"
+
+#: include/fullserver/objects.inc:987
+#, c-format
+msgid "Tylko dla czlonkow klanu {b}%s{/b}!"
+msgstr "Only for members of gang {b}%s{/b} gang!"
+
+#: include/fullserver/objects.inc:995
+msgid "Wejscie tylko dla {b}moderatorow{/b}!"
+msgstr "Only for {b}moderators{/b}!"
+
+#: include/fullserver/objects.inc:997
+msgid "Wejscie tylko dla {b}administratorow{/b}!"
+msgstr "Only for {b}admins{/b}!"
+
+#: include/fullserver/objects.inc:999
+msgid "Wejscie tylko dla {b}RCONow{/b}!"
+msgstr "Only for {b}RCONs{/b}!"
+
+#: include/fullserver/objects.inc:1005
+msgid "Zamkniete."
+msgstr "Closed."
+
+#: include/fullserver/objects.inc:1115
+msgid "Bankomat"
+msgstr "ATM"
+
+#: include/fullserver/objects.inc:1535 include/fullserver/objects.inc:1574
+#, c-format
+msgid ""
+"%d. %s\n"
+"{ffffff}Skill: %d\n"
+"{d0d0d0}Respekt: %d"
+msgstr ""
+"%d. %s\n"
+"{ffffff}Skill: %d\n"
+"{d0d0d0}Respect: %d"
+
+#: include/fullserver/objects.inc:1553
+msgid "znaleziony bonus"
+msgstr "bonus found"
+
+#: include/fullserver/objects.inc:1553
+msgid "znalezione bonusy"
+msgstr "bonuses found"
+
+#: include/fullserver/objects.inc:1553
+msgid "znalezionych bonusow"
+msgstr "bonuses found"
+
+#: include/fullserver/objects.inc:1593
+#, c-format
+msgid ""
+"%d. %s\n"
+"{ffffff}Wygranych: %d\n"
+"{d0d0d0}Wygrywa %01d%% pojedynkow"
+msgstr ""
+"%d. %s\n"
+"{ffffff}No. of matches won: %d\n"
+"{d0d0d0}Percentage of m. won: %01d%%"
+
+#: include/fullserver/objects.inc:1630
+msgid "kick"
+msgstr ""
+
+#: include/fullserver/objects.inc:1630
+msgid "kicki"
+msgstr "kicks"
+
+#: include/fullserver/objects.inc:1630
+msgid "kickow"
+msgstr "kicks"
+
+#: include/fullserver/objects.inc:1630
+msgid "ban"
+msgstr ""
+
+#: include/fullserver/objects.inc:1630
+msgid "bany"
+msgstr "bans"
+
+#: include/fullserver/objects.inc:1630
+msgid "banow"
+msgstr "bans"
+
+#: include/fullserver/objects.inc:1649
+#, c-format
+msgid ""
+"%d. %s\n"
+"{ffffff}Przejechanych %dKM\n"
+"{d0d0d0}w %d %s."
+msgstr ""
+"%d. %s\n"
+"{ffffff}Drove: %dKM\n"
+"{d0d0d0}in %d %s."
+
+#: include/fullserver/objects.inc:1649
+msgid "wyscigu"
+msgstr "race"
+
+#: include/fullserver/objects.inc:1649
+msgid "wyscigach"
+msgstr "races"
+
+#: include/fullserver/objects.inc:1668
+#, c-format
+msgid ""
+"%d. %s\n"
+"{ffffff}%d %s\n"
+"{d0d0d0}Sredni czas walki: %dm%ds."
+msgstr ""
+"%d. %s\n"
+"{ffffff}%d %s\n"
+"{d0d0d0}Average fight time: %dm%ds."
+
+#: include/fullserver/objects.inc:1668
+msgid "wygrany pojedynek"
+msgstr "match won"
+
+#: include/fullserver/objects.inc:1668
+msgid "wygrane pojedynki"
+msgstr "matches won"
+
+#: include/fullserver/objects.inc:1668
+msgid "wygranych pojedynkow"
+msgstr "matches won"
+
+#: include/fullserver/objects.inc:1681
+msgid ""
+"Poszukiwani przestepcy\n"
+"\n"
+msgstr ""
+"Wanted speeders\n"
+"\n"
+
+#: include/fullserver/objects.inc:1695
+msgid ""
+"Najlepsi na /ONEDE\n"
+"\n"
+msgstr ""
+"Best of /ONEDE\n"
+"\n"
+
+#: include/fullserver/objects.inc:1710
+msgid ""
+"Najlepsi na /ONEDE2\n"
+"\n"
+msgstr ""
+"Best of /ONEDE2\n"
+"\n"
+
+#: include/fullserver/objects.inc:1855
+msgid "opuszcza teren warsztatu i frakcje mechanikow"
+msgstr "leaves the workshop and mechanics fraction"
+
+#: include/fullserver/objects.inc:1936
+#, c-format
+msgid "_~n~_~n~_~n~_~n~_~n~~r~%d KM/h~n~~w~Jedziesz zbyt szybko!"
+msgstr "_~n~_~n~_~n~_~n~_~n~~r~%d KM/h~n~~w~Too fast!"
+
+#: include/fullserver/objects.inc:1944
+#, c-format
+msgid "[FOTORADAR] {ff5050}Przekroczyles dopuszczalna predkosc! {50ff50}Mandat: {ffffff}%d$"
+msgstr "[SPEEDCAM] {ff5050}You were caught speeding! {50ff50}Fine: {ffffff}%d$"
+
+#: include/fullserver/prezenty.inc:139
+msgid "Obecnie nie ma zadnej ukrytej podkowy"
+msgstr "There is no horseshoe hidden currently"
+
+#: include/fullserver/score.inc:101
+#, c-format
+msgid "Nowe osiagniecie: {b}%s{/b}"
+msgstr "New achievement: {b}%s{/b}"
+
+#: include/fullserver/score.inc:107
+#, c-format
+msgid "Nowe osiagniecie! ~n~~y~%s"
+msgstr "New achievement! ~n~~y~%s"
+
+#: include/fullserver/score.inc:271
+#, c-format
+msgid "Dostajesz {b}%i respektu{/b} i {b}%d${/b} za nastepna godzine gry!"
+msgstr "You receive {b}%i respect{/b} and {b}%d${/b} for hour of playing!"
+
+#: include/fullserver/scripting_functions.inc:866
+msgid "Wcisnij {b}SHIFT/ENTER{/b} aby dolaczyc do gry."
+msgstr "Press {b}SHIFT/ENTER{/b} to join the game."
+
+#: include/fullserver/scripting_functions.inc:1060
+#, c-format
+msgid "%s ~n~ ~n~~y~TAK!    ~w~Glosow: %d"
+msgstr "%s ~n~ ~n~~y~YES!    ~w~Votes: %d"
+
+#: include/fullserver/scripting_functions.inc:1062
+#, c-format
+msgid "%s ~n~ ~n~~y~NIE!    ~w~Glosow: %d"
+msgstr "%s ~n~ ~n~~y~NO!    ~w~Votes: %d"
+
+#: include/fullserver/scripting_functions.inc:1074
+#, c-format
+msgid "%s %s~n~~y~%2d       ~g~%d   ~w~/TAK   ~r~%d   ~w~/NIE"
+msgstr "%s %s~n~~y~%2d       ~g~%d   ~w~/YES   ~r~%d   ~w~/NO"
+
+#: include/fullserver/scripting_functions.inc:1098
+msgid "Chowany zostal przerwany z powodu limitu czasu na ukonczenie."
+msgstr "{b}Hide'n'seek{/b} is canceled (timeout)."
+
+#: include/fullserver/scripting_functions.inc:1117
+msgid "SPS zostal przerwany z powodu limitu czasu na ukonczenie."
+msgstr "{b}HJ{/b} is canceled (timeout)."
+
+#: include/fullserver/scripting_functions.inc:1134
+msgid "{b}Derby{/b} zostaly przerwane z powodu limitu czasu na ukonczenie."
+msgstr "{b}Derby{/b} is canceled (timeout)."
+
+#: include/fullserver/scripting_functions.inc:1169
+msgid "{b}Wojna gangow{/b} zostala przerwana z powodu limitu czasu na ukonczenie."
+msgstr "{b}Gang war{/b} is canceled (timeout)."
+
+#: include/fullserver/scripting_functions.inc:1204
+msgid "{b}Strzelnica{/b} zostala przerwana z powodu braku graczy"
+msgstr "{b}Shooting range{/b} is canceled (lack of players)."
+
+#: include/fullserver/scripting_functions.inc:1211
+msgid "{b}Strzelnica{/b} zostala przerwana z powodu limitu czasu na ukonczenie"
+msgstr "{b}Shooting range{/b} is canceled (timeout)."
+
+#: include/fullserver/scripting_functions.inc:1247
+#, c-format
+msgid "{b}%s{/b} wygrywa strzelnice!"
+msgstr "{b}%s{/b} wins shooting range!"
+
+#: include/fullserver/scripting_functions.inc:1251
+msgid "Wygrywasz strzelnice i otrzymujesz +10 respektu"
+msgstr "You win in {b}shooting range{/b}! Reward: {b}%d respect points{/b}!"
+
+#: include/fullserver/scripting_functions.inc:1278
+msgid "{b}Strzelnica{/b} zostaje przerwana z powodu braku graczy"
+msgstr "{b}Shooting range{/b} is canceled (lack of players)."
+
+#: include/fullserver/scripting_functions.inc:1315
+#, c-format
+msgid "{b}%s{/b} rozpocznie sie za {b}%i %s{/b}."
+msgstr "{b}%s{/b} will start in {b}%i %s{/b}."
+
+#: include/fullserver/scripting_functions.inc:1315
+msgid "sekunde"
+msgstr "second"
+
+#: include/fullserver/scripting_functions.inc:1315
+msgid "sekundy"
+msgstr "seconds"
+
+#: include/fullserver/scripting_functions.inc:1315
+msgid "sekund"
+msgstr "seconds"
+
+#: include/fullserver/scripting_functions.inc:1329
+msgid "Brak dostatecznej liczby graczy na {b}chowanego{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}hide'n'seek{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1330
+msgid "Brak dostatecznej liczby graczy na {b}SPS{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}HJ{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1331
+msgid "Brak dostatecznej liczby graczy na {b}derby{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}derby{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1332
+msgid "Brak dostatecznej liczby graczy na {b}labirynt{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}labyrinth{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1333
+msgid "Brak dostatecznej liczby graczy na {b}race{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}race{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1334
+msgid "Brak dostatecznej liczby graczy na {b}Drifting{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}Drifting{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1335
+msgid "Brak dostatecznej liczby graczy na {b}WG{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}Gang Wars{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1336
+msgid "Brak dostatecznej liczby graczy na {b}strzelnice{/b}, zapisy ponowione."
+msgstr "Not enough players for {b}Shooting Range{/b}, not starting."
+
+#: include/fullserver/scripting_functions.inc:1377
+#, c-format
+msgid "~g~~h~Zapisy (%i/%i)~n~"
+msgstr "~g~~h~(%i/%i)~n~"
+
+#: include/fullserver/scripting_functions.inc:1385
+#, c-format
+msgid "~y~Startuje (%i)~n~"
+msgstr "~y~Starting (%i)~n~"
+
+#: include/fullserver/scripting_functions.inc:1393
+msgid "~r~~h~~h~TRWA~n~"
+msgstr "~r~~h~~h~ON~n~"
+
+#: include/fullserver/scripting_functions.inc:1415
+msgid "~g~~h~/Areny~n~"
+msgstr "~g~~h~/Arena~n~"
+
+#: include/fullserver/scripting_functions.inc:1443
+msgid "Odsiedziales/as swoja kare, jestes wolny/-a!"
+msgstr "Your jail time has passed - you're free!"
+
+#: include/fullserver/scripting_functions.inc:1451
+#, c-format
+msgid "~n~~n~~n~~n~~n~~y~Pozostalo: ~w~%i %s"
+msgstr "~n~~n~~n~~n~~n~~y~Time left: ~w~%i %s"
+
+#: include/fullserver/scripting_functions.inc:1456
+msgid "Tak szybko nie uciekniesz!"
+msgstr "You won't escape so quickly!"
+
+#: include/fullserver/scripting_functions.inc:2463
+#, c-format
+msgid "Gracz %s dostal%s kicka z powodu: spamowanie."
+msgstr ""
+
+#: include/fullserver/scripting_functions.inc:2964
+msgid " {ff0000} Administrator RCON{ffffff} \n"
+msgstr " {ff0000} RCON admin{ffffff} \n"
+
+#: include/fullserver/scripting_functions.inc:2966
+msgid " {ff0000} Administrator{ffffff} \n"
+msgstr " {ff0000} Admin{ffffff} \n"
+
+#: include/fullserver/scripting_functions.inc:2968
+msgid " {ff0000} Administrator rekrut{ffffff} \n"
+msgstr " {ff0000} Admin-recruit{ffffff} \n"
+
+#: include/fullserver/scripting_functions.inc:2970
+msgid " {FF6600} Moderator{ffffff} \n"
+msgstr ""
+
+#: include/fullserver/scripting_functions.inc:2973
+msgid "{FFD700} Gracz V.I.P{ffffff} \n"
+msgstr "{FFD700} V.I.P player{ffffff} \n"
+
+#: include/fullserver/scripting_functions.inc:2976
+#, c-format
+msgid ""
+"%s\n"
+"{d0d0d0}Respekt: {ffffff}%d\n"
+"{d0d0d0}Skill: {ffffff}%d\n"
+msgstr ""
+"%s\n"
+"{d0d0d0}Respect: {ffffff}%d\n"
+"{d0d0d0}Skill: {ffffff}%d\n"
+
+#: include/fullserver/scripting_functions.inc:2978
+msgid "Gracz niezarejestrowany\n"
+msgstr "Unregistered player\n"
+
+#: include/fullserver/scripting_functions.inc:2984
+msgid " Czlonek "
+msgstr " Member of "
+
+#: include/fullserver/scripting_functions.inc:2986
+msgid " Zalozyciel "
+msgstr " Founder of "
+
+#: include/fullserver/scripting_functions.inc:2988
+msgid " Lider "
+msgstr " Leader of "
+
+#: include/fullserver/scripting_functions.inc:2990
+msgid " Zawieszony czlonek "
+msgstr " Suspended member of "
+
+#: include/fullserver/scripting_functions.inc:2995
+#, c-format
+msgid "%s{d0d0d0}Ping sredni/biezacy:\t{ffffff}%dms/%dms\n"
+msgstr "%s{d0d0d0}Avg/current ping:\t{ffffff}%dms/%dms\n"
+
+#: include/fullserver/scripting_functions.inc:2996
+#, c-format
+msgid "%s{d0d0d0}Plugin audio: %s \n"
+msgstr "%s{d0d0d0}Audio plugin: %s \n"
+
+#: include/fullserver/scripting_functions.inc:2996
+msgid "{30ff30} TAK"
+msgstr "{30ff30} YES"
+
+#: include/fullserver/scripting_functions.inc:2996
+msgid "{ff3030} NIE"
+msgstr "{ff3030} NO"
+
+#: include/fullserver/scripting_functions.inc:2998
+msgid "Informacje o graczu"
+msgstr "Player info"
+
+#: include/fullserver/scripting_functions.inc:3098
+#, c-format
+msgid "Powod: {b}%s"
+msgstr "Reason: {b}%s"
+
+#: include/fullserver/scripting_functions.inc:3153
+msgid "Niestety, ta bron jest obecnie niedostepna"
+msgstr "This weapon is currently unavailable."
+
+#: include/fullserver/scripting_functions.inc:3155
+msgid "Nie mozesz obecnie kupowac broni!"
+msgstr "You cannot buy weapons at this moment!"
+
+#: include/fullserver/scripting_functions.inc:3159
+#, c-format
+msgid "Kupiles/-as {b}%s{/b} za {b}%d{/b}$."
+msgstr "You've bought {b}%s{/b} for {b}%d{/b}$."
+
+#: include/fullserver/scripting_functions.inc:3231
+#, c-format
+msgid "WYKRYTY WH: {b}%s{/b}(%d) ma gogle/noktowizor."
+msgstr "WH detected: {b}%s{/b}(%d) has night/infrared vision."
+
+#: include/fullserver/scripting_functions.inc:3236
+#, c-format
+msgid "WYKRYTY WH: {b}%s{/b}(%d) ma RPG z naprowadzaniem (niedostepne w grze!)."
+msgstr "WH detected: {b}%s{/b}(%d) has auto-tracking RPG (not available in game!)."
+
+#: include/fullserver/textdraws.inc:52
+msgid "~<~ Dom ~>~__"
+msgstr "~<~ House ~>~__"
+
+#: include/fullserver/textdraws.inc:61
+msgid "~<~ Baza gangu ~>~__"
+msgstr "~<~ Gang base ~>~__"
+
+#: include/fullserver/textdraws.inc:70
+msgid "~<~ Full Andreas ~>~__"
+msgstr ""
+
+#: include/fullserver/textdraws.inc:82
+msgid "Uzyj strzalek ~<~ oraz ~>~ aby zmienic miasto.~n~~n~Nacisnij ENTER aby zaakceptowac."
+msgstr "Use arrows ~<~ and ~>~ to choose starting city.~n~~n~Press ENTER to spawn."
+
+#: include/fullserver/textdraws.inc:92
+msgid "Podpowiedz"
+msgstr "Hint"
+
+#: include/fullserver/textdraws.inc:121
+msgid "Najlepszy serwer SA:MP w Polsce"
+msgstr "SA:MP redefined!"
+
+#: include/fullserver/textdraws.inc:331
+msgid "FullServer wita"
+msgstr "Welcome to FullServer"
+
+#: include/fullserver/textdraws.inc:372
+msgid "Czas gry: Ping:     Respekt:  Skill:"
+msgstr "Play.time Ping      Respect   Skill"
+
+#: include/fullserver/textdraws.inc:382
+msgid "STREFA ~r~SMIERCI"
+msgstr "DEATH ~r~ZONE"
+
+#: include/fullserver/textdraws.inc:391
+msgid "STREFA ~b~~h~BEZ DM"
+msgstr "NO-DM ~b~~h~ZONE"
+
+#: include/fullserver/textdraws.inc:400
+msgid "~n~Otrzymano ostrzezenie od administratora!~n~~n~You have received a warning!~n~~n~"
+msgstr "~n~~n~You have received a warning!~n~~n~"
+
+#: include/fullserver/timers.inc:61
+msgid "[AFK] {FFECCF}Zostajesz wyrzucony/-a z powodu zbyt dlugiej nieaktywnosci!"
+msgstr "[AFK] {FFECCF}You've got kicked out because of too long inactivity!"
+
+#: include/fullserver/timers.inc:65
+msgid "[AFK] {FFECCF}Rusz sie, albo zostaniesz wyrzuczony/-a za nieaktywnosc!"
+msgstr "[AFK] {FFECCF}Move, or you'll get kicked for inactivity!"
+
+#: include/fullserver/timers.inc:107 include/fullserver/timers.inc:111
+msgid "gracz"
+msgstr "player"
+
+#: include/fullserver/timers.inc:107 include/fullserver/timers.inc:111
+msgid "graczy"
+msgstr "players"
+
+#: include/fullserver/timers.inc:165
+msgid "Zostajesz wyrzucony/-a za zbyt dluga nieaktywnosc."
+msgstr "You were kicked out for too long inactivity."
+
+#: include/fullserver/timers.inc:290
+msgid "Niestety, zbyt dlugo byles/as AFK i {b}artefakt{/b} postanowil Cie opuscic!"
+msgstr "You were AFK for too long and dropped {b}artefact{/b}."
+
+#: include/fullserver/timers.inc:297
+msgid "Czujesz nieprzyjemne mrowienie na plecach..."
+msgstr "You feel shivers on your spine."
+
+#: include/fullserver/timers.inc:298
+msgid "Artefakt wydaje sie byc bardzo ciezki..."
+msgstr "Artefact suddenly feels very heavy..."
+
+#: include/fullserver/timers.inc:299
+msgid "Po twoich plecach przechodzi dreszcz..."
+msgstr "You've got a bad feeling about this."
+
+#: include/fullserver/timers.inc:323
+msgid "Artefakt odnawia Ci HP"
+msgstr "Artefact heals you."
+
+#: include/fullserver/timers.inc:334
+msgid "Artefakt odnawia Ci armor"
+msgstr "Artefact gives you armor."
+
+#: include/fullserver/utility_functions.inc:1969
+#, c-format
+msgid "Nie znaleziono gracza o nicku lub ID '{b}%s{/b}'."
+msgstr "Couldn't find any player matching '{b}%s{/b}'."
+
+#: include/fullserver/utility_functions.inc:1979
+#, c-format
+msgid "Znaleziono wiecej niz jednego gracza z fraza '{b}%s{/b}'."
+msgstr "Found more than one player matching '{b}%s{/b}'. Refine your query."
+
+#: include/fullserver/warsztat.inc:10
+msgid "Najpierw zaparkuj samochod w garazu."
+msgstr "Park you vehicle in the garage."
+
+#: include/fullserver/warsztat.inc:12 include/fullserver/warsztat.inc:14
+msgid "Zmiana tablicy"
+msgstr "Plate change"
+
+#: include/fullserver/warsztat.inc:12
+msgid "Wprowadz tresc nowe tablicy rejestracyjnej"
+msgstr "Please type your new plate."
+
+#: include/fullserver/warsztat.inc:14
+msgid ""
+"Wprowadz tresc nowe tablicy rejestracyjnej.\n"
+"{ff3030}Uzyles niedozwolonych znakow. Sprobuj ponownie."
+msgstr ""
+"Enter type your new plate.\n"
+"{ff3030}Invalid characters used, please retry."
+
+#: include/fullserver/warsztat.inc:19
+msgid "Tablica ustawiona"
+msgstr "License plate set!"
+
+#: include/fullserver/warsztat.inc:53
+msgid "Zrezygnowalas"
+msgstr "Aborted."
+
+#: include/fullserver/warsztat.inc:53
+msgid "Zrezygnowales"
+msgstr "Aborted."
+
+#: include/fullserver/warsztat.inc:60
+msgid "~y~Myjnia"
+msgstr "~y~Car Wash"
+
+#: include/fullserver/warsztat.inc:62
+msgid "Musisz tu przyjechac pojazdem :-)."
+msgstr "You have to drive here by car :-)."
+
+#~ msgid "{b}%s (%i){/b} weszla na serwer (IP: %s)"
+#~ msgstr "{b}%s (%i){/b} has joined (IP: %s)."
+
+#~ msgid "{b}%s (%i){/b} wszedl na serwer (IP: %s)"
+#~ msgstr "{b}%s (%i){/b} has joined (IP: %s)."
+
+#~ msgid "{b}%s (%i){/b} weszla na serwer."
+#~ msgstr "{b}%s (%i){/b} has joined."
+
+#~ msgid "{b}%s (%i){/b} wszedl na serwer."
+#~ msgstr "{b}%s (%i){/b} has joined."

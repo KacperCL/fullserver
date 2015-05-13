@@ -25,10 +25,10 @@ SOFTWARE.
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
-$__dbName="-";
-$__dbUser="-";
-$__dbHost="-";
-$__dbPass="-";
+$__dbName="?";
+$__dbUser="?";
+$__dbHost="?";
+$__dbPass="?";
 
 // Cloudflare addition
 if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];

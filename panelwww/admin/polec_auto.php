@@ -1,19 +1,30 @@
 <?php
 /**
- * <pre>
- * FullServer.eu
- * Part of FSADM v2
- * </pre>
- *
- * @author 		Wielebny, eider
- * @copyright	(c) 2011 - 2013 FullServer.eu
- * @package		FSADM v2
- * @link		http://fullserver.eu
- *
- */
+The MIT License (MIT)
+
+Copyright (c) 2014 Mateusz Cichon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 
 require_once("./p/libs/BazaDanych.class.php");
-$RDB=new BazaDanych("178.19.106.171","db_2152","db_2152","Nca7Jzq6LK2em4DK");
+$RDB=new BazaDanych("?","?","?","?");
 
 $donagrodzenia=$RDB->pobierz_tabele_wynikow("SELECT po.polecil,p2.nick polecil_nick,po.polecona,p1.nick polecona_nick,p1.active_server polecona_active,p2.active_server polecil_active
          FROM fs_polecenia po JOIN fs_players p1 ON p1.id=po.polecona JOIN fs_players p2 ON p2.id=po.polecil WHERE p1.respect>=2000 AND uniewazniony=0 AND rewarded=0");

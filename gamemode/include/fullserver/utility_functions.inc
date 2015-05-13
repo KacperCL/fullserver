@@ -1216,7 +1216,7 @@ public TeleportVerify(playerid,Float:vectorX,Float:vectorY,Float:vectorZ){
 
 bool:IsValidSkin(skinid)
 {
-  if(skinid < 0 || skinid > 299) return false;
+  if(skinid < 0 || skinid > 311) return false;
   switch(skinid)
     {
       case 74: return false;

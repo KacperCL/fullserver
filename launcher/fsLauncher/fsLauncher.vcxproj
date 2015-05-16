@@ -106,6 +106,8 @@
     </ClInclude>
     <ClInclude Include="md5.h" />
     <ClInclude Include="md5wrapper.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="updaterForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -119,10 +121,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="fsLauncher.ico" />
     <Image Include="sao_loader.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="fsLauncher.rc" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="SHDocVw.1.1.dll">
@@ -133,6 +133,9 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>false</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="fsLauncher.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

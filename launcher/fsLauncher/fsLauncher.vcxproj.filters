@@ -30,6 +30,12 @@
     <ClInclude Include="mainWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="sao_loader.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fsLauncher.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

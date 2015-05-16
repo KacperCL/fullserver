@@ -15,6 +15,7 @@
 
 DWORD GetProcId(char* ProcName);
 void openBrowser(LPCSTR url);
+bool ContainsInvalidNickChars(char * szString);
 void runGame(const char* player, char ip[], int port, char pass[]);
 
 void toInt(std::string from, int &to);
@@ -25,5 +26,5 @@ int pow(int a);
 #undef Process32First
 #undef Process32Next
 
-#define VERSION 1300
+#define VERSION 1400
 #define PLAYER_NAME "Player"

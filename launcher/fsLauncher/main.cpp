@@ -7,6 +7,30 @@ void openBrowser(LPCSTR url)
 	ShellExecuteA(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
 }
 
+bool ContainsInvalidNickChars(char * szString)
+{
+	int x = 0;
+
+	while (*szString) {
+		if ((*szString >= '0' && *szString <= '9') ||
+			(*szString >= 'A' && *szString <= 'Z') ||
+			(*szString >= 'a' && *szString <= 'z') ||
+			*szString == ']' || *szString == '[' ||
+			*szString == '_' || *szString == '.' ||
+			*szString == '$' || *szString == '@' ||
+			*szString == '=' || *szString == '(' ||
+			*szString == ')'
+			) {
+
+			szString++;
+		}
+		else {
+			return true;
+		}
+	}
+	return false;
+}
+
 // i hate looking at this functions but i don't have time to rewrite it. don't copy it anywhere, it's shit!
 void runGame(const char* player, char ip[], int port, char pass[])
 {

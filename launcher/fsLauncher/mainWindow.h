@@ -303,7 +303,7 @@ namespace fsLauncher {
 		}
 #pragma endregion
 	private: System::Void forumButton_Click(System::Object^  sender, System::EventArgs^  e) {
-		openBrowser("http://fullserver.eu");
+		openBrowser("http://i32.pl/");
 	}
 	private: System::Void forumButton_MouseEnter(System::Object^  sender, System::EventArgs^  e) {
 		System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(mainWindow::typeid));
@@ -343,7 +343,7 @@ namespace fsLauncher {
 		SHDocVw::WebBrowser^ newsWebBrowser = (SHDocVw::WebBrowser^)this->newsBrowser->ActiveXInstance;
 		newsWebBrowser->NavigateError += gcnew SHDocVw::DWebBrowserEvents2_NavigateErrorEventHandler(this, &mainWindow::newsWebBrowserErrorHandler);
 		newsWebBrowser->Silent = true;
-		this->newsBrowser->Navigate("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/news.htm");
+		this->newsBrowser->Navigate("http://i32.pl/fslauncher/news.htm");
 
 		// retrieve version and nickname from registry key
 		WCHAR nickName[20];
@@ -414,6 +414,13 @@ namespace fsLauncher {
 		LONG openRes = RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("SOFTWARE\\SAMP"), 0, KEY_SET_VALUE, &hKey);
 		const char* nickName = (const char*)(void*)Marshal::StringToHGlobalAnsi(nickBox->Text);
 
+		if (ContainsInvalidNickChars((char*)nickName))
+		{
+			MessageBox::Show("Podany nick zawiera nieprawid³owe znaki i nie mo¿e zostaæ zapisany. Je¿eli nie zmienisz go przed rozpoczêciem gry nie bêdziesz móg³ siê po³¹czyæ z serwerem.", "Wyst¹pi³ b³¹d", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			printf("[DEBUG] Nickname contains invalid characters!\n");
+			return;
+		}
+
 		if (openRes != ERROR_SUCCESS) {
 			printf("[DEBUG] Error opening windows registry key!\n");
 		}
@@ -424,7 +431,7 @@ namespace fsLauncher {
 			printf("[DEBUG] Error writing windows registry key!\n");
 		}
 
-		printf("[DEBUG] Writed nickname is %s and lenth is %d", nickName, strlen(nickName));
+		printf("[DEBUG] Writed nickname is %s and lenth is %d\n", nickName, strlen(nickName));
 
 		LONG closeOut = RegCloseKey(hKey);
 
@@ -447,11 +454,11 @@ namespace fsLauncher {
 		}
 		else{
 			printf("[DEBUG] DNS query error. Using default config!\n");
-			runGame(nickName, "178.19.106.171", 7777, "");
+			runGame(nickName, "127.0.0.1", 7777, "");
 		}
 	}
 	private: System::Void locationButton_Click(System::Object^  sender, System::EventArgs^  e) {
-		openBrowser("https://www.facebook.com/fullserver");
+		openBrowser("https://www.facebook.com/myfanpage");
 	}
 
 	private: void newsWebBrowserErrorHandler(System::Object ^pDisp, System::Object ^%URL, System::Object ^%Frame, System::Object ^%StatusCode, bool %Cancel){

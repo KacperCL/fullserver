@@ -166,7 +166,7 @@ private: System::Void updaterWorker_DoWork(System::Object^  sender, System::Comp
 	try {
 		this->updateStateChange->Text = L"Pobieranie pliku wersji...";
 
-		XmlTextReader^ reader = gcnew XmlTextReader("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/checkin.xml");
+		XmlTextReader^ reader = gcnew XmlTextReader("http://i32.pl/fslauncher/checkin.xml");
 
 		this->updateStateChange->Text = L"Rozpakowywanie pliku wersji...";
 
@@ -207,21 +207,29 @@ private: System::Void updaterWorker_DoWork(System::Object^  sender, System::Comp
 		this->updateStateChange->Text = L"Sprawdzanie wersji...";
 
 		// version checking!!!!!!!!!!!!!!!!!!
-		if (sampVerUpd.compare(sampDllSum) != 0)
+		if (sampDllSum.compare("-1") == 0)
 		{
-			this->updateStateChange->Text = L"Pobieranie aktualizacji...";
-
-			std::cout << "[DEBUG:UPDATER] SA-MP version md5sum(" << sampVerUpd << ") doesn't match current installed md5sum(" << sampDllSum << ")! Force reinstall!\n";
-			System::Net::WebClient ^Client = gcnew System::Net::WebClient();
-			printf("[DEBUG:UPDATER:DOWNLOAD] Download started from https://s3-eu-west-1.amazonaws.com/i32/fslauncher/update/samp_installer.exe\n");
-			Client->DownloadFileAsync(gcnew Uri("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/update/samp_installer.exe"), "doUpdate.exe");
-			Client->DownloadFileCompleted += gcnew AsyncCompletedEventHandler(this, &updaterForm::DownloadFileCompleted);
-			Client->DownloadProgressChanged += gcnew System::Net::DownloadProgressChangedEventHandler(this, &updaterForm::DownloadProgressChanged);
-
-			while (Client->IsBusy){}
+			MessageBox::Show("Launcher nie znajduje siê w katalogu gry lub na tym komputerze nie ma ¿adnej wersji SA-MP. Uruchomienie gry nie bêdzie mo¿liwe!", "Wersja SA-MP", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			printf("[DEBUG:UPDATER] There is no samp.dll!\n");
 		}
-		else{
-			std::cout << "[DEBUG:UPDATER] SA-MP version md5sum(" << sampVerUpd << ") matches md5sum(" << sampDllSum << ")! No update needed!\n";
+		else
+		{
+			if (sampVerUpd.compare(sampDllSum) != 0)
+			{
+				this->updateStateChange->Text = L"Pobieranie aktualizacji...";
+
+				std::cout << "[DEBUG:UPDATER] SA-MP version md5sum(" << sampVerUpd << ") doesn't match current installed md5sum(" << sampDllSum << ")! Force reinstall!\n";
+				System::Net::WebClient ^Client = gcnew System::Net::WebClient();
+				printf("[DEBUG:UPDATER:DOWNLOAD] Download started from http://i32.pl/fslauncher/update/samp_installer.exe\n");
+				Client->DownloadFileAsync(gcnew Uri("http://i32.pl/fslauncher/update/samp_installer.exe"), "doUpdate.exe");
+				Client->DownloadFileCompleted += gcnew AsyncCompletedEventHandler(this, &updaterForm::DownloadFileCompleted);
+				Client->DownloadProgressChanged += gcnew System::Net::DownloadProgressChangedEventHandler(this, &updaterForm::DownloadProgressChanged);
+
+				while (Client->IsBusy){}
+			}
+			else{
+				std::cout << "[DEBUG:UPDATER] SA-MP version md5sum(" << sampVerUpd << ") matches md5sum(" << sampDllSum << ")! No update needed!\n";
+			}
 		}
 
 		if (iLaunchVerUpd > VERSION)
@@ -230,8 +238,8 @@ private: System::Void updaterWorker_DoWork(System::Object^  sender, System::Comp
 
 			printf("[DEBUG:UPDATER:DOWNLOAD] Launcher version %d is newer then %d! Force update!\n", iLaunchVerUpd, VERSION);
 			System::Net::WebClient ^Client = gcnew System::Net::WebClient();
-			printf("[DEBUG:UPDATER:DOWNLOAD] Download started from https://s3-eu-west-1.amazonaws.com/i32/fslauncher/update/fsLauncher_installer.exe\n");
-			Client->DownloadFileAsync(gcnew Uri("https://s3-eu-west-1.amazonaws.com/i32/fslauncher/update/fsLauncher_installer.exe"), "doUpdate.exe");
+			printf("[DEBUG:UPDATER:DOWNLOAD] Download started from http://i32.pl/fslauncher/update/fsLauncher_installer.exe\n");
+			Client->DownloadFileAsync(gcnew Uri("http://i32.pl/fslauncher/update/fsLauncher_installer.exe"), "doUpdate.exe");
 			Client->DownloadFileCompleted += gcnew AsyncCompletedEventHandler(this, &updaterForm::DownloadFileCompleted);
 			Client->DownloadProgressChanged += gcnew System::Net::DownloadProgressChangedEventHandler(this, &updaterForm::DownloadProgressChanged);
 

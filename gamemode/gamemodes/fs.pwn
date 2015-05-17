@@ -2418,6 +2418,9 @@ public OnPlayerUpdate(playerid)
   if(pTemp[playerid][desync]) return 0;
   
   if (GetTickCount()%2==0) return 1;    // raz na 2 razy kontynuujemy
+  
+  if((GetTickCount()-pTemp[playerid][lastOpuUpdateTick]) <= 30) { pTemp[playerid][lastOpuUpdateTick] = GetTickCount(); return 1; }
+  pTemp[playerid][lastOpuUpdateTick] = GetTickCount();
 
   static pState,wepid,bbuf[128];
   pState = GetPlayerState(playerid);

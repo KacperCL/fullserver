@@ -2308,7 +2308,7 @@ CensorText(text[])
   {
     while(FindString(szSource, gCensoredWord[i], _start, _end))
     {
-        if(_start!=0 && (szSource[_start-1])!=' ') break;
+      if(_start!=0 && (szSource[_start-1])!=' ') break;
 
       copy(gCensoredWord[i], buffer);
 

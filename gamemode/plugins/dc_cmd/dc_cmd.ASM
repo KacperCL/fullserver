@@ -177,7 +177,7 @@ proc amx_DC_CMD
     ;call    [logprintf]
     ;add     esp, 8
 
-    ; cmdname[3] = '_' (overwriting '/' symbol)
+    ; cmdname[3] = '_'
     ; comment by eider: you can change it to anything you want, just remember it will change public's name! (eg. from _help to cmd_help)
     mov     [esp], byte '_'
 
@@ -289,10 +289,20 @@ proc amx_DC_CMD
     call    eax
     add     esp, 12
 
+    ; releasing memory allocated after pushing params string
+    mov     edx, [ebp+.addr]
+    mov     eax, [pAMXFunctions]
+    push    edx
+    mov     ecx, [ebp+.AMX]
+    mov     eax, [eax+amx_Release]
+    push    ecx
+    call    eax
+    add     esp, 8
+
     ; return code from public function
     mov eax, [ebp+.retval]
     cmp eax, 0
-    jz .return0pub
+    jz .return0
 
 .return1:
     mov     eax, 1
@@ -306,17 +316,6 @@ proc amx_DC_CMD
 .noparams1:
     mov     [ebp+.params_pos], dword str_params_empty
     jmp     .loop1_exit
-.return0pub:
-    ; releasing memory allocated after pushing params string
-    mov     edx, [ebp+.addr]
-    mov     eax, [pAMXFunctions]
-    push    edx
-    mov     ecx, [ebp+.AMX]
-    mov     eax, [eax+amx_Release]
-    push    ecx
-    call    eax
-    add     esp, 8
-    jmp     .return0
 endp
 
 ;section '.data' data readable writable

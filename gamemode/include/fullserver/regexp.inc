@@ -22,9 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#if defined USE_REGEX
-
-stock ContainsIP(const string[])
+bool:ContainsIP(const string[])
 {
   static RegEx:rCIP;
 
@@ -34,13 +32,13 @@ stock ContainsIP(const string[])
   else return false;
 }
 
-stock NinjaBan(const string[])
+bool:NinjaBan(const string[])
 {
    #pragma unused string
    return false;
 }
 
-stock IsValidEmail(const string[])
+bool:IsValidEmail(const string[])
 {
   static RegEx:rEMAIL;
 
@@ -50,24 +48,52 @@ stock IsValidEmail(const string[])
   else return false;
 }
 
-#else
-
-stock ContainsIP(const string[])
+bool:IsNumeric(const string[])
 {
-  #pragma unused string
-  return false;
+  static RegEx:rNUMER;
+
+  if ( !rNUMER ) rNUMER = regex_build("^[0-9]+$");
+
+  if (regex_match_exid(string, rNUMER)) return true;
+  else return false;
 }
 
-stock NinjaBan(const string[])
+bool:IsNickCorrect(szNick[])
 {
-  #pragma unused string
-  return false;
+  static RegEx:rNICK;
+
+  if ( !rNICK ) rNICK = regex_build("^[a-zA-Z0-9_$@()=\\[\\]]{3,20}+$");
+
+  if (regex_match_exid(szNick, rNICK)) return true;
+  else return false;
 }
 
-stock IsValidEmail(const string[])
+bool:IsPasswordCorrect(szPassword[])
 {
-  #pragma unused string
-  return false;
+  static RegEx:rPASS;
+
+  if ( !rPASS ) rPASS = regex_build("^[a-zA-Z0-9!@#\\$%\\^&*()_+-\\[\\];\\\\<>,\\.\\/?`~\"]{5,30}+$");
+
+  if (regex_match_exid(szPassword, rPASS)) return true;
+  else return false;
 }
-#endif
-// EOF
+
+bool:IsHex(szHex[])
+{
+  static RegEx:rHEX;
+
+  if ( !rHEX ) rHEX = regex_build("^[0-9A-Fa-f]{1,6}+$");
+
+  if (regex_match_exid(szHex, rHEX)) return true;
+  else return false;
+}
+
+bool:IsCorrectWordForCensorship(szWord[])
+{
+  static RegEx:rWORD;
+
+  if ( !rWORD ) rWORD = regex_build("^[0-9A-Za-z]{1,30}+$");
+
+  if (regex_match_exid(szWord, rWORD)) return true;
+  else return false;
+}

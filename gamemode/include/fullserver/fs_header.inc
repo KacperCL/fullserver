@@ -33,9 +33,9 @@ SOFTWARE.
 #define NIEMAPERZY (pData[playerid][accountID]!=702 && pData[playerid][accountID]!=12713)
 #define NIESURV (pData[playerid][accountID]!=46)
 #define GANGMGMT (pData[playerid][adminLevel]>=LEVEL_ADMIN3)
-#define USE_REGEX
 #define FLOAT_NAN     (Float:0xFFFFFFFF)
-#define SALT_ALOGIN         "KiciaWielebny"
+#define SALT_ALOGIN         "changeme"
+#define PASS_SECURE_SALT   "changeme"
 #define MAX_IDENT_STEP  5
 
 #define VIP_GP_COST 23
@@ -44,14 +44,9 @@ SOFTWARE.
 #define GOD_GP_COST 5
 #define MONEY_GP_COST 200000
 
-#define KEY_PRESSED(%0) \
-  (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
-
-#define KEY_RELEASED(%0) \
-  (((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
-
-#define HOLDING_KEYS(%0) \
-  ((newkeys & (%0)) == (%0))
+#define KEY_PRESSED(%0) (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
+#define KEY_RELEASED(%0) (((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
+#define HOLDING_KEYS(%0) ((newkeys & (%0)) == (%0))
 
 #define MAX_SERVER_PLAYERS          140
 #undef MAX_PLAYERS
@@ -516,10 +511,13 @@ SOFTWARE.
 #define foreach(%1) for(new %1 = 0; %1 <= gmTemp[highestPlayerID]; %1++) if(IsPlayerConnected(%1))
 #define HidePlayerDialog(%1) ShowPlayerDialog(%1, -1, 0, " ", " ", " ", " ")
 #define dli(%1,%2,%3,%4) ((%1==1)?(%2):(((%1% 10>1)&&(%1% 10<5)&&!((%1% 100>=10)&&(%1% 100<=21)))?(%3):(%4)))
-
 #define SCM(%1,%2,%3) SendClientMessage(%1, %2, %3)
-
 #define MUST_BE_SPAWNED(%1) if(!(IsPlayerSpawned(%1) || pData[%1][spectating] != INVALID_PLAYER_ID)) return Msg(%1, COLOR_ERROR, TXT(%1, 24))
+#define GetPlayerCurrentSession(%0) ((GetTickCount() - pData[%0][session]) / 1000)
+#define IsGM(%0) ((pData[%0][adminLevel]<LEVEL_GM) ? false : true)
+#define IsFS(%0) pTemp[%0][isFS] && pData[%0][loggedIn]
+#define GetPlayerProperName(%0) GetPlayerNick(%0)
+#define TXT(%0,%1) gLang[pData[%0][language]][%1]
 
 #define VEHICLE_REPAIR_INTERVAL 30000 // jak czesto mozna naprawiac pojazdy
 #define HEAL_REPAIR_INTERVAL  10000 // jak czesto uzywac /100hp
@@ -544,6 +542,20 @@ SOFTWARE.
 
 #define ART_ADD 0
 #define ART_UPDATE 1
+
+// why this is not in a_players!?
+#define BODY_PART_TORSO     3
+#define BODY_PART_ASS       4
+#define BODY_PART_LEFT_ARM  5
+#define BODY_PART_RIGHT_ARM 6
+#define BODY_PART_LEFT_LEG  7
+#define BODY_PART_RIGHT_LEG 8
+#define BODY_PART_HEAD      9
+
+native gpci(playerid, const serial[ ], maxlen);
+native IsValidVehicle(vehicleid);
+
+bool:IsValidSkin(skinid);
 
 new gstr[256];
 new ebuf[256]; // used for error logging
@@ -1498,7 +1510,7 @@ new szHelpAuthor[][] = {
  " ",
  "{A9C4E4}Podziêkowania dla: {C1D0E5}DracoBlue, Incognito, Y_Less, Sacky, StrickenKid, Zeex, SA-MP Team, Fro1sha",
  " ",
- "{A9C4E4}© Copyright 2010-2014 - FullServer™ - www.FullServer.eu"
+ "{A9C4E4}© Copyright 2010-2015 - FullServer™ - www.FullServer.eu"
 };
 
 new szHelpCmdGeneral[][] = {

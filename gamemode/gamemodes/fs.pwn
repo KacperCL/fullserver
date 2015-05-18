@@ -50,6 +50,7 @@ SOFTWARE.
 #include <fullserver/fs_header>
 #include <fullserver/money>
 #include <fullserver/atms>
+#include <fullserver/regexp>  // wyrazenia regularne
 #include <fullserver/utility_functions>
 #include <fullserver/factions>
 #include <fullserver/logging>
@@ -62,7 +63,6 @@ SOFTWARE.
 #include <fullserver/objects>
 #include <fullserver/gangs>
 #include <fullserver/scripting_functions>
-#include <fullserver/regexp>  // wyrazenia regularne
 #include <fullserver/spawns>
 #include <fullserver/areny>
 #include <fullserver/poczta>

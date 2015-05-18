@@ -22,19 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
-native gpci(playerid, const serial[ ], maxlen);
-native IsValidVehicle(vehicleid);
-
-// why its not in a_players!?
-#define BODY_PART_TORSO     3
-#define BODY_PART_ASS       4
-#define BODY_PART_LEFT_ARM  5
-#define BODY_PART_RIGHT_ARM 6
-#define BODY_PART_LEFT_LEG  7
-#define BODY_PART_RIGHT_LEG 8
-#define BODY_PART_HEAD      9
-
 bool:IsPlayerSpawned(playerid)
 {
   new pstate=GetPlayerState(playerid);
@@ -43,17 +30,12 @@ bool:IsPlayerSpawned(playerid)
   return true;
 }
 
-#define GetPlayerCurrentSession(%0) \
-  ((GetTickCount() - pData[%0][session]) / 1000)
-
-#define IsGM(%0) \
-  ((pData[%0][adminLevel]<LEVEL_GM) ? false : true)
-
 /* == setPlayerSkin hook == */
 #if defined CJHIT_MODEL
 
 stock AC_SetPlayerSkin(playerid,skinid){
   if(!IsPlayerConnected(playerid)) return;
+  if(!IsValidSkin(skinid)) return;
   SetPlayerSkin(playerid,skinid);
 
   if(pData[playerid][hudSetting][HUD_CJHIT] && IsPlayerSpawned(playerid)){
@@ -278,7 +260,7 @@ stock rot13(string[])
 forward BanExCommit(playerid); // ugly fix for strings in timers
 public BanExCommit(playerid)
 {
-    if(!IsPlayerConnected(playerid)) return;
+  if(!IsPlayerConnected(playerid)) return;
   BanEx(playerid, gmTemp[banEx]);
 }
 
@@ -603,23 +585,6 @@ Msg(playerid, colorid, text[], bool:playSound = true, bool:displayPrefix = true)
   return 1;
 }
 
-bool:IsNumeric(const string[])
-{
-  new
-   sign;
-
-  if(string[0] > '9' || string[0] < '0' || string[strlen(string) - 1] > '9' || string[strlen(string) - 1] < '0') return false;
-
-  for(new i = 1; i < strlen(string); i++)
-  {
-    if(string[i] >= '0' && string[i] <= '9') sign = 0;
-    else return false;
-    if(sign > 1) return false;
-  }
-
-  return true;
-}
-
 FindString(string1[], string2[], &start = 0, &end = 0)
 {
   if(!strlen(string1) || !strlen(string2)) return false;
@@ -689,59 +654,6 @@ IntToHex(int)
   }
 
   return result;
-}
-
-#define IsFS(%0)\
-  pTemp[%0][isFS] && pData[%0][loggedIn]
-
-#define GetPlayerProperName(%0)\
-  GetPlayerNick(%0)
-
-#define TXT(%0,%1) \
-  gLang[pData[%0][language]][%1]
-
-bool:IsPasswordCorrect(szPassword[])
-{
-  new
-   length = strlen(szPassword);
-
-  if(length < 5 || length > 30) return false;
-
-  for(new i = 0; i < length; i++)
-  {
-    switch(szPassword[i])
-    {
-      case 'a'..'z': continue;
-      case 'A'..'Z': continue;
-      case '0'..'9': continue;
-      case '!','@','#','$','%','^','&','*','(',')','_','+','"','=','-','[',']',';',':','\\','<','>',',','.','/','?','`','~': continue;
-      default: return false;
-    }
-  }
-
-  return true;
-}
-
-bool:IsNickCorrect(szNick[])
-{
-  new
-   length = strlen(szNick);
-
-  if(length < 3 || length > 20) return false;
-
-  for(new i = 0; i < length; i++)
-  {
-    switch(szNick[i])
-    {
-      case 'a'..'z': continue;
-      case 'A'..'Z': continue;
-      case '0'..'9': continue;
-      case '.', '_', '[', ']', '(', ')', '=', '$', '@': continue;
-      default: return false;
-    }
-  }
-
-  return true;
 }
 
 Text:DrawRectangle(Float:startX, Float:endX, Float:startY, Float:endY, color)
@@ -918,7 +830,6 @@ StringToInt(string[])
   return strval(string);
 }
 
-
 stock copy(string1[], string2[])
 {
 
@@ -928,27 +839,6 @@ stock copy(string1[], string2[])
   }
 
   string2[strlen(string1)] = EOS;
-}
-
-bool:IsHex(szHex[])
-{
-  new
-   length = strlen(szHex);
-
-  if(length < 1 || length > 6) return false;
-
-  for(new i = 0; i < length; i++)
-  {
-    switch(szHex[i])
-    {
-      case 'a'..'f': continue;
-      case 'A'..'F': continue;
-      case '0'..'9': continue;
-      default: return false;
-    }
-  }
-
-  return true;
 }
 
 FindPlayer(playerName[])
@@ -1051,7 +941,7 @@ PassHash(const playerName[], const password[])
   new
    hashed[80];
 
-  format(hashed, sizeof hashed, "%snhugdij89^Dhcd%s", playerName, password);
+  format(hashed, sizeof hashed, "%s%s%s", playerName, PASS_SECURE_SALT, password);
 
   return hashed;
 }
@@ -1111,7 +1001,6 @@ bool:IsAdmin(playerid, level = 2)
   if(pData[playerid][adminLevel] < level) return false;
   return true;
 }
-
 
 Teleport(type, playerid, Float:vectorX, Float:vectorY, Float:vectorZ, Float:angle = 0.0, interior = 0xFFF, virtualWorld = 0xFFF, bool:prestream=false)
 {
@@ -1433,27 +1322,6 @@ bool:SpaceCheck(string[])
   return false;
 }
 
-bool:IsCorrectWordForCensorship(szWord[])
-{
-  new
-   length = strlen(szWord);
-
-  if(length < 3 || length > 30) return false;
-
-  for(new i = 0; i < length; i++)
-  {
-    switch(szWord[i])
-    {
-      case '0'..'9': continue;
-      case 'a'..'z': continue;
-      case 'A'..'Z': continue;
-      default: return false;
-    }
-  }
-
-  return true;
-}
-
 bool:TeleportAllowed(playerid)
 {
   if (pTemp[playerid][cheater]) return false;
@@ -1579,7 +1447,7 @@ GetAttractionMaximumQueueValue(attractionId)
 }
 
 stock bool:IsPlayerSwimming(playerid){
-    new index = GetPlayerAnimationIndex(playerid);
+  new index = GetPlayerAnimationIndex(playerid);
   if ((index >=  1538 && index <= 1541) || index == 1544) return true;
 
   return false;
@@ -1720,7 +1588,7 @@ public spawnVehicleForPlayer(playerid,vehicleid,bool:replace){
 
   SetTimerEx("OnPlayerStateChange",1500,false,"ddd",playerid, 2, 1);
 
-    return vehid;
+  return vehid;
 }
 
 stock RemovePlayerWeapon(playerid, weaponid)
@@ -2100,7 +1968,6 @@ stock GetDotXY(Float:StartPosX, Float:StartPosY, &Float:NewX, &Float:NewY, Float
    NewY = StartPosY + (dist * floatcos(alpha, degrees));
 }
 
-
 forward RespawnPlayer(playerid);
 public RespawnPlayer(playerid){
   TogglePlayerSpectating(playerid,0);
@@ -2126,7 +1993,7 @@ forward clearPlayerBombs(playerid);
 public clearPlayerBombs(playerid){
   if(pTemp[playerid][bombId]==-1) return 1;
 
-    DestroyPickup(pTemp[playerid][bombId]);
+  DestroyPickup(pTemp[playerid][bombId]);
   pTemp[playerid][bombPos][0]=-1;
   pTemp[playerid][bombPos][1]=-1;
   pTemp[playerid][bombPos][2]=-1;

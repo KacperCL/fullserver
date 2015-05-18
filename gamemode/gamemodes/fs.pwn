@@ -448,9 +448,8 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnPlayerRequestSpawn(playerid)
 {
-    if(IsPlayerNPC(playerid)) return 1;
-  if(pData[playerid][logonDialog])
-    return 0;
+  if(IsPlayerNPC(playerid)) return 1;
+  if(pData[playerid][logonDialog]) return 0;
 
   pData[playerid][classSelecting] = false;
 
@@ -1162,7 +1161,8 @@ public OnPlayerDisconnect(playerid, reason)
 public OnPlayerSpawn(playerid)
 {
   if(IsPlayerNPC(playerid)) return 1;
-    if(GetPVarInt(playerid,"Zaladowano")>0) {
+  
+  if(GetPVarInt(playerid,"Zaladowano")>0) {
     SetPVarInt(playerid,"Zaladowano",0);
   }
 
@@ -1187,26 +1187,30 @@ public OnPlayerSpawn(playerid)
     solo_OnPlayerDeath(playerid,soloinv[playerid][esi_targetplayerid],54);
   }
 
-  if(pTemp[playerid][useRsp]){
-      if (pData[playerid][gang]!=NO_GANG)
-      gangs_SetPlayerAttachedObject(playerid);
+  if(pTemp[playerid][useRsp])
+  {
+    if (pData[playerid][gang]!=NO_GANG) gangs_SetPlayerAttachedObject(playerid);
 
-    if (gmData[artefactOwner] == playerid){
+    if (gmData[artefactOwner] == playerid)
+    {
       artefact_SetPlayerHolding(playerid);
     }
 
-        if(gmTemp[aCTFFlaga]==playerid && aData[A_CTF][aState] == A_STATE_ON && pData[playerid][pAttraction]==A_CTF){
-          DestroyObject(gmTemp[aCTFFlagaObj]);
+    if(gmTemp[aCTFFlaga]==playerid && aData[A_CTF][aState] == A_STATE_ON && pData[playerid][pAttraction]==A_CTF)
+    {
+      DestroyObject(gmTemp[aCTFFlagaObj]);
       gmTemp[aCTFFlagaObj] = CreateObject(11245,-1,-1,-1,0, 288.53997802734, 328.23999023438);
       MoveObject(gmTemp[aCTFFlagaObj],-1,-1,-1,999);
-        AttachObjectToPlayer(gmTemp[aCTFFlagaObj], playerid, 1.5, 0.5, 0.0, 0.0, 1.5, 2);
+      AttachObjectToPlayer(gmTemp[aCTFFlagaObj], playerid, 1.5, 0.5, 0.0, 0.0, 1.5, 2);
     }
   }
   pTemp[playerid][dead]=false;
   pTemp[playerid][useRsp]=false;
 
   if (pData[playerid][loggedIn] && pTemp[playerid][e_houseid]>=0 && strlen(pData[playerid][pDzaloz])>0 && FSDomy[pTemp[playerid][e_houseid]][ed_owner]==pData[playerid][accountID])
+  {
     _zaloz(playerid,pData[playerid][pDzaloz]);
+  }
 
   if(pTemp[playerid][specPosReturn])
   {
@@ -1218,19 +1222,20 @@ public OnPlayerSpawn(playerid)
 
   if(pData[playerid][hudSetting][HUD_HP]) ShowPlayerHudElement(playerid, HUD_HP, true);
 
-  if (pTemp[playerid][onArena]>0)
-    return arena_SpawnPlayer(playerid);
-  if(pData[playerid][pAttraction]==A_CTF) {
-      CTF_ReSpawn(playerid);
+  if (pTemp[playerid][onArena]>0) return arena_SpawnPlayer(playerid);
+  if(pData[playerid][pAttraction]==A_CTF) 
+  {
+    CTF_ReSpawn(playerid);
     return 1;
   }
-  if(pData[playerid][pAttraction]==A_GG) {
-      GG_ReSpawn(playerid);
+  if(pData[playerid][pAttraction]==A_GG) 
+  {
+    GG_ReSpawn(playerid);
     return 1;
   }
 
-    pData[playerid][hudSetting][HUD_FPS]=false;
-    ShowPlayerHudElement(playerid, HUD_FPS, false);
+  pData[playerid][hudSetting][HUD_FPS]=false;
+  ShowPlayerHudElement(playerid, HUD_FPS, false);
 
   gzw_ShowGangZonesForPlayer(playerid);
 
@@ -4736,7 +4741,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 {
   pTemp[playerid][lastPos]=-1;
 
-  if(pData[playerid][jail]>0 && pData[playerid][adminLevel]<LEVEL_GM && pData[playerid][allowedLevel]<LEVEL_GM && strfind(cmdtext,"raport",true)!=0) {
+  if(pData[playerid][jail]>0 && pData[playerid][adminLevel]<LEVEL_GM && pData[playerid][allowedLevel]<LEVEL_GM && strfind(cmdtext,"raport",true)!=0 && strfind(cmdtext,"report",true)!=0) {
     Msg(playerid, COLOR_ERROR, __("Niestety - siedzisz w paczce."));
     return 0;
   }
@@ -4824,7 +4829,7 @@ OnPlayerRCONLogin(playerid)
 
 OnPlayerFirstSpawn(playerid)
 {
-    RemoveBuildings(playerid);
+  RemoveBuildings(playerid);
   DisablePlayerSounds(playerid);
   SetPlayerVirtualWorld(playerid,0);
   PlaySound(playerid, 1058);

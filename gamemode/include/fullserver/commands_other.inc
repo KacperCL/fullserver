@@ -343,10 +343,11 @@ CMD:zmienemail(playerid, params[])
 
 CMD:mojskin(playerid)
 {
+  if(!pData[playerid][loggedIn]) return Msg(playerid, COLOR_ERROR, TXT(playerid, 22)); // Musisz byæ zarejestrowany, aby u¿yæ tej komendy.
   if(!pData[playerid][classSelecting]) return Msg(playerid, COLOR_ERROR, TXT(playerid, 100)); // Ta komenda jest dostêpna tylko w wybiera³ce skinów.
   if(!pData[playerid][lastUsedSkin]) return Msg(playerid, COLOR_ERROR, TXT(playerid, 101)); // Bêdziesz móg³ u¿yæ tej komendy po ponownym wejœciu na serwer.
 
-  SetSpawnInfo(playerid, 0, pData[playerid][lastUsedSkin], -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
+  SetSpawnInfo(playerid, (playerid+1), pData[playerid][lastUsedSkin], -2876.87, 2807.71, 252.25, 45.0, 0, 0, 0, 0, 0, 0);
   SpawnPlayer(playerid);
   OnPlayerRequestSpawn(playerid);
 

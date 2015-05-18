@@ -289,15 +289,10 @@ proc amx_DC_CMD
     call    eax
     add     esp, 12
 
-    ; releasing memory allocated after pushing params string
-    mov     edx, [ebp+.addr]
-    mov     eax, [pAMXFunctions]
-    push    edx
-    mov     ecx, [ebp+.AMX]
-    mov     eax, [eax+amx_Release]
-    push    ecx
-    call    eax
-    add     esp, 8
+    ; return code from public function
+    mov eax, [ebp+.retval]
+    cmp eax, 0
+    jz .return0pub
 
 .return1:
     mov     eax, 1
@@ -311,6 +306,17 @@ proc amx_DC_CMD
 .noparams1:
     mov     [ebp+.params_pos], dword str_params_empty
     jmp     .loop1_exit
+.return0pub:
+    ; releasing memory allocated after pushing params string
+    mov     edx, [ebp+.addr]
+    mov     eax, [pAMXFunctions]
+    push    edx
+    mov     ecx, [ebp+.AMX]
+    mov     eax, [eax+amx_Release]
+    push    ecx
+    call    eax
+    add     esp, 8
+    jmp     .return0
 endp
 
 ;section '.data' data readable writable

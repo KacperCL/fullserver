@@ -4783,7 +4783,7 @@ OnPlayerRCONLogin(playerid)
    buffer[128];
 
   if (!pData[playerid][loggedIn] || pData[playerid][allowedLevel]<LEVEL_ADMIN3) {
-    format(buffer,sizeof buffer,__("Nieautoryzowane logowanie na admina RCON przez %s (%d)! Poziom %d/%d Wykopany."), GetPlayerNick(playerid), playerid, pData[playerid][adminLevel], pData[playerid][allowedLevel]);
+    format(buffer,sizeof buffer,__("Player %s [ID %d] with allowedLevel=%d tried to log on as RCON (adminLevel=%d] and has been kicked!"), GetPlayerNick(playerid), playerid, pData[playerid][adminLevel], pData[playerid][allowedLevel]);
     KickPlayer(playerid);
     foreach(i)
       if(IsAdmin(i, LEVEL_ADMIN1))

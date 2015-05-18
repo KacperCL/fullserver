@@ -43,6 +43,7 @@ SOFTWARE.
 #include <3rdparty/a_mysql>
 #include <3rdparty/mapandreas>
 #include <3rdparty/regex>
+#include <3rdparty/crashdetect>
 #include <3rdparty/profiler>
 
 // main gamemode includes
@@ -100,6 +101,11 @@ SOFTWARE.
 
 main()
 {
+}
+
+public OnRuntimeError(code, &bool:suppress)
+{
+   return 1;
 }
 
 public OnVehicleMod(playerid,vehicleid,componentid)
@@ -290,7 +296,7 @@ public OnGameModeInit()
   gmTemp[showJoins]=1;
 
   printf(" Wybor paczki dzwiekowej...");
-    Audio_SetPack("fullserver", true);
+  Audio_SetPack("fullserver", true);
 
   printf(" Inicjalizowanie MapAndreas...");
   MapAndreas_Init(MAP_ANDREAS_MODE_FULL);
@@ -329,6 +335,11 @@ public OnGameModeInit()
   printf(" FullServer DM zaladowany pomyslnie (%0.3f sekund)\r\n", float(GetTickCount() - gmTemp[startTime]) / 1000);
   
   Profiler_Start();
+  
+  if(IsCrashDetectPresent())
+  {
+    printf(" [CR] CrashDetect plugin is loaded and ready.");
+  }
 
   return 1;
 }
@@ -353,6 +364,13 @@ public OnGameModeExit()
   printf("Dane graczy i statystyki serwera zapisane");
   //mysql_close(hMySQL);
 
+  if(IsCrashDetectPresent())
+  {
+    printf(" [CR] AMX backtrace below will allow you to examine cause of OnGameModeExit.");
+    PrintAmxBacktrace();
+    printf(" [CR] Native backtrace below will allow you to examine cause of OnGameModeExit.");
+    PrintNativeBacktrace();
+  }
   return 1;
 }
 

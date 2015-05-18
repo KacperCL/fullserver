@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*-
-              =WERSJA ZMODYFIKOWANA PREZEZ EIDERA=
+            =MODIFIED BY EIDER FOR FULLSERVER.EU=
             ====================================
              y_timers - Run timers efficiently.
             ====================================

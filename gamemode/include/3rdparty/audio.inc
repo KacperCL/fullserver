@@ -82,24 +82,24 @@ static bool:Audio_g_OPDC = false;
 
 public OnFilterScriptInit()
 {
-  if (!Audio_g_CTS)
-  {
-    Audio_g_CTS = true;
-    Audio_g_OPC = (funcidx("Audio_OnPlayerConnect") != -1);
-    Audio_g_OPDC = (funcidx("Audio_OnPlayerDisconnect") != -1);
-    Audio_CreateTCPServer(GetServerVarAsInt("port"));
-  }
-  if (funcidx("Audio_OnFilterScriptInit") != -1)
-  {
-    return CallLocalFunction("Audio_OnFilterScriptInit", "");
-  }
-  return 1;
+	if (!Audio_g_CTS)
+	{
+		Audio_g_CTS = true;
+		Audio_g_OPC = (funcidx("Audio_OnPlayerConnect") != -1);
+		Audio_g_OPDC = (funcidx("Audio_OnPlayerDisconnect") != -1);
+		Audio_CreateTCPServer(GetServerVarAsInt("port"));
+	}
+	if (funcidx("Audio_OnFilterScriptInit") != -1)
+	{
+		return CallLocalFunction("Audio_OnFilterScriptInit", "");
+	}
+	return 1;
 }
 
 #if defined _ALS_OnFilterScriptInit
-  #undef OnFilterScriptInit
+	#undef OnFilterScriptInit
 #else
-  #define _ALS_OnFilterScriptInit
+	#define _ALS_OnFilterScriptInit
 #endif
 #define OnFilterScriptInit Audio_OnFilterScriptInit
 
@@ -107,24 +107,24 @@ forward Audio_OnFilterScriptInit();
 
 public OnGameModeInit()
 {
-  if (!Audio_g_CTS)
-  {
-    Audio_g_CTS = true;
-    Audio_g_OPC = (funcidx("Audio_OnPlayerConnect") != -1);
-    Audio_g_OPDC = (funcidx("Audio_OnPlayerDisconnect") != -1);
-    Audio_CreateTCPServer(GetServerVarAsInt("port"));
-  }
-  if (funcidx("Audio_OnGameModeInit") != -1)
-  {
-    return CallLocalFunction("Audio_OnGameModeInit", "");
-  }
-  return 1;
+	if (!Audio_g_CTS)
+	{
+		Audio_g_CTS = true;
+		Audio_g_OPC = (funcidx("Audio_OnPlayerConnect") != -1);
+		Audio_g_OPDC = (funcidx("Audio_OnPlayerDisconnect") != -1);
+		Audio_CreateTCPServer(GetServerVarAsInt("port"));
+	}
+	if (funcidx("Audio_OnGameModeInit") != -1)
+	{
+		return CallLocalFunction("Audio_OnGameModeInit", "");
+	}
+	return 1;
 }
 
 #if defined _ALS_OnGameModeInit
-  #undef OnGameModeInit
+	#undef OnGameModeInit
 #else
-  #define _ALS_OnGameModeInit
+	#define _ALS_OnGameModeInit
 #endif
 #define OnGameModeInit Audio_OnGameModeInit
 
@@ -132,24 +132,24 @@ forward Audio_OnGameModeInit();
 
 public OnPlayerConnect(playerid)
 {
-  if (!IsPlayerNPC(playerid))
-  {
-    new ip[16], name_[MAX_PLAYER_NAME];
-    GetPlayerIp(playerid, ip, sizeof(ip));
-    GetPlayerName(playerid, name_, sizeof(name_));
-    Audio_AddPlayer(playerid, ip, name_);
-  }
-  if (Audio_g_OPC)
-  {
-    return CallLocalFunction("Audio_OnPlayerConnect", "d", playerid);
-  }
-  return 1;
+	if (!IsPlayerNPC(playerid))
+	{
+		new ip[16], name[MAX_PLAYER_NAME];
+		GetPlayerIp(playerid, ip, sizeof(ip));
+		GetPlayerName(playerid, name, sizeof(name));
+		Audio_AddPlayer(playerid, ip, name);
+	}
+	if (Audio_g_OPC)
+	{
+		return CallLocalFunction("Audio_OnPlayerConnect", "d", playerid);
+	}
+	return 1;
 }
 
 #if defined _ALS_OnPlayerConnect
-  #undef OnPlayerConnect
+	#undef OnPlayerConnect
 #else
-  #define _ALS_OnPlayerConnect
+	#define _ALS_OnPlayerConnect
 #endif
 #define OnPlayerConnect Audio_OnPlayerConnect
 
@@ -157,21 +157,21 @@ forward Audio_OnPlayerConnect(playerid);
 
 public OnPlayerDisconnect(playerid, reason)
 {
-  if (!IsPlayerNPC(playerid))
-  {
-    Audio_RemovePlayer(playerid);
-  }
-  if (Audio_g_OPDC)
-  {
-    return CallLocalFunction("Audio_OnPlayerDisconnect", "dd", playerid, reason);
-  }
-  return 1;
+	if (!IsPlayerNPC(playerid))
+	{
+		Audio_RemovePlayer(playerid);
+	}
+	if (Audio_g_OPDC)
+	{
+		return CallLocalFunction("Audio_OnPlayerDisconnect", "dd", playerid, reason);
+	}
+	return 1;
 }
 
 #if defined _ALS_OnPlayerDisconnect
-  #undef OnPlayerDisconnect
+	#undef OnPlayerDisconnect
 #else
-  #define _ALS_OnPlayerDisconnect
+	#define _ALS_OnPlayerDisconnect
 #endif
 #define OnPlayerDisconnect Audio_OnPlayerDisconnect
 
@@ -179,18 +179,18 @@ forward Audio_OnPlayerDisconnect(playerid, reason);
 
 // Native Hook Section
 
-stock Audio_SetPlayerName(playerid, name_[])
+stock Audio_SetPlayerName(playerid, name[])
 {
-  new value = SetPlayerName(playerid, name_);
-  if (value > 0)
-  {
-    Audio_RenamePlayer(playerid, name_);
-  }
-  return value;
+	new value = SetPlayerName(playerid, name);
+	if (value > 0)
+	{
+		Audio_RenamePlayer(playerid, name);
+	}
+	return value;
 }
 #if defined _ALS_SetPlayerName
-  #undef SetPlayerName
+	#undef SetPlayerName
 #else
-  #define _ALS_SetPlayerName
+	#define _ALS_SetPlayerName
 #endif
 #define SetPlayerName Audio_SetPlayerName

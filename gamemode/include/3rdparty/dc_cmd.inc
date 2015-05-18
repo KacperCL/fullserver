@@ -1,7 +1,7 @@
 /*
   Daniel's Command Processing Plugin, modified by FullServer.eu
   © 2012-2013, Daniel_Cortez
-  © 2014, FullServer.eu
+  © 2014-2015, FullServer.eu
 
 Description:  fast and compact command processor written in pure ASM.
 License:    http://creativecommons.org/licenses/by-sa/3.0/

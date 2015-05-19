@@ -1386,11 +1386,11 @@ new fNames_hud[][] = {
  "Godzina",
  "Gwiazdki",
  "Licznik FPS",
- "Wskaznik HP",
 #if defined CJHIT_MODEL
+ "Wskaznik HP",
  "Wskaznik obrazen"
 #else
-  " "
+  "Wskaznik HP"
 #endif
 };
 

@@ -4749,7 +4749,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
     Msg(playerid, COLOR_ERROR, __("{b}Jestes ocenzurowany/-a{/b}! Nie mozesz wpisywac komend."));
     return 0;
   }
-  if(pData[playerid][logonDialog] || (pData[playerid][classSelecting] && strfind(cmdtext, "skin", true) == -1)) {
+  if(pData[playerid][logonDialog] || (pData[playerid][classSelecting] && strfind(cmdtext, "skin", true) == -1 && strfind(cmdtext, "/ms", true) == -1)) {
     Msg(playerid,COLOR_ERROR,__("Najpierw musisz dolaczyc do gry."));
     return 0;
   }

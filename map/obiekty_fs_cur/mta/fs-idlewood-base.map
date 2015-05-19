@@ -1,0 +1,7 @@
+<map edf:definitions="editor_main">
+    <object id="object (crackhoose) (2)" breakable="true" interior="0" collisions="true" alpha="255" model="14735" doublesided="false" scale="1" dimension="0" posX="2176.1001" posY="-1668.40002" posZ="8.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (LOW_BED_2) (1)" breakable="true" interior="0" collisions="true" alpha="255" model="1793" doublesided="false" scale="1" dimension="0" posX="2162.19995" posY="-1660.90002" posZ="7.1" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (gb_bedmags03) (1)" breakable="true" interior="0" alpha="255" model="2853" doublesided="false" scale="1" dimension="0" posX="2162.1001" posY="-1660.69995" posZ="7.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (GB_novels04) (1)" breakable="true" interior="0" alpha="255" model="2826" doublesided="false" scale="1" dimension="0" posX="2167" posY="-1663.80005" posZ="7.2" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (Gen_doorEXT03) (1)" breakable="true" interior="0" alpha="255" model="1498" doublesided="false" scale="1" dimension="0" posX="2160.3999" posY="-1675.69995" posZ="7.2" rotX="0" rotY="0" rotZ="180"></object>
+</map>

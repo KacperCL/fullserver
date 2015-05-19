@@ -1,0 +1,9 @@
+<map edf:definitions="editor_main">
+    <vehicle id="vehicle (Flash) (1)" paintjob="3" interior="0" alpha="255" model="565" plate="G1N4VQO" dimension="0" color="101,106,121,101,106,121,0,0,0,0,0,0" posX="-2159.19995" posY="654.40002" posZ="52.1" rotX="0" rotY="0" rotZ="270"></vehicle>
+    <vehicle id="vehicle (Faggio) (2)" paintjob="3" interior="0" alpha="255" model="462" plate="J1SFHJP" dimension="0" color="214,218,214,214,218,214,0,0,0,0,0,0" posX="-2152.1001" posY="640.70001" posZ="52" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Previon) (1)" paintjob="3" interior="0" alpha="255" model="436" plate="AE34HO8" dimension="0" color="82,86,97,245,245,245,0,0,0,0,0,0" posX="-2214" posY="615.40002" posZ="35" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Berkley&apos;s RC Van) (1)" paintjob="3" interior="0" alpha="255" model="459" plate="KFKYD1U" dimension="0" color="16,80,130,16,80,130,0,0,0,0,0,0" posX="-2093.89941" posY="712.7998" posZ="69.63" rotX="0" rotY="5.499" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Manana) (1)" paintjob="3" interior="0" alpha="255" model="410" plate="ZJ3FXIS" dimension="0" color="37,37,39,245,245,245,0,0,0,0,0,0" posX="-2274.30005" posY="645.79999" posZ="49.1" rotX="0" rotY="356" rotZ="180"></vehicle>
+    <vehicle id="vehicle (Blista Compact) (1)" paintjob="3" interior="0" alpha="255" model="496" plate="U7YAQU8" dimension="0" color="59,78,120,59,78,120,0,0,0,0,0,0" posX="-2179.1001" posY="715.40002" posZ="53.7" rotX="0" rotY="0" rotZ="0"></vehicle>
+    <vehicle id="vehicle (Windsor) (1)" paintjob="3" interior="0" alpha="255" model="555" plate="IQSJMJY" dimension="0" color="37,37,39,245,245,245,0,0,0,0,0,0" posX="-2227.69922" posY="740.2998" posZ="49.2" rotX="0" rotY="0" rotZ="0"></vehicle>
+</map>

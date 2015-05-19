@@ -58,8 +58,6 @@ SOFTWARE.
 #include <fullserver/audio_functions>
 #include <fullserver/domy>
 #include <fullserver/gangzones>
-//#include <fullserver/mo/rakieta>
-#include <fullserver/mo/balony>
 #include <fullserver/paczki>
 #include <fullserver/objects>
 #include <fullserver/gangs>
@@ -79,6 +77,9 @@ SOFTWARE.
 #include <fullserver/warsztat>
 #include <fullserver/exports>
 #include <fullserver/quiz>
+// mini-attraction includes
+#include <fullserver/mo/rakieta>
+#include <fullserver/mo/balony>
 // attraction includes
 #include <fullserver/attraction_derby>
 #include <fullserver/attraction_race>

@@ -1,0 +1,30 @@
+// /**
+//  * <pre>
+//  * FullServer.eu
+//  * Part of XyzzyDM
+//  * </pre>
+//  *
+//  * @author 		Wielebny, WUBE, Olej, noctropolis, eider, times, DEMON, evolution, sebox, sayu, SlowSheep, and others
+//  * @copyright	(c) 2011 - 2013 FullServer.eu
+//  * @package		XyzzyDM Objects
+//  * @link		http://fullserver.eu
+//  *
+//  */
+
+// PUNKT KONTROLI POJAZDÓW
+AddStaticVehicle(525,1053.25476074,1838.33142090,10.81031227,0.00000000,-1,-1); //Tow Truck
+AddStaticVehicle(525,1058.84069824,1838.41857910,10.81031227,0.00000000,-1,-1); //Tow Truck
+AddStaticVehicle(525,1064.41467285,1838.41796875,10.81031227,0.00000000,-1,-1); //Tow Truck
+AddStaticVehicle(525,1070.08569336,1838.50573730,10.81031227,0.00000000,-1,-1); //Tow Truck
+AddStaticVehicle(530,1084.93920898,1839.18176270,10.62039852,180.00000000,-1,-1); //Forklift
+AddStaticVehicle(530,1081.23120117,1839.19018555,10.62039852,180.00000000,-1,-1); //Forklift
+
+// ANDROMEDY
+AddStaticVehicle(590,2309.34057617,1230.99682617,1522.90393066,0.00000000,-1,-1); //Freight Carriage
+AddStaticVehicle(590,-1909.11254883,848.11169434,1522.82897949,0.00000000,-1,-1); //Freight Carriage
+AddStaticVehicle(590,1109.87902832,-1452.34985352,1522.74499512,0.00000000,-1,-1); //Freight Carriage
+
+// wyspas
+AddStaticVehicle(446,3349.0747,-2025.4513,-0.2889,182.2125,3,3); // squallo
+AddStaticVehicle(493,3349.3037,-2012.5593,-0.3205,121.2362,36,13); //  Jetmax
+// EOF

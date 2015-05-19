@@ -150,7 +150,7 @@ enum e_checkpoints {
   ec_warsztatlv_myjnia,
   ec_warsztatlv_podnosnik,
   ec_warsztatlv_spray,
-  //ec_sfrakieta
+  ec_sfrakieta
 }
 
 new DAs[e_DynamicAreas];  // rozne strefy dynamiczne
@@ -180,7 +180,7 @@ CreateObjects()
     neony[i][1]=CreateDynamicObject(18647+(i%6),0,0,0,0,0,0);
     neony[i][2]=INVALID_VEHICLE_ID;
   }
-  //rakieta_init();
+  rakieta_init();
   balony_init();
   poczta_init();
 
@@ -252,6 +252,9 @@ CreateObjects()
   Checkpoints[ec_warsztatlv_skup]=CreateDynamicCP(1064,1735,12.43,7.0, 0,0,-1,20.0);
   Checkpoints[ec_warsztatlv_skup]=CreateDynamicCP(886.9,1911.5,10.00,7.0, 0,0,-1,20.0);
   CreateDynamic3DTextLabel("Skup\npojazdow", 0xffffffff, 886.9,1911.5,10.9, 20, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 0, 0, -1, 20);
+  
+  Checkpoints[ec_sfrakieta]=CreateDynamicCP(-2898.35,489.05,30.5,1.0,    0,0,-1,20.0);
+  CreateDynamic3DTextLabel("Start\nrakiety", 0xffffffff, -2898.35,489.05,30.9, 20, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 0, 0, -1, 20);
 
   Fotoradary[0]=CreateDynamicSphere(2057.50,1303.54,10.93,20,-1,0,-1);
   Fotoradary[1]=CreateDynamicSphere(1217.44,1804.47,7.62,20,-1,0,-1);
@@ -922,8 +925,8 @@ obiekty_OPEnterDynamicCP(playerid,checkpointid){
     return warsztat_CPmyjnia(playerid);
   else if (checkpointid==Checkpoints[ec_warsztatlv_podnosnik])
     return warsztat_CPpodnosnik(playerid);
-  /*else if (checkpointid==Checkpoints[ec_sfrakieta])
-    return rakieta_confirmliftoff(playerid);*/
+  else if (checkpointid==Checkpoints[ec_sfrakieta])
+    return rakieta_confirmliftoff(playerid);
   }
   if (GetTickCount()-pTemp[playerid][teleCPDelay] > MIN_TELECP_DELAY)
     for(new i=0; i < TeleCPCount; i++)

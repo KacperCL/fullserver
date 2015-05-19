@@ -1,0 +1,14 @@
+// /**
+//  * <pre>
+//  * FullServer.eu
+//  * Part of XyzzyDM
+//  * </pre>
+//  *
+//  * @author 		7hd
+//  * @copyright	(c) 2011 - 2013 FullServer.eu
+//  * @package		XyzzyDM Objects
+//  * @link		http://fullserver.eu
+//  *
+//  */
+
+// tutaj obiekty w formie Incognito Streamer (CreateDynamicObjects). Do konwersji uzyj convertffs.com

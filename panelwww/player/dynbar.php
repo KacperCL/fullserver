@@ -72,10 +72,15 @@ $bbox=imagettfbbox(9, 0, $veramobd, $pd['nick']."       ");
 $offset=5+$bbox[2];
 
 $r=""; $color=$black;
-if ($pid==702) {
+if ($pd['vip']) {
+			$r="V.I.P.";
+			$color=$yellow;
+		}
+    
+if ($pd['levelAddition'] == 1) {
 			$r="Maper";
 			$color=$blue;
-} else 
+}
 
 switch($pd['level']){
 	case 4:
@@ -95,10 +100,6 @@ switch($pd['level']){
 		$color=$orange;
 		break;
 	default:
-	if ($pd['vip']) {
-		$r="V.I.P.";
-		$color=$yellow;
-	}
 }
 
 if($ban['pozostalo']>0){

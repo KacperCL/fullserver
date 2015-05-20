@@ -30,8 +30,7 @@ SOFTWARE.
 
 #define SERVER_NONE 0
 #define VEHICLE_DEFAULT_HP 999
-#define NIEMAPERZY (pData[playerid][accountID]!=702 && pData[playerid][accountID]!=12713)
-#define NIESURV (pData[playerid][accountID]!=46)
+#define NIEMAPERZY (pData[playerid][levelAddition]!=LEVEL_ADD_MAPPER)
 #define GANGMGMT (pData[playerid][adminLevel]>=LEVEL_ADMIN3)
 #define FLOAT_NAN     (Float:0xFFFFFFFF)
 #define SALT_ALOGIN         "changeme"
@@ -159,6 +158,8 @@ SOFTWARE.
 #define LEVEL_ADMIN2        3
 #define LEVEL_ADMIN3        4
 #define LEVEL_ADMINHIDDEN     5
+
+#define LEVEL_ADD_MAPPER  1
 
 #define ATTACH_TMPMISC  3
 #define ATTACH_FACTION  4
@@ -867,6 +868,7 @@ enum e_pData
   vipDaysLeft,
   allowedLevel, // na jaki poziom moze sie zalogowac
   adminLevel,   // na jaki poziom sie zalogowal
+  levelAddition,
   session,
   gang,
   gangRank,

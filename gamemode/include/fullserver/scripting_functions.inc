@@ -852,7 +852,7 @@ LoadBasicPlayerData(playerid,bool:altnick=false)
     mysql_real_escape_string(GetPlayerNick(playerid), escaped_nick);
 
     pData[playerid][accountID]=0;
-    format(buffer,sizeof buffer,"SELECT p.id,last_skin,jail,level,IFNULL(fp.id_gang,0),IFNULL(fp.rank,'none'),level,IFNULL(suspendedTo>NOW(),0),hudData,nick,isLocked,active_server FROM fs_players p LEFT JOIN fs_players_in_gangs fp ON p.id=fp.id_player WHERE p.nick='%s' LIMIT 1",escaped_nick);
+    format(buffer,sizeof buffer,"SELECT p.id,last_skin,jail,level,levelAddition,IFNULL(fp.id_gang,0),IFNULL(fp.rank,'none'),IFNULL(suspendedTo>NOW(),0),hudData,nick,isLocked,active_server FROM fs_players p LEFT JOIN fs_players_in_gangs fp ON p.id=fp.id_player WHERE p.nick='%s' LIMIT 1",escaped_nick);
 
     if (!mysql_query(buffer)){
       printf(" (3) MYSQL CONNECTION CHECKING RETURNED 0! SERVER IS GOING DOWN NOW TO PREVENT SYSTEM DAMAGE!");
@@ -867,8 +867,8 @@ LoadBasicPlayerData(playerid,bool:altnick=false)
             pData[playerid][lastUsedSkin],
             pData[playerid][jailMysql],
             pData[playerid][allowedLevel],
+            pData[playerid][levelAddition],
             pData[playerid][gang], gangrank,
-            pData[playerid][allowedLevel],
             pData[playerid][suspended],
             hudData,
             dbnick,

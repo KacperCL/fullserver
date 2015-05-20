@@ -943,7 +943,7 @@ OnPlayerLogin(playerid)
   if (pData[playerid][gang]!=NO_GANG)
     gangs_OnPlayerLogin(playerid);
 
-  if(pData[playerid][accountID]==702) {
+  if(pData[playerid][levelAddition]==LEVEL_ADD_MAPPER) {
     format(buffer,sizeof buffer,__("*** %s zalogowal sie jako maper."), GetPlayerNick(playerid));
     SendClientMessageToAll(0x636dfb, buffer);
     foreach(i)

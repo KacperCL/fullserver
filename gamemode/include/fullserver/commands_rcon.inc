@@ -292,7 +292,7 @@ CMD:streamtr(playerid,params[]){
 }
 
 CMD:makevip(playerid,params[]){
-  if(!IsAdmin(playerid,LEVEL_ADMIN3) && NIESURV) return 0;
+  if(!IsAdmin(playerid,LEVEL_ADMIN3)) return 0;
   new userid,tplayer[24];
   if (isnull(params) && pData[playerid][spectating]!=INVALID_PLAYER_ID)
     userid=pData[playerid][spectating];

@@ -45,7 +45,7 @@ require_once("p/libs/BazaDanych.class.php");
 require_once("p/__config.php");
 $RDB=new BazaDanych($__dbHost,$__dbName,$__dbUser,$__dbPass);
 
-$pd=$RDB->pobierz_wyniki("SELECT p.nick,p.level,p.last_skin,p.respect,p.skill,p.vip>NOW() vip,pig.id_gang, g.color gangcolor, g.name gangname,pig.rank gangrank FROM fs_players p LEFT JOIN fs_players_in_gangs pig ON pig.id_player=p.id AND pig.rank!='suspended' LEFT JOIN fs_gangs g ON pig.id_gang=g.id WHERE p.id=$pid LIMIT 1");
+$pd=$RDB->pobierz_wyniki("SELECT p.nick,p.level,p.levelAddition,p.last_skin,p.respect,p.skill,p.vip>NOW() vip,pig.id_gang, g.color gangcolor, g.name gangname,pig.rank gangrank FROM fs_players p LEFT JOIN fs_players_in_gangs pig ON pig.id_player=p.id AND pig.rank!='suspended' LEFT JOIN fs_gangs g ON pig.id_gang=g.id WHERE p.id=$pid LIMIT 1");
 
 $im=imagecreatefrompng("s/i/userbar".intval($tlo).".png");
 
@@ -82,10 +82,16 @@ $bbox=imagettfbbox(8, 0, $veramobd, $pd['nick']."       ");
 $offset=5+$bbox[2];
 
 $r=""; $color=$black;
-if ($pid==702) {
+
+if ($pd['vip']) {
+			$r="V.I.P.";
+			$color=$yellow;
+		}
+    
+if ($pd['levelAddition'] == 1) {
 			$r="Maper";
 			$color=$blue;
-} else 
+}
 
 switch($pd['level']){
 	case 4:
@@ -105,10 +111,6 @@ switch($pd['level']){
 		$color=$orange;
 		break;
 	default:
-if ($pd['vip']) {
-			$r="V.I.P.";
-			$color=$yellow;
-		}
 }
 
 if(strlen($r)>0) {

@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb2
+-- version 4.4.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 30 Kwi 2014, 01:23
--- Wersja serwera: 5.5.35
--- Wersja PHP: 5.4.4-14+deb7u7
+-- Czas generowania: 20 Maj 2015, 13:00
+-- Wersja serwera: 5.6.23-1~dotdeb.3-log
+-- Wersja PHP: 5.5.23-1~dotdeb.2
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Baza danych: `db_2152`
+-- Baza danych: `db_12`
 --
 
 -- --------------------------------------------------------
@@ -26,11 +26,10 @@ SET time_zone = "+00:00";
 -- Struktura tabeli dla tabeli `fs_achievements`
 --
 
+DROP TABLE IF EXISTS `fs_achievements`;
 CREATE TABLE IF NOT EXISTS `fs_achievements` (
   `name` varchar(32) NOT NULL,
-  `shortname` varchar(10) NOT NULL,
-  PRIMARY KEY (`shortname`),
-  UNIQUE KEY `name` (`name`)
+  `shortname` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -59,16 +58,14 @@ INSERT INTO `fs_achievements` (`name`, `shortname`) VALUES
 -- Struktura tabeli dla tabeli `fs_achievements_ranks`
 --
 
+DROP TABLE IF EXISTS `fs_achievements_ranks`;
 CREATE TABLE IF NOT EXISTS `fs_achievements_ranks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `shortname` varchar(10) CHARACTER SET ascii NOT NULL,
   `rank` varchar(48) NOT NULL,
   `score` int(10) unsigned NOT NULL,
-  `replacename` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `shortname` (`shortname`),
-  KEY `shortname_2` (`shortname`,`score`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=153 ;
+  `replacename` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `fs_achievements_ranks`
@@ -196,12 +193,16 @@ INSERT INTO `fs_achievements_ranks` (`id`, `shortname`, `rank`, `score`, `replac
 -- Struktura tabeli dla tabeli `fs_admin_activity`
 --
 
+DROP TABLE IF EXISTS `fs_admin_activity`;
 CREATE TABLE IF NOT EXISTS `fs_admin_activity` (
   `id_player` int(11) NOT NULL,
   `data` date NOT NULL,
-  `minut` smallint(3) NOT NULL,
-  UNIQUE KEY `id_player` (`id_player`,`data`)
+  `minut` smallint(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_admin_activity`
+--
 
 -- --------------------------------------------------------
 
@@ -209,10 +210,10 @@ CREATE TABLE IF NOT EXISTS `fs_admin_activity` (
 -- Struktura tabeli dla tabeli `fs_arena`
 --
 
+DROP TABLE IF EXISTS `fs_arena`;
 CREATE TABLE IF NOT EXISTS `fs_arena` (
   `id` int(10) unsigned NOT NULL,
-  `descr` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`)
+  `descr` varchar(32) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -241,16 +242,15 @@ INSERT INTO `fs_arena` (`id`, `descr`) VALUES
 -- Struktura tabeli dla tabeli `fs_bans`
 --
 
+DROP TABLE IF EXISTS `fs_bans`;
 CREATE TABLE IF NOT EXISTS `fs_bans` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `player_banned` int(11) NOT NULL,
   `player_given` int(11) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `player_banned` (`player_banned`,`date_created`,`date_end`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `reason` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -258,17 +258,17 @@ CREATE TABLE IF NOT EXISTS `fs_bans` (
 -- Struktura tabeli dla tabeli `fs_chowany_arena`
 --
 
+DROP TABLE IF EXISTS `fs_chowany_arena`;
 CREATE TABLE IF NOT EXISTS `fs_chowany_arena` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `descr` varchar(64) NOT NULL,
   `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
   `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
   `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
   `wb_cube` varchar(64) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'prostopadloscian x1,y1,z1,x2,y2,z2',
   `wb_mode` enum('oraz','lub') CHARACTER SET ascii NOT NULL DEFAULT 'lub' COMMENT 'oraz - gracz musi byc w obu polach, lub - musi byc w jednym z nich',
-  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r'
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_chowany_arena`
@@ -313,16 +313,16 @@ INSERT INTO `fs_chowany_arena` (`id`, `descr`, `interior`, `minplayers`, `maxpla
 -- Struktura tabeli dla tabeli `fs_chowany_arena_sp`
 --
 
+DROP TABLE IF EXISTS `fs_chowany_arena_sp`;
 CREATE TABLE IF NOT EXISTS `fs_chowany_arena_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `team` tinyint(1) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
-  `A` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2291 ;
+  `A` double NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2291 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_chowany_arena_sp`
@@ -2135,10 +2135,10 @@ INSERT INTO `fs_chowany_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`) VALU
 -- Struktura tabeli dla tabeli `fs_config`
 --
 
+DROP TABLE IF EXISTS `fs_config`;
 CREATE TABLE IF NOT EXISTS `fs_config` (
   `option_name` varchar(32) NOT NULL,
-  `value` text,
-  PRIMARY KEY (`option_name`)
+  `value` text
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -2155,8 +2155,9 @@ INSERT INTO `fs_config` (`option_name`, `value`) VALUES
 -- Struktura tabeli dla tabeli `fs_ctf_arena`
 --
 
+DROP TABLE IF EXISTS `fs_ctf_arena`;
 CREATE TABLE IF NOT EXISTS `fs_ctf_arena` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `descr` varchar(64) NOT NULL,
   `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
   `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
@@ -2166,10 +2167,8 @@ CREATE TABLE IF NOT EXISTS `fs_ctf_arena` (
   `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r',
   `flaga_spawn` varchar(64) NOT NULL,
   `flaga_team0` varchar(64) NOT NULL COMMENT 'zielony',
-  `flaga_team1` varchar(64) NOT NULL COMMENT 'niebieski',
-  PRIMARY KEY (`id`),
-  KEY `minplayers` (`minplayers`,`maxplayers`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
+  `flaga_team1` varchar(64) NOT NULL COMMENT 'niebieski'
+) ENGINE=MyISAM AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_ctf_arena`
@@ -2189,18 +2188,17 @@ INSERT INTO `fs_ctf_arena` (`id`, `descr`, `interior`, `minplayers`, `maxplayers
 -- Struktura tabeli dla tabeli `fs_ctf_arena_sp`
 --
 
+DROP TABLE IF EXISTS `fs_ctf_arena_sp`;
 CREATE TABLE IF NOT EXISTS `fs_ctf_arena_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `team` tinyint(1) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
   `A` double NOT NULL,
-  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie',
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`,`team`,`randomorder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3414 ;
+  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie'
+) ENGINE=MyISAM AUTO_INCREMENT=3414 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_ctf_arena_sp`
@@ -2338,18 +2336,17 @@ INSERT INTO `fs_ctf_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`, `randomo
 -- Struktura tabeli dla tabeli `fs_derby_arena`
 --
 
+DROP TABLE IF EXISTS `fs_derby_arena`;
 CREATE TABLE IF NOT EXISTS `fs_derby_arena` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '2',
   `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '4',
   `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
   `interior` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `descr` varchar(255) DEFAULT NULL,
   `nitro` tinyint(1) NOT NULL DEFAULT '0',
-  `minZ` int(11) NOT NULL DEFAULT '-1000',
-  PRIMARY KEY (`id`),
-  KEY `minPlayers` (`minPlayers`,`maxPlayers`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+  `minZ` int(11) NOT NULL DEFAULT '-1000'
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `fs_derby_arena`
@@ -2380,16 +2377,15 @@ INSERT INTO `fs_derby_arena` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `inte
 -- Struktura tabeli dla tabeli `fs_derby_arena_sp`
 --
 
+DROP TABLE IF EXISTS `fs_derby_arena_sp`;
 CREATE TABLE IF NOT EXISTS `fs_derby_arena_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=447 ;
+  `angle` double NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=447 DEFAULT CHARSET=utf8;
 
 --
 -- Zrzut danych tabeli `fs_derby_arena_sp`
@@ -2770,13 +2766,13 @@ INSERT INTO `fs_derby_arena_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 -- Struktura tabeli dla tabeli `fs_dragrace_records`
 --
 
+DROP TABLE IF EXISTS `fs_dragrace_records`;
 CREATE TABLE IF NOT EXISTS `fs_dragrace_records` (
   `id_player` int(10) unsigned NOT NULL,
   `vehicleModel` int(10) unsigned NOT NULL,
   `time` double(6,3) unsigned NOT NULL,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ping` int(11) DEFAULT NULL,
-  UNIQUE KEY `id_player` (`id_player`,`vehicleModel`)
+  `ping` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2785,17 +2781,20 @@ CREATE TABLE IF NOT EXISTS `fs_dragrace_records` (
 -- Struktura tabeli dla tabeli `fs_drift_records`
 --
 
+DROP TABLE IF EXISTS `fs_drift_records`;
 CREATE TABLE IF NOT EXISTS `fs_drift_records` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `playerid` int(10) unsigned NOT NULL,
   `raceid` smallint(10) unsigned NOT NULL,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `recordtime` float unsigned NOT NULL,
   `opponents` mediumint(9) NOT NULL DEFAULT '1',
-  `finalscore` smallint(5) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `raceid` (`raceid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `finalscore` smallint(5) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_drift_records`
+--
 
 -- --------------------------------------------------------
 
@@ -2803,8 +2802,9 @@ CREATE TABLE IF NOT EXISTS `fs_drift_records` (
 -- Struktura tabeli dla tabeli `fs_drift_tracks`
 --
 
+DROP TABLE IF EXISTS `fs_drift_tracks`;
 CREATE TABLE IF NOT EXISTS `fs_drift_tracks` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '10',
   `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
@@ -2819,10 +2819,8 @@ CREATE TABLE IF NOT EXISTS `fs_drift_tracks` (
   `scz` double DEFAULT NULL,
   `limitrand` tinyint(4) NOT NULL DEFAULT '100',
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `partime` float unsigned NOT NULL DEFAULT '100',
-  PRIMARY KEY (`id`),
-  KEY `minPlayers` (`minPlayers`,`maxPlayers`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `partime` float unsigned NOT NULL DEFAULT '100'
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_drift_tracks`
@@ -2850,18 +2848,17 @@ INSERT INTO `fs_drift_tracks` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `int
 -- Struktura tabeli dla tabeli `fs_drift_tracks_cp`
 --
 
+DROP TABLE IF EXISTS `fs_drift_tracks_cp`;
 CREATE TABLE IF NOT EXISTS `fs_drift_tracks_cp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
   `type` smallint(3) unsigned NOT NULL DEFAULT '0',
   `size` double NOT NULL DEFAULT '0',
-  `so` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=234 ;
+  `so` int(10) unsigned NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=234 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_drift_tracks_cp`
@@ -3101,16 +3098,15 @@ INSERT INTO `fs_drift_tracks_cp` (`id`, `aid`, `X`, `Y`, `Z`, `type`, `size`, `s
 -- Struktura tabeli dla tabeli `fs_drift_tracks_sp`
 --
 
+DROP TABLE IF EXISTS `fs_drift_tracks_sp`;
 CREATE TABLE IF NOT EXISTS `fs_drift_tracks_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+  `angle` double NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_drift_tracks_sp`
@@ -3168,6 +3164,7 @@ INSERT INTO `fs_drift_tracks_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 -- Struktura tabeli dla tabeli `fs_gangs`
 --
 
+DROP TABLE IF EXISTS `fs_gangs`;
 CREATE TABLE IF NOT EXISTS `fs_gangs` (
   `id` smallint(1) unsigned NOT NULL,
   `name` varchar(32) NOT NULL,
@@ -3179,11 +3176,12 @@ CREATE TABLE IF NOT EXISTS `fs_gangs` (
   `spawnpoint` varchar(64) NOT NULL DEFAULT '2023,1008,11,270',
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `www` varchar(30) NOT NULL,
-  `wyspa_sphere` varchar(64) NOT NULL COMMENT 'kula/sfera: x,y,z,r',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `tag` (`tag`)
+  `wyspa_sphere` varchar(64) NOT NULL COMMENT 'kula/sfera: x,y,z,r'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `fs_gangs`
+--
 
 -- --------------------------------------------------------
 
@@ -3191,11 +3189,11 @@ CREATE TABLE IF NOT EXISTS `fs_gangs` (
 -- Struktura tabeli dla tabeli `fs_gangs_alliance`
 --
 
+DROP TABLE IF EXISTS `fs_gangs_alliance`;
 CREATE TABLE IF NOT EXISTS `fs_gangs_alliance` (
   `g1` smallint(2) unsigned NOT NULL,
   `g2` smallint(2) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`g1`,`g2`)
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -3204,8 +3202,9 @@ CREATE TABLE IF NOT EXISTS `fs_gangs_alliance` (
 -- Struktura tabeli dla tabeli `fs_houses`
 --
 
+DROP TABLE IF EXISTS `fs_houses`;
 CREATE TABLE IF NOT EXISTS `fs_houses` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `descr` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
@@ -3226,291 +3225,289 @@ CREATE TABLE IF NOT EXISTS `fs_houses` (
   `vehicles_allowed` tinyint(4) NOT NULL DEFAULT '1',
   `vehicle_radius` double unsigned NOT NULL DEFAULT '20',
   `audioURL` varchar(128) DEFAULT NULL,
-  `restrict_gang` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `ownerid` (`ownerid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=905 ;
+  `restrict_gang` tinyint(2) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=905 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_houses`
 --
 
 INSERT INTO `fs_houses` (`id`, `descr`, `X`, `Y`, `Z`, `ownerid`, `koszt`, `exitX`, `exitY`, `exitZ`, `exitA`, `paidTo`, `homeX`, `homeY`, `homeZ`, `homeA`, `homeI`, `homeVW`, `vehicles_allowed`, `vehicle_radius`, `audioURL`, `restrict_gang`) VALUES
-(1, 'Grove Street', 2486.42, -1644.53, 14.07, 1628, 500, 2486.42, -1647.99, 14.0703, 181.621, '0000-00-00', 2318.14, -1025.23, 1050.21, 320.429, 9, -1, 1, 20, NULL, 0),
-(2, 'Grove Street', 2498.47, -1642.28, 14.11, 237, 230, 2498.34, -1644.81, 13.7826, 174.177, '0000-00-00', 2324.12, -1147.41, 1050.71, 0.274112, 12, -1, 1, 20, NULL, 0),
-(4, 'GS', 2524.7, -1658.67, 15.82, 11857, 230, 2522.21, -1658.6, 15.4935, 88.3463, '0000-00-00', 444.178, 510.64, 1001.42, 299.123, 12, -1, 1, 20, NULL, 0),
-(5, 'Apartament w Financial, SF', -1808.97, 903.77, 24.89, 11084, 270, -1806.68, 906.651, 24.8906, 324.578, '0000-00-00', 234.163, 1065.45, 1084.21, 357.044, 6, -1, 1, 20, NULL, 0),
+(1, 'Grove Street', 2486.42, -1644.53, 14.07, 1628, 500, 2486.42, -1647.99, 14.0703, 181.621, '2014-06-01', 2318.14, -1025.23, 1050.21, 320.429, 9, -1, 1, 20, NULL, 0),
+(2, 'Grove Street', 2498.47, -1642.28, 14.11, 237, 230, 2498.34, -1644.81, 13.7826, 174.177, '2014-04-18', 2324.12, -1147.41, 1050.71, 0.274112, 12, -1, 1, 20, NULL, 0),
+(4, 'GS', 2524.7, -1658.67, 15.82, 11857, 230, 2522.21, -1658.6, 15.4935, 88.3463, '2014-04-12', 444.178, 510.64, 1001.42, 299.123, 12, -1, 1, 20, NULL, 0),
+(5, 'Apartament w Financial, SF', -1808.97, 903.77, 24.89, 11084, 270, -1806.68, 906.651, 24.8906, 324.578, '2014-01-20', 234.163, 1065.45, 1084.21, 357.044, 6, -1, 1, 20, NULL, 0),
 (6, 'Les Barrancas', -817.22, 1560.57, 27.11, 0, 200, -814.663, 1560.36, 27.1172, 271.625, '0000-00-00', 260.575, 1238.61, 1084.26, 358.95, 9, -1, 1, 20, NULL, 0),
 (7, 'Dom', -1623.34, 446.33, 7.17, 14142, 0, -1622.28, 445.26, 7.1797, 226.778, NULL, 2324.25, -1147.74, 1050.71, 2.15604, 12, -1, 1, 20, NULL, 0),
-(8, 'Willa w LS', 980.0839, -677.1592, 121.9763, 155, 230, 978.323, -674.717, 121.976, 31.9224, '0000-00-00', 140.365, 1367.54, 1083.86, 7.81884, 5, -1, 1, 20, NULL, 0),
-(10, 'Domek LS', 828.05, -858.74, 70.33, 290, 180, 828.696, -860.674, 69.9219, 202.064, '0000-00-00', 1522.27, -47.8407, 1002.13, 267.963, 2, -1, 1, 20, NULL, 0),
-(11, 'Domek w zatoce', -2437.31, 2354.07, 5.19, 13575, 130, -2436.66, 2351.43, 4.96875, 194.231, '0000-00-00', 300.333, 313.853, 999.148, 268.033, 4, -1, 1, 20, NULL, 0),
-(12, 'Willa w Los Santos', 299.96, -1154.79, 81.19, 1129, 230, 297.995, -1156.64, 80.9099, 131.765, '0000-00-00', 229.205, 1114.17, 1080.99, 269.944, 5, -1, 1, 20, NULL, 0),
+(8, 'Willa w LS', 980.0839, -677.1592, 121.9763, 155, 230, 978.323, -674.717, 121.976, 31.9224, '2014-05-12', 140.365, 1367.54, 1083.86, 7.81884, 5, -1, 1, 20, NULL, 0),
+(10, 'Domek LS', 828.05, -858.74, 70.33, 290, 180, 828.696, -860.674, 69.9219, 202.064, '2014-05-05', 1522.27, -47.8407, 1002.13, 267.963, 2, -1, 1, 20, NULL, 0),
+(11, 'Domek w zatoce', -2437.31, 2354.07, 5.19, 13575, 130, -2436.66, 2351.43, 4.96875, 194.231, '2014-02-17', 300.333, 313.853, 999.148, 268.033, 4, -1, 1, 20, NULL, 0),
+(12, 'Willa w Los Santos', 299.96, -1154.79, 81.19, 1129, 230, 297.995, -1156.64, 80.9099, 131.765, '2014-05-02', 229.205, 1114.17, 1080.99, 269.944, 5, -1, 1, 20, NULL, 0),
 (13, 'Fort Carson Villa', -206.39, 1119.18, 19.47, 0, 190, -203.401, 1118.82, 19.7422, 267.11, '0000-00-00', 24.1856, 1342.13, 1084.38, 0.190774, 10, -1, 1, 20, NULL, 0),
 (14, 'Osiedle LV', 1407.074, 2524.4785, 10.8203, 0, 180, 1404.99, 2524.32, 10.8203, 89.8663, '0000-00-00', 2237.73, -1079.51, 1049.02, 358.999, 2, -1, 1, 20, NULL, 0),
 (18, 'Groove Street', 2513.78, -1650.34, 14.35, 14142, 240, 2512.48, -1651.63, 13.9436, 135.68, '2044-07-26', 2466.1, -1698.41, 1013.51, 91.2326, 2, -1, 1, 20, NULL, 0),
-(19, 'Groove Street', 2523.27, -1679.5, 15.49, 15893, 250, 2520.22, -1678.83, 14.9853, 82.1028, '0000-00-00', 235.507, 1188.8, 1080.26, 355.3, 3, -1, 0, 20, NULL, 0),
-(20, 'Groove Street', 2514.33, -1691.59, 14.04, 16538, 180, 2513.25, -1690.48, 13.5334, 50.4324, '0000-00-00', 446.32, 509.97, 1001.42, 330.57, 12, -1, 1, 20, NULL, 0),
+(19, 'Groove Street', 2523.27, -1679.5, 15.49, 15893, 250, 2520.22, -1678.83, 14.9853, 82.1028, '2014-04-17', 235.507, 1188.8, 1080.26, 355.3, 3, -1, 0, 20, NULL, 0),
+(20, 'Groove Street', 2514.33, -1691.59, 14.04, 16538, 180, 2513.25, -1690.48, 13.5334, 50.4324, '2014-05-04', 446.32, 509.97, 1001.42, 330.57, 12, -1, 1, 20, NULL, 0),
 (21, 'Groove Street', 2459.46, -1691.64, 13.54, 0, 0, 2459.71, -1689.43, 13.5329, 357.792, '0000-00-00', 1133.38, -13.2246, 1000.68, 4.42519, 12, -1, 1, 20, NULL, 0),
-(22, 'Groove Street', 2469.56, -1646.35, 13.78, 16349, 290, 2469.6, -1648.57, 13.4731, 184.204, '0000-00-00', 2318.14, -1025.23, 1050.21, 320.429, 9, -1, 0, 100, NULL, 0),
-(23, 'Byly dom NOWI, kasyno /lv', 1958.32, 953.44, 10.82, 14461, 700, 1958.16, 950.593, 10.8203, 181.071, '0000-00-00', 1262.77, -785.321, 1091.91, 271.62, 5, -1, 1, 20, NULL, 0),
-(25, 'Angel Pine', -2087.14, -2510.7, 31.06, 173, 80, -2089.09, -2511.77, 31.0668, 142.65, '0000-00-00', 420.779, 2536.39, 10, 87.0211, 10, -1, 1, 20, NULL, 0),
+(22, 'Groove Street', 2469.56, -1646.35, 13.78, 16349, 290, 2469.6, -1648.57, 13.4731, 184.204, '2014-04-15', 2318.14, -1025.23, 1050.21, 320.429, 9, -1, 0, 100, NULL, 0),
+(23, 'Byly dom NOWI, kasyno /lv', 1958.32, 953.44, 10.82, 14461, 700, 1958.16, 950.593, 10.8203, 181.071, '2014-04-27', 1262.77, -785.321, 1091.91, 271.62, 5, -1, 1, 20, NULL, 0),
+(25, 'Angel Pine', -2087.14, -2510.7, 31.06, 173, 80, -2089.09, -2511.77, 31.0668, 142.65, '2014-03-15', 420.779, 2536.39, 10, 87.0211, 10, -1, 1, 20, NULL, 0),
 (26, 'Angel Pine', -2101.1, -2532.67, 31.06, 7486, 100, -2102.48, -2531.24, 31.0668, 39.5155, '2013-10-08', 301.213, 313.032, 999.148, 269.818, 4, -1, 1, 20, NULL, 0),
-(27, 'Glass Tower', 1653.96, -1654.75, 22.51, 374, 100, 1653.96, -1660, 22.51, 180, '0000-00-00', 225.91, 1024.68, 1084.1, 0, 7, -1, 1, 300, NULL, 0),
-(54, 'Valle Ocultado', -827.3, 2765.12, 46, 3569, 80, -826.212, 2764.05, 46, 229.736, '0000-00-00', 268.844, 305.108, 999.148, 275.059, 2, -1, 1, 20, NULL, 0),
-(53, 'Valle Ocultado', -825.93, 2752.19, 46, 493, 80, -824.511, 2753.42, 46, 311.204, '0000-00-00', 268.388, 304.859, 999.148, 269.451, 2, -1, 1, 20, NULL, 0),
-(32, 'Bayside', -2446.05, 2490.7, 15.54, 9856, 50, -2446.11, 2492.2, 15.3203, 0.516998, '0000-00-00', 0.299435, -2.93086, 999.428, 92.2777, 2, -1, 1, 20, NULL, 0),
-(34, 'Calton Heights', -2116.99, 927.82, 86.07, 4310, 200, -2116.93, 924.709, 86.0791, 179.722, '0000-00-00', 1262.71, -784.473, 1091.91, 295.69, 5, -1, 1, 20, NULL, 0),
+(27, 'Glass Tower', 1653.96, -1654.75, 22.51, 374, 100, 1653.96, -1660, 22.51, 180, '2014-05-03', 225.91, 1024.68, 1084.1, 0, 7, -1, 1, 300, NULL, 0),
+(54, 'Valle Ocultado', -827.3, 2765.12, 46, 3569, 80, -826.212, 2764.05, 46, 229.736, '2014-05-07', 268.844, 305.108, 999.148, 275.059, 2, -1, 1, 20, NULL, 0),
+(53, 'Valle Ocultado', -825.93, 2752.19, 46, 493, 80, -824.511, 2753.42, 46, 311.204, '2014-05-02', 268.388, 304.859, 999.148, 269.451, 2, -1, 1, 20, NULL, 0),
+(32, 'Bayside', -2446.05, 2490.7, 15.54, 9856, 50, -2446.11, 2492.2, 15.3203, 0.516998, '2014-04-18', 0.299435, -2.93086, 999.428, 92.2777, 2, -1, 1, 20, NULL, 0),
+(34, 'Calton Heights', -2116.99, 927.82, 86.07, 4310, 200, -2116.93, 924.709, 86.0791, 179.722, '2014-04-10', 1262.71, -784.473, 1091.91, 295.69, 5, -1, 1, 20, NULL, 0),
 (35, 'Redsands West', 1596.4, 2147.3, 11.46, 3350, 140, 1598.87, 2147.37, 11.4609, 274.976, '2013-08-03', 221.679, 1141.64, 1082.61, 357.674, 4, -1, 1, 20, NULL, 0),
-(51, 'Richman', 251.33, -1220.31, 76.1, 16125, 300, 252.091, -1221.59, 75.5319, 218.769, '0000-00-00', 2324.27, -1147.86, 1050.71, 2.59035, 12, -1, 1, 20, NULL, 0),
+(51, 'Richman', 251.33, -1220.31, 76.1, 16125, 300, 252.091, -1221.59, 75.5319, 218.769, '2014-05-14', 2324.27, -1147.86, 1050.71, 2.59035, 12, -1, 1, 20, NULL, 0),
 (55, 'Fort Carson', 148.58, 1105.65, 14.04, 0, 140, 146.683, 1105.71, 13.8447, 85.6249, '0000-00-00', 83.2212, 1324.62, 1083.86, 359.523, 9, -1, 1, 20, NULL, 0),
 (61, 'El Castillo Del Diablo', -36.18, 2350.51, 24.3, 0, 220, -36.125, 2349.11, 24.3026, 178.614, '0000-00-00', 2807.6, -1172.71, 1025.57, 357.529, 8, -1, 1, 20, NULL, 0),
-(62, 'Calton Heights', -2058.96, 889.39, 61.85, 4310, 100, -2059, 901.963, 54.9235, 359.731, '0000-00-00', 234.315, 1065.66, 1084.21, 355.054, 6, -1, 1, 20, NULL, 0),
+(62, 'Calton Heights', -2058.96, 889.39, 61.85, 4310, 100, -2059, 901.963, 54.9235, 359.731, '2014-04-08', 234.315, 1065.66, 1084.21, 355.054, 6, -1, 1, 20, NULL, 0),
 (63, 'The Farm', -1061.35, -1205.43, 129.75, 0, 210, -1059.68, -1205.61, 129.219, 270.245, '0000-00-00', 2807.47, -1172.94, 1025.57, 359.233, 8, -1, 1, 20, NULL, 0),
-(57, 'El Corona', 2522.72, -2019.02, 14.07, 1738, 120, 2521.03, -2017.34, 13.5469, 49.1445, '0000-00-00', 2319.6, -1023.06, 1050.21, 3.09073, 9, -1, 1, 20, NULL, 0),
-(58, 'The Four Dragons Casino', 2012.42, 919.95, 10.82, 16291, 80, 2012.4, 922.092, 10.8203, 0.554966, '0000-00-00', 260.91, 1239.32, 1084.26, 1.00911, 9, -1, 1, 20, NULL, 0),
-(59, 'The Four Dragons Casino', 2002.25, 919.96, 10.82, 7620, 220, 2002.32, 921.822, 10.8203, 7.76172, '0000-00-00', 260.884, 1239.31, 1084.26, 0.845341, 9, -1, 1, 20, NULL, 0),
-(64, 'Rockshore West', 2123.3, 776.1, 11.44, 3277, 140, 2123.21, 774.168, 11.4453, 181.155, '0000-00-00', 260.687, 1238.58, 1084.26, 3.97493, 9, -1, 1, 20, NULL, 0),
+(57, 'El Corona', 2522.72, -2019.02, 14.07, 1738, 120, 2521.03, -2017.34, 13.5469, 49.1445, '2014-05-04', 2319.6, -1023.06, 1050.21, 3.09073, 9, -1, 1, 20, NULL, 0),
+(58, 'The Four Dragons Casino', 2012.42, 919.95, 10.82, 16291, 80, 2012.4, 922.092, 10.8203, 0.554966, '2014-04-27', 260.91, 1239.32, 1084.26, 1.00911, 9, -1, 1, 20, NULL, 0),
+(59, 'The Four Dragons Casino', 2002.25, 919.96, 10.82, 7620, 220, 2002.32, 921.822, 10.8203, 7.76172, '2014-02-08', 260.884, 1239.31, 1084.26, 0.845341, 9, -1, 1, 20, NULL, 0),
+(64, 'Rockshore West', 2123.3, 776.1, 11.44, 3277, 140, 2123.21, 774.168, 11.4453, 181.155, '2014-05-11', 260.687, 1238.58, 1084.26, 3.97493, 9, -1, 1, 20, NULL, 0),
 (576, 'Fint County', -607.57, -1073.89, 23.49, 0, 70, -607.778, -1076.98, 23.5546, 175.745, '0000-00-00', 268.343, 305.055, 999.148, 277.164, 2, -1, 1, 20, NULL, 0),
-(71, 'Redsands West', 1464.49, 1895.18, 11.46, 15911, 170, 1467.51, 1894.96, 11.4609, 265.47, '0000-00-00', 260.35, 1239.76, 1084.26, 4.14775, 9, -1, 1, 20, NULL, 0),
-(72, 'Redsande West', 1680.33, 2069.23, 11.35, 12494, 150, 1680.21, 2067.11, 11.3594, 177.113, '0000-00-00', 2237.49, -1079.27, 1049.02, 5.65166, 2, -1, 1, 20, NULL, 0),
-(75, 'Temple', 1127.99, -1021.17, 34.99, 16525, 100, 1127.81, -1023.57, 34.9922, 179.98, '0000-00-00', 82.8627, 1323.88, 1083.86, 357.618, 9, -1, 1, 20, NULL, 0),
+(71, 'Redsands West', 1464.49, 1895.18, 11.46, 15911, 170, 1467.51, 1894.96, 11.4609, 265.47, '2014-03-30', 260.35, 1239.76, 1084.26, 4.14775, 9, -1, 1, 20, NULL, 0),
+(72, 'Redsande West', 1680.33, 2069.23, 11.35, 12494, 150, 1680.21, 2067.11, 11.3594, 177.113, '2014-02-09', 2237.49, -1079.27, 1049.02, 5.65166, 2, -1, 1, 20, NULL, 0),
+(75, 'Temple', 1127.99, -1021.17, 34.99, 16525, 100, 1127.81, -1023.57, 34.9922, 179.98, '2014-04-20', 82.8627, 1323.88, 1083.86, 357.618, 9, -1, 1, 20, NULL, 0),
 (78, 'The Camel''s Toe', 2512.23, 1326.4, 10.82, 0, 130, 2512.22, 1323.11, 10.8203, 182.965, '0000-00-00', -42.6266, 1407.19, 1084.43, 357.012, 8, -1, 1, 20, NULL, 0),
-(80, 'Calton Heights', -2018.54, 865.67, 45.44, 3695, 230, -2016.71, 865.667, 45.4453, 267.229, '0000-00-00', 2324.59, -1147.83, 1050.71, 359.96, 12, -1, 1, 20, NULL, 0),
+(80, 'Calton Heights', -2018.54, 865.67, 45.44, 3695, 230, -2016.71, 865.667, 45.4453, 267.229, '2014-04-28', 2324.59, -1147.83, 1050.71, 359.96, 12, -1, 1, 20, NULL, 0),
 (81, 'Dillimore', 745.18, -556.78, 18.01, 0, 140, 745.171, -552.992, 17.4717, 358.252, '0000-00-00', 260.625, 1239.43, 1084.26, 357.77, 9, -1, 1, 30, NULL, 0),
-(82, 'Las Colinas', 2499.74, -1065.56, 70.23, 2688, 130, 2497.84, -1065.34, 70.1328, 84.1762, '0000-00-00', 2260.85, -1135.72, 1050.63, 268.395, 10, -1, 1, 20, NULL, 0),
-(85, 'Red County', 1566.82, 23.34, 24.16, 11897, 100, 1564.64, 23.2657, 24.1641, 90.9249, '0000-00-00', 385.223, 1471.86, 1080.19, 92.9544, 15, -1, 1, 20, NULL, 0),
-(442, 'Namiot', -814.55, 2752.74, 46, 60, 80, -812.6, 2755.03, 45.8516, 315.132, '0000-00-00', 268.775, 304.861, 999.148, 269.385, 2, -1, 1, 20, NULL, 0),
-(92, 'Verona Beach', 846.76, -1717.24, 14.92, 13207, 100, 849.458, -1717.6, 14.9297, 267.742, '0000-00-00', 83.1756, 1324.02, 1083.86, 1.74293, 9, -1, 1, 20, NULL, 0),
-(94, 'Paradiso', -2641.15, 935.71, 71.95, 67, 180, -2641.15, 932, 71.95, 180, '0000-00-00', 225.84, 1023.54, 1084.01, 0, 7, -1, 1, 50, NULL, 0),
+(82, 'Las Colinas', 2499.74, -1065.56, 70.23, 2688, 130, 2497.84, -1065.34, 70.1328, 84.1762, '2014-05-11', 2260.85, -1135.72, 1050.63, 268.395, 10, -1, 1, 20, NULL, 0),
+(85, 'Red County', 1566.82, 23.34, 24.16, 11897, 100, 1564.64, 23.2657, 24.1641, 90.9249, '2014-05-01', 385.223, 1471.86, 1080.19, 92.9544, 15, -1, 1, 20, NULL, 0),
+(442, 'Namiot', -814.55, 2752.74, 46, 60, 80, -812.6, 2755.03, 45.8516, 315.132, '2014-03-11', 268.775, 304.861, 999.148, 269.385, 2, -1, 1, 20, NULL, 0),
+(92, 'Verona Beach', 846.76, -1717.24, 14.92, 13207, 100, 849.458, -1717.6, 14.9297, 267.742, '2014-04-27', 83.1756, 1324.02, 1083.86, 1.74293, 9, -1, 1, 20, NULL, 0),
+(94, 'Paradiso', -2641.15, 935.71, 71.95, 67, 180, -2641.15, 932, 71.95, 180, '2014-05-08', 225.84, 1023.54, 1084.01, 0, 7, -1, 1, 50, NULL, 0),
 (95, 'Bayside', -2478.28, 2488.91, 18.22, 0, 80, -2479.81, 2489.18, 18.23, 88.7331, '0000-00-00', 83.9628, 1324.39, 1083.86, 170.273, 9, -1, 1, 20, NULL, 0),
-(96, 'Bayside', -2583.73, 2307.84, 7, 3291, 180, -2580.8, 2308.2, 6.69515, 277.552, '0000-00-00', 235.558, 1188.21, 1080.26, 0.417778, 3, -1, 1, 20, NULL, 0),
-(97, 'Willowfield', 2486.49, -2021.55, 13.99, 1003, 180, 2486.35, -2017.71, 13.5469, 359.037, '0000-00-00', 221.86, 1142.03, 1082.61, 1.08948, 4, -1, 1, 100, NULL, 0),
-(99, 'East Beach', 2842.08, -1334.79, 14.74, 1961, 150, 2845.05, -1334.93, 13.1257, 279.985, '0000-00-00', 22.5613, 1405.09, 1084.43, 352.71, 5, -1, 1, 20, NULL, 0),
-(101, 'Willa w Paradiso (SF)', -2706.58, 864.45, 70.7, 748, 230, -2706.59, 869.635, 70.9698, 5.6903, '0000-00-00', 225.925, 1024.68, 1084.01, 358.031, 7, -1, 1, 20, NULL, 0),
-(102, 'El Quebrados', -1389.94, 2639.55, 55.98, 58, 100, -1390.07, 2636.99, 55.9844, 170.667, '0000-00-00', 322.116, 304.098, 999.148, 355.68, 5, -1, 1, 20, NULL, 0),
+(96, 'Bayside', -2583.73, 2307.84, 7, 3291, 180, -2580.8, 2308.2, 6.69515, 277.552, '2014-02-21', 235.558, 1188.21, 1080.26, 0.417778, 3, -1, 1, 20, NULL, 0),
+(97, 'Willowfield', 2486.49, -2021.55, 13.99, 1003, 180, 2486.35, -2017.71, 13.5469, 359.037, '2014-05-02', 221.86, 1142.03, 1082.61, 1.08948, 4, -1, 1, 100, NULL, 0),
+(99, 'East Beach', 2842.08, -1334.79, 14.74, 1961, 150, 2845.05, -1334.93, 13.1257, 279.985, '2014-05-04', 22.5613, 1405.09, 1084.43, 352.71, 5, -1, 1, 20, NULL, 0),
+(101, 'Willa w Paradiso (SF)', -2706.58, 864.45, 70.7, 748, 230, -2706.59, 869.635, 70.9698, 5.6903, '2014-05-11', 225.925, 1024.68, 1084.01, 358.031, 7, -1, 1, 20, NULL, 0),
+(102, 'El Quebrados', -1389.94, 2639.55, 55.98, 58, 100, -1390.07, 2636.99, 55.9844, 170.667, '2014-05-02', 322.116, 304.098, 999.148, 355.68, 5, -1, 1, 20, NULL, 0),
 (169, 'Flint County', -594.76, -1056.87, 23.35, 0, 70, -595.084, -1060.18, 23.3765, 170.696, '0000-00-00', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
 (106, 'Paradiso', -2662.09, 876.35, 79.77, 0, 0, -2662.12, 879.786, 79.7738, 359.612, '2013-09-02', 84.9244, 1324.3, 1083.86, 69.7804, 9, 1, 1, 50, NULL, 0),
-(107, 'Las Colinas', 2348.07, -1047.56, 53.86, 16689, 80, 2346.82, -1044.28, 53.7596, 18.5566, '0000-00-00', 445.269, 508.98, 1001.42, 268.866, 12, -1, 1, 20, NULL, 0),
-(152, 'Mulholland Mansion', 1259.63, -785.52, 92.03, 2643, 1000, 1256.83, -785.981, 92.0302, 126.068, '0000-00-00', 1263.11, -784.352, 1091.91, 298.693, 5, -1, 1, 20, NULL, 0),
-(168, 'Dacza w Las Colinas', 2335.19, -1045.98, 52.55, 192, 60, 2336.44, -1043.73, 52.3516, 276.002, '0000-00-00', 223.335, 1289.14, 1082.13, 358.566, 1, -1, 1, 20, NULL, 0),
+(107, 'Las Colinas', 2348.07, -1047.56, 53.86, 16689, 80, 2346.82, -1044.28, 53.7596, 18.5566, '2014-05-04', 445.269, 508.98, 1001.42, 268.866, 12, -1, 1, 20, NULL, 0),
+(152, 'Mulholland Mansion', 1259.63, -785.52, 92.03, 2643, 1000, 1256.83, -785.981, 92.0302, 126.068, '2014-05-13', 1263.11, -784.352, 1091.91, 298.693, 5, -1, 1, 20, NULL, 0),
+(168, 'Dacza w Las Colinas', 2335.19, -1045.98, 52.55, 192, 60, 2336.44, -1043.73, 52.3516, 276.002, '2014-04-30', 223.335, 1289.14, 1082.13, 358.566, 1, -1, 1, 20, NULL, 0),
 (145, 'Richman, Los Santos', 142.66, -1470.4, 25.21, 0, 200, 144.515, -1468.34, 25.2498, 321.986, '0000-00-00', 2466.11, -1698.11, 1013.51, 89.2096, 2, -1, 1, 20, NULL, 0),
-(108, 'Las Colinas', 2491.32, -1012.32, 65.39, 410, 80, 2489.34, -1011.29, 65.3984, 68.9782, '0000-00-00', 84.3904, 1324.76, 1083.86, 1.95485, 9, -1, 1, 20, NULL, 0),
-(109, 'Las Colinas', 2479.65, -1064.05, 66.99, 16361, 80, 2477.14, -1063.34, 66.8359, 70.9144, '0000-00-00', -262.892, 1456.78, 1084.37, 81.7873, 4, -1, 1, 20, NULL, 0),
-(111, 'Cmentarz', 898.91, -1068.7, 24.48, 76, 120, 898.836, -1071.56, 24.3597, 175.915, '0000-00-00', 345.386, 304.874, 999.148, 272.759, 6, -1, 1, 20, NULL, 0),
-(112, 'Richman', 219.25, -1249.79, 78.33, 16133, 190, 220.51, -1251.81, 78.3102, 216.387, '0000-00-00', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
-(113, 'Richman', 470.7, -1163.57, 67.21, 12816, 270, 471.15, -1166.3, 66.7684, 192.939, '0000-00-00', 140.54, 1367.56, 1083.86, 0.019782, 5, -1, 1, 20, NULL, 0),
-(114, 'Doherty', -2027.86, -40.6, 38.8, 494, 100, -2027.95, -43.9598, 38.8047, 179.755, '0000-00-00', 22.86, 1404.92, 1084.43, 349.62, 5, -1, 1, 20, NULL, 0),
-(454, 'Namiot', -838.96, 2762.58, 46, 10305, 80, -836.699, 2760.73, 45.8439, 228.942, '0000-00-00', 268.575, 305.028, 999.148, 269.049, 2, -1, 1, 20, NULL, 0),
+(108, 'Las Colinas', 2491.32, -1012.32, 65.39, 410, 80, 2489.34, -1011.29, 65.3984, 68.9782, '2014-04-19', 84.3904, 1324.76, 1083.86, 1.95485, 9, -1, 1, 20, NULL, 0),
+(109, 'Las Colinas', 2479.65, -1064.05, 66.99, 16361, 80, 2477.14, -1063.34, 66.8359, 70.9144, '2014-05-01', -262.892, 1456.78, 1084.37, 81.7873, 4, -1, 1, 20, NULL, 0),
+(111, 'Cmentarz', 898.91, -1068.7, 24.48, 76, 120, 898.836, -1071.56, 24.3597, 175.915, '2014-05-09', 345.386, 304.874, 999.148, 272.759, 6, -1, 1, 20, NULL, 0),
+(112, 'Richman', 219.25, -1249.79, 78.33, 16133, 190, 220.51, -1251.81, 78.3102, 216.387, '2014-05-05', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
+(113, 'Richman', 470.7, -1163.57, 67.21, 12816, 270, 471.15, -1166.3, 66.7684, 192.939, '2014-02-10', 140.54, 1367.56, 1083.86, 0.019782, 5, -1, 1, 20, NULL, 0),
+(114, 'Doherty', -2027.86, -40.6, 38.8, 494, 100, -2027.95, -43.9598, 38.8047, 179.755, '2014-01-29', 22.86, 1404.92, 1084.43, 349.62, 5, -1, 1, 20, NULL, 0),
+(454, 'Namiot', -838.96, 2762.58, 46, 10305, 80, -836.699, 2760.73, 45.8439, 228.942, '2014-04-29', 268.575, 305.028, 999.148, 269.049, 2, -1, 1, 20, NULL, 0),
 (119, 'El Corona', 1715.08, -2125.45, 14.05, 0, 100, 1715.23, -2122.16, 13.5469, 357.404, '0000-00-00', 2237.6, -1079.44, 1049.02, 11.3147, 2, -1, 1, 15, NULL, 0),
 (122, 'Plaza LS', 2801.92, -1962.77, 13.54, 8858, 160, 2805.12, -1962.95, 13.5469, 268.678, '2013-12-03', 295.157, 1474.11, 1080.26, 358.678, 15, -1, 1, 20, NULL, 0),
 (124, 'Na wsi', -571.69, -1497.81, 9.54, 0, 150, -574.088, -1499.22, 9.62248, 105.994, '0000-00-00', 301.521, 313.586, 999.378, 265.96, 4, -1, 1, 20, NULL, 0),
-(125, 'Willa na wsi', -385.45, -1438.76, 26.32, 161, 140, -382.494, -1438.95, 25.8142, 269.972, '0000-00-00', -68.8721, 1353.34, 1080.21, 354.909, 6, -1, 1, 20, NULL, 0),
-(496, 'Rodeo', 477.99, -1536.78, 19.54, 7857, 100, 481.283, -1535.49, 19.5538, 288.128, '0000-00-00', 2317.89, -1024.95, 1050.21, 3.3524, 9, -1, 1, 20, NULL, 0),
-(127, 'East Beach', 2756.31, -1182.8, 69.4, 48, 100, 2756.31, -1180.13, 69.39, 0, '0000-00-00', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 150, NULL, 0),
-(616, 'Tierra Robada', -673.21, 2705.57, 70.66, 16616, 70, -671.031, 2709.15, 70.919, 337.17, '0000-00-00', 260.938, 1239.96, 1084.26, 0.35718, 9, -1, 1, 20, NULL, 0),
-(495, 'Come-a-lot', 2186.93, 1113.39, 12.65, 11902, 280, 2184.36, 1114.67, 12.6484, 63.9408, '0000-00-00', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
+(125, 'Willa na wsi', -385.45, -1438.76, 26.32, 161, 140, -382.494, -1438.95, 25.8142, 269.972, '2014-04-13', -68.8721, 1353.34, 1080.21, 354.909, 6, -1, 1, 20, NULL, 0),
+(496, 'Rodeo', 477.99, -1536.78, 19.54, 7857, 100, 481.283, -1535.49, 19.5538, 288.128, '2014-04-30', 2317.89, -1024.95, 1050.21, 3.3524, 9, -1, 1, 20, NULL, 0),
+(127, 'East Beach', 2756.31, -1182.8, 69.4, 48, 100, 2756.31, -1180.13, 69.39, 0, '2014-05-01', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 150, NULL, 0),
+(616, 'Tierra Robada', -673.21, 2705.57, 70.66, 16616, 70, -671.031, 2709.15, 70.919, 337.17, '2014-04-27', 260.938, 1239.96, 1084.26, 0.35718, 9, -1, 1, 20, NULL, 0),
+(495, 'Come-a-lot', 2186.93, 1113.39, 12.65, 11902, 280, 2184.36, 1114.67, 12.6484, 63.9408, '2014-05-12', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
 (133, 'Los Flores', 2670.27, -1211.76, 63.66, 92, 130, 2672.41, -1211.63, 63.7113, 270.437, '2013-12-02', 444.884, 509.075, 1001.42, 264.999, 12, -1, 1, 20, NULL, 0),
-(615, 'Mulholland', 1540.47, -851.46, 64.33, 9354, 140, 1537.85, -851.683, 64.3361, 87.1693, '0000-00-00', 261.045, 1238.88, 1084.26, 1.56835, 9, -1, 1, 20, NULL, 0),
-(140, 'Fern Ridge', 870.39, -24.93, 63.98, 15282, 50, 869.579, -26.7522, 63.8438, 157.722, '0000-00-00', 419.376, 2536.75, 10, 268.161, 10, -1, 1, 20, NULL, 0),
-(141, 'Mulholand', 1093.9, -807.12, 107.41, 325, 140, 1093.61, -804.755, 107.419, 7.4109, '0000-00-00', 2317.65, -1025.12, 1050.21, 3.58567, 9, 1, 1, 59, NULL, 0),
-(142, 'Idlewood', 1980.37, -1718.99, 17.03, 11317, 200, 1981.9, -1718.87, 16.9762, 267.416, '0000-00-00', -262.18, 1456.62, 1084.37, 82.46, 4, -1, 1, 12, NULL, 0),
-(143, 'Idlewood', 1973.36, -1654.66, 15.96, 209, 140, 1973.34, -1656.34, 15.9688, 177.657, '0000-00-00', 23.9133, 1342.03, 1084.38, 4.40535, 10, -1, 1, 20, NULL, 0),
-(144, 'Last Dime Motel', 1916.03, 742.87, 10.81, 12168, 70, 1915.75, 739.154, 10.8203, 175.486, '0000-00-00', 446.301, 510.054, 1001.42, 283.836, 12, -1, 1, 20, NULL, 0),
+(615, 'Mulholland', 1540.47, -851.46, 64.33, 9354, 140, 1537.85, -851.683, 64.3361, 87.1693, '2014-05-01', 261.045, 1238.88, 1084.26, 1.56835, 9, -1, 1, 20, NULL, 0),
+(140, 'Fern Ridge', 870.39, -24.93, 63.98, 15282, 50, 869.579, -26.7522, 63.8438, 157.722, '2014-05-09', 419.376, 2536.75, 10, 268.161, 10, -1, 1, 20, NULL, 0),
+(141, 'Mulholand', 1093.9, -807.12, 107.41, 325, 140, 1093.61, -804.755, 107.419, 7.4109, '2014-04-29', 2317.65, -1025.12, 1050.21, 3.58567, 9, 1, 1, 59, NULL, 0),
+(142, 'Idlewood', 1980.37, -1718.99, 17.03, 11317, 200, 1981.9, -1718.87, 16.9762, 267.416, '2014-01-05', -262.18, 1456.62, 1084.37, 82.46, 4, -1, 1, 12, NULL, 0),
+(143, 'Idlewood', 1973.36, -1654.66, 15.96, 209, 140, 1973.34, -1656.34, 15.9688, 177.657, '2014-04-27', 23.9133, 1342.03, 1084.38, 4.40535, 10, -1, 1, 20, NULL, 0),
+(144, 'Last Dime Motel', 1916.03, 742.87, 10.81, 12168, 70, 1915.75, 739.154, 10.8203, 175.486, '2014-02-05', 446.301, 510.054, 1001.42, 283.836, 12, -1, 1, 20, NULL, 0),
 (154, 'Bayside Marina', -2348.36, 2423.59, 7.32, 0, 100, -2350.04, 2421.33, 7.24688, 143.884, '0000-00-00', 228.302, 1114.12, 1080.99, 269.256, 5, -1, 1, 20, NULL, 0),
 (157, 'Richman', 298.78, -1338.55, 53.44, 0, 210, 296.81, -1335.48, 53.4416, 35.7258, '0000-00-00', 234.245, 1065.43, 1084.21, 357.747, 6, -1, 1, 20, NULL, 0),
-(146, 'Red County', -396.27, -425.08, 16.25, 12361, 90, -398.931, -426.964, 16.2031, 142.716, '0000-00-00', 223.118, 1288.63, 1082.14, 356.22, 1, -1, 1, 20, NULL, 0),
+(146, 'Red County', -396.27, -425.08, 16.25, 12361, 90, -398.931, -426.964, 16.2031, 142.716, '2014-05-02', 223.118, 1288.63, 1082.14, 356.22, 1, -1, 1, 20, NULL, 0),
 (147, 'Apartament w Idlewood', 1909.91, -1597.41, 14.3, 0, 210, 1910.08, -1599.95, 13.8546, 181.073, '0000-00-00', 83.2261, 1324.33, 1083.86, 359.361, 9, -1, 1, 20, NULL, 0),
 (688, 'Rodeo ', 336.73, -1359.12, 14.5, 817, 170, 338.894, -1358.16, 14.5078, 308.248, '2013-12-24', 234.153, 1066.06, 1084.21, 359.322, 6, -1, 1, 20, NULL, 0),
-(626, 'Palmino creek', -683.92, 939.51, 13.63, 202, 120, -685.94, 939.314, 13.6328, 88.1434, '0000-00-00', 2233.62, -1112.38, 1050.88, 8.64999, 5, -1, 1, 20, NULL, 0),
-(155, 'Kanciapa na lotnisku', 1347.6766, 1257.9954, 10.8203, 314, 180, 1350.13, 1261.18, 10.8203, 317.953, '0000-00-00', 2318.89, -1024.97, 1050.21, 351.179, 9, -1, 1, 20, NULL, 0),
-(240, 'Commerce', 1519.09, -1453.92, 14.2, 6998, 250, 1518.94, -1451.75, 14.1409, 2.03461, '0000-00-00', 1133.12, -13.4325, 1000.68, 3.31434, 12, -1, 1, 20, NULL, 0),
-(159, 'Yellow Bell Station', 1429.21, 2620.28, 11.39, 160, 60, 1432.66, 2620.71, 11.3926, 276.653, '0000-00-00', 245.231, 304.946, 999.148, 272.603, 1, -1, 1, 20, NULL, 0),
-(160, 'Willowfield', 2524.44, -1998.4, 14.11, 80, 120, 2522.03, -2001.17, 13.5469, 136.767, '0000-00-00', 327.842, 1479.87, 1084.44, 1.42944, 15, -1, 1, 20, NULL, 0),
-(494, 'Rodeo', 487.27, -1639.1, 23.7, 7986, 280, 487.111, -1642.18, 23.7031, 177.837, '0000-00-00', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
-(162, 'Juniper Hill', -2447.43, 821.61, 35.17, 14082, 90, -2447.35, 818.591, 35.1797, 179.98, '0000-00-00', 447.214, 1398.53, 1084.31, 354.997, 2, -1, 1, 20, NULL, 0),
-(163, 'Jefferson', 2090.99, -1277.83, 26.17, 142, 120, 2091.05, -1279.74, 26.0335, 180.297, '0000-00-00', 2467.09, -1698.4, 1013.51, 89.1633, 2, -1, 1, 20, NULL, 0),
+(626, 'Palmino creek', -683.92, 939.51, 13.63, 202, 120, -685.94, 939.314, 13.6328, 88.1434, '2014-05-09', 2233.62, -1112.38, 1050.88, 8.64999, 5, -1, 1, 20, NULL, 0),
+(155, 'Kanciapa na lotnisku', 1347.6766, 1257.9954, 10.8203, 314, 180, 1350.13, 1261.18, 10.8203, 317.953, '2014-03-12', 2318.89, -1024.97, 1050.21, 351.179, 9, -1, 1, 20, NULL, 0),
+(240, 'Commerce', 1519.09, -1453.92, 14.2, 6998, 250, 1518.94, -1451.75, 14.1409, 2.03461, '2014-04-08', 1133.12, -13.4325, 1000.68, 3.31434, 12, -1, 1, 20, NULL, 0),
+(159, 'Yellow Bell Station', 1429.21, 2620.28, 11.39, 160, 60, 1432.66, 2620.71, 11.3926, 276.653, '2014-05-11', 245.231, 304.946, 999.148, 272.603, 1, -1, 1, 20, NULL, 0),
+(160, 'Willowfield', 2524.44, -1998.4, 14.11, 80, 120, 2522.03, -2001.17, 13.5469, 136.767, '2014-05-03', 327.842, 1479.87, 1084.44, 1.42944, 15, -1, 1, 20, NULL, 0),
+(494, 'Rodeo', 487.27, -1639.1, 23.7, 7986, 280, 487.111, -1642.18, 23.7031, 177.837, '2014-05-09', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
+(162, 'Juniper Hill', -2447.43, 821.61, 35.17, 14082, 90, -2447.35, 818.591, 35.1797, 179.98, '2014-04-29', 447.214, 1398.53, 1084.31, 354.997, 2, -1, 1, 20, NULL, 0),
+(163, 'Jefferson', 2090.99, -1277.83, 26.17, 142, 120, 2091.05, -1279.74, 26.0335, 180.297, '2014-04-18', 2467.09, -1698.4, 1013.51, 89.1633, 2, -1, 1, 20, NULL, 0),
 (164, 'Come-a-lot LV', 2249.21, 960.53, 10.81, 0, 160, 2249.34, 962.951, 10.813, 68.5945, '0000-00-00', 234.622, 1188.13, 1080.26, 357.781, 3, -1, 1, 20, NULL, 0),
-(165, 'Richman LS', 497.45, -1095.07, 82.35, 5540, 200, 497.486, -1091.74, 82.3468, 357.177, '0000-00-00', 2324.12, -1147.36, 1050.71, 358.431, 12, -1, 1, 20, NULL, 0),
+(165, 'Richman LS', 497.45, -1095.07, 82.35, 5540, 200, 497.486, -1091.74, 82.3468, 357.177, '2014-02-03', 2324.12, -1147.36, 1050.71, 358.431, 12, -1, 1, 20, NULL, 0),
 (167, 'Na stacji w LV', 2117.52, 896.78, 11.17, 0, 140, 2118.1, 900.358, 10.813, 0.412594, '0000-00-00', 2466.49, -1698.58, 1013.51, 89.8996, 2, -1, 1, 30, NULL, 0),
-(171, 'Mulholland LS', 1332.21, -633.46, 109.13, 528, 180, 1331.24, -631.141, 109.135, 18.0539, '0000-00-00', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
-(446, 'El Corona', 1820.24, -1994.1, 13.55, 5105, 180, 1822.61, -1994.04, 13.5469, 273.615, '0000-00-00', 228.953, 1114.28, 1080.99, 270.313, 5, -1, 1, 20, NULL, 0),
+(171, 'Mulholland LS', 1332.21, -633.46, 109.13, 528, 180, 1331.24, -631.141, 109.135, 18.0539, '2014-05-02', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
+(446, 'El Corona', 1820.24, -1994.1, 13.55, 5105, 180, 1822.61, -1994.04, 13.5469, 273.615, '2014-05-06', 228.953, 1114.28, 1080.99, 270.313, 5, -1, 1, 20, NULL, 0),
 (542, 'Szeregowiec', 2787.07, -1926.21, 13.54, 1593, 140, 2784.03, -1928.11, 13.5469, 87.0237, '2013-10-29', 2260.85, -1136.21, 1050.63, 237.088, 10, -1, 1, 20, NULL, 0),
 (437, 'Rocshore West', 2094.1, 775.19, 11.45, 0, 200, 2093.86, 772.625, 11.4531, 180.456, '0000-00-00', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
-(540, 'Las Colinas', 2045.57, -1115.73, 26.36, 2990, 90, 2048.51, -1118.73, 25.4963, 177.435, '0000-00-00', 2449.02, -1702.38, 1013.51, 350.788, 2, -1, 1, 20, NULL, 0),
-(510, 'Glen Park', 1905.99, -1112.94, 26.66, 290, 140, 1906, -1114.84, 26.204, 178.998, '0000-00-00', 228.273, 1114.12, 1080.99, 268.925, 5, -1, 1, 20, NULL, 0),
+(540, 'Las Colinas', 2045.57, -1115.73, 26.36, 2990, 90, 2048.51, -1118.73, 25.4963, 177.435, '2014-04-20', 2449.02, -1702.38, 1013.51, 350.788, 2, -1, 1, 20, NULL, 0),
+(510, 'Glen Park', 1905.99, -1112.94, 26.66, 290, 140, 1906, -1114.84, 26.204, 178.998, '2014-04-20', 228.273, 1114.12, 1080.99, 268.925, 5, -1, 1, 20, NULL, 0),
 (733, 'Red County', -427.61, -392.71, 16.58, 0, 90, -426.49, -391.481, 16.2031, 325.881, '0000-00-00', 223.118, 1288.63, 1082.14, 356.22, 1, -1, 1, 20, NULL, 0),
-(379, 'Idlewood', 2065.1, -1703.5, 14.14, 16583, 100, 2068.45, -1703.82, 14.1484, 268.488, '0000-00-00', 2318.98, -1023.8, 1050.21, 351.791, 9, -1, 1, 20, NULL, 0),
-(472, 'Wigwam', -879.19, 2747.87, 46, 14497, 80, -880.497, 2750.28, 45.8516, 27.4408, '0000-00-00', 269.071, 304.92, 999.148, 270.903, 2, -1, 1, 20, NULL, 0),
-(512, 'Bone County', -431.07, 2241, 42.98, 11168, 150, -431.193, 2238.44, 42.4297, 182.602, '0000-00-00', 82.9923, 1323.8, 1083.86, 1.82981, 9, -1, 1, 20, NULL, 0),
-(532, 'Red Country', 1463.32, -1470.48, 13.53, 210, 200, 1459.71, -1469.99, 13.5391, 84.6086, '0000-00-00', 2324.42, -1145.57, 1050.71, 2.22546, 12, 0, 1, 40, NULL, 0),
+(379, 'Idlewood', 2065.1, -1703.5, 14.14, 16583, 100, 2068.45, -1703.82, 14.1484, 268.488, '2014-04-26', 2318.98, -1023.8, 1050.21, 351.791, 9, -1, 1, 20, NULL, 0),
+(472, 'Wigwam', -879.19, 2747.87, 46, 14497, 80, -880.497, 2750.28, 45.8516, 27.4408, '2014-03-01', 269.071, 304.92, 999.148, 270.903, 2, -1, 1, 20, NULL, 0),
+(512, 'Bone County', -431.07, 2241, 42.98, 11168, 150, -431.193, 2238.44, 42.4297, 182.602, '2014-01-03', 82.9923, 1323.8, 1083.86, 1.82981, 9, -1, 1, 20, NULL, 0),
+(532, 'Red Country', 1463.32, -1470.48, 13.53, 210, 200, 1459.71, -1469.99, 13.5391, 84.6086, '2014-04-09', 2324.42, -1145.57, 1050.71, 2.22546, 12, 0, 1, 40, NULL, 0),
 (899, 'Regular Tom', -314.44, 1774.59, 43.64, 0, 120, -316.18, 1773.15, 43.6406, 108.161, '0000-00-00', 234.237, 1065.69, 1084.21, 356.374, 6, -1, 1, 20, NULL, 0),
-(541, 'Szeregowiec', 2787.07, -1952.57, 13.54, 438, 140, 2785.05, -1953.69, 13.5469, 96.7605, '0000-00-00', 2260.85, -1136.21, 1050.63, 237.088, 10, -1, 1, 20, NULL, 0),
-(595, 'Warsztat', 1043.25, 1751.09, 12.64, 2805, 0, 1043.25, 1753.77, 12.43, 0, '0000-00-00', 225.709, 1023.21, 1084.01, 357.059, 7, 1, 1, 20, NULL, 0),
-(631, 'Mulholland', 867.51, -717.58, 105.67, 12765, 131, 868.172, -715.034, 105.68, 339.092, '0000-00-00', 24.3554, 1341.82, 1084.38, 350.785, 10, -1, 1, 20, NULL, 0),
+(541, 'Szeregowiec', 2787.07, -1952.57, 13.54, 438, 140, 2785.05, -1953.69, 13.5469, 96.7605, '2014-01-22', 2260.85, -1136.21, 1050.63, 237.088, 10, -1, 1, 20, NULL, 0),
+(595, 'Warsztat', 1043.25, 1751.09, 12.64, 2805, 0, 1043.25, 1753.77, 12.43, 0, '2014-05-12', 225.709, 1023.21, 1084.01, 357.059, 7, 1, 1, 20, NULL, 0),
+(631, 'Mulholland', 867.51, -717.58, 105.67, 12765, 131, 868.172, -715.034, 105.68, 339.092, '2014-04-04', 24.3554, 1341.82, 1084.38, 350.785, 10, -1, 1, 20, NULL, 0),
 (307, 'Hilltop farm', 1107.61, -316.68, 74.74, 0, 150, 1107.75, -314.465, 74.545, 357.213, '0000-00-00', 224.701, 1240.01, 1082.14, 93.0939, 2, -1, 1, 20, NULL, 0),
-(620, 'Verdant Blufus', 1122.7, -2037.01, 69.89, 53, 100, 1125.39, -2036.87, 69.8814, 279.164, '0000-00-00', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
+(620, 'Verdant Blufus', 1122.7, -2037.01, 69.89, 53, 100, 1125.39, -2036.87, 69.8814, 279.164, '2014-07-09', 1264.31, -785.809, 1091.91, 266.284, 5, -1, 1, 20, NULL, 0),
 (241, 'Mulholland', 937.8, -848.74, 93.57, 0, 0, 936.591, -846.447, 93.8713, 26.9933, '0000-00-00', 226.198, 1024.54, 1084.01, 1.5048, 7, -1, 1, 20, NULL, 0),
-(675, 'Hilltop farm', 1106.54, -299.71, 74.53, 11650, 100, 1102.93, -299.699, 73.9922, 89.3977, '0000-00-00', 223.141, 1289.26, 1082.13, 357.462, 1, -1, 1, 20, NULL, 0),
-(242, 'Richman', 254.41, -1367.17, 53.1, 9077, 240, 256.766, -1365.61, 53.1094, 304.738, '0000-00-00', 2215.94, -1076.02, 1050.48, 95.6199, 1, -1, 1, 30, NULL, 0),
-(575, 'Latarnia na wyspie', 3344.54, -2209.43, 5.39, 193, 70, 3344.91, -2203, 4.55368, 356.723, '0000-00-00', 2319.84, -1023.61, 1050.21, 356.723, 9, -1, 1, 20, NULL, 0),
+(675, 'Hilltop farm', 1106.54, -299.71, 74.53, 11650, 100, 1102.93, -299.699, 73.9922, 89.3977, '2014-04-22', 223.141, 1289.26, 1082.13, 357.462, 1, -1, 1, 20, NULL, 0),
+(242, 'Richman', 254.41, -1367.17, 53.1, 9077, 240, 256.766, -1365.61, 53.1094, 304.738, '2014-05-08', 2215.94, -1076.02, 1050.48, 95.6199, 1, -1, 1, 30, NULL, 0),
+(575, 'Latarnia na wyspie', 3344.54, -2209.43, 5.39, 193, 70, 3344.91, -2203, 4.55368, 356.723, '2014-03-27', 2319.84, -1023.61, 1050.21, 356.723, 9, -1, 1, 20, NULL, 0),
 (294, 'Bayside', -2583.13, 2300.28, 7, 0, 170, -2579.99, 2300.43, 6.59428, 270.753, '0000-00-00', 82.9578, 1324.01, 1083.86, 358.578, 9, -1, 1, 20, NULL, 0),
-(269, 'Richman', 189.63, -1308.13, 70.24, 170, 180, 193.213, -1308.03, 70.2719, 272.159, '0000-00-00', 140.37, 1367.88, 1083.86, 349.24, 5, -1, 1, 100, NULL, 0),
-(660, 'Santa Maria Beach', 915.64, -1816.84, 13.3, 9351, 160, 914.942, -1819.83, 13.302, 168.43, '0000-00-00', 226.45, 1025.06, 1084.01, 328.704, 7, -1, 1, 20, NULL, 0),
-(420, 'Arco Del Oeste', -795.89, 2259.57, 59.46, 1202, 90, -797.457, 2256.57, 58.9766, 156.414, '0000-00-00', 260.851, 1239.2, 1084.26, 355.359, 9, -1, 1, 20, NULL, 0),
-(453, 'Gora', -2388.52, 2866.9, 44.93, 219, 180, -2387.7, 2870.45, 44.1452, 347.77, '0000-00-00', 140.233, 1367.79, 1083.86, 3.43695, 5, -1, 1, 20, NULL, 0),
-(440, 'Pinckle pine', 1325.53, 2567.49, 10.82, 194, 140, 1325.38, 2570.74, 10.8203, 2.14411, '0000-00-00', 2317.82, -1024.84, 1050.21, 356.504, 9, -1, 1, 20, NULL, 0),
-(665, 'Santa maria beach', 532.65, -1812.96, 6.57, 68, 100, 535.989, -1813.55, 6.57126, 262.028, '0000-00-00', 234.265, 1065.63, 1084.21, 17.1287, 6, -1, 1, 20, NULL, 0),
-(468, 'Willowfield', 2508.23, -1998.36, 13.9, 233, 190, 2507.92, -2001.94, 13.5469, 168.466, '0000-00-00', 2261.05, -1135.91, 1050.63, 271.867, 10, -1, 1, 20, NULL, 0),
+(269, 'Richman', 189.63, -1308.13, 70.24, 170, 180, 193.213, -1308.03, 70.2719, 272.159, '2014-05-11', 140.37, 1367.88, 1083.86, 349.24, 5, -1, 1, 100, NULL, 0),
+(660, 'Santa Maria Beach', 915.64, -1816.84, 13.3, 9351, 160, 914.942, -1819.83, 13.302, 168.43, '2014-04-30', 226.45, 1025.06, 1084.01, 328.704, 7, -1, 1, 20, NULL, 0),
+(420, 'Arco Del Oeste', -795.89, 2259.57, 59.46, 1202, 90, -797.457, 2256.57, 58.9766, 156.414, '2014-04-27', 260.851, 1239.2, 1084.26, 355.359, 9, -1, 1, 20, NULL, 0),
+(453, 'Gora', -2388.52, 2866.9, 44.93, 219, 180, -2387.7, 2870.45, 44.1452, 347.77, '2014-05-01', 140.233, 1367.79, 1083.86, 3.43695, 5, -1, 1, 20, NULL, 0),
+(440, 'Pinckle pine', 1325.53, 2567.49, 10.82, 194, 140, 1325.38, 2570.74, 10.8203, 2.14411, '2014-04-28', 2317.82, -1024.84, 1050.21, 356.504, 9, -1, 1, 20, NULL, 0),
+(665, 'Santa maria beach', 532.65, -1812.96, 6.57, 68, 100, 535.989, -1813.55, 6.57126, 262.028, '2014-03-23', 234.265, 1065.63, 1084.21, 17.1287, 6, -1, 1, 20, NULL, 0),
+(468, 'Willowfield', 2508.23, -1998.36, 13.9, 233, 190, 2507.92, -2001.94, 13.5469, 168.466, '2014-04-23', 2261.05, -1135.91, 1050.63, 271.867, 10, -1, 1, 20, NULL, 0),
 (648, 'Osiedle w Mulholland', 1245.41, -902.88, 46.59, 0, 0, 1250, -902.88, 46.59, 90, '0000-00-00', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 50, NULL, 0),
 (507, 'East Beach', 2808.02, -1175.91, 25.38, 0, 100, 2807.74, -1178.49, 25.3794, 177.438, '0000-00-00', 2807.77, -1172.13, 1025.57, 351.003, 8, -1, 1, 20, NULL, 0),
-(491, 'Latarnia morska LS', 154.17, -1946.35, 5.22, 392, 200, 155.683, -1949.82, 47.875, 319.44, '0000-00-00', 1282.51, -781.926, 1089.94, 178.462, 5, -1, 1, 50, NULL, 0),
+(491, 'Latarnia morska LS', 154.17, -1946.35, 5.22, 392, 200, 155.683, -1949.82, 47.875, 319.44, '2014-03-14', 1282.51, -781.926, 1089.94, 178.462, 5, -1, 1, 50, NULL, 0),
 (474, 'Ganton', 2408.92, -1674.93, 14.37, 0, 270, 2408.99, -1672.22, 13.5861, 1.52264, '0000-00-00', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
-(573, 'Dom na wyspie ', 3381.02, -2194.35, 3.97, 1622, 70, 3376.36, -2193.9, 3.1612, 42.0308, '0000-00-00', 2448.79, -1703.4, 1013.51, 320.082, 2, -1, 1, 20, NULL, 0),
-(419, 'Dom w Porcie w ls', 2444.57, -2548.1, 17.91, 1814, 80, 2448.24, -2548.39, 17.9107, 266.881, '0000-00-00', 260.501, 1239.19, 1084.26, 340.99, 9, -1, 1, 20, NULL, 0),
-(456, 'Budka', -842.56, 2751.31, 45.85, 8247, 80, -842.557, 2753.98, 45.8516, 353.359, '0000-00-00', 268.539, 304.781, 999.148, 271.242, 2, -1, 1, 20, NULL, 0),
+(573, 'Dom na wyspie ', 3381.02, -2194.35, 3.97, 1622, 70, 3376.36, -2193.9, 3.1612, 42.0308, '2014-04-26', 2448.79, -1703.4, 1013.51, 320.082, 2, -1, 1, 20, NULL, 0),
+(419, 'Dom w Porcie w ls', 2444.57, -2548.1, 17.91, 1814, 80, 2448.24, -2548.39, 17.9107, 266.881, '2014-02-03', 260.501, 1239.19, 1084.26, 340.99, 9, -1, 1, 20, NULL, 0),
+(456, 'Budka', -842.56, 2751.31, 45.85, 8247, 80, -842.557, 2753.98, 45.8516, 353.359, '2014-05-07', 268.539, 304.781, 999.148, 271.242, 2, -1, 1, 20, NULL, 0),
 (716, 'Tierra Robada', -1668.15, 2486.31, 87.17, 0, 140, -1664.57, 2486.51, 87.1412, 270.383, '0000-00-00', 2237.55, -1079.5, 1049.02, 0.54608, 2, -1, 1, 20, NULL, 0),
-(479, 'Rodeo', 227.99, -1405.46, 51.6, 192, 200, 229.048, -1403.4, 51.6053, 333.199, '0000-00-00', 1262.96, -785.242, 1091.91, 296.08, 5, -1, 1, 20, NULL, 0),
-(404, 'Hasbury', -2489.86, -16.93, 25.61, 68, 100, -2493.59, -16.9237, 25.7656, 91.4339, '0000-00-00', 318.589, 1117.45, 1083.88, 0.567517, 5, -1, 1, 20, NULL, 0),
-(364, 'Valle Ocultado', -816.15, 2766.04, 46, 7313, 80, -814.493, 2764.25, 46, 227.205, '0000-00-00', 269.122, 304.84, 999.148, 271.966, 2, -1, 1, 20, NULL, 0),
+(479, 'Rodeo', 227.99, -1405.46, 51.6, 192, 200, 229.048, -1403.4, 51.6053, 333.199, '2014-03-10', 1262.96, -785.242, 1091.91, 296.08, 5, -1, 1, 20, NULL, 0),
+(404, 'Hasbury', -2489.86, -16.93, 25.61, 68, 100, -2493.59, -16.9237, 25.7656, 91.4339, '2014-04-06', 318.589, 1117.45, 1083.88, 0.567517, 5, -1, 1, 20, NULL, 0),
+(364, 'Valle Ocultado', -816.15, 2766.04, 46, 7313, 80, -814.493, 2764.25, 46, 227.205, '2014-04-28', 269.122, 304.84, 999.148, 271.966, 2, -1, 1, 20, NULL, 0),
 (334, 'Richman', 253.28, -1269.94, 74.42, 0, 140, 252.03, -1268.1, 73.4167, 34.3421, '0000-00-00', 235.142, 1189.08, 1080.26, 2.29593, 3, -1, 1, 40, NULL, 0),
-(483, 'Plaza LS', 280.93, -1768.5, 4.51, 6825, 150, 283.665, -1771.99, 4.44318, 181.371, '0000-00-00', 260.872, 1287.15, 1080.26, 351.997, 4, -1, 1, 20, NULL, 0),
-(482, 'Red County', 1095.03, -646.18, 113.63, 428, 70, 1091.34, -646.506, 113.648, 359.519, '0000-00-00', 419.37, 2536.75, 10, 0, 10, -1, 1, 50, NULL, 0),
-(566, 'Flint County', -601.08, -1065.39, 23.4, 16584, 70, -601.074, -1067.59, 23.4236, 177.576, '0000-00-00', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
-(477, 'Mulholland', 700.24, -1060.36, 49.42, 7719, 200, 692.401, -1073.29, 49.4217, 62.5232, '0000-00-00', 1265.04, -785.218, 1091.91, 271.831, 5, -1, 1, 20, NULL, 0),
-(478, 'Willowfield', 2507.79, -2021.04, 14.21, 10460, 120, 2507.68, -2018.58, 13.5469, 359.209, '0000-00-00', 2467.37, -1698.48, 1013.51, 89.9865, 2, -1, 1, 20, NULL, 0),
+(483, 'Plaza LS', 280.93, -1768.5, 4.51, 6825, 150, 283.665, -1771.99, 4.44318, 181.371, '2014-03-19', 260.872, 1287.15, 1080.26, 351.997, 4, -1, 1, 20, NULL, 0),
+(482, 'Red County', 1095.03, -646.18, 113.63, 428, 70, 1091.34, -646.506, 113.648, 359.519, '2014-05-08', 419.37, 2536.75, 10, 0, 10, -1, 1, 50, NULL, 0),
+(566, 'Flint County', -601.08, -1065.39, 23.4, 16584, 70, -601.074, -1067.59, 23.4236, 177.576, '2014-04-25', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
+(477, 'Mulholland', 700.24, -1060.36, 49.42, 7719, 200, 692.401, -1073.29, 49.4217, 62.5232, '2014-05-13', 1265.04, -785.218, 1091.91, 271.831, 5, -1, 1, 20, NULL, 0),
+(478, 'Willowfield', 2507.79, -2021.04, 14.21, 10460, 120, 2507.68, -2018.58, 13.5469, 359.209, '2014-05-02', 2467.37, -1698.48, 1013.51, 89.9865, 2, -1, 1, 20, NULL, 0),
 (369, 'Richman', 432.06, -1253.95, 51.58, 0, 200, 431.163, -1251.55, 51.5809, 18.4366, '0000-00-00', 223.302, 1289.18, 1082.13, 0.563712, 1, -1, 1, 30, NULL, 0),
-(460, 'Mulholand', 1496.98, -687.89, 95.56, 11857, 230, 1496.88, -690.926, 94.75, 183.943, '0000-00-00', 140.37, 1367.88, 1083.86, 349.24, 5, -1, 1, 20, NULL, 0),
-(378, 'Bone Country', -311.29, 1303.45, 53.66, 52, 120, -308.448, 1303.34, 53.6643, 272.925, '0000-00-00', 234.233, 1065.62, 1084.21, 6.76274, 6, -1, 1, 20, NULL, 0),
-(455, 'Namiot', -851.41, 2761.44, 46, 16270, 80, -852.919, 2759.32, 45.8516, 142.235, '0000-00-00', 2233.63, -1112.88, 1050.88, 357.039, 5, -1, 1, 20, NULL, 0),
-(475, 'Willowfield', 2483.3, -1996.96, 13.83, 7973, 120, 2484.35, -2000.64, 13.5469, 4.24584, '0000-00-00', 227.737, 1114.49, 1080.99, 273.402, 5, -1, 1, 20, NULL, 0),
-(490, 'Jefferson', 2191.34, -1470.47, 25.91, 12106, 120, 2198.67, -1469.95, 24.9487, 267.237, '0000-00-00', 85.0751, 1324.94, 1083.86, 355.888, 9, -1, 1, 20, NULL, 0),
-(470, 'Osiedle w Mulholland', 1252.89, -901.89, 46.59, 14724, 80, 1251.07, -902.094, 46.6016, 102.492, '0000-00-00', 2215.94, -1076.02, 1050.48, 95.6199, 1, -1, 1, 50, NULL, 0),
+(460, 'Mulholand', 1496.98, -687.89, 95.56, 11857, 230, 1496.88, -690.926, 94.75, 183.943, '2014-04-30', 140.37, 1367.88, 1083.86, 349.24, 5, -1, 1, 20, NULL, 0),
+(378, 'Bone Country', -311.29, 1303.45, 53.66, 52, 120, -308.448, 1303.34, 53.6643, 272.925, '2014-05-05', 234.233, 1065.62, 1084.21, 6.76274, 6, -1, 1, 20, NULL, 0),
+(455, 'Namiot', -851.41, 2761.44, 46, 16270, 80, -852.919, 2759.32, 45.8516, 142.235, '2014-05-04', 2233.63, -1112.88, 1050.88, 357.039, 5, -1, 1, 20, NULL, 0),
+(475, 'Willowfield', 2483.3, -1996.96, 13.83, 7973, 120, 2484.35, -2000.64, 13.5469, 4.24584, '2014-04-29', 227.737, 1114.49, 1080.99, 273.402, 5, -1, 1, 20, NULL, 0),
+(490, 'Jefferson', 2191.34, -1470.47, 25.91, 12106, 120, 2198.67, -1469.95, 24.9487, 267.237, '2014-01-27', 85.0751, 1324.94, 1083.86, 355.888, 9, -1, 1, 20, NULL, 0),
+(470, 'Osiedle w Mulholland', 1252.89, -901.89, 46.59, 14724, 80, 1251.07, -902.094, 46.6016, 102.492, '2014-04-14', 2215.94, -1076.02, 1050.48, 95.6199, 1, -1, 1, 50, NULL, 0),
 (471, 'Wigwam', -880.03, 2761.05, 46, 0, 100, -881.63, 2759, 46, 141.182, '0000-00-00', 269.071, 304.92, 999.148, 270.903, 2, -1, 1, 20, NULL, 0),
-(438, 'Rocshore West', 2071.59, 776.63, 11.46, 12462, 200, 2071.25, 773.658, 11.4605, 177.346, '0000-00-00', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
-(435, 'Glen Park', 2000.07, -1114.05, 27.12, 1754, 140, 1999.92, -1117.08, 26.7812, 180.02, '0000-00-00', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
-(469, 'Wigwam', -865.8, 2749.1, 45.99, 217, 80, -867.686, 2751.45, 45.8516, 40.6009, '0000-00-00', 2215.68, -1075.98, 1050.48, 79.5771, 1, -1, 1, 22, NULL, 0),
-(476, 'Willowfield', 2652.79, -1989.42, 13.99, 164, 70, 2652.62, -1992.26, 13.5548, 177.75, '0000-00-00', 2365.47, -1133.95, 1050.88, 0.837433, 8, -1, 1, 20, NULL, 0),
-(489, 'Dom na drzewie', -2325.34, 2351.67, 4.99, 16049, 100, -2325.19, 2349.81, 43.1405, 330.177, '0000-00-00', 2808, -1171.18, 1025.57, 6.41234, 8, -1, 0, 20, NULL, 0),
-(497, 'Juniper Hollow', -2541.5, 987.87, 78.28, 37, 100, -2536.03, 986.928, 78.3136, 267.324, '0000-00-00', 221.693, 1143.43, 1082.61, 358.561, 4, -1, 1, 20, NULL, 0),
+(438, 'Rocshore West', 2071.59, 776.63, 11.46, 12462, 200, 2071.25, 773.658, 11.4605, 177.346, '2014-04-23', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
+(435, 'Glen Park', 2000.07, -1114.05, 27.12, 1754, 140, 1999.92, -1117.08, 26.7812, 180.02, '2014-05-11', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
+(469, 'Wigwam', -865.8, 2749.1, 45.99, 217, 80, -867.686, 2751.45, 45.8516, 40.6009, '2014-02-23', 2215.68, -1075.98, 1050.48, 79.5771, 1, -1, 1, 22, NULL, 0),
+(476, 'Willowfield', 2652.79, -1989.42, 13.99, 164, 70, 2652.62, -1992.26, 13.5548, 177.75, '2014-05-23', 2365.47, -1133.95, 1050.88, 0.837433, 8, -1, 1, 20, NULL, 0),
+(489, 'Dom na drzewie', -2325.34, 2351.67, 4.99, 16049, 100, -2325.19, 2349.81, 43.1405, 330.177, '2014-04-05', 2808, -1171.18, 1025.57, 6.41234, 8, -1, 0, 20, NULL, 0),
+(497, 'Juniper Hollow', -2541.5, 987.87, 78.28, 37, 100, -2536.03, 986.928, 78.3136, 267.324, '2014-04-12', 221.693, 1143.43, 1082.61, 358.561, 4, -1, 1, 20, NULL, 0),
 (863, 'Centrum dowodzenia Wszechświatem', -1827.05, 2042.32, 8.66, 46, 0, -1826.19, 2039.66, 8.34, 119.3, '2016-01-01', -42.5267, 1408.23, 1084.43, 0, 8, 123123, 1, 123123, NULL, 0),
-(486, 'Wigwam', -867.18, 2762.17, 46, 494, 100, -868.52, 2760.7, 46, 313.58, '0000-00-00', 235.433, 1189.56, 1080.26, 4.50902, 3, -1, 1, 20, NULL, 0),
-(493, 'Mulholland', 1112.64, -742.05, 100.13, 16126, 200, 1109.86, -742.115, 100.133, 87.9369, '0000-00-00', 235.359, 1188.03, 1080.26, 0.300665, 3, -1, 1, 20, NULL, 0),
-(606, 'Mulholland', 835.99, -894.88, 68.76, 158, 180, 837.027, -893.482, 68.7689, 333.987, '0000-00-00', 235.207, 1188.24, 1080.26, 1.05925, 3, -1, 1, 20, NULL, 0),
+(486, 'Wigwam', -867.18, 2762.17, 46, 494, 100, -868.52, 2760.7, 46, 313.58, '2014-05-11', 235.433, 1189.56, 1080.26, 4.50902, 3, -1, 1, 20, NULL, 0),
+(493, 'Mulholland', 1112.64, -742.05, 100.13, 16126, 200, 1109.86, -742.115, 100.133, 87.9369, '2014-04-17', 235.359, 1188.03, 1080.26, 0.300665, 3, -1, 1, 20, NULL, 0),
+(606, 'Mulholland', 835.99, -894.88, 68.76, 158, 180, 837.027, -893.482, 68.7689, 333.987, '2014-05-05', 235.207, 1188.24, 1080.26, 1.05925, 3, -1, 1, 20, NULL, 0),
 (513, 'Bone County', -376.92, 2242.34, 42.61, 0, 150, -378.79, 2241.8, 42.4844, 103.014, '0000-00-00', 82.9923, 1323.8, 1083.86, 1.82981, 9, -1, 1, 20, NULL, 0),
-(514, 'Bone County', -386.76, 2217.38, 42.42, 438, 150, -384.874, 2217.8, 42.4173, 288.799, '0000-00-00', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
+(514, 'Bone County', -386.76, 2217.38, 42.42, 438, 150, -384.874, 2217.8, 42.4173, 288.799, '2014-04-26', 227.76, 1114.38, 1080.99, 266.26, 5, -1, 1, 20, NULL, 0),
 (515, 'Bone County', -384.81, 2206.1, 42.42, 0, 150, -382.435, 2206.54, 42.4197, 286.606, '0000-00-00', 83.034, 1324.05, 1083.86, 358.39, 9, -1, 1, 20, NULL, 0),
-(696, 'Flint County', -576.67, -1031.85, 23.83, 5544, 70, -576.538, -1034.79, 23.8299, 182.171, '0000-00-00', 245.535, 305.045, 999.148, 281.499, 1, -1, 1, 20, NULL, 0),
+(696, 'Flint County', -576.67, -1031.85, 23.83, 5544, 70, -576.538, -1034.79, 23.8299, 182.171, '2014-03-20', 245.535, 305.045, 999.148, 281.499, 1, -1, 1, 20, NULL, 0),
 (664, 'Fort Carson', -92.64, 970.01, 19.98, 0, 100, -92.5651, 973.013, 19.8982, 356.588, '0000-00-00', 446.884, 1399.23, 1084.3, 2.45647, 2, -1, 1, 20, NULL, 0),
 (685, 'Calton heights', 1743.578, -1863.8594, 13.5746, 0, 0, 1743.83, -1861.01, 13.578, 357.023, '0000-00-00', 226.198, 1024.54, 1084.01, 1.5048, 7, 1, 1, 30, NULL, 0),
 (678, 'Jefferson', 2111.23, -1279.71, 25.68, 0, 130, 2106.74, -1280.18, 25.6875, 88.0909, '0000-00-00', 295.336, 1474.22, 1080.26, 358.562, 15, -1, 1, 20, NULL, 0),
-(594, 'Bone Country', 263.55, 2895.43, 10.53, 12057, 90, 261.85, 2897.42, 9.63268, 38.6807, '0000-00-00', 2365.2, -1133.35, 1050.88, 0.301315, 8, -1, 1, 20, NULL, 0),
+(594, 'Bone Country', 263.55, 2895.43, 10.53, 12057, 90, 261.85, 2897.42, 9.63268, 38.6807, '2014-02-03', 2365.2, -1133.35, 1050.88, 0.301315, 8, -1, 1, 20, NULL, 0),
 (619, 'Valle Ocultado', -910.94, 2685.93, 42.37, 0, 200, -912.305, 2687.71, 42.3703, 43.8235, '0000-00-00', 234.094, 1065.85, 1084.21, 1.73956, 6, -1, 1, 15, NULL, 0),
 (676, 'San Fierro', -1378.25, 1488.75, 11.2, 0, 150, -1377.56, 1490.84, 11.2031, 338.792, '0000-00-00', -2778.54, 2728.04, 59.3406, 194.515, 18, 105, 1, 20, NULL, 0),
-(715, 'DomLois', 897.88, -677.16, 116.89, 16451, 80, 899.268, -678.387, 116.89, 239.694, '0000-00-00', 22.3482, 1341.85, 1084.38, 269.607, 10, -1, 1, 20, NULL, 0),
-(776, 'dom na wsi', -1051.78, 1549.99, 33.43, 15851, 160, -1049.44, 1550.17, 33.4376, 305.261, '0000-00-00', 234.28, 1065.23, 1084.21, 0, 6, -1, 1, 20, NULL, 0),
-(764, 'Chilliad', -2400.88, -1633.02, 521.1, 367, 50, -2400.88, -1630.02, 521.1, 260.835, '0000-00-00', 245.556, 304.763, 999.148, 270.468, 1, -1, 1, 20, NULL, 0),
-(777, 'Bone Country', 710.42, 1208.05, 13.84, 16622, 50, 713.021, 1206.35, 13.3964, 176.884, '0000-00-00', 268.718, 304.881, 999.148, 268.021, 2, -1, 1, 20, NULL, 0),
-(732, 'SAMOTNIA TIMESA', -1648.83, 1202.49, 7.25, 33, 1000, -1649.08, 1204.66, 7.25, 354.142, '0000-00-00', 225.832, 1023.18, 1084.01, 1.10588, 7, -1, 1, 20, NULL, 0),
-(735, 'Vale ocultado', -736.12, 2747.84, 47.22, 428, 80, -735.783, 2746.23, 47.2266, 203.814, '0000-00-00', 268.231, 305.039, 999.148, 273.688, 2, -1, 1, 20, NULL, 0),
-(749, 'Montgomery', 1311.87, 169.53, 20.63, 12553, 50, 1312.74, 171.4, 20.46, 336, '0000-00-00', 420.629, 2536.77, 10, 94.3132, 10, -1, 1, 100, NULL, 0),
-(750, 'Stlot', 202.7, 2631.53, 16.82, 11633, 80, 200.97, 2633.98, 16.4811, 39.5553, '0000-00-00', 1.55, 23.32, 1199.59, 359.914, 1, -1, 1, 20, NULL, 0),
+(715, 'DomLois', 897.88, -677.16, 116.89, 16451, 80, 899.268, -678.387, 116.89, 239.694, '2014-04-19', 22.3482, 1341.85, 1084.38, 269.607, 10, -1, 1, 20, NULL, 0),
+(776, 'dom na wsi', -1051.78, 1549.99, 33.43, 15851, 160, -1049.44, 1550.17, 33.4376, 305.261, '2014-05-02', 234.28, 1065.23, 1084.21, 0, 6, -1, 1, 20, NULL, 0),
+(764, 'Chilliad', -2400.88, -1633.02, 521.1, 367, 50, -2400.88, -1630.02, 521.1, 260.835, '2014-05-03', 245.556, 304.763, 999.148, 270.468, 1, -1, 1, 20, NULL, 0),
+(777, 'Bone Country', 710.42, 1208.05, 13.84, 16622, 50, 713.021, 1206.35, 13.3964, 176.884, '2014-05-01', 268.718, 304.881, 999.148, 268.021, 2, -1, 1, 20, NULL, 0),
+(732, 'SAMOTNIA TIMESA', -1648.83, 1202.49, 7.25, 33, 1000, -1649.08, 1204.66, 7.25, 354.142, '2014-07-21', 225.832, 1023.18, 1084.01, 1.10588, 7, -1, 1, 20, NULL, 0),
+(735, 'Vale ocultado', -736.12, 2747.84, 47.22, 428, 80, -735.783, 2746.23, 47.2266, 203.814, '2014-04-13', 268.231, 305.039, 999.148, 273.688, 2, -1, 1, 20, NULL, 0),
+(749, 'Montgomery', 1311.87, 169.53, 20.63, 12553, 50, 1312.74, 171.4, 20.46, 336, '2014-02-09', 420.629, 2536.77, 10, 94.3132, 10, -1, 1, 100, NULL, 0),
+(750, 'Stlot', 202.7, 2631.53, 16.82, 11633, 80, 200.97, 2633.98, 16.4811, 39.5553, '2014-04-28', 1.55, 23.32, 1199.59, 359.914, 1, -1, 1, 20, NULL, 0),
 (751, 'Stlot 2', 175.59, 2648.99, 16.47, 0, 80, 176.198, 2646.32, 16.4766, 190.223, '0000-00-00', 1.55, 23.32, 1199.59, 359.914, 1, -1, 1, 20, NULL, 0),
-(752, 'Las Colinas', 2581.5, -969.3, 81.36, 410, 50, 2579.39, -969.744, 81.3573, 94.9188, '0000-00-00', 2466, -1698.17, 1013.51, 91.0183, 2, -1, 1, 20, NULL, 0),
-(753, 'Las Colinas', 2582.92, -952.92, 81.38, 16177, 50, 2583.3, -955.69, 81.3673, 192.656, '0000-00-00', 2261.15, -1136.06, 1050.63, 267.787, 10, -1, 1, 50, NULL, 0),
-(754, 'Beacon Hill', -347.89, -1045.65, 59.81, 4709, 60, -348.446, -1049.78, 59.3123, 169.319, '0000-00-00', 245.56, 305.13, 999.148, 272.788, 1, -1, 1, 20, NULL, 0),
-(755, 'El Quebrados', -1450.02, 2562.31, 56.02, 77, 50, -1449.98, 2564.21, 55.8359, 2.3323, '0000-00-00', 224.29, 1289.01, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
-(769, 'Tierra Robada', -1354.09, 2057.68, 53.11, 217, 100, -1351.39, 2057.18, 52.6821, 270.49, '0000-00-00', 225.92, 1024.68, 1084.43, 181.479, 7, -1, 1, 200, NULL, 0),
-(904, 'Juniper Hollowe', -2517.04, 1142.08, 55.72, 14888, 75, -2517.24, 1139.82, 55.7266, 169.635, '0000-00-00', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
+(752, 'Las Colinas', 2581.5, -969.3, 81.36, 410, 50, 2579.39, -969.744, 81.3573, 94.9188, '2014-05-02', 2466, -1698.17, 1013.51, 91.0183, 2, -1, 1, 20, NULL, 0),
+(753, 'Las Colinas', 2582.92, -952.92, 81.38, 16177, 50, 2583.3, -955.69, 81.3673, 192.656, '2014-05-06', 2261.15, -1136.06, 1050.63, 267.787, 10, -1, 1, 50, NULL, 0),
+(754, 'Beacon Hill', -347.89, -1045.65, 59.81, 4709, 60, -348.446, -1049.78, 59.3123, 169.319, '2014-04-29', 245.56, 305.13, 999.148, 272.788, 1, -1, 1, 20, NULL, 0),
+(755, 'El Quebrados', -1450.02, 2562.31, 56.02, 77, 50, -1449.98, 2564.21, 55.8359, 2.3323, '2014-05-06', 224.29, 1289.01, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
+(769, 'Tierra Robada', -1354.09, 2057.68, 53.11, 217, 100, -1351.39, 2057.18, 52.6821, 270.49, '2014-05-02', 225.92, 1024.68, 1084.43, 181.479, 7, -1, 1, 200, NULL, 0),
+(904, 'Juniper Hollowe', -2517.04, 1142.08, 55.72, 14888, 75, -2517.24, 1139.82, 55.7266, 169.635, '2014-05-02', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
 (786, 'Domek w poblizu pustynii LV', 1032.69, 2315.09, 11.46, 0, 110, 1032.52, 2313.45, 11.4683, 182.523, '0000-00-00', 2365.42, -1131.85, 1050.88, 350.785, 8, -1, 1, 20, NULL, 0),
-(787, 'Dom na opuszczonym lotnisku', 424.04, 2536.55, 16.14, 80, 90, 426.493, 2536.24, 16.5391, 267.187, '0000-00-00', 419.894, 2537.12, 10, 113.056, 10, -1, 1, 20, NULL, 0),
-(600, 'Piekna willa w SF', -2664.54, -0.2, 6.13, 398, 299, -2667.24, -0.187656, 6.13281, 91.7644, '0000-00-00', 2324.23, -1146.94, 1050.71, 1.47127, 12, 1, 1, 20, NULL, 0),
-(790, 'okolice kosciola', -2791.58, -145.96, 7.85, 2305, 80, -2795.41, -145.834, 7.1875, 88.3549, '0000-00-00', 2496.05, -1695.17, 1014.74, 179.22, 3, -1, 1, 20, NULL, 0),
-(791, 'angel pine', -2220.36, -2399.85, 32.58, 15846, 160, -2216.84, -2402.67, 31.6653, 234.928, '0000-00-00', 24.3991, 1341.98, 1084.38, 358.36, 10, -1, 1, 20, NULL, 0),
-(794, 'Willa w SF', -2721.06, 923.75, 67.59, 14461, 130, -2724.24, 923.695, 67.3662, 105.13, '0000-00-00', 2324.59, -1145.18, 1050.71, 1.92234, 12, -1, 1, 20, NULL, 0),
-(795, 'Iglesia Pentecostes', 2194.27, -999.33, 63.24, 1622, 120, 2193.71, -1001.69, 62.6046, 165.405, '0000-00-00', 2260.69, -1136.05, 1050.63, 270.303, 10, -1, 1, 20, NULL, 0),
+(787, 'Dom na opuszczonym lotnisku', 424.04, 2536.55, 16.14, 80, 90, 426.493, 2536.24, 16.5391, 267.187, '2014-04-28', 419.894, 2537.12, 10, 113.056, 10, -1, 1, 20, NULL, 0),
+(600, 'Piekna willa w SF', -2664.54, -0.2, 6.13, 398, 299, -2667.24, -0.187656, 6.13281, 91.7644, '2014-03-09', 2324.23, -1146.94, 1050.71, 1.47127, 12, 1, 1, 20, NULL, 0),
+(790, 'okolice kosciola', -2791.58, -145.96, 7.85, 2305, 80, -2795.41, -145.834, 7.1875, 88.3549, '2014-03-26', 2496.05, -1695.17, 1014.74, 179.22, 3, -1, 1, 20, NULL, 0),
+(791, 'angel pine', -2220.36, -2399.85, 32.58, 15846, 160, -2216.84, -2402.67, 31.6653, 234.928, '2014-05-09', 24.3991, 1341.98, 1084.38, 358.36, 10, -1, 1, 20, NULL, 0),
+(794, 'Willa w SF', -2721.06, 923.75, 67.59, 14461, 130, -2724.24, 923.695, 67.3662, 105.13, '2014-05-04', 2324.59, -1145.18, 1050.71, 1.92234, 12, -1, 1, 20, NULL, 0),
+(795, 'Iglesia Pentecostes', 2194.27, -999.33, 63.24, 1622, 120, 2193.71, -1001.69, 62.6046, 165.405, '2014-03-07', 2260.69, -1136.05, 1050.63, 270.303, 10, -1, 1, 20, NULL, 0),
 (796, 'Hampton Barns', 747.13, 278.24, 27.21, 0, 110, 749.379, 278.749, 27.3151, 265.316, '0000-00-00', 419.89, 2537.12, 10, 67.65, 10, -1, 1, 20, NULL, 0),
-(797, 'ocultado', -768.61, 2765.4, 45.85, 9032, 50, -768.693, 2762.28, 45.7612, 176.964, '0000-00-00', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
-(801, 'Palomino Creek', -692.33, 939.59, 13.63, 359, 120, -689.977, 939.797, 13.6328, 270.505, '0000-00-00', 2233.69, -1112.81, 1050.88, 8.64999, 5, -1, 1, 20, NULL, 0),
-(798, 'ls kort tenisowy', 691.57, -1275.89, 13.56, 2237, 120, 688.066, -1275.79, 13.5582, 87.7147, '0000-00-00', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
-(799, 'kort tenisowy2', 725.35, -1276.25, 13.64, 15859, 120, 731.148, -1276.37, 17.6484, 268.777, '0000-00-00', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
+(797, 'ocultado', -768.61, 2765.4, 45.85, 9032, 50, -768.693, 2762.28, 45.7612, 176.964, '2014-05-01', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
+(801, 'Palomino Creek', -692.33, 939.59, 13.63, 359, 120, -689.977, 939.797, 13.6328, 270.505, '2014-05-09', 2233.69, -1112.81, 1050.88, 8.64999, 5, -1, 1, 20, NULL, 0),
+(798, 'ls kort tenisowy', 691.57, -1275.89, 13.56, 2237, 120, 688.066, -1275.79, 13.5582, 87.7147, '2014-05-11', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
+(799, 'kort tenisowy2', 725.35, -1276.25, 13.64, 15859, 120, 731.148, -1276.37, 17.6484, 268.777, '2014-05-03', 234.28, 1065.23, 1084.21, 4.38999, 6, -1, 1, 20, NULL, 0),
 (800, 'Bait Shop Angel Pine', -2057.36, -2464.53, 31.17, 0, 120, -2058.51, -2465.43, 31.1797, 140.415, '0000-00-00', 421.135, 2536.66, 10, 83.4651, 10, -1, 1, 20, NULL, 0),
-(802, 'osiedle verona', 893.63, -1635.69, 14.92, 73, 100, 893.141, -1640.81, 14.7561, 174.17, '0000-00-00', 234.61, 1187.82, 1080.26, 349.48, 3, -1, 1, 20, NULL, 0),
+(802, 'osiedle verona', 893.63, -1635.69, 14.92, 73, 100, 893.141, -1640.81, 14.7561, 174.17, '2014-04-26', 234.61, 1187.82, 1080.26, 349.48, 3, -1, 1, 20, NULL, 0),
 (803, 'osiedle verona', 865.19, -1633.84, 14.92, 0, 150, 864.261, -1639.87, 14.9603, 180.703, '0000-00-00', 225.175, 1240.14, 1082.14, 78.5027, 2, -1, 1, 20, NULL, 0),
-(804, 'valle', -789.7, 2757.2, 45.85, 16074, 80, -786.279, 2757.18, 45.6401, 266.06, '0000-00-00', 224.29, 1289, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
-(903, 'Juniper Hollow', -2506.37, 1141.64, 55.72, 12265, 75, -2506.44, 1139.42, 55.7266, 179.458, '0000-00-00', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
-(902, 'Juniper Hollow', -2493.29, 1141.77, 55.72, 12416, 75, -2493.35, 1139.84, 55.7266, 179.745, '0000-00-00', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
-(900, 'Juniper Hollow', -2423.95, 1139.11, 55.72, 11684, 75, -2424.43, 1137.04, 55.7266, 167.153, '0000-00-00', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
-(809, 'jefferson', 2091.51, -1184.29, 27.05, 217, 50, 2091.38, -1187.84, 27.0571, 185.533, '0000-00-00', 224.29, 1289.01, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
+(804, 'valle', -789.7, 2757.2, 45.85, 16074, 80, -786.279, 2757.18, 45.6401, 266.06, '2014-05-08', 224.29, 1289, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
+(903, 'Juniper Hollow', -2506.37, 1141.64, 55.72, 12265, 75, -2506.44, 1139.42, 55.7266, 179.458, '2014-05-07', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
+(902, 'Juniper Hollow', -2493.29, 1141.77, 55.72, 12416, 75, -2493.35, 1139.84, 55.7266, 179.745, '2014-05-07', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
+(900, 'Juniper Hollow', -2423.95, 1139.11, 55.72, 11684, 75, -2424.43, 1137.04, 55.7266, 167.153, '2014-05-05', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
+(809, 'jefferson', 2091.51, -1184.29, 27.05, 217, 50, 2091.38, -1187.84, 27.0571, 185.533, '2014-04-14', 224.29, 1289.01, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
 (810, 'jefferson', 2093.98, -1122.67, 27.68, 0, 50, 2093.95, -1125.35, 27.6899, 177.05, '0000-00-00', 224.29, 1289.01, 1082.13, 359.87, 1, -1, 1, 20, NULL, 0),
 (811, 'redsands', 1414.7, 2026.89, 14.73, 0, 100, 1417.11, 2029.45, 14.7396, 2.48223, '0000-00-00', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
-(813, 'redsands', 1422.25, 2033.13, 14.73, 817, 100, 1419.36, 2033.37, 14.7396, 182.044, '0000-00-00', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
-(814, 'redsands', 1534.71, 2026.9, 14.73, 8928, 100, 1537.48, 2027.39, 14.7396, 272.101, '0000-00-00', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
-(815, 'redsands', 1542.26, 2033.26, 14.73, 2685, 100, 1540.04, 2031.48, 14.7396, 181.464, '0000-00-00', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
+(813, 'redsands', 1422.25, 2033.13, 14.73, 817, 100, 1419.36, 2033.37, 14.7396, 182.044, '2014-03-31', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
+(814, 'redsands', 1534.71, 2026.9, 14.73, 8928, 100, 1537.48, 2027.39, 14.7396, 272.101, '2014-02-21', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
+(815, 'redsands', 1542.26, 2033.26, 14.73, 2685, 100, 1540.04, 2031.48, 14.7396, 181.464, '2014-02-21', 239.28, 1114.2, 1080.99, 270.27, 5, -1, 1, 20, NULL, 0),
 (816, 'Tierra Robada', -1500.04, 1960.09, 49.02, 0, 120, -1499.67, 1962.4, 48.6896, 357.643, '0000-00-00', 419.89, 2537.12, 10, 67.65, 10, -1, 1, 20, NULL, 0),
 (817, 'Tierra Robada', -1497.96, 1950.25, 48.82, 0, 120, -1497.63, 1947.94, 48.4977, 180.36, '0000-00-00', 420.75, 2537, 10, 87.6269, 10, -1, 1, 20, NULL, 0),
-(822, 'Budka Ciecia', 2173.38, -323.69, 63.81, 1010, 100, 2174.65, -322.38, 63.5875, 308.44, '0000-00-00', 268.033, 304.984, 999.148, 276.503, 2, -1, 1, 20, NULL, 0),
-(818, 'Rezydencja nad Fisher''s Lagoon', 2163.97, -322.59, 68.4, 12462, 250, 2164.96, -323.764, 68.4057, 216.886, '0000-00-00', 2317.75, -1025.11, 1050.21, 357.887, 9, -1, 1, 20, NULL, 0),
+(822, 'Budka Ciecia', 2173.38, -323.69, 63.81, 1010, 100, 2174.65, -322.38, 63.5875, 308.44, '2014-04-28', 268.033, 304.984, 999.148, 276.503, 2, -1, 1, 20, NULL, 0),
+(818, 'Rezydencja nad Fisher''s Lagoon', 2163.97, -322.59, 68.4, 12462, 250, 2164.96, -323.764, 68.4057, 216.886, '2014-04-11', 2317.75, -1025.11, 1050.21, 357.887, 9, -1, 1, 20, NULL, 0),
 (819, 'Rezydencja nad Fisher''s Lagoon', 2139.97, -320.6, 57.55, 0, 0, 2138.56, -321.298, 57.5554, 128.549, '0000-00-00', 2324.32, -1147.82, 1050.71, 8.12951, 12, -1, 1, 20, NULL, 0),
 (820, 'Rezydencja nad Fisher''s Lagoon', 2146.66, -315.34, 53.55, 0, 0, 2145.2, -313.591, 51.9553, 36.3907, '0000-00-00', 1262.59, -785.495, 1091.91, 270.116, 5, -1, 1, 20, NULL, 0),
 (821, 'Rezydencja nad Fisher''s Lagoon', 2188.09, -304.1, 61.34, 0, 0, 2188.9, -305.142, 61.3411, 219.356, '0000-00-00', 227.934, 1114.31, 1080.99, 269.803, 5, -1, 1, 20, NULL, 0),
-(824, 'ocultado', -780.51, 2745.5, 45.85, 15853, 50, -777.355, 2745.04, 45.699, 272.507, '0000-00-00', 223.641, 1240.4, 1082.14, 78.4232, 2, -1, 1, 20, NULL, 0),
-(825, 'ocultado', -760.61, 2765.4, 45.85, 2305, 50, -761.74, 2761.7, 45.7734, 161.675, '0000-00-00', 235.557, 1188.6, 1080.26, 0.104678, 3, -1, 1, 20, NULL, 0),
-(827, 'Rezydencja nad Fisher''s Lagoon', 2134.49, -296.35, 43.8, 63, 250, 2135.52, -297.789, 43.802, 219.408, '0000-00-00', 2317.54, -1025.27, 1050.21, 358.216, 9, -1, 1, 20, NULL, 0),
-(828, 'Rezydencja nad Fisher''s Lagoon', 2129.94, -301.49, 46.49, 2643, 250, 2128.44, -302.873, 45.5551, 122.821, '0000-00-00', 2324.36, -1147.57, 1050.71, 2.31545, 12, -1, 1, 20, NULL, 0),
+(824, 'ocultado', -780.51, 2745.5, 45.85, 15853, 50, -777.355, 2745.04, 45.699, 272.507, '2014-05-08', 223.641, 1240.4, 1082.14, 78.4232, 2, -1, 1, 20, NULL, 0),
+(825, 'ocultado', -760.61, 2765.4, 45.85, 2305, 50, -761.74, 2761.7, 45.7734, 161.675, '2014-04-25', 235.557, 1188.6, 1080.26, 0.104678, 3, -1, 1, 20, NULL, 0),
+(827, 'Rezydencja nad Fisher''s Lagoon', 2134.49, -296.35, 43.8, 63, 250, 2135.52, -297.789, 43.802, 219.408, '2014-02-24', 2317.54, -1025.27, 1050.21, 358.216, 9, -1, 1, 20, NULL, 0),
+(828, 'Rezydencja nad Fisher''s Lagoon', 2129.94, -301.49, 46.49, 2643, 250, 2128.44, -302.873, 45.5551, 122.821, '2014-04-07', 2324.36, -1147.57, 1050.71, 2.31545, 12, -1, 1, 20, NULL, 0),
 (829, 'Rezydencja nad Fisher''s Lagoon', 2122.52, -309.21, 45, 0, 200, 2124.11, -308.139, 44.7143, 307.726, '0000-00-00', 2495.62, -1693.65, 1014.74, 177.2, 3, -1, 1, 20, NULL, 0),
 (830, 'Rezydencja nad Fisher''s Lagoon', 2101.94, -302.8, 43.51, 0, 150, 2103.83, -301.979, 42.8752, 306.853, '0000-00-00', 2237.49, -1079.3, 1049.02, 1.0598, 2, -1, 1, 20, NULL, 0),
 (831, 'Rezydencja nad Fisher''s Lagoon', 2109.9, -296.92, 43.51, 0, 0, 2111.6, -295.7, 42.8199, 305.093, '0000-00-00', 2237.41, -1079.5, 1049.02, 357.757, 2, -1, 1, 20, NULL, 0),
 (832, 'Rezydencja nad Fisher''s Lagoon', 2125.37, -283.29, 35.36, 0, 0, 2124.36, -281.29, 34.3052, 31.8764, '0000-00-00', 140.404, 1368.88, 1083.86, 358.036, 5, -1, 1, 20, NULL, 0),
-(833, 'Rezydencja nad Fisher''s Lagoon', 2117.22, -289.22, 35.36, 6825, 200, 2116.54, -287.591, 34.6315, 35.9732, '0000-00-00', 140.333, 1369.04, 1083.86, 1.81951, 5, -1, 1, 20, NULL, 0),
-(836, 'Osiedle na El Corona', 1898.39, -2037.98, 13.54, 12788, 100, 1895.75, -2037.92, 13.5469, 89.4483, '0000-00-00', -42.8413, 1407.8, 1084.43, 357.093, 8, -1, 1, 20, NULL, 0),
-(837, 'Osiedle na El Corona', 1868.8, -2037.9, 13.54, 11351, 100, 1870.32, -2037.94, 13.5469, 266.466, '0000-00-00', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 20, NULL, 0),
-(838, 'Osiedle na El Corona', 1877.92, -2001.09, 13.54, 200, 100, 1880.43, -2000.91, 13.5469, 269.142, '0000-00-00', 2260.85, -1136.21, 1050.63, 237.088, 10, -1, 1, 20, NULL, 0),
-(839, 'Osiedle na El Corona', 1888.39, -2001.11, 13.54, 220, 100, 1885.92, -2000.94, 13.5469, 90.7641, '0000-00-00', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 20, NULL, 0),
-(840, 'Osiedle na El Corona', 1877.61, -1982.62, 13.54, 110, 100, 1880.38, -1982.62, 13.5469, 274.993, '0000-00-00', 2464.95, -1698.11, 1013.51, 89.0275, 2, -1, 1, 20, NULL, 0),
-(841, 'Osiedle na El Corona', 1888.55, -1982.6, 13.54, 92, 100, 1885.65, -1982.62, 13.5469, 84.3953, '0000-00-00', -42.8413, 1407.8, 1084.43, 357.093, 8, -1, 1, 20, NULL, 0),
-(842, 'Mulholland', 1535.03, -800.19, 72.84, 12804, 200, 1533.29, -800.224, 72.6705, 90.7777, '0000-00-00', 2268.45, -1210.58, 1047.56, 92.2485, 10, -1, 1, 20, NULL, 0),
-(844, 'Mulholland', 1468.7, -905.67, 54.83, 16592, 200, 1468.8, -904.412, 54.8359, 359.507, '0000-00-00', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
-(851, 'Juniper Hollow', -2478.69, 1141.98, 55.72, 16716, 75, -2478.71, 1139.35, 55.7266, 177.412, '0000-00-00', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
-(845, 'Osiedle na El Corona', 1870.91, -2020.45, 13.54, 36, 100, 1872.22, -2020.43, 13.5469, 270.723, '0000-00-00', 221.871, 1141.73, 1082.61, 1.08948, 4, -1, 1, 20, NULL, 0),
-(846, 'Osiedle na El Corona', 1895.21, -2020.56, 13.54, 89, 100, 1893.61, -2020.4, 13.5469, 93.6853, '0000-00-00', 221.871, 1141.73, 1082.61, 1.08948, 4, -1, 1, 20, NULL, 0),
-(843, 'Mulholland', 1527.46, -773.08, 80.57, 16691, 180, 1526.44, -774.047, 79.8995, 135.305, '0000-00-00', 236.425, 1190.86, 1080.26, 344.031, 3, -1, 1, 20, NULL, 0),
+(833, 'Rezydencja nad Fisher''s Lagoon', 2117.22, -289.22, 35.36, 6825, 200, 2116.54, -287.591, 34.6315, 35.9732, '2014-03-04', 140.333, 1369.04, 1083.86, 1.81951, 5, -1, 1, 20, NULL, 0),
+(836, 'Osiedle na El Corona', 1898.39, -2037.98, 13.54, 12788, 100, 1895.75, -2037.92, 13.5469, 89.4483, '2014-05-02', -42.8413, 1407.8, 1084.43, 357.093, 8, -1, 1, 20, NULL, 0),
+(837, 'Osiedle na El Corona', 1868.8, -2037.9, 13.54, 11351, 100, 1870.32, -2037.94, 13.5469, 266.466, '2014-05-13', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 20, NULL, 0),
+(838, 'Osiedle na El Corona', 1877.92, -2001.09, 13.54, 200, 100, 1880.43, -2000.91, 13.5469, 269.142, '2014-04-30', 2260.85, -1136.21, 1050.63, 237.088, 10, -1, 1, 20, NULL, 0),
+(839, 'Osiedle na El Corona', 1888.39, -2001.11, 13.54, 220, 100, 1885.92, -2000.94, 13.5469, 90.7641, '2014-05-07', 445.143, 509.04, 1001.42, 270.883, 12, -1, 1, 20, NULL, 0),
+(840, 'Osiedle na El Corona', 1877.61, -1982.62, 13.54, 110, 100, 1880.38, -1982.62, 13.5469, 274.993, '2014-05-05', 2464.95, -1698.11, 1013.51, 89.0275, 2, -1, 1, 20, NULL, 0),
+(841, 'Osiedle na El Corona', 1888.55, -1982.6, 13.54, 92, 100, 1885.65, -1982.62, 13.5469, 84.3953, '2014-05-05', -42.8413, 1407.8, 1084.43, 357.093, 8, -1, 1, 20, NULL, 0),
+(842, 'Mulholland', 1535.03, -800.19, 72.84, 12804, 200, 1533.29, -800.224, 72.6705, 90.7777, '2014-03-21', 2268.45, -1210.58, 1047.56, 92.2485, 10, -1, 1, 20, NULL, 0),
+(844, 'Mulholland', 1468.7, -905.67, 54.83, 16592, 200, 1468.8, -904.412, 54.8359, 359.507, '2014-04-28', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
+(851, 'Juniper Hollow', -2478.69, 1141.98, 55.72, 16716, 75, -2478.71, 1139.35, 55.7266, 177.412, '2014-05-05', 268.1, 304.979, 999.148, 267.412, 2, -1, 1, 20, NULL, 0),
+(845, 'Osiedle na El Corona', 1870.91, -2020.45, 13.54, 36, 100, 1872.22, -2020.43, 13.5469, 270.723, '2014-05-02', 221.871, 1141.73, 1082.61, 1.08948, 4, -1, 1, 20, NULL, 0),
+(846, 'Osiedle na El Corona', 1895.21, -2020.56, 13.54, 89, 100, 1893.61, -2020.4, 13.5469, 93.6853, '2014-05-12', 221.871, 1141.73, 1082.61, 1.08948, 4, -1, 1, 20, NULL, 0),
+(843, 'Mulholland', 1527.46, -773.08, 80.57, 16691, 180, 1526.44, -774.047, 79.8995, 135.305, '2014-04-30', 236.425, 1190.86, 1080.26, 344.031, 3, -1, 1, 20, NULL, 0),
 (852, 'Dom dziewczyny CJ''a w Paradiso', -2574.15, 1151.7, 55.72, 0, 0, -2574.48, 1150.5, 55.7266, 155.094, '0000-00-00', 2324.6, -1145.4, 1050.71, 5.20511, 12, -1, 1, 20, NULL, 0),
-(853, 'Juniper Hollow', 2427.45, -1136.68, 34.63, 3932, 180, 2425.78, -1138.32, 34.1651, 104.592, '0000-00-00', 268.405, 305.151, 999.148, 269.727, 2, -1, 1, 20, NULL, 0),
+(853, 'Juniper Hollow', 2427.45, -1136.68, 34.63, 3932, 180, 2425.78, -1138.32, 34.1651, 104.592, '2014-05-08', 268.405, 305.151, 999.148, 269.727, 2, -1, 1, 20, NULL, 0),
 (854, 'Garaz dziewczyny CJa w SF', -1799.98, 1200.49, 25.11, 0, 350, -1799.97, 1199.39, 25.1194, 182.499, '0000-00-00', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
-(855, 'Garcia', -2220.99, 100.62, 35.32, 5781, 200, -2221.1, 101.927, 35.3203, 0.677242, '0000-00-00', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
-(856, 'Ocean Flats', -2793.26, 69.68, 7.18, 15590, 200, -2794.55, 69.8169, 7.1875, 90.2695, '0000-00-00', 261.775, 1240.15, 1084.26, 174.025, 9, -1, 1, 20, NULL, 0),
-(857, 'Ocean Flats', -2793.51, 126.84, 7.18, 1613, 200, -2794.94, 126.828, 7.1875, 89.3061, '0000-00-00', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
+(855, 'Garcia', -2220.99, 100.62, 35.32, 5781, 200, -2221.1, 101.927, 35.3203, 0.677242, '2014-01-06', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
+(856, 'Ocean Flats', -2793.26, 69.68, 7.18, 15590, 200, -2794.55, 69.8169, 7.1875, 90.2695, '2014-03-21', 261.775, 1240.15, 1084.26, 174.025, 9, -1, 1, 20, NULL, 0),
+(857, 'Ocean Flats', -2793.51, 126.84, 7.18, 1613, 200, -2794.94, 126.828, 7.1875, 89.3061, '2014-02-18', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
 (858, 'Ocean Flats', -2791.81, 142.26, 10.05, 0, 120, -2791.64, 141.034, 9.27159, 180.877, '0000-00-00', 271.88, 306.631, 999.148, 85.9041, 2, -1, 1, 20, NULL, 0),
 (859, 'Ocean Flats', -2792.81, 92.19, 7.64, 0, 200, -2794.04, 92.3474, 7.1875, 90.7769, '0000-00-00', 2324.35, -1146.8, 1050.71, 0.818049, 12, -1, 1, 20, NULL, 0),
-(860, 'Valle Oculdato', -789.32, 2763.54, 45.85, 15287, 50, -787.511, 2763.55, 45.6513, 268.354, '0000-00-00', 223.641, 1240.4, 1082.14, 78.4232, 2, -1, 1, 20, NULL, 0),
+(860, 'Valle Oculdato', -789.32, 2763.54, 45.85, 15287, 50, -787.511, 2763.55, 45.6513, 268.354, '2014-05-13', 223.641, 1240.4, 1082.14, 78.4232, 2, -1, 1, 20, NULL, 0),
 (861, 'Mulholland', 1442.61, -628.94, 95.71, 0, 200, 1442.73, -630.375, 95.7186, 178.773, '0000-00-00', 261.407, 1239.38, 1084.26, 358.893, 9, -1, 1, 20, NULL, 0),
-(867, 'Juniper Hollow', -2383.85, 1128.16, 55.72, 250, 75, -2383.85, 1125.16, 55.72, 227.303, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(868, 'Juniper Hollow', -2396.58, 1132.72, 55.73, 761, 75, -2396.58, 1129.72, 55.73, 200.043, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(869, 'Juniper Hollow', -2406.86, 1135.84, 55.72, 1884, 75, -2406.86, 1132.84, 55.72, 198.163, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(870, 'Las Barrancas', -775.3, 1447.32, 13.94, 5751, 75, -774.102, 1445.65, 13.7891, 216.963, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(871, 'Las Barrancas', -774, 1426.04, 13.94, 16695, 75, -776.058, 1427.2, 13.7891, 46.2576, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(867, 'Juniper Hollow', -2383.85, 1128.16, 55.72, 250, 75, -2383.85, 1125.16, 55.72, 227.303, '2014-05-05', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(868, 'Juniper Hollow', -2396.58, 1132.72, 55.73, 761, 75, -2396.58, 1129.72, 55.73, 200.043, '2014-05-11', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(869, 'Juniper Hollow', -2406.86, 1135.84, 55.72, 1884, 75, -2406.86, 1132.84, 55.72, 198.163, '2014-05-13', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(870, 'Las Barrancas', -775.3, 1447.32, 13.94, 5751, 75, -774.102, 1445.65, 13.7891, 216.963, '2014-04-22', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(871, 'Las Barrancas', -774, 1426.04, 13.94, 16695, 75, -776.058, 1427.2, 13.7891, 46.2576, '2014-05-03', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
 (872, 'Juniper Hollow', -2468.45, 1141.9, 55.73, 0, 75, -2468.45, 1138.9, 55.73, 180, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(873, 'Juniper Hollow', -2461.66, 1141.9, 55.72, 330, 75, -2461.66, 1138.9, 55.72, 180, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
+(873, 'Juniper Hollow', -2461.66, 1141.9, 55.72, 330, 75, -2461.66, 1138.9, 55.72, 180, '2014-04-27', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
 (874, 'Juniper Hollow', -2451.21, 1141.76, 55.73, 0, 75, -2451.21, 1138.76, 55.73, 180, '0000-00-00', 269.351, 305.303, 999.148, 301.158, 2, -1, 1, 20, NULL, 0),
-(875, 'Las Barrancas', -828.26, 1439.89, 13.97, 857, 100, -827.831, 1437.79, 13.7814, 185.732, '0000-00-00', 444.647, 508.239, 1001.42, 282.552, 12, -1, 1, 20, NULL, 0),
-(876, 'Juniper Hollow', -2438.35, 1141.01, 55.72, 41, 75, -2438.35, 1138.01, 55.72, 180, '0000-00-00', 269.351, 305.303, 999.148, 10.5049, 2, -1, 1, 20, NULL, 0),
-(877, 'Remiza strazacka', -2026.09, 67.06, 28.69, 567, 75, -2024.02, 67.3046, 28.4502, 272.917, '0000-00-00', 268.373, 306.609, 999.148, 288.621, 2, -1, 1, 20, NULL, 0),
-(878, 'Juniper Hollow', -2413.67, 1137.54, 55.72, 5876, 75, -2413.67, 1134.54, 55.72, 91.9942, '0000-00-00', 268.373, 306.609, 999.148, 288.621, 2, -1, 1, 20, NULL, 0),
-(880, 'tierra robada ', -1320.54, 2698.61, 50.26, 11678, 90, -1319.66, 2696.79, 50.0625, 206.749, '0000-00-00', 268.453, 305.069, 999.148, 278.817, 2, -1, 1, 150, NULL, 0),
-(881, 'Przyczepa', -1604.2, 2689.62, 55.28, 872, 100, -1601.53, 2689.6, 55.1132, 269.079, '0000-00-00', 318.547, 1116.66, 1083.88, 358.268, 5, -1, 1, 20, NULL, 0),
-(882, 'Dillimore', 745.67, -591.09, 18.01, 1047, 200, 741.124, -589.682, 17.2622, 93.4879, '0000-00-00', 225.763, 1024.29, 1084.01, 5.82268, 7, -1, 1, 30, NULL, 0),
-(883, 'Dillimore', 766.68, -556.78, 18.01, 316, 200, 766.71, -552.1, 17.27, 0, '0000-00-00', 2324.42, -1147.54, 1050.71, 0, 12, -1, 1, 20, NULL, 0),
-(884, 'Mulholland', 1245.57, -902.88, 42.88, 11313, 125, 1247.73, -902.707, 42.8828, 276.667, '0000-00-00', 445.85, 508.683, 1001.42, 265.992, 12, -1, 1, 20, NULL, 0),
+(875, 'Las Barrancas', -828.26, 1439.89, 13.97, 857, 100, -827.831, 1437.79, 13.7814, 185.732, '2014-05-03', 444.647, 508.239, 1001.42, 282.552, 12, -1, 1, 20, NULL, 0),
+(876, 'Juniper Hollow', -2438.35, 1141.01, 55.72, 41, 75, -2438.35, 1138.01, 55.72, 180, '2014-04-27', 269.351, 305.303, 999.148, 10.5049, 2, -1, 1, 20, NULL, 0),
+(877, 'Remiza strazacka', -2026.09, 67.06, 28.69, 567, 75, -2024.02, 67.3046, 28.4502, 272.917, '2014-05-12', 268.373, 306.609, 999.148, 288.621, 2, -1, 1, 20, NULL, 0),
+(878, 'Juniper Hollow', -2413.67, 1137.54, 55.72, 5876, 75, -2413.67, 1134.54, 55.72, 91.9942, '2014-04-28', 268.373, 306.609, 999.148, 288.621, 2, -1, 1, 20, NULL, 0),
+(880, 'tierra robada ', -1320.54, 2698.61, 50.26, 11678, 90, -1319.66, 2696.79, 50.0625, 206.749, '2014-05-02', 268.453, 305.069, 999.148, 278.817, 2, -1, 1, 150, NULL, 0),
+(881, 'Przyczepa', -1604.2, 2689.62, 55.28, 872, 100, -1601.53, 2689.6, 55.1132, 269.079, '2014-03-08', 318.547, 1116.66, 1083.88, 358.268, 5, -1, 1, 20, NULL, 0),
+(882, 'Dillimore', 745.67, -591.09, 18.01, 1047, 200, 741.124, -589.682, 17.2622, 93.4879, '2014-04-28', 225.763, 1024.29, 1084.01, 5.82268, 7, -1, 1, 30, NULL, 0),
+(883, 'Dillimore', 766.68, -556.78, 18.01, 316, 200, 766.71, -552.1, 17.27, 0, '2014-04-11', 2324.42, -1147.54, 1050.71, 0, 12, -1, 1, 20, NULL, 0),
+(884, 'Mulholland', 1245.57, -902.88, 42.88, 11313, 125, 1247.73, -902.707, 42.8828, 276.667, '2014-04-16', 445.85, 508.683, 1001.42, 265.992, 12, -1, 1, 20, NULL, 0),
 (885, 'Dillimore', 743.25, -509.31, 18.01, 0, 100, 743.5, -513.84, 17.23, 180, '0000-00-00', 268.549, 304.986, 999.148, 271.005, 2, -1, 1, 20, NULL, 0),
-(886, 'Dillimore', 818.27, -509.32, 18.01, 7986, 200, 818.14, -512.61, 17.79, 179, '0000-00-00', 2324.42, -1145.57, 1050.71, 0, 12, -1, 1, 50, NULL, 0),
-(887, 'Dillimore', 795.19, -506.14, 18.01, 166, 100, 795.5, -507.89, 18.01, 180, '0000-00-00', -68.85, 1353.07, 1080.21, 0, 6, -1, 1, 100, NULL, 0),
-(888, 'Pole golfowe', 1456.92, 2773.51, 10.82, 133, 100, 1458.61, 2773.6, 10.8203, 270.641, '0000-00-00', 1262.88, -785.139, 1091.91, 291.334, 5, -1, 1, 30, NULL, 0),
-(891, 'Richman', 608.02, -1186.95, 41.78, 7485, 350, 610.15, -1185.73, 41.78, 304.5, '0000-00-00', 295.139, 1474.37, 1080.26, 0, 15, 2495, 1, 50, NULL, 0),
-(894, 'Calton Heights', -2099.68, 897.35, 76.71, 16017, 200, -2099.73, 899.32, 76.71, 331.101, '0000-00-00', 225.832, 1023.18, 1084.01, 1.10588, 7, -1, 1, 50, NULL, 0),
-(895, 'bayside', -2523.92, 2238.84, 5.39, 452, 200, -2523.13, 2240.59, 5.21602, 335.384, '0000-00-00', 225.643, 1024.8, 1084.01, 2.10571, 7, -1, 1, 20, NULL, 0),
-(896, 'flint county', -588.76, -1048.52, 23.33, 7029, 70, -588.846, -1051.04, 23.3426, 194.456, '0000-00-00', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
-(897, 'flint county', -582.62, -1040.19, 23.58, 16204, 70, -582.475, -1042.21, 23.6059, 180.606, '0000-00-00', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
+(886, 'Dillimore', 818.27, -509.32, 18.01, 7986, 200, 818.14, -512.61, 17.79, 179, '2014-04-06', 2324.42, -1145.57, 1050.71, 0, 12, -1, 1, 50, NULL, 0),
+(887, 'Dillimore', 795.19, -506.14, 18.01, 166, 100, 795.5, -507.89, 18.01, 180, '2014-05-02', -68.85, 1353.07, 1080.21, 0, 6, -1, 1, 100, NULL, 0),
+(888, 'Pole golfowe', 1456.92, 2773.51, 10.82, 133, 100, 1458.61, 2773.6, 10.8203, 270.641, '2014-05-28', 1262.88, -785.139, 1091.91, 291.334, 5, -1, 1, 30, NULL, 0),
+(891, 'Richman', 608.02, -1186.95, 41.78, 7485, 350, 610.15, -1185.73, 41.78, 304.5, '2014-04-18', 295.139, 1474.37, 1080.26, 0, 15, 2495, 1, 50, NULL, 0),
+(894, 'Calton Heights', -2099.68, 897.35, 76.71, 16017, 200, -2099.73, 899.32, 76.71, 331.101, '2014-05-18', 225.832, 1023.18, 1084.01, 1.10588, 7, -1, 1, 50, NULL, 0),
+(895, 'bayside', -2523.92, 2238.84, 5.39, 452, 200, -2523.13, 2240.59, 5.21602, 335.384, '2014-05-17', 225.643, 1024.8, 1084.01, 2.10571, 7, -1, 1, 20, NULL, 0),
+(896, 'flint county', -588.76, -1048.52, 23.33, 7029, 70, -588.846, -1051.04, 23.3426, 194.456, '2014-02-24', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
+(897, 'flint county', -582.62, -1040.19, 23.58, 16204, 70, -582.475, -1042.21, 23.6059, 180.606, '2014-04-24', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
 (898, 'Richman', 552.89, -1200.29, 44.83, 0, 100, 550.204, -1200.56, 44.8315, 108.769, '0000-00-00', 223.313, 1288.88, 1082.13, 0.563712, 1, -1, 1, 20, NULL, 0);
 
 -- --------------------------------------------------------
@@ -3519,8 +3516,9 @@ INSERT INTO `fs_houses` (`id`, `descr`, `X`, `Y`, `Z`, `ownerid`, `koszt`, `exit
 -- Struktura tabeli dla tabeli `fs_houses_vehicles`
 --
 
+DROP TABLE IF EXISTS `fs_houses_vehicles`;
 CREATE TABLE IF NOT EXISTS `fs_houses_vehicles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `houseid` int(10) unsigned NOT NULL,
   `model` smallint(5) unsigned NOT NULL,
   `X` double NOT NULL,
@@ -3530,9 +3528,8 @@ CREATE TABLE IF NOT EXISTS `fs_houses_vehicles` (
   `color1` smallint(5) unsigned NOT NULL DEFAULT '0',
   `color2` smallint(5) unsigned NOT NULL DEFAULT '0',
   `plate` varchar(32) NOT NULL DEFAULT 'bryka',
-  `components` varchar(80) NOT NULL DEFAULT ' ',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10907 ;
+  `components` varchar(80) NOT NULL DEFAULT ' '
+) ENGINE=MyISAM AUTO_INCREMENT=10907 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_houses_vehicles`
@@ -3825,18 +3822,17 @@ INSERT INTO `fs_houses_vehicles` (`id`, `houseid`, `model`, `X`, `Y`, `Z`, `A`, 
 -- Struktura tabeli dla tabeli `fs_ipbans`
 --
 
+DROP TABLE IF EXISTS `fs_ipbans`;
 CREATE TABLE IF NOT EXISTS `fs_ipbans` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `ip` varchar(24) NOT NULL,
   `player_given` int(11) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `reason` text NOT NULL,
   `target_nick` varchar(32) DEFAULT NULL,
-  `target_accountid` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `date_created` (`date_created`,`date_end`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `target_accountid` int(10) unsigned DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3844,15 +3840,13 @@ CREATE TABLE IF NOT EXISTS `fs_ipbans` (
 -- Struktura tabeli dla tabeli `fs_iplocks`
 --
 
+DROP TABLE IF EXISTS `fs_iplocks`;
 CREATE TABLE IF NOT EXISTS `fs_iplocks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `ip_class` varchar(16) NOT NULL DEFAULT 'NONE' COMMENT 'tylko nie za zbyt szerokie ;-)',
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `comment` tinytext NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `serial` (`ip_class`),
-  KEY `date_created` (`date_created`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `comment` tinytext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3860,8 +3854,9 @@ CREATE TABLE IF NOT EXISTS `fs_iplocks` (
 -- Struktura tabeli dla tabeli `fs_mapicons`
 --
 
+DROP TABLE IF EXISTS `fs_mapicons`;
 CREATE TABLE IF NOT EXISTS `fs_mapicons` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `mapicon` smallint(6) NOT NULL DEFAULT '1',
   `pX` double NOT NULL,
   `pY` double NOT NULL,
@@ -3870,9 +3865,8 @@ CREATE TABLE IF NOT EXISTS `fs_mapicons` (
   `pvw` mediumint(9) NOT NULL DEFAULT '0',
   `opis` varchar(64) DEFAULT NULL,
   `type` smallint(1) unsigned NOT NULL DEFAULT '1',
-  `loadingdistance` int(10) unsigned NOT NULL DEFAULT '1200',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+  `loadingdistance` int(10) unsigned NOT NULL DEFAULT '1200'
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_mapicons`
@@ -3910,8 +3904,9 @@ INSERT INTO `fs_mapicons` (`id`, `mapicon`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis
 -- Struktura tabeli dla tabeli `fs_miscpickups`
 --
 
+DROP TABLE IF EXISTS `fs_miscpickups`;
 CREATE TABLE IF NOT EXISTS `fs_miscpickups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `pickupid` mediumint(8) unsigned NOT NULL DEFAULT '371',
   `interior` int(11) NOT NULL DEFAULT '0',
   `vw` int(11) NOT NULL DEFAULT '0',
@@ -3919,9 +3914,8 @@ CREATE TABLE IF NOT EXISTS `fs_miscpickups` (
   `pY` double NOT NULL,
   `pZ` double NOT NULL,
   `descr` varchar(64) DEFAULT NULL,
-  `addedby` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=841 ;
+  `addedby` int(10) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=841 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_miscpickups`
@@ -4388,16 +4382,15 @@ INSERT INTO `fs_miscpickups` (`id`, `pickupid`, `interior`, `vw`, `pX`, `pY`, `p
 -- Struktura tabeli dla tabeli `fs_mutes`
 --
 
+DROP TABLE IF EXISTS `fs_mutes`;
 CREATE TABLE IF NOT EXISTS `fs_mutes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `player_muted` int(11) NOT NULL,
   `player_given` int(11) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `player_banned` (`player_muted`,`date_created`,`date_end`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `reason` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -4405,16 +4398,16 @@ CREATE TABLE IF NOT EXISTS `fs_mutes` (
 -- Struktura tabeli dla tabeli `fs_paczki`
 --
 
+DROP TABLE IF EXISTS `fs_paczki`;
 CREATE TABLE IF NOT EXISTS `fs_paczki` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `x` double NOT NULL,
   `y` double NOT NULL,
   `z` double NOT NULL,
   `i` smallint(5) unsigned NOT NULL DEFAULT '0',
   `vw` int(10) unsigned NOT NULL DEFAULT '0',
-  `opis` varchar(64) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=134 ;
+  `opis` varchar(64) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_paczki`
@@ -4556,13 +4549,16 @@ INSERT INTO `fs_paczki` (`id`, `x`, `y`, `z`, `i`, `vw`, `opis`) VALUES
 -- Struktura tabeli dla tabeli `fs_paczki_gracze`
 --
 
+DROP TABLE IF EXISTS `fs_paczki_gracze`;
 CREATE TABLE IF NOT EXISTS `fs_paczki_gracze` (
   `id_paczki` int(10) unsigned NOT NULL,
   `id_gracza` int(10) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_paczki`,`id_gracza`),
-  KEY `idg` (`id_gracza`)
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_paczki_gracze`
+--
 
 -- --------------------------------------------------------
 
@@ -4570,8 +4566,9 @@ CREATE TABLE IF NOT EXISTS `fs_paczki_gracze` (
 -- Struktura tabeli dla tabeli `fs_players`
 --
 
+DROP TABLE IF EXISTS `fs_players`;
 CREATE TABLE IF NOT EXISTS `fs_players` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `nick` varchar(24) CHARACTER SET ascii NOT NULL,
   `email` varchar(56) NOT NULL,
   `password` varchar(32) NOT NULL,
@@ -4583,6 +4580,7 @@ CREATE TABLE IF NOT EXISTS `fs_players` (
   `datetime_last` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `session` bigint(11) NOT NULL,
   `level` tinyint(1) unsigned NOT NULL,
+  `levelAddition` int(1) DEFAULT '0' COMMENT '1 - maper',
   `suspendedTo` timestamp NULL DEFAULT NULL COMMENT 'zawieszenie rangi do daty',
   `vip` date NOT NULL,
   `doubleMode` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'tryb furii',
@@ -4607,18 +4605,12 @@ CREATE TABLE IF NOT EXISTS `fs_players` (
   `spawnData` tinyint(1) unsigned NOT NULL DEFAULT '5',
   `selectedWeap` smallint(1) unsigned NOT NULL DEFAULT '1',
   `hudData` varchar(64) NOT NULL DEFAULT '1,1,1,1,1,1,1,1,1,1',
-  `isLocked` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'blokada konta',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nick` (`nick`),
-  KEY `session` (`session`),
-  KEY `respect` (`respect`),
-  KEY `skill` (`skill`),
-  KEY `ip_last` (`ip_last`),
-  KEY `serial_last` (`serial_last`),
-  KEY `gamep` (`gamep`),
-  KEY `serial_registered` (`serial_registered`),
-  KEY `ip_registered` (`ip_registered`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `isLocked` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'blokada konta'
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `fs_players`
+--
 
 -- --------------------------------------------------------
 
@@ -4626,14 +4618,16 @@ CREATE TABLE IF NOT EXISTS `fs_players` (
 -- Struktura tabeli dla tabeli `fs_players_achievements`
 --
 
+DROP TABLE IF EXISTS `fs_players_achievements`;
 CREATE TABLE IF NOT EXISTS `fs_players_achievements` (
   `playerid` int(10) unsigned NOT NULL,
   `shortname` enum('DERBYFAN','DERBYWIN','KILLS','LONGPLAY','RACEDIST','RACEFCNT','WALIZKI','FOTOCASH','DRIFTPTS','LISTONOSZ','CHOFAN','CHOWIN','QUIZ','PACZKI') CHARACTER SET ascii NOT NULL,
-  `score` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`playerid`,`shortname`),
-  KEY `shortname` (`shortname`,`score`),
-  KEY `playerid` (`playerid`)
+  `score` int(10) unsigned NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `fs_players_achievements`
+--
 
 -- --------------------------------------------------------
 
@@ -4641,12 +4635,16 @@ CREATE TABLE IF NOT EXISTS `fs_players_achievements` (
 -- Struktura tabeli dla tabeli `fs_players_arenascore`
 --
 
+DROP TABLE IF EXISTS `fs_players_arenascore`;
 CREATE TABLE IF NOT EXISTS `fs_players_arenascore` (
   `id_player` int(10) unsigned NOT NULL,
   `id_arena` smallint(5) unsigned NOT NULL,
-  `kills` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id_player`,`id_arena`)
+  `kills` int(10) unsigned NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_players_arenascore`
+--
 
 -- --------------------------------------------------------
 
@@ -4654,12 +4652,16 @@ CREATE TABLE IF NOT EXISTS `fs_players_arenascore` (
 -- Struktura tabeli dla tabeli `fs_players_arenascore_week`
 --
 
+DROP TABLE IF EXISTS `fs_players_arenascore_week`;
 CREATE TABLE IF NOT EXISTS `fs_players_arenascore_week` (
   `id_player` int(10) unsigned NOT NULL,
   `id_arena` smallint(5) unsigned NOT NULL,
-  `kills` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id_player`,`id_arena`)
+  `kills` int(10) unsigned NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_players_arenascore_week`
+--
 
 -- --------------------------------------------------------
 
@@ -4667,14 +4669,17 @@ CREATE TABLE IF NOT EXISTS `fs_players_arenascore_week` (
 -- Struktura tabeli dla tabeli `fs_players_in_gangs`
 --
 
+DROP TABLE IF EXISTS `fs_players_in_gangs`;
 CREATE TABLE IF NOT EXISTS `fs_players_in_gangs` (
   `id_gang` smallint(1) unsigned NOT NULL,
   `id_player` int(10) unsigned NOT NULL,
   `rank` enum('member','owner','leader','suspended','viceowner') NOT NULL DEFAULT 'member',
-  `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_gang`,`id_player`),
-  KEY `player_in_gang` (`id_player`,`rank`)
+  `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `fs_players_in_gangs`
+--
 
 -- --------------------------------------------------------
 
@@ -4682,16 +4687,16 @@ CREATE TABLE IF NOT EXISTS `fs_players_in_gangs` (
 -- Struktura tabeli dla tabeli `fs_poczta`
 --
 
+DROP TABLE IF EXISTS `fs_poczta`;
 CREATE TABLE IF NOT EXISTS `fs_poczta` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `nadawca` int(10) unsigned NOT NULL,
   `odbiorca` int(10) unsigned NOT NULL,
   `tresc` varchar(1024) CHARACTER SET cp1250 COLLATE cp1250_polish_ci NOT NULL,
   `dostarczone` tinyint(1) NOT NULL DEFAULT '0',
   `przeczytane` tinyint(1) NOT NULL DEFAULT '0',
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4699,6 +4704,7 @@ CREATE TABLE IF NOT EXISTS `fs_poczta` (
 -- Struktura tabeli dla tabeli `fs_polecenia`
 --
 
+DROP TABLE IF EXISTS `fs_polecenia`;
 CREATE TABLE IF NOT EXISTS `fs_polecenia` (
   `polecona` int(11) unsigned NOT NULL,
   `polecil` int(11) unsigned NOT NULL,
@@ -4708,8 +4714,7 @@ CREATE TABLE IF NOT EXISTS `fs_polecenia` (
   `rewarded` tinyint(4) NOT NULL DEFAULT '0',
   `reward_date` timestamp NULL DEFAULT NULL,
   `uniewazniony` tinyint(4) NOT NULL DEFAULT '0',
-  `uniewazniony_powod` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`polecona`)
+  `uniewazniony_powod` varchar(128) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -4718,1552 +4723,1551 @@ CREATE TABLE IF NOT EXISTS `fs_polecenia` (
 -- Struktura tabeli dla tabeli `fs_quiz`
 --
 
+DROP TABLE IF EXISTS `fs_quiz`;
 CREATE TABLE IF NOT EXISTS `fs_quiz` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `kategoria` varchar(64) CHARACTER SET utf8 NOT NULL,
   `pytanie` varchar(255) CHARACTER SET utf8 NOT NULL,
   `odpowiedz` varchar(64) CHARACTER SET utf8 NOT NULL,
-  `lu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `kategoria` (`kategoria`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1612 ;
+  `lu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM AUTO_INCREMENT=1612 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_quiz`
 --
 
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
-(1, 'Historia', 'W ktorym roku byla bitwa pod Grunwaldem?', '1410', '2014-04-29 15:28:50'),
-(2, 'Mitologia', 'Jak nazywa sie grecki bog slonca?', 'Helios', '2014-04-15 18:47:07'),
-(3, 'Historia', 'Ktory krol francuski nadal sobie przydomek "Slonce"?', 'Ludwik XIV', '2014-04-13 17:14:37'),
-(4, 'Geografia', 'Jak nazywa sie most laczacy San Francisco z hrabstwem Marin?', 'Golden Gate', '2014-04-29 18:10:33'),
-(5, 'Literatura', 'Jak nazywal sie autor "Folwarku zwierzecego" i "Roku 1984"?', 'George Orwell', '2014-04-29 18:57:25'),
-(280, 'Sport', 'Ktory Polski pilkaz zostal krolem strzelcow podczas mundialu w 1974r. w Niemczech?', 'Grzegorz Lato', '2014-04-21 18:08:08'),
-(7, 'Filmy', 'Jak na nazwisko maja rezyserowie filmu "Matrix"?', 'Wachowski', '2014-04-24 18:28:30'),
-(8, 'Filmy', 'Jak nazywa sie rezyser "Powrotow do przyszlosci"?', 'Robert Zemeckis', '2014-04-12 15:45:33'),
-(9, 'Geografia', 'Najglebsze jezioro w Polsce to?', 'Hancza', '2014-04-07 18:54:26'),
-(10, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgCl?', 'chlorek srebra', '2014-04-27 18:13:17'),
-(11, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgNO3?', 'azotan srebra', '2014-04-13 13:43:58'),
-(12, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AlCl3?', 'chlorek glinu', '2014-04-29 18:17:16'),
-(13, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu BaCl2?', 'chlorek baru', '2014-04-21 13:01:03'),
-(14, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu BaSO4?', 'baryt', '2014-04-27 15:24:21'),
-(15, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C12H22O11?', 'laktoza', '2014-04-28 18:55:05'),
-(16, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H2?', 'acetylen', '2014-04-19 15:56:24'),
-(17, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H5OH?', 'alkohol etylowy', '2014-04-16 13:28:20'),
-(18, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H6?', 'etan', '2014-04-25 18:07:47'),
-(19, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C4H6O6?', 'kwas winowy', '2014-04-21 15:10:32'),
-(20, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C6H6?', 'benzen', '2014-04-13 18:00:06'),
-(21, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C6H8O7?', 'kwas cytrynowy', '2014-04-20 08:48:57'),
-(22, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu Ca(NO3)2?', 'azotan wapnia', '2014-04-28 15:37:21'),
-(23, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3CHOHCOOH?', 'kwas mlekowy', '2014-04-24 18:10:42'),
-(24, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3COOH?', 'kwas octowy', '2014-04-29 13:35:12'),
-(25, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3OH?', 'alkohol metylowy', '2014-04-05 13:21:40'),
-(26, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH4?', 'metan', '2014-04-27 18:36:11'),
-(27, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CO?', 'tlenek wegla', '2014-04-22 17:32:06'),
-(28, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CO2?', 'dwutlenek wegla', '2014-04-27 13:55:48'),
-(29, 'Geografia', 'Stolica Afganistanu?', 'Kabul', '2014-04-27 15:00:03'),
-(30, 'Geografia', 'Stolica Albanii?', 'Tirana', '2014-04-15 15:20:08'),
-(161, 'Geografia', 'Stolica panstwa Haiti?', 'Port-au-Prince', '2014-04-15 15:45:55'),
-(160, 'Geografia', 'Stolica panstwa Gwinea Rownikowa?', 'Malabo', '2014-04-28 18:52:23'),
-(159, 'Geografia', 'Stolica panstwa Gwinea Bissau?', 'Bissau', '2014-04-19 18:27:04'),
-(158, 'Geografia', 'Stolica panstwa Gwinea?', 'Konakry', '2014-04-18 15:35:28'),
-(157, 'Geografia', 'Stolica panstwa Gwatemala?', 'Gwatemala', '2014-04-16 13:41:39'),
-(156, 'Geografia', 'Stolica panstwa Gujana?', 'Georgetown', '2014-04-16 13:00:36'),
-(155, 'Geografia', 'Stolica panstwa Gruzja?', 'Tbilisi', '2014-04-11 15:02:42'),
-(154, 'Geografia', 'Stolica panstwa Grecja?', 'Ateny', '2014-04-29 18:30:20'),
-(153, 'Geografia', 'Stolica panstwa Ghana?', 'Akra', '2014-04-28 15:36:27'),
-(152, 'Geografia', 'Stolica panstwa Gambia?', 'Bandzul', '2014-04-16 15:11:15'),
-(151, 'Geografia', 'Stolica panstwa Gabon?', 'Libreville', '2014-04-24 15:56:46'),
-(150, 'Geografia', 'Stolica panstwa Francja?', 'Paryz', '2014-04-20 13:36:52'),
-(149, 'Geografia', 'Stolica panstwa Finlandia?', 'Helsinki', '2014-04-14 17:45:55'),
-(148, 'Geografia', 'Stolica panstwa Filipiny?', 'Manila', '2014-04-25 18:17:44'),
-(147, 'Geografia', 'Stolica panstwa Fidzi?', 'Suva', '2014-04-27 15:58:52'),
-(146, 'Geografia', 'Stolica panstwa Etiopia?', 'Addis Abeba', '2014-04-28 13:17:50'),
-(145, 'Geografia', 'Stolica panstwa Estonia?', 'Tallinn', '2014-04-17 08:57:41'),
-(144, 'Geografia', 'Stolica panstwa Erytrea?', 'Asmara', '2014-04-21 18:24:18'),
-(143, 'Geografia', 'Stolica panstwa Ekwador?', 'Quito', '2014-04-21 15:00:19'),
-(142, 'Geografia', 'Stolica panstwa Egipt?', 'Kair', '2014-04-08 13:05:43'),
-(141, 'Geografia', 'Stolica panstwa Dzibuti?', 'Dzibuti', '2014-04-16 15:33:41'),
-(140, 'Geografia', 'Stolica panstwa Dominikana?', 'Santo Domingo', '2014-04-29 18:09:40'),
-(139, 'Geografia', 'Stolica panstwa Dominika?', 'Roseau', '2014-04-24 18:54:35'),
-(138, 'Geografia', 'Stolica panstwa Demokratyczna Republika Konga?', 'Kinszasa', '2014-04-15 15:48:13'),
-(137, 'Geografia', 'Stolica panstwa Dania?', 'Kopenhaga', '2014-04-28 13:44:59'),
-(136, 'Geografia', 'Stolica panstwa Czechy?', 'Praga', '2014-04-29 13:11:09'),
-(135, 'Geografia', 'Stolica panstwa Czarnogora?', 'Podgorica', '2014-04-14 18:34:35'),
-(134, 'Geografia', 'Stolica panstwa Czad?', 'Ndzamena', '2014-04-25 15:59:05'),
-(133, 'Geografia', 'Stolica panstwa Cypr?', 'Nikozja', '2014-04-22 18:10:25'),
-(132, 'Geografia', 'Stolica panstwa Chorwacja?', 'Zagrzeb', '2014-04-07 13:17:40'),
-(131, 'Geografia', 'Stolica panstwa Chiny?', 'Pekin', '2014-04-08 18:49:29'),
-(130, 'Geografia', 'Stolica panstwa Chile?', 'Santiago', '2014-04-27 15:52:02'),
-(129, 'Geografia', 'Stolica panstwa Burundi?', 'Buzumbura', '2014-04-18 08:35:14'),
-(128, 'Geografia', 'Stolica panstwa Burkina Faso?', 'Wagadugu', '2014-04-17 18:50:51'),
-(127, 'Geografia', 'Stolica panstwa Bulgaria?', 'Sofia', '2014-04-21 08:05:43'),
-(126, 'Geografia', 'Stolica panstwa Brunei?', 'Bandar Seri Begawan', '2014-04-16 13:14:28'),
-(125, 'Geografia', 'Stolica panstwa Brazylia?', 'Brasilia', '2014-04-09 13:14:17'),
-(124, 'Geografia', 'Stolica panstwa Botswana?', 'Gaborone', '2014-04-19 13:14:56'),
-(123, 'Geografia', 'Stolica panstwa Bosnia i Hercegowina?', 'Sarajewo', '2014-04-27 18:20:56'),
-(122, 'Geografia', 'Stolica panstwa Bialorus?', 'Minsk', '2014-04-18 13:28:29'),
-(121, 'Geografia', 'Stolica panstwa Bhutan?', 'Thimphu', '2014-04-22 18:09:31'),
-(120, 'Geografia', 'Stolica panstwa Belize?', 'Belmopan', '2014-04-24 18:30:20'),
-(119, 'Geografia', 'Stolica panstwa Belgia?', 'Bruksela', '2014-04-28 18:25:42'),
-(118, 'Geografia', 'Stolica panstwa Barbados?', 'Bridgetown', '2014-04-28 13:51:13'),
-(117, 'Geografia', 'Stolica panstwa Bangladesz?', 'Dhaka', '2014-04-18 18:56:03'),
-(116, 'Geografia', 'Stolica panstwa Bahrajn?', 'Manama', '2014-04-29 18:59:13'),
-(115, 'Geografia', 'Stolica panstwa Bahamy?', 'Nassau', '2014-04-28 15:31:59'),
-(114, 'Geografia', 'Stolica panstwa Azerbejdzan?', 'Baku', '2014-04-29 15:59:51'),
-(113, 'Geografia', 'Stolica panstwa Austria?', 'Wieden', '2014-04-25 13:15:44'),
-(112, 'Geografia', 'Stolica panstwa Australia?', 'Canberra', '2014-04-22 18:33:43'),
-(111, 'Geografia', 'Stolica panstwa Armenia?', 'Erywan', '2014-04-22 15:22:31'),
-(110, 'Geografia', 'Stolica panstwa Argentyna?', 'Buenos Aires', '2014-04-27 13:42:03'),
-(109, 'Geografia', 'Stolica panstwa Arabia Saudyjska?', 'Rijad', '2014-04-21 17:31:49'),
-(108, 'Geografia', 'Stolica panstwa Angola?', 'Luanda', '2014-04-21 13:28:01'),
-(107, 'Geografia', 'Stolica panstwa Andora?', 'Andora', '2014-04-17 18:02:02'),
-(106, 'Geografia', 'Stolica panstwa Algieria?', 'Algier', '2014-04-25 13:31:23'),
-(162, 'Geografia', 'Stolica panstwa Hiszpania?', 'Madryt', '2014-04-27 15:25:42'),
-(163, 'Geografia', 'Stolica panstwa Honduras?', 'Tegucigalpa', '2014-04-16 13:15:28'),
-(164, 'Geografia', 'Stolica panstwa Indie?', 'Nowe Delhi', '2014-04-28 18:04:26'),
-(165, 'Geografia', 'Stolica panstwa Indonezja?', 'Dzakarta', '2014-04-29 13:32:31'),
-(166, 'Geografia', 'Stolica panstwa Irak?', 'Bagdad', '2014-04-20 17:30:15'),
-(167, 'Geografia', 'Stolica panstwa Iran?', 'Teheran', '2014-04-28 18:37:03'),
-(168, 'Geografia', 'Stolica panstwa Irlandia?', 'Dublin', '2014-04-21 17:38:45'),
-(169, 'Geografia', 'Stolica panstwa Islandia?', 'Reykjavík', '2014-04-29 15:33:47'),
-(170, 'Geografia', 'Stolica panstwa Jamajka?', 'Kingston', '2014-04-19 15:57:19'),
-(171, 'Geografia', 'Stolica panstwa Japonia?', 'Tokio', '2014-04-18 18:30:25'),
-(172, 'Geografia', 'Stolica panstwa Jemen?', 'Sana', '2014-04-20 13:49:47'),
-(173, 'Geografia', 'Stolica panstwa Jordania?', 'Amman', '2014-04-12 13:29:12'),
-(174, 'Geografia', 'Stolica panstwa Kambodza?', 'Phnom Penh', '2014-04-25 15:01:10'),
-(175, 'Geografia', 'Stolica panstwa Kamerun?', 'Jaunde', '2014-04-29 18:58:19'),
-(176, 'Geografia', 'Stolica panstwa Kanada?', 'Ottawa', '2014-04-18 13:38:53'),
-(177, 'Geografia', 'Stolica panstwa Katar?', 'Ad-Dauha', '2014-04-22 15:37:04'),
-(178, 'Geografia', 'Stolica panstwa Kazachstan?', 'Astana', '2014-04-19 17:21:39'),
-(179, 'Geografia', 'Stolica panstwa Kenia?', 'Nairobi', '2014-04-21 13:59:55'),
-(180, 'Geografia', 'Stolica panstwa Kirgistan?', 'Biszkek', '2014-04-28 15:50:52'),
-(181, 'Geografia', 'Stolica panstwa Kolumbia?', 'Bogota', '2014-04-21 18:11:42'),
-(182, 'Geografia', 'Stolica panstwa Komory?', 'Moroni', '2014-04-29 15:41:53'),
-(183, 'Geografia', 'Stolica panstwa Kongo?', 'Brazzaville', '2014-04-27 15:42:28'),
-(184, 'Geografia', 'Stolica panstwa Korea Poludniowa?', 'Seul', '2014-04-25 18:00:03'),
-(185, 'Geografia', 'Stolica panstwa Korea Polnocna?', 'Pjongjang', '2014-04-20 18:03:49'),
-(186, 'Geografia', 'Stolica panstwa Kosowo?', 'Prisztina', '2014-04-04 15:52:06'),
-(187, 'Geografia', 'Stolica panstwa Kostaryka?', 'San Jose', '2014-04-12 13:04:53'),
-(188, 'Geografia', 'Stolica panstwa Kuba?', 'Hawana', '2014-04-20 18:09:17'),
-(189, 'Geografia', 'Stolica panstwa Kuwejt?', 'Kuwejt', '2014-04-22 18:21:50'),
-(190, 'Geografia', 'Stolica panstwa Laos?', 'Wientian', '2014-04-16 18:28:05'),
-(191, 'Geografia', 'Stolica panstwa Lesotho?', 'Maseru', '2014-04-16 13:16:12'),
-(192, 'Geografia', 'Stolica panstwa Liban?', 'Bejrut', '2014-04-20 15:16:20'),
-(193, 'Geografia', 'Stolica panstwa Liberia?', 'Monrovia', '2014-04-20 15:32:26'),
-(194, 'Geografia', 'Stolica panstwa Libia?', 'Trypolis', '2014-04-25 13:17:31'),
-(195, 'Geografia', 'Stolica panstwa Liechtenstein?', 'Vaduz', '2014-04-18 13:35:25'),
-(196, 'Geografia', 'Stolica panstwa Litwa?', 'Wilno', '2014-04-22 15:50:43'),
-(197, 'Geografia', 'Stolica panstwa Luksemburg?', 'Luksemburg', '2014-04-25 15:15:57'),
-(198, 'Geografia', 'Stolica panstwa lotwa?', 'Ryga', '2014-04-14 15:00:27'),
-(199, 'Geografia', 'Stolica panstwa Macedonia?', 'Skopje', '2014-04-18 13:38:14'),
-(200, 'Geografia', 'Stolica panstwa Madagaskar?', 'Antananarywa', '2014-04-22 15:41:37'),
-(201, 'Geografia', 'Stolica panstwa Malawi?', 'Lilongwe', '2014-04-18 13:45:58'),
-(202, 'Geografia', 'Stolica panstwa Malediwy?', 'Male', '2014-04-20 15:39:36'),
-(203, 'Geografia', 'Stolica panstwa Mali?', 'Bamako', '2014-04-16 13:22:18'),
-(204, 'Geografia', 'Stolica panstwa Malta?', 'Valletta', '2014-04-27 13:54:27'),
-(205, 'Geografia', 'Stolica panstwa Maroko?', 'Rabat', '2014-04-25 13:09:23'),
-(206, 'Geografia', 'Stolica panstwa Mauretania?', 'Nawakszut', '2014-04-20 18:04:43'),
-(207, 'Geografia', 'Stolica panstwa Mauritius?', 'Port Louis', '2014-04-13 17:40:40'),
-(208, 'Geografia', 'Stolica panstwa Meksyk?', 'Meksyk', '2014-04-20 13:38:31'),
-(209, 'Geografia', 'Stolica panstwa Mikronezja?', 'Palikir', '2014-04-08 18:29:38'),
-(210, 'Geografia', 'Stolica panstwa Mjanma?', 'Naypyidaw', '2014-04-27 18:44:13'),
-(211, 'Geografia', 'Stolica panstwa Moldawia?', 'Kiszyniow', '2014-04-28 13:18:43'),
-(212, 'Geografia', 'Stolica panstwa Monako?', 'Monako', '2014-04-10 18:41:13'),
-(213, 'Geografia', 'Stolica panstwa Mongolia?', 'Ulan Bator', '2014-04-29 13:27:38'),
-(214, 'Geografia', 'Stolica panstwa Mozambik?', 'Maputo', '2014-04-28 15:54:29'),
-(215, 'Geografia', 'Stolica panstwa Namibia?', 'Windhuk', '2014-04-22 17:18:12'),
-(216, 'Geografia', 'Stolica panstwa Nepal?', 'Katmandu', '2014-04-22 18:42:23'),
-(217, 'Geografia', 'Stolica panstwa Niemcy?', 'Berlin', '2014-04-24 15:51:48'),
-(218, 'Geografia', 'Stolica panstwa Niger?', 'Niamey', '2014-04-06 15:50:09'),
-(219, 'Geografia', 'Stolica panstwa Nigeria?', 'Abudza', '2014-04-29 15:06:24'),
-(220, 'Geografia', 'Stolica panstwa Nikaragua?', 'Managua', '2014-04-29 13:08:29'),
-(221, 'Geografia', 'Stolica panstwa Norwegia?', 'Oslo', '2014-04-10 13:02:09'),
-(222, 'Geografia', 'Stolica panstwa Nowa Zelandia?', 'Wellington', '2014-04-28 18:24:20'),
-(223, 'Geografia', 'Stolica panstwa Oman?', 'Maskat', '2014-04-29 15:49:32'),
-(224, 'Geografia', 'Stolica panstwa Pakistan?', 'Islamabad', '2014-04-22 13:46:37'),
-(225, 'Geografia', 'Stolica panstwa Palau?', 'Ngerulmud', '2014-04-29 13:17:23'),
-(226, 'Geografia', 'Stolica panstwa Panama?', 'Panama', '2014-04-24 15:06:22'),
-(227, 'Geografia', 'Stolica panstwa Papua-Nowa Gwinea?', 'Port Moresby', '2014-04-10 15:54:38'),
-(228, 'Geografia', 'Stolica panstwa Peru?', 'Lima', '2014-04-29 15:16:44'),
-(229, 'Geografia', 'Stolica panstwa Polska?', 'Warszawa', '2014-04-29 13:46:52'),
-(230, 'Geografia', 'Stolica panstwa Portugalia?', 'Lizbona', '2014-04-27 15:35:14'),
-(231, 'Geografia', 'Stolica panstwa Republika Poludniowej Afryki?', 'Pretoria', '2014-04-13 17:02:27'),
-(232, 'Geografia', 'Stolica panstwa Republika srodkowoafrykanska?', 'Bangi', '2014-04-22 08:47:23'),
-(233, 'Geografia', 'Stolica panstwa Republika Zielonego Przyladka?', 'Praia', '2014-04-22 18:35:33'),
-(234, 'Geografia', 'Stolica panstwa Rosja?', 'Moskwa', '2014-04-28 18:28:26'),
-(235, 'Geografia', 'Stolica panstwa Rumunia?', 'Bukareszt', '2014-04-28 15:23:54'),
-(236, 'Geografia', 'Stolica panstwa Rwanda?', 'Kigali', '2014-04-29 18:14:35'),
-(237, 'Geografia', 'Stolica panstwa Saint Kitts i Nevis?', 'Basseterre', '2014-04-29 13:23:36'),
-(238, 'Geografia', 'Stolica panstwa Saint Lucia?', 'Castries', '2014-04-21 15:19:53'),
-(239, 'Geografia', 'Stolica panstwa Saint Vincent i Grenadyny?', 'Kingstown', '2014-04-21 08:55:56'),
-(240, 'Geografia', 'Stolica panstwa Salwador?', 'San Salvador', '2014-04-21 13:26:40'),
-(241, 'Geografia', 'Stolica panstwa Samoa?', 'Apia', '2014-04-28 13:42:18'),
-(242, 'Geografia', 'Stolica panstwa San Marino?', 'San Marino', '2014-04-28 18:41:34'),
-(243, 'Geografia', 'Stolica panstwa Senegal?', 'Dakar', '2014-04-19 15:09:09'),
-(244, 'Geografia', 'Stolica panstwa Serbia?', 'Belgrad', '2014-04-29 18:20:25'),
-(245, 'Geografia', 'Stolica panstwa Seszele?', 'Victoria', '2014-04-22 08:05:46'),
-(246, 'Geografia', 'Stolica panstwa Sierra Leone?', 'Freetown', '2014-04-25 15:53:41'),
-(247, 'Geografia', 'Stolica panstwa Singapur?', 'Singapur', '2014-04-22 13:04:14'),
-(248, 'Geografia', 'Stolica panstwa Slowacja?', 'Bratyslawa', '2014-04-21 18:02:45'),
-(249, 'Geografia', 'Stolica panstwa Slowenia?', 'Lublana', '2014-04-22 18:34:38'),
-(250, 'Geografia', 'Stolica panstwa Somalia?', 'Mogadiszu', '2014-04-14 15:58:16'),
-(251, 'Geografia', 'Stolica panstwa Stany Zjednoczone?', 'Waszyngton', '2014-04-24 15:55:52'),
-(252, 'Geografia', 'Stolica panstwa Sudan?', 'Chartum', '2014-04-25 13:01:44'),
-(253, 'Geografia', 'Stolica panstwa Sudan Poludniowy?', 'Dzuba', '2014-04-24 15:50:54'),
-(254, 'Geografia', 'Stolica panstwa Surinam?', 'Paramaribo', '2014-04-21 13:24:25'),
-(255, 'Geografia', 'Stolica panstwa Syria?', 'Damaszek', '2014-04-29 18:06:05'),
-(256, 'Geografia', 'Stolica panstwa Szwajcaria?', 'Berno', '2014-04-28 15:04:06'),
-(257, 'Geografia', 'Stolica panstwa Szwecja?', 'Sztokholm', '2014-04-21 15:15:26'),
-(258, 'Geografia', 'Stolica panstwa Tadzykistan?', 'Duszanbe', '2014-04-22 13:30:21'),
-(259, 'Geografia', 'Stolica panstwa Tajlandia?', 'Bangkok', '2014-04-25 13:18:25'),
-(260, 'Geografia', 'Stolica panstwa Timor Wschodni?', 'Dili', '2014-04-15 13:37:11'),
-(261, 'Geografia', 'Stolica panstwa Trynidad i Tobago?', 'Port-of-Spain', '2014-04-29 18:21:19'),
-(262, 'Geografia', 'Stolica panstwa Tunezja?', 'Tunis', '2014-04-16 08:23:14'),
-(263, 'Geografia', 'Stolica panstwa Turcja?', 'Ankara', '2014-04-20 15:28:25'),
-(264, 'Geografia', 'Stolica panstwa Turkmenistan?', 'Aszchabad', '2014-04-21 13:58:08'),
-(265, 'Geografia', 'Stolica panstwa Uganda?', 'Kampala', '2014-04-03 13:02:10'),
-(266, 'Geografia', 'Stolica panstwa Ukraina?', 'Kijow', '2014-04-22 15:27:31'),
-(267, 'Geografia', 'Stolica panstwa Urugwaj?', 'Montevideo', '2014-03-29 14:19:49'),
-(268, 'Geografia', 'Stolica panstwa Uzbekistan?', 'Taszkent', '2014-04-25 18:05:58'),
-(269, 'Geografia', 'Stolica panstwa Vanuatu?', 'Port Vila', '2014-04-27 18:19:08'),
-(270, 'Geografia', 'Stolica panstwa Watykan?', 'Watykan', '2014-04-22 13:49:23'),
-(271, 'Geografia', 'Stolica panstwa Wenezuela?', 'Caracas', '2014-04-25 18:38:34'),
-(272, 'Geografia', 'Stolica panstwa Wegry?', 'Budapeszt', '2014-04-25 18:36:45'),
-(273, 'Geografia', 'Stolica panstwa Wielka Brytania?', 'Londyn', '2014-04-21 08:57:40'),
-(274, 'Geografia', 'Stolica panstwa Wietnam?', 'Hanoi', '2014-04-28 15:14:27'),
-(275, 'Geografia', 'Stolica panstwa Wlochy?', 'Rzym', '2014-04-17 08:40:21'),
-(276, 'Geografia', 'Stolica panstwa Wyspy Marshalla?', 'Majuro', '2014-04-19 13:37:23'),
-(277, 'Geografia', 'Stolica panstwa Wyspy Salomona?', 'Honiara', '2014-04-22 08:59:32'),
-(278, 'Geografia', 'Stolica panstwa Zambia?', 'Lusaka', '2014-04-20 15:47:13'),
-(279, 'Geografia', 'Stolica panstwa Zimbabwe?', 'Harare', '2014-04-29 15:37:50'),
-(281, 'Sport', 'Jaki był wynik finałowego meczu euro w 2012 roku?', '4:0', '2014-04-25 15:10:09'),
-(282, 'Sport', 'Gdzie odbyl sie finalowy mecz euro w 2012 roku?', 'Kijow', '2014-04-08 13:02:08'),
-(283, 'Sport', 'Gdzie odbyl sie mecz otwarcia euro w 2012 roku?', 'Warszawa', '2014-04-27 18:45:07'),
-(284, 'Sport', 'Jak nazywala sie pilka ktora grali pilkarze podczas mundialu w 2010r. w RPA?', 'jabulani', '2014-04-21 15:26:08'),
-(285, 'Sport', 'Kto strzelil bramke dla Polakow w meczu otwarcia euro 2012?', 'Robert Lewandowski', '2014-04-29 15:05:31'),
-(286, 'Sport', 'Co ile lat odbywaja sie mistrzostwa swiata w pilce noznej?', 'co 4', '2014-04-28 13:31:09'),
-(287, 'Sport', 'Ile minut trwa dogrywka w meczu pilki noznej?', '30', '2014-04-22 13:54:17'),
-(288, 'Sport', 'Gdzie odbyl sie finalowy mecz Ligi Mistrzow w 2013 roku?', 'Wembley', '2014-04-29 18:19:31'),
-(289, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1930 roku? ', 'Urugwaj', '2014-04-28 13:54:47'),
-(290, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1934 roku? ', 'Wlochy', '2014-04-15 13:23:17'),
-(291, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1938 roku?', 'Francja', '2014-04-24 15:22:05'),
-(292, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1950 roku?', 'Brazylia', '2014-04-29 13:04:55'),
-(293, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1954 roku?', 'Szwajcaria', '2014-04-20 18:23:04'),
-(294, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1958 roku? ', 'Szwecja', '2014-04-19 13:54:58'),
-(295, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1962 roku? ', 'Chile', '2014-04-22 18:32:48'),
-(296, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1966 roku?', 'Anglia', '2014-04-29 15:21:13'),
-(297, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1970 roku? ', 'Meksyk', '2014-04-25 18:58:33'),
-(298, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1974 roku? ', 'RFN', '2014-04-28 15:57:11'),
-(299, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1978 roku? ', 'Argentyna', '2014-04-21 18:51:03'),
-(300, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1982 roku?', 'Hiszpania', '2014-04-20 15:56:11'),
-(301, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1986 roku? ', 'Meksyk', '2014-04-19 13:05:57'),
-(302, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1990 roku?', 'Wlochy', '2014-04-18 18:14:27'),
-(303, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1994 roku?', 'Stany Zjednoczone', '2014-04-25 18:59:27'),
-(304, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1998 roku?', 'Francja', '2014-04-11 17:37:11'),
-(305, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2002 roku?', 'Korea Poludniowa i Japonia', '2014-04-21 18:32:54'),
-(306, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2006 roku?', 'Niemcy', '2014-04-25 15:40:10'),
-(307, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2010 roku?', 'RPA', '2014-04-27 15:43:22'),
-(308, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2014 roku?', 'Brazylia', '2014-04-29 15:48:38'),
-(309, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2018 roku?', 'Rosja', '2014-04-27 18:01:13'),
-(310, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2022 roku?', 'Katar', '2014-04-17 13:54:40'),
-(311, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1960 roku?', 'Francja', '2014-04-22 13:41:12'),
-(312, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1964 roku?', 'Hiszpania', '2014-04-09 18:59:03'),
-(313, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1968 roku? ', 'Wlochy', '2014-04-28 15:08:35'),
-(314, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1972 roku?', 'Belgia', '2014-04-27 18:05:41'),
-(315, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1976 roku?', 'Jugoslawia', '2014-04-22 13:28:59'),
-(316, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1980 roku?', 'Wlochy', '2014-04-15 13:16:54'),
-(317, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1984 roku?', 'Francja', '2014-04-18 15:20:35'),
-(318, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1988 roku? ', 'RFN', '2014-04-21 13:30:43'),
-(319, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1992 roku?', 'Szwecja', '2014-04-22 17:00:51'),
-(320, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1996 roku?', 'Anglia', '2014-04-22 08:14:26'),
-(321, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2000 roku?', 'Belgia i Holandia', '2014-04-17 13:19:11'),
-(322, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2004 roku?', 'Portugalia', '2014-04-25 18:51:44'),
-(323, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2008 roku?', 'Austria i Szwajcaria', '2014-04-13 15:05:21'),
-(324, 'Historia', 'Podaj rok, w ktorym upadlo cesarstwo Zachodniorzymskie', '476', '2014-04-27 15:06:22'),
-(325, 'Historia', 'Podaj rok, w ktorym koronowano Karola Wielkiego na cesarza', '800', '2014-04-25 18:52:39'),
-(326, 'Historia', 'Podaj rok, w ktorym nastapil chrzest Polski', '966', '2014-04-16 15:58:55'),
-(327, 'Historia', 'Podaj rok bitwy pod Cedynia', '972', '2014-04-28 13:56:34'),
-(328, 'Historia', 'Podaj rok zjazdu gnieznienskiego', '1000', '2014-04-21 18:18:54'),
-(329, 'Historia', 'Podaj rok koronacji Boleslawa Chrobrego na krola Polski', '1025', '2014-04-19 15:44:07'),
-(330, 'Historia', 'Podaj rok bitwy pod Legnica', '1241', '2014-04-20 18:19:23'),
-(331, 'Historia', 'Podaj rok koronacji Wladyslawa lokietka na krola Polski', '1320', '2014-04-07 13:27:33'),
-(332, 'Historia', 'Podaj rok smierci krola Kazimiera, ostatniego Piasta na tronie polskim', '1370', '2014-04-20 18:29:31'),
-(333, 'Historia', 'Podaj rok koronacji Jadwigi na krolowa Polski', '1384', '2014-04-20 18:15:15'),
-(334, 'Historia', 'Podaj rok odkrycia Ameryki przez Kolumba', '1492', '2014-04-15 15:24:44'),
-(335, 'Historia', 'Podaj rok I rozbioru Polski', '1772', '2014-04-29 15:58:03'),
-(336, 'Historia', 'Podaj rok II rozbioru Polski', '1793', '2014-04-16 18:15:11'),
-(337, 'Historia', 'Podaj rok III rozbioru Polski', '1795', '2014-04-29 15:09:59'),
-(338, 'Historia', 'Podaj rok wybuchu I Wojny swiatowej', '1914', '2014-04-29 18:24:55'),
-(339, 'Historia', 'Podaj rok, w ktorym Gagarin polecial w kosmos', '1960', '2014-04-24 15:38:14'),
-(340, 'Historia', 'Podaj rok, w ktorym Lech Walesa zostal prezydentem', '1990', '2014-04-22 15:02:02'),
-(341, 'Historia', 'Podaj rok, w ktorym utworzono Unie Europejska', '1993', '2014-04-28 15:05:53'),
-(342, 'Astronomia', 'Jak nazywa sie gwiazda polozona najblizej Ziemi?', 'Slonce', '2014-04-28 15:52:41'),
-(343, 'Astronomia', 'Ktora z planet Ukladu Slonecznego jest najwieksza?', 'Jowisz', '2014-04-29 18:04:17'),
-(344, 'Astronomia', 'Jak nazywa sie naturalny satelita Ziemi?', 'Ksiezyc', '2014-04-28 15:45:27'),
-(345, 'Astronomia', 'Podaj imie i nazwisko polskiego astronoma, ktory "wstrzymal Slonce i ruszyl Ziemie"', 'Mikolaj Kopernik', '2014-04-29 13:45:04'),
-(346, 'Astronomia', 'Ktora planeta Ukladu Slonecznego jest najzimniejsza?', 'Neptun', '2014-04-28 13:36:57'),
-(347, 'Astronomia', 'Ktora planeta jest najblizej slonca?', 'Merkury', '2014-04-27 18:32:10'),
-(348, 'Astronomia', 'Podaj imie i nazwisko pierwszej kobiety kosmonautki, ktora poleciala w kosmos.', 'Walentyna Tiereszkowa', '2014-04-22 15:24:20'),
-(349, 'Gry', 'W ktorym roku wydana zostala gra GTA 4?', '2008', '2014-04-18 18:11:13'),
-(350, 'Gry', 'Jak nazywa sie skorumpowany policjant, ktorego scigamy w ostatniej misji GTA SA?', 'Tenpenny', '2014-04-15 13:29:38'),
-(351, 'Gry', 'Jak nazywa sie protagonista w grze GTA San Andreas?', 'Carl Johnson', '2014-03-20 18:17:21'),
-(352, 'Gry', 'Jak nazywa sie protagonista w grze GTA 4', 'Niko Bellic', '2014-04-14 18:24:55'),
-(353, 'Gry', 'Jak nazywa sie protagonista w grze GTA III', 'Claude Speed', '2014-04-28 15:10:23'),
-(354, 'Gry', 'Jak nazywa sie protagonista w grze GTA Vice City', 'Tommy Vercetti', '2014-04-19 15:12:47'),
-(355, 'Filmy', 'Indyjski odpowiednik Hollywood?', 'Bollywood', '2014-04-20 15:42:17'),
-(356, 'Geografia', 'Ktory kraj Europy jest najgesciej zaludniony (osoba/km^2)?', 'Monako', '2014-04-24 15:08:09'),
-(357, 'Astronomia', 'Jak nazywa sie najglebiej polozona czesc planety?', 'Jadro', '2014-04-25 13:20:12'),
-(358, 'Astronomia', 'Jak nazywa sie warstwa gazow otaczajaca wiekszosc planet i niektore ksiezyce?', 'Atmosfera', '2014-04-24 15:09:58'),
-(359, 'Astronomia', 'Jak nazywa sie szlak, po ktorym porusza sie planeta wokol Slonca lub ksiezyc dookola planety?', 'Orbita', '2014-04-21 18:31:05'),
-(360, 'Astronomia', 'Jedna z wewnetrznych warstw planety, zlokalizowany ponizej skorupy.', 'Plaszcz', '2014-04-22 18:17:16'),
-(361, 'Astronomia', 'Punkt po przeciwnej stronie niz zenit?', 'nadir', '2014-04-29 18:12:21'),
-(362, 'Astronomia', 'Jak sie nazywa najstarszy wahadlowiec?', 'Columbia', '2014-04-22 13:37:34'),
-(363, 'Astronomia', 'Jak sie nazywa wlascicielka rekordu najdluzszego pobytu kobiety w kosmosie?', 'Lucid', '2014-04-21 18:12:36'),
-(364, 'Astronomia', 'Kto pierwszy opisal kanaly na Marsie?', 'Schiaparelli', '2014-04-19 15:42:45'),
-(365, 'Astronomia', 'Jak sie nazywa najdalszy ksiezyc Urana?', 'Setebos', '2014-04-22 15:12:31'),
-(366, 'Astronomia', 'Ile ksiezycow ma Neptun?', '11', '2014-04-28 13:12:32'),
-(367, 'Astronomia', '3.26 roku swietlnego to inaczej... ?', 'parsek', '2014-04-28 18:30:14'),
-(368, 'Astronomia', 'Jaka jest najjasniejsza gwiazda na polskim niebie?', 'Slonce', '2014-04-20 13:39:25'),
-(369, 'Astronomia', 'Jaka planeta ma orbite najbardziej zblizona do okregu?', 'Wenus', '2014-04-05 15:39:07'),
-(370, 'Astronomia', 'Z jakiego filmu pochodzila nazwa pierwszego wahadlowca?', 'Star Trek', '2014-04-19 08:04:06'),
-(371, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2012 roku? ', 'Polska i Ukraina', '2014-04-21 18:49:15'),
-(372, 'Sport', 'Gdzie odbeda sie Mistrzostwa Europy w Pilce Noznej w 2016 roku?', 'Francja', '2014-04-21 13:51:24'),
-(373, 'Sport', 'W jakiej miejscowosci Robert Lewandowski strzelil swoja pierwsza bramke dla reprezentacji Polski?', 'Serravelle', '2014-04-21 17:17:57'),
-(374, 'Sport', 'Jak nazywana jest federacja regionalna Ameryki Polnocnej?', 'CONCACAF', '2014-04-21 18:21:37'),
-(375, 'Sport', 'Ilu znajduje sie sedziow na meczu pilki noznej?', 'szesciu', '2014-04-25 13:47:23'),
-(376, 'Sport', 'W jakim klubie gra Marcin Gortat?', 'Washington Wizadrs', '2014-04-18 18:06:39'),
-(377, 'Sport', 'Ile minut trwa mecz pilki recznej?', '60', '2014-04-18 17:11:12'),
-(378, 'Sport', 'Z ilu kwart sklada sie mecz koszykowki?', 'czterech', '2014-04-08 18:19:32'),
-(379, 'Sport', 'W ktorym z wielkoszlemowych turniejow Agnieszka Radwanska pokonala Marie Szarapowa?', 'US Open', '2014-04-24 13:05:39'),
-(380, 'Sport', 'Kto zaprojektowal flage olimpijska?', 'Pierre de Coubertin', '2014-04-17 13:41:09'),
-(381, 'Sport', 'Ile kol ma flaga olimpijska?', 'piec', '2014-04-27 18:09:16'),
-(382, 'Sport', 'Co oznaczaja kolory kol na fladze olimpijskiej?', 'kontynenty', '2014-04-22 08:12:42'),
-(383, 'Sport', 'Nazwa sportu zimowego, w ktorym jezdzi sie na jednej desce to ...', 'snowboard', '2014-04-20 18:45:06'),
-(384, 'Przyslowia', 'Baba z wozu ...', 'koniom lzej', '2014-04-22 08:21:22'),
-(385, 'Sport', 'Nazwa pojazdu Formuly 1?', 'bolid', '2014-04-21 13:04:38'),
-(386, 'Rozne', 'Dziedzina nauki, ktora zajmuije sie badaniem pogody?', 'meteorologia', '2014-04-28 13:55:40'),
-(387, 'Przyslowia', 'Gdy sie czlowiek spieszy ...', 'to sie diabel cieszy', '2014-04-21 13:40:32'),
-(388, 'Formula 1', 'Ktory z kierowcow zdobyl najwiecej tytulow mistrza swiata F1?', 'Michael Schumacher', '2014-04-19 17:00:50'),
-(389, 'Formula 1', 'Jak w skrocie nazywa sie Miedzynarodowa Federacja Samochodowa?', 'FIA', '2014-04-21 18:06:20'),
-(390, 'Formula 1', 'Z ilu wyscigow skladal sie pierwszy sezon F1 w 1950 roku?', 'siedmiu', '2014-04-24 15:19:23'),
-(391, 'Formula 1', 'Kto w GP Australi wykluczyl szanse na dojechanie do mety Roberta Kubicy niszczac mu tylne zawieszenie?', 'Kazuki Nakajima', '2014-04-20 18:34:33'),
-(392, 'Formula 1', 'W ktorym roku zadebiutowala Formula 1?', '1950', '2014-04-14 15:50:28'),
-(393, 'Motoryzacja', 'Od ktorego roku produkowane sa samochody BMW?', '1913', '2014-04-29 13:12:02'),
-(394, 'Motoryzacja', 'Jakiego koloru byl ostatni wyprodukowany FIAT 126 Maluch?', 'zolty', '2014-04-22 08:40:27'),
-(395, 'Mitologia', 'Grecka bogini pieknosci to?', 'afrodyta', '2014-04-13 18:58:10'),
-(396, 'Mitologia', 'Matka Heraklesa byla...', 'Alkmena', '2014-04-19 15:41:50'),
-(397, 'Mitologia', 'Kto byl ojcem Heraklesa?', 'Zeus', '2014-03-29 18:18:54'),
-(398, 'Mitologia', 'Kto byl przywodca wyprawy po zlote runo?', 'Jazon', '2014-04-20 18:31:20'),
-(399, 'Mitologia', 'Jak nazywaja se boginki lasow, wod i pol?', 'nimfy', '2014-04-27 18:00:20'),
-(400, 'Mitologia', 'Jak nazywa sie siedziba bogow greckich?', 'Olimp', '2014-04-15 15:05:50'),
-(401, 'Mitologia', 'Czarodziejka, ktora zamienila towarzyszy Odysa w wieprze to...', 'Kirke', '2014-04-28 18:23:53'),
-(402, 'Mitologia', 'Greckim bogiem wojny byl...', 'Ares', '2014-04-12 17:42:08'),
-(403, 'Mitologia', 'Jak nazywal sie statek argonautow?', 'Argo', '2014-04-19 13:27:04'),
-(404, 'Mitologia', 'zona Odyseusza byla...', 'Penelopa', '2014-04-22 17:37:19'),
-(405, 'Mitologia', 'Ukochana Erosa to...', 'Psyche', '2014-03-24 14:36:58'),
-(406, 'Mitologia', 'zona Zeusa jest...', 'Hera', '2014-04-20 18:12:57'),
-(407, 'Mitologia', 'Ile jest muz w mitologii greckiej?', 'dziewiec', '2014-04-17 15:04:22'),
-(408, 'Informatyka', 'Rozwin skrot WWW', 'World Wide Web', '2014-04-24 15:25:14'),
-(409, 'Informatyka', 'Szerokopasmowa transmisja danych umozliwiajaca korzystanie z internetu metoda bezprzewodowa to...', 'UMTS', '2014-04-25 18:00:58'),
-(410, 'Informatyka', 'Protokol wykorzystywany do komunikacji ze stronami WWW to...', 'HTTP', '2014-04-25 15:34:20'),
-(411, 'Informatyka', 'Urzadzenie pozwalajace na przesylanie informacji miedzy komputerami za pomoca linii telefonicznych to...', 'modem', '2014-04-17 18:19:29'),
-(412, 'Astronomia', 'Jak nazywa sie gwiazdozbior, w ktorego sklad wchodzi Gwiazda Polarna?', 'Mala Niedzwiedzica', '2014-04-29 13:48:40'),
-(413, 'Astronomia', 'Jak nazywa sie wiekszy z dwoch ksiezycow Marsa?', 'Fobos', '2014-04-19 18:51:22'),
-(414, 'Astronomia', 'Jak nazywa sie mniejszy z dwoch ksiezycow Marsa?', 'Deimos', '2014-04-24 15:42:45'),
-(415, 'Astronomia', 'Jak nazywa sie galaktyka, w ktorej znajduje sie Ziemia?', 'Droga Mleczna', '2014-04-22 13:05:25'),
-(416, 'Astronomia', 'W jakim miescie znajduje sie najwieksze polskie planetarium?', 'Chorzow', '2014-04-29 13:56:42'),
-(417, 'Geografia', 'Jakie miasto bylo pierwsza stolica Polski?', 'Gniezno', '2014-04-27 18:27:41'),
-(418, 'Geografia', 'Jakie miasto bylo druga stolica Polski?', 'Krakow', '2014-04-24 18:55:30'),
-(419, 'Geografia', 'Ile metrow n.p.m. wznosi sie najwyzszy szczyt polski - Rysy?', '2499', '2014-04-19 13:35:35'),
-(420, 'Geografia', 'Ile jest aktualnie w Polsce wojewodztw?', '16', '2014-04-20 13:29:01'),
-(421, 'Geografia', 'Ktore polskie wojewodztwo ma najmniejsza powierzchnie?', 'opolskie', '2014-04-27 15:33:25'),
-(422, 'Geografia', 'Ktore polskie wojewodztwo ma najmniejsza liczbe ludnosci?', 'lubuskie', '2014-04-29 15:53:07'),
-(423, 'Informatyka', 'Najlepiej sprzedajacy sie model komputera w historii to?', 'Commodore 64', '2014-04-29 15:10:53'),
-(424, 'Motoryzacja', 'W jakim miescie byly produkowane samochody dostawcze FSC Zuk?', 'Lublin', '2014-04-29 18:49:20'),
-(425, 'Przyslowia', 'Niedaleko pada...', 'jablko od jabloni', '2014-04-22 08:50:51'),
-(426, 'Przyslowia', 'Bez pracy...', 'nie ma kolaczy', '2014-04-29 15:23:00'),
-(427, 'Przyslowia', 'Komu w droge..', 'temu czas', '2014-04-29 13:58:29'),
-(428, 'Przyslowia', 'Gdzie kucharek szesc...', 'tam nie ma co jesc', '2014-04-29 13:52:15'),
-(429, 'Sport', 'Ile razy Ruch Chorzow i Gornik Zabrze zdobyly MP w pilce noznej?', '14', '2014-04-29 15:40:59'),
-(430, 'Sport', 'Kto zdobyl najwiecej goli dla reprezentacji Polski w pilce noznej?', 'Wlodzimierz Lubanski', '2014-04-20 15:08:43'),
-(431, 'Sport', 'Ktory polski bramkarz to "czlowiek, ktory zatrzymal Anglie"?', 'Jan Tomaszewski', '2014-04-15 17:23:11'),
-(432, 'Sport', 'Ktory polski trener mawial "pilka jest okragla, a bramki sa dwie"?', 'Kazimierz Gorski', '2014-04-28 13:52:59'),
-(433, 'Sport', 'Kto jest rekordzista Polski w dlugosci lotu narciarskiego?', 'Piotr Zyla i Kamil Stoch', '2014-04-29 15:58:57'),
-(434, 'Sport', 'Kto jest rekordzista swiata w długosci lotu narciarskiego?', 'Johan Remen Evensen', '2014-04-21 08:07:27'),
-(435, 'Sport', 'Jak nazywa sie najbardziej znana skocznia narciarska w Polsce?', 'Wielka Krokiew', '2014-04-29 18:51:09'),
-(436, 'Sport', 'Kto ma najwiecej zwyciestw w konkursach PS w skokach narciarskich?', 'Gregor Schlierenzauer', '2014-04-29 13:01:20'),
-(437, 'Sport', 'Ile razy Adam Malysz stal na podium zawodow PS w skokach narciarskich?', '92', '2014-04-27 15:44:44'),
-(438, 'Sport', 'Jaki skoczek narciarski 5-krotnie wygrywal Turniej Czterech Skoczni?', 'Janne Ahonen', '2014-04-22 17:07:47'),
-(439, 'Sport', 'W jakim miescie znajduje sie najwieksza mamucia skocznia narciarska?', 'Vikersund', '2014-04-14 18:53:01'),
-(440, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ssakow ladowych to?', 'Slon afrykanski', '2014-04-29 18:25:49'),
-(441, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ssakow to?', 'Pletwal blekitny', '2014-04-20 15:59:46'),
-(442, 'Zoologia', 'Najszybsze zwierze ladowe to?', 'Gepard', '2014-04-28 13:09:00'),
-(443, 'Zoologia', 'Jaki gatunek zwierzecia potrafi wytworzyc napiecie 600V?', 'Wegorz elektryczny', '2014-04-22 13:11:47'),
-(444, 'Film', 'Jak ma na nazwisko aktor, odtworca glownych rol w filmach "Rambo"?', 'Stallone', '2014-03-20 14:29:55'),
-(445, 'Film', 'Jaki podtytul nosi pierwsza czesc trylogii "Wladca Pierscieni"?', 'Druzyna Pierscienia', '2014-04-25 15:59:59'),
-(446, 'Film', 'Jaki podtytul nosi druga czesc trylogii "Wladca Pierscieni"?', 'Dwie Wieze', '2014-04-28 15:31:05'),
-(447, 'Film', 'Jaki podtytul nosi trzecia czesc trylogii "Wladca Pierscieni"?', 'Powrot Krola', '2014-04-17 18:28:42'),
-(448, 'Film', 'Podaj nazwisko aktora, odtworce filmowej roli Terminatora T-800?', 'Schwarzenegger', '2014-04-28 18:17:34'),
-(449, 'Matematyka', 'Ile wynosi pierwiastek 3-go stopnia z 64?', '4', '2014-04-22 17:59:54'),
-(450, 'Matematyka', 'Ile wierzcholkow ma szescian?', '8', '2014-04-21 18:07:14'),
-(451, 'Matematyka', 'Ile krawedzi ma szescian?', '12', '2014-04-27 15:58:25'),
-(452, 'Matematyka', 'Ile krawedzi ma ostroslup o podstawie trojkata?', '6', '2014-04-25 13:56:45'),
-(453, 'Matematyka', 'Ile wynosi 2 do 6-tej potegi?', '64', '2014-04-22 18:39:40'),
-(454, 'Matematyka', 'Jak nazywa sie odwrotnosc calki?', 'rozniczka', '2014-03-31 13:00:05'),
-(455, 'Fizyka', 'Jak nazywa sie jednostka pracy w ukladzie SI?', 'dzul', '2014-04-15 18:18:45'),
-(456, 'Fizyka', 'Jak nazywa sie jednostka mocy w ukladzie SI?', 'wat', '2014-04-28 18:25:15'),
-(457, 'Fizyka', 'Jak nazywa sie jednostka cisnienia w ukladzie SI?', 'paskal', '2014-03-17 09:02:32'),
-(458, 'Fizyka', 'Jak nazywa sie jednostka sily w ukladzie SI?', 'niuton', '2014-04-07 18:38:07'),
-(459, 'Fizyka', 'Jak nazywa sie jednostka napiecia elektrycznego w ukladzie SI?', 'wolt', '2014-04-19 13:09:04'),
-(460, 'Fizyka', 'Jak nazywa sie jednostka pojemnosci elektrycznej w ukladzie SI?', 'farad', '2014-03-12 09:29:46'),
-(461, 'Fizyka', 'Jak nazywa sie jednostka natezenia pradu elektrycznego w ukladzie SI?', 'amper', '2014-04-28 18:46:05'),
-(462, 'Fizyka', 'Jak nazywa sie jednostka oporu elektrycznego w ukladzie SI?', 'om', '2014-04-25 13:45:36'),
-(463, 'Fizyka', 'Jak nazywa sie jednostka czestotliwosci w ukladzie SI?', 'herc', '2014-04-25 18:42:11'),
-(464, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia ciala stalego w gaz?', 'sublimacja', '2014-04-24 13:10:39'),
-(465, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia gazu w cialo stale?', 'resublimacja', '2014-04-29 18:06:59'),
-(466, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia ciala stalego w ciecz?', 'topnienie', '2014-04-20 18:46:02'),
-(467, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia cieczy w cialo stale?', 'krzepniecie', '2014-04-29 15:36:56'),
-(468, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia gazu w ciecz?', 'skraplanie', '2014-04-16 18:59:24'),
-(469, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia cieczy w gaz?', 'parowanie', '2014-04-22 08:54:19'),
-(470, 'Fizyka', 'Przyrzad do pomiaru wydzielanego lub pobieranego ciepla to?', 'kalorymetr', '2014-04-21 17:52:36'),
-(471, 'Fizyka', 'Przyrzad do pomiaru gestosci cieczy to?', 'areometr', '2014-04-27 15:49:45'),
-(472, 'Fizyka', 'Przyrzad do pomiaru cisnienia to?', 'manometr', '2014-04-10 17:47:13'),
-(473, 'Geografia', 'Linie laczace punkty na mapie o takiej samej wartosci cisnienia to?', 'izobary', '2014-04-21 13:35:20'),
-(474, 'Geografia', 'Linie laczace punkty na mapie o takiej samej wartosci temperatury to?', 'izotermy', '2014-04-22 13:09:26'),
-(475, 'Geografia', 'Jaka jest druga nazwa najwyzszego szczytu swiata Mount Everest?', 'Czomolungma', '2014-04-27 13:49:04'),
-(476, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu Polski Fiat 126p?', '1973', '2014-04-20 15:31:32'),
-(477, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu FSO Polonez?', '1978', '2014-04-12 15:09:02'),
-(478, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu Polski Fiat 125p?', '1967', '2014-04-19 08:52:34'),
-(479, 'Literatura', 'Z ilu ksiag sklada sie "Pan Tadeusz"?', '12', '2014-04-16 15:15:22'),
-(480, 'Informatyka', 'Rozwin skrot RAM', 'Random Access Memory', '2014-04-20 08:19:30'),
-(481, 'Informatyka', 'Rozwin skrot ROM', 'Read Only Memory', '2014-04-29 15:00:08'),
-(482, 'Informatyka', 'Jeden bajt to ile bitow?', '8', '2014-04-29 15:14:56'),
-(483, 'Informatyka', 'Jeden kilobajt to ile bajtow?', '1024', '2014-04-19 13:49:06'),
-(484, 'Informatyka', 'Liczba binarna 101101 jest rowna jakiej liczbie dziesiatkowej?', '45', '2014-04-19 13:07:41'),
-(485, 'Informatyka', 'Liczba szesnastkowa FF jest rowna jakiej liczbie dziesiatkowej?', '255', '2014-04-27 18:54:56'),
-(486, 'Rozne', 'Z ilu liter sklada sie polski alfabet?', '32', '2014-04-20 08:28:10'),
-(487, 'Historia', 'Podaj rok Holdu Pruskiego?', '1525', '2014-04-17 15:53:57'),
-(488, 'Literatura', 'Jak mial na imie Pan Kleks z "Akademii Pana Kleksa"?', 'Ambrozy', '2014-04-05 18:03:23'),
-(489, 'Biologia', 'Ile czlowiek ma par zeber?', '12', '2014-04-28 15:38:15'),
-(490, 'Biologia', 'Ile dorosly czlowiek ma zebow?', '32', '2014-04-21 13:14:32'),
-(491, 'Biologia', 'Jaka jest najpospolitsza wsrod ludzi grupa krwi?', '0', '2014-04-22 18:46:29'),
-(492, 'Biologia', 'Jaka jest najrzadsza wsrod ludzi grupa krwi?', 'AB', '2014-04-06 18:39:28'),
-(493, 'Biologia', 'Najpospolitszym drzewem Polski jest?', 'sosna', '2014-04-27 18:03:54'),
-(494, 'Biologia', 'Jak nazywa sie hormon obnizajacy poziom cukru we krwi?', 'insulina', '2014-04-29 18:22:13'),
-(495, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ptakow to?', 'Strus afrykanski', '2014-04-28 15:44:34'),
-(496, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow wezy to?', 'Pyton siatkowy', '2014-04-22 18:03:06'),
-(497, 'Astronomia', 'Ile osob do tej pory stanelo na Ksiezycu?', '12', '2014-04-25 15:36:07'),
-(498, 'Astronomia', 'Jak nazywa sie najwiekszy ksiezyc Plutona?', 'Charon', '2014-04-21 18:38:48'),
-(499, 'Literatura', 'Jak nazywa sie autor powiesci "Lalka"?', 'Boleslaw Prus', '2014-04-09 18:47:12'),
-(500, 'Literatura', 'Jak nazywa sie autor dramatu "Dziady"?', 'Adam Mickiewicz', '2014-04-28 15:05:00'),
-(501, 'Literatura', 'Jak nazywa sie autor powiesci "Chlopi"?', 'Wladyslaw Reymont', '2014-04-22 17:51:13'),
-(502, 'Literatura', 'Jak nazywa sie autor powiesci "Przedwiosnie"?', 'Stefan Zeromski', '2014-04-25 18:44:01'),
-(503, 'Literatura', 'Jak nazywa sie autor noweli "Janko Muzykant"?', 'Henryk Sienkiewicz', '2014-04-16 08:57:49'),
-(504, 'Literatura', 'Jaka polska pisarka otrzymala literacka nagrode Nobla w 1996?', 'Wislawa Szymborska', '2014-04-22 18:24:34'),
-(505, 'Literatura', 'Jak nazywa sie autorka powiesci "Nad Niemnem"?', 'Eliza Orzeszkowa', '2014-04-28 13:26:43'),
-(506, 'Literatura', 'Autor licznych bajek i satyr, m.in. "Kruk i lis", "Zona modna" to?', 'Ignacy Krasicki', '2014-04-16 13:21:23'),
-(507, 'Literatura', 'Jak brzmi prawdziwe imie i nazwisko Boleslawa Prusa?', 'Aleksander Glowacki', '2014-04-22 15:23:25'),
-(508, 'Literatura', 'Jak nazywa sie autor dramatu "Odprawa poslow greckich"?', 'Jan Kochanowski', '2014-04-19 18:34:23'),
-(509, 'Literatura', 'Jak nazywa sie autor tragedii "Balladyna"?', 'Juliusz Slowacki', '2014-04-20 17:49:19'),
-(510, 'Literatura', 'Jak nazywa sie autor komedii "Zemsta"?', 'Aleksander Fredro', '2014-04-28 15:00:57'),
-(511, 'Literatura', 'Jak nazywa sie autorka wiersza "Rota"?', 'Maria Konopnicka', '2014-04-13 15:52:00'),
-(512, 'Literatura', 'Jak nazywa sie autor dramatu "Wesele"?', 'Stanislaw Wyspianski', '2014-04-20 13:54:11'),
-(513, 'Literatura', 'Jak nazywa sie autorka dramatu "Moralnosc pani Dulskiej"?', 'Gabriela Zapolska', '2014-04-29 13:04:01'),
-(514, 'Literatura', 'Jak nazywa sie autor dramatu "Antygona"?', 'Sofokles', '2014-04-25 13:49:10'),
-(515, 'Literatura', 'Kto jest znany ze zwrotu: "Polacy nie gesi, i swoj jezyk maja"?', 'Mikolaj Rej', '2014-04-20 13:44:49'),
-(516, 'Literatura', 'Jak nazywa sie autor poematu "Boska Komedia"?', 'Dante Alighieri', '2014-04-20 15:41:24'),
-(517, 'Literatura', 'Jaka epoka literacka nastapila po renesansie?', 'barok', '2014-04-20 13:02:54'),
-(518, 'Literatura', 'Jaka epoka literacka nastapila po baroku?', 'oswiecenie', '2014-04-28 15:03:12'),
-(519, 'Literatura', 'Jaka epoka literacka nastapila po oswieceniu?', 'romantyzm', '2014-04-19 15:20:03'),
-(520, 'Literatura', 'Jaka epoka literacka nastapila po romantyzmie?', 'pozytywizm', '2014-04-29 13:06:42'),
-(521, 'Literatura', 'Jak nazywa sie trzeci rodzaj literacki po epice i liryce?', 'dramat', '2014-04-22 18:52:53'),
-(522, 'Literatura', 'Utwor liryczny o charakterze zalobnym to?', 'tren', '2014-04-21 15:18:06'),
-(523, 'Informatyka', 'Rozwin skrot AMD', 'Advanced Micro Devices', '2014-04-10 08:45:17'),
-(524, 'Informatyka', 'Rozwin skrot BIOS', 'Basic Input Output System', '2014-04-20 13:29:57'),
-(525, 'Informatyka', 'Rozwin skrot CPU', 'Central Processing Unit', '2014-04-28 15:34:40'),
-(526, 'Informatyka', 'Rozwin skrot FDD', 'Floppy Disk Drive', '2014-04-29 13:54:56'),
-(527, 'Informatyka', 'Rozwin skrot FTP', 'File Transfer Protocol', '2014-04-27 13:53:33'),
-(528, 'Informatyka', 'Rozwin skrot FAT', 'File Allocation Table', '2014-04-18 15:36:22'),
-(529, 'Informatyka', 'Rozwin skrot LAN', 'Local Area Network', '2014-04-25 13:38:30'),
-(530, 'Informatyka', 'Rozwin skrot MBR', 'Master Boot Record', '2014-03-28 18:06:52'),
-(531, 'Informatyka', 'Rozwin skrot NTFS', 'New Technology File System', '2014-04-17 17:40:42'),
-(532, 'Informatyka', 'Rozwin skrot P2P', 'Peer To Peer', '2014-04-15 13:41:52'),
-(533, 'Informatyka', 'Rozwin skrot PCI', 'Peripheral Component Interconnect', '2014-04-20 18:18:27'),
-(534, 'Informatyka', 'Rozwin skrot RGB', 'Red Green Blue', '2014-04-13 18:47:38'),
-(535, 'Informatyka', 'Rozwin skrot IP', 'Internet Protocol', '2014-04-28 18:26:37'),
-(536, 'Informatyka', 'Rozwin skrot USB', 'Universal Serial Bus', '2014-04-22 18:20:00'),
-(537, 'Informatyka', 'Rozwin skrot WAN', 'Wide Area Network', '2014-04-20 13:07:26'),
-(538, 'Informatyka', 'Rozwin skrot Wi-Fi', 'Wireless Fidelity', '2014-04-21 18:13:30'),
-(539, 'Informatyka', 'Rozwin skrot CMYK', 'Cyan Magenta Yellow BlacK', '2014-04-21 13:07:19'),
-(540, 'Informatyka', 'Rozwin skrot HDD', 'Hard Disk Drive', '2014-04-24 15:44:34'),
-(541, 'Fizyka', 'Podaj nazwisko odkrywcy zjawiska indukcji elektromagnetycznej', 'Faraday', '2014-04-24 18:08:53'),
-(542, 'Rozne', 'Podaj nazwisko wynalazcy telefonu', 'Bell', '2014-04-27 18:16:26'),
-(543, 'Rozne', 'Podaj nazwisko wynalazcy zarowki elektrycznej', 'Edison', '2014-04-15 17:09:18'),
-(544, 'Rozne', 'Podaj nazwisko wynalazcy szczepionki przeciwko wsciekliznie', 'Pasteur', '2014-04-25 18:20:27'),
-(545, 'Rozne', 'Podaj nazwisko wynalazcy lampy naftowej', 'Lukasiewicz', '2014-04-19 13:45:29'),
-(546, 'Rozne', 'Podaj nazwisko wynalazcy bomby atomowej', 'Einstein', '2014-04-25 18:31:19'),
-(547, 'Rozne', 'Podaj nazwisko wynalazcy dynamitu', 'Nobel', '2014-04-15 17:19:43'),
-(548, 'Rozne', 'Podaj nazwisko wynalazcy ogumienia pneumatycznego', 'Dunlop', '2014-04-27 18:29:28'),
-(549, 'Rozne', 'Podaj nazwisko wynalazcy piorunochronu', 'Franklin', '2014-04-29 13:02:13'),
-(550, 'Rozne', 'Podaj nazwisko wynalazcy m.in. silnika elektrycznego, dynama i radia', 'Tesla', '2014-04-28 13:40:31'),
-(551, 'Rozne', 'Podaj nazwisko braci - wynalazcow samolotu', 'Wright', '2014-04-22 13:23:05'),
-(552, 'Rozne', 'Podaj nazwisko wynalazcy czcionek drukarskich', 'Gutenberg', '2014-04-28 15:48:10'),
-(553, 'Rozne', 'Podaj nazwisko wynalazcy pierwszego syntezatora muzycznego', 'Moog', '2014-04-24 15:05:28'),
-(554, 'Rozne', 'Podaj nazwisko wynalazcy silnika wysokopreznego (na olej napedowy)', 'Diesel', '2014-04-29 18:28:31'),
-(555, 'Rozne', 'Podaj nazwisko tworcy alfabetu dla niewidomych', 'Braille', '2014-04-22 13:16:23'),
-(556, 'Rozne', 'Jak nazywa sie choroba polegajaca na niemoznosci rozpoznawania barw?', 'daltonizm', '2014-04-29 18:33:03'),
-(557, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2010 roku w RPA?', 'Hiszpania', '2014-04-24 15:52:42'),
-(558, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2006 roku w Niemczech?', 'Wlochy', '2014-04-07 18:23:57'),
-(559, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2002 roku w Korei/Japonii?', 'Brazylia', '2014-04-25 15:12:50'),
-(560, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1998 roku we Francji?', 'Francja', '2014-04-19 15:45:55'),
-(561, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1994 roku w USA?', 'Brazylia', '2014-04-20 15:14:33'),
-(562, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1990 roku we Wloszech?', 'RFN', '2014-04-20 15:54:24'),
-(563, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2012 roku w Polsce/Ukrainie?', 'Hiszpania', '2014-04-22 13:42:27'),
-(564, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2008 roku w Austrii/Szwajcarii?', 'Hiszpania', '2014-04-22 18:47:24'),
-(565, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2004 roku w Portugalii?', 'Grecja', '2014-04-14 17:26:48'),
-(566, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2000 roku w Belgii/Holandii?', 'Francja', '2014-04-28 18:51:29'),
-(567, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 1996 roku w Anglii?', 'Niemcy', '2014-04-17 08:42:05'),
-(568, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 1992 roku w Szwecji?', 'Dania', '2014-04-22 08:42:11'),
-(569, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kto? co?', 'mianownik', '2014-04-25 13:04:54'),
-(570, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kogo? czego?', 'dopelniacz', '2014-04-17 13:28:37'),
-(571, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania komu? czemu?', 'celownik', '2014-04-15 17:12:46'),
-(572, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kogo? co?', 'biernik', '2014-04-29 18:13:41'),
-(573, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania z kim? z czym?', 'narzednik', '2014-04-20 08:47:13'),
-(574, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania o kim? o czym?', 'miejscownik', '2014-04-22 18:20:55'),
-(575, 'Jezyk polski', 'Jak nazywa sie przypadek uzywany w zawolaniach (nie posiadajacy pyt.)?', 'wolacz', '2014-04-16 18:00:53'),
-(576, 'Jezyk polski', 'Ile jest przypadkow w jezyku polskim?', '7', '2014-04-07 18:01:03'),
-(577, 'Jezyk polski', 'Czesc zdania oznaczajaca wykonawce czynnosci wyrazonej orzeczeniem to?', 'podmiot', '2014-04-25 13:59:52'),
-(578, 'Jezyk polski', 'Czesc zdania opisujaca czynnosc podmiotu to?', 'orzeczenie', '2014-04-19 13:27:58'),
-(579, 'Jezyk polski', 'CZesc zdania okreslajaca rzeczownik, a wyrazona np. przymiotnikiem to?', 'przydawka', '2014-04-19 15:16:25'),
-(580, 'Jezyk polski', 'Czesc zdania oznaczajaca przedmiot czynnosci wyrazonej orzeczeniem to?', 'dopelnienie', '2014-04-25 13:37:37'),
-(581, 'Jezyk polski', 'Czesc zdania pelniaca funkcje okreslajaca czasownik to?', 'okolicznik', '2014-04-24 15:11:45'),
-(582, 'Jezyk polski', 'Czesc mowy nazywajaca rzeczy, obiekty, miejsca, osoby, zjawiska itp. to?', 'rzeczownik', '2014-04-28 18:02:37'),
-(583, 'Jezyk polski', 'Czesc mowy okreslajaca cechy istot zywych, rzeczy, zjawisk i pojec to?', 'przymiotnik', '2014-04-18 18:16:17'),
-(584, 'Jezyk polski', 'Czesc mowy przedstawiajaca dziejace sie czynnosci i niektore stany to?', 'czasownik', '2014-04-18 15:56:43'),
-(585, 'Jezyk polski', 'Czesc mowy okreslajaca liczbe, ilosc, liczebnosc lub kolejnosc to?', 'liczebnik', '2014-04-24 18:44:30'),
-(587, 'Rozne', 'Pierwsza litera alfabetu greckiego to?', 'alfa', '2014-04-25 18:24:04'),
-(588, 'Rozne', 'Druga litera alfabetu greckiego to?', 'beta', '2014-04-22 08:09:14');
+(1, 'Historia', 'W ktorym roku byla bitwa pod Grunwaldem?', '1410', '2015-05-14 13:28:24'),
+(2, 'Mitologia', 'Jak nazywa sie grecki bog slonca?', 'Helios', '2015-05-11 18:14:22'),
+(3, 'Historia', 'Ktory krol francuski nadal sobie przydomek "Slonce"?', 'Ludwik XIV', '2015-05-06 17:30:09'),
+(4, 'Geografia', 'Jak nazywa sie most laczacy San Francisco z hrabstwem Marin?', 'Golden Gate', '2015-05-13 15:17:51'),
+(5, 'Literatura', 'Jak nazywal sie autor "Folwarku zwierzecego" i "Roku 1984"?', 'George Orwell', '2015-05-18 18:00:14'),
+(280, 'Sport', 'Ktory Polski pilkaz zostal krolem strzelcow podczas mundialu w 1974r. w Niemczech?', 'Grzegorz Lato', '2015-05-18 18:38:47'),
+(7, 'Filmy', 'Jak na nazwisko maja rezyserowie filmu "Matrix"?', 'Wachowski', '2015-05-11 15:32:02'),
+(8, 'Filmy', 'Jak nazywa sie rezyser "Powrotow do przyszlosci"?', 'Robert Zemeckis', '2015-05-18 18:37:02'),
+(9, 'Geografia', 'Najglebsze jezioro w Polsce to?', 'Hancza', '2015-05-15 15:42:21'),
+(10, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgCl?', 'chlorek srebra', '2015-05-03 17:54:13'),
+(11, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgNO3?', 'azotan srebra', '2015-05-17 18:04:04'),
+(12, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AlCl3?', 'chlorek glinu', '2015-05-12 13:12:35'),
+(13, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu BaCl2?', 'chlorek baru', '2015-05-15 18:56:41'),
+(14, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu BaSO4?', 'baryt', '2015-05-16 13:15:56'),
+(15, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C12H22O11?', 'laktoza', '2015-05-15 15:12:30'),
+(16, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H2?', 'acetylen', '2015-04-04 20:54:42'),
+(17, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H5OH?', 'alkohol etylowy', '2015-05-05 20:37:12'),
+(18, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C2H6?', 'etan', '2015-05-16 13:29:58'),
+(19, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C4H6O6?', 'kwas winowy', '2015-05-14 15:17:49'),
+(20, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C6H6?', 'benzen', '2015-05-09 18:16:30'),
+(21, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu C6H8O7?', 'kwas cytrynowy', '2015-05-07 18:25:07'),
+(22, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu Ca(NO3)2?', 'azotan wapnia', '2015-04-27 17:39:58'),
+(23, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3CHOHCOOH?', 'kwas mlekowy', '2015-05-17 15:24:56'),
+(24, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3COOH?', 'kwas octowy', '2015-05-03 15:39:17'),
+(25, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH3OH?', 'alkohol metylowy', '2015-05-06 15:24:46'),
+(26, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CH4?', 'metan', '2015-05-12 18:33:58'),
+(27, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CO?', 'tlenek wegla', '2015-05-11 18:51:01'),
+(28, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu CO2?', 'dwutlenek wegla', '2015-05-06 15:07:09'),
+(29, 'Geografia', 'Stolica Afganistanu?', 'Kabul', '2015-05-03 20:21:54'),
+(30, 'Geografia', 'Stolica Albanii?', 'Tirana', '2015-05-17 15:47:37'),
+(161, 'Geografia', 'Stolica panstwa Haiti?', 'Port-au-Prince', '2015-04-10 17:57:30'),
+(160, 'Geografia', 'Stolica panstwa Gwinea Rownikowa?', 'Malabo', '2015-04-11 15:05:46'),
+(159, 'Geografia', 'Stolica panstwa Gwinea Bissau?', 'Bissau', '2015-04-25 15:28:54'),
+(158, 'Geografia', 'Stolica panstwa Gwinea?', 'Konakry', '2015-05-14 15:28:22'),
+(157, 'Geografia', 'Stolica panstwa Gwatemala?', 'Gwatemala', '2015-05-06 20:40:56'),
+(156, 'Geografia', 'Stolica panstwa Gujana?', 'Georgetown', '2015-04-25 17:58:10'),
+(155, 'Geografia', 'Stolica panstwa Gruzja?', 'Tbilisi', '2015-05-17 18:00:35'),
+(154, 'Geografia', 'Stolica panstwa Grecja?', 'Ateny', '2015-05-17 13:57:51'),
+(153, 'Geografia', 'Stolica panstwa Ghana?', 'Akra', '2015-05-05 20:01:55'),
+(152, 'Geografia', 'Stolica panstwa Gambia?', 'Bandzul', '2015-05-18 15:56:45'),
+(151, 'Geografia', 'Stolica panstwa Gabon?', 'Libreville', '2015-05-16 15:20:05'),
+(150, 'Geografia', 'Stolica panstwa Francja?', 'Paryz', '2015-05-17 18:09:18'),
+(149, 'Geografia', 'Stolica panstwa Finlandia?', 'Helsinki', '2015-05-03 17:02:32'),
+(148, 'Geografia', 'Stolica panstwa Filipiny?', 'Manila', '2015-04-25 15:32:30'),
+(147, 'Geografia', 'Stolica panstwa Fidzi?', 'Suva', '2015-05-13 15:37:06'),
+(146, 'Geografia', 'Stolica panstwa Etiopia?', 'Addis Abeba', '2015-04-30 20:34:33'),
+(145, 'Geografia', 'Stolica panstwa Estonia?', 'Tallinn', '2015-05-02 15:46:29'),
+(144, 'Geografia', 'Stolica panstwa Erytrea?', 'Asmara', '2015-05-16 15:32:24'),
+(143, 'Geografia', 'Stolica panstwa Ekwador?', 'Quito', '2015-04-28 15:36:11'),
+(142, 'Geografia', 'Stolica panstwa Egipt?', 'Kair', '2015-05-06 15:47:41'),
+(141, 'Geografia', 'Stolica panstwa Dzibuti?', 'Dzibuti', '2015-05-13 18:49:28'),
+(140, 'Geografia', 'Stolica panstwa Dominikana?', 'Santo Domingo', '2015-05-07 18:00:20'),
+(139, 'Geografia', 'Stolica panstwa Dominika?', 'Roseau', '2015-05-02 17:48:57'),
+(138, 'Geografia', 'Stolica panstwa Demokratyczna Republika Konga?', 'Kinszasa', '2015-05-14 15:00:15'),
+(137, 'Geografia', 'Stolica panstwa Dania?', 'Kopenhaga', '2015-04-13 15:39:12'),
+(136, 'Geografia', 'Stolica panstwa Czechy?', 'Praga', '2015-05-08 15:42:45'),
+(135, 'Geografia', 'Stolica panstwa Czarnogora?', 'Podgorica', '2015-05-11 18:17:52'),
+(134, 'Geografia', 'Stolica panstwa Czad?', 'Ndzamena', '2015-04-07 20:51:14'),
+(133, 'Geografia', 'Stolica panstwa Cypr?', 'Nikozja', '2015-05-19 13:17:44'),
+(132, 'Geografia', 'Stolica panstwa Chorwacja?', 'Zagrzeb', '2015-05-08 18:38:35'),
+(131, 'Geografia', 'Stolica panstwa Chiny?', 'Pekin', '2015-05-18 13:42:21'),
+(130, 'Geografia', 'Stolica panstwa Chile?', 'Santiago', '2015-05-17 15:10:57'),
+(129, 'Geografia', 'Stolica panstwa Burundi?', 'Buzumbura', '2015-05-05 15:21:22'),
+(128, 'Geografia', 'Stolica panstwa Burkina Faso?', 'Wagadugu', '2015-05-16 18:49:51'),
+(127, 'Geografia', 'Stolica panstwa Bulgaria?', 'Sofia', '2015-05-11 18:23:06'),
+(126, 'Geografia', 'Stolica panstwa Brunei?', 'Bandar Seri Begawan', '2015-04-14 20:43:33'),
+(125, 'Geografia', 'Stolica panstwa Brazylia?', 'Brasilia', '2015-04-02 17:42:25'),
+(124, 'Geografia', 'Stolica panstwa Botswana?', 'Gaborone', '2015-05-16 15:35:55'),
+(123, 'Geografia', 'Stolica panstwa Bosnia i Hercegowina?', 'Sarajewo', '2015-05-09 13:30:06'),
+(122, 'Geografia', 'Stolica panstwa Bialorus?', 'Minsk', '2015-04-24 20:38:15'),
+(121, 'Geografia', 'Stolica panstwa Bhutan?', 'Thimphu', '2015-05-12 13:46:01'),
+(120, 'Geografia', 'Stolica panstwa Belize?', 'Belmopan', '2015-05-04 17:49:36'),
+(119, 'Geografia', 'Stolica panstwa Belgia?', 'Bruksela', '2015-05-10 18:45:14'),
+(118, 'Geografia', 'Stolica panstwa Barbados?', 'Bridgetown', '2015-05-06 15:26:32'),
+(117, 'Geografia', 'Stolica panstwa Bangladesz?', 'Dhaka', '2015-05-04 20:37:16'),
+(116, 'Geografia', 'Stolica panstwa Bahrajn?', 'Manama', '2015-05-12 13:51:18'),
+(115, 'Geografia', 'Stolica panstwa Bahamy?', 'Nassau', '2015-05-16 18:44:37'),
+(114, 'Geografia', 'Stolica panstwa Azerbejdzan?', 'Baku', '2015-05-18 18:07:15'),
+(113, 'Geografia', 'Stolica panstwa Austria?', 'Wieden', '2015-04-11 17:50:33'),
+(112, 'Geografia', 'Stolica panstwa Australia?', 'Canberra', '2015-05-17 15:42:23'),
+(111, 'Geografia', 'Stolica panstwa Armenia?', 'Erywan', '2015-05-11 13:37:07'),
+(110, 'Geografia', 'Stolica panstwa Argentyna?', 'Buenos Aires', '2015-02-25 20:38:22'),
+(109, 'Geografia', 'Stolica panstwa Arabia Saudyjska?', 'Rijad', '2015-05-09 18:35:47'),
+(108, 'Geografia', 'Stolica panstwa Angola?', 'Luanda', '2015-05-07 17:40:44'),
+(107, 'Geografia', 'Stolica panstwa Andora?', 'Andora', '2015-04-29 17:05:51'),
+(106, 'Geografia', 'Stolica panstwa Algieria?', 'Algier', '2015-05-05 17:33:44'),
+(162, 'Geografia', 'Stolica panstwa Hiszpania?', 'Madryt', '2015-05-02 20:13:02'),
+(163, 'Geografia', 'Stolica panstwa Honduras?', 'Tegucigalpa', '2015-05-17 15:54:36'),
+(164, 'Geografia', 'Stolica panstwa Indie?', 'Nowe Delhi', '2015-05-08 15:32:12'),
+(165, 'Geografia', 'Stolica panstwa Indonezja?', 'Dzakarta', '2015-05-12 13:31:56'),
+(166, 'Geografia', 'Stolica panstwa Irak?', 'Bagdad', '2015-05-19 13:28:16'),
+(167, 'Geografia', 'Stolica panstwa Iran?', 'Teheran', '2015-05-17 13:24:33'),
+(168, 'Geografia', 'Stolica panstwa Irlandia?', 'Dublin', '2015-05-09 13:31:51'),
+(169, 'Geografia', 'Stolica panstwa Islandia?', 'Reykjavík', '2015-04-27 15:48:27'),
+(170, 'Geografia', 'Stolica panstwa Jamajka?', 'Kingston', '2015-05-18 15:13:05'),
+(171, 'Geografia', 'Stolica panstwa Japonia?', 'Tokio', '2015-05-18 13:07:16'),
+(172, 'Geografia', 'Stolica panstwa Jemen?', 'Sana', '2015-05-19 15:09:16'),
+(173, 'Geografia', 'Stolica panstwa Jordania?', 'Amman', '2015-05-01 20:05:57'),
+(174, 'Geografia', 'Stolica panstwa Kambodza?', 'Phnom Penh', '2015-05-06 17:07:09'),
+(175, 'Geografia', 'Stolica panstwa Kamerun?', 'Jaunde', '2015-05-14 13:31:55'),
+(176, 'Geografia', 'Stolica panstwa Kanada?', 'Ottawa', '2015-04-27 20:29:11'),
+(177, 'Geografia', 'Stolica panstwa Katar?', 'Ad-Dauha', '2015-04-02 15:31:29'),
+(178, 'Geografia', 'Stolica panstwa Kazachstan?', 'Astana', '2015-05-14 13:19:36'),
+(179, 'Geografia', 'Stolica panstwa Kenia?', 'Nairobi', '2015-05-13 18:58:12'),
+(180, 'Geografia', 'Stolica panstwa Kirgistan?', 'Biszkek', '2015-04-22 20:11:15'),
+(181, 'Geografia', 'Stolica panstwa Kolumbia?', 'Bogota', '2015-05-13 18:56:27'),
+(182, 'Geografia', 'Stolica panstwa Komory?', 'Moroni', '2015-03-30 15:10:37'),
+(183, 'Geografia', 'Stolica panstwa Kongo?', 'Brazzaville', '2015-05-04 17:56:41'),
+(184, 'Geografia', 'Stolica panstwa Korea Poludniowa?', 'Seul', '2015-03-30 20:49:22'),
+(185, 'Geografia', 'Stolica panstwa Korea Polnocna?', 'Pjongjang', '2015-05-18 15:53:17'),
+(186, 'Geografia', 'Stolica panstwa Kosowo?', 'Prisztina', '2015-05-17 13:14:04'),
+(187, 'Geografia', 'Stolica panstwa Kostaryka?', 'San Jose', '2015-05-12 18:46:14'),
+(188, 'Geografia', 'Stolica panstwa Kuba?', 'Hawana', '2015-04-12 15:37:41'),
+(189, 'Geografia', 'Stolica panstwa Kuwejt?', 'Kuwejt', '2015-04-17 15:16:23'),
+(190, 'Geografia', 'Stolica panstwa Laos?', 'Wientian', '2015-05-03 15:26:50'),
+(191, 'Geografia', 'Stolica panstwa Lesotho?', 'Maseru', '2015-05-18 13:45:51'),
+(192, 'Geografia', 'Stolica panstwa Liban?', 'Bejrut', '2015-04-30 15:57:30'),
+(193, 'Geografia', 'Stolica panstwa Liberia?', 'Monrovia', '2015-04-25 15:36:05'),
+(194, 'Geografia', 'Stolica panstwa Libia?', 'Trypolis', '2015-05-16 15:49:59'),
+(195, 'Geografia', 'Stolica panstwa Liechtenstein?', 'Vaduz', '2015-05-17 13:22:48'),
+(196, 'Geografia', 'Stolica panstwa Litwa?', 'Wilno', '2015-05-10 18:08:42'),
+(197, 'Geografia', 'Stolica panstwa Luksemburg?', 'Luksemburg', '2015-04-24 17:47:04'),
+(198, 'Geografia', 'Stolica panstwa lotwa?', 'Ryga', '2015-05-17 18:54:44'),
+(199, 'Geografia', 'Stolica panstwa Macedonia?', 'Skopje', '2015-05-12 18:02:26'),
+(200, 'Geografia', 'Stolica panstwa Madagaskar?', 'Antananarywa', '2015-05-17 13:40:20'),
+(201, 'Geografia', 'Stolica panstwa Malawi?', 'Lilongwe', '2015-05-03 17:27:29'),
+(202, 'Geografia', 'Stolica panstwa Malediwy?', 'Male', '2015-03-25 20:52:57'),
+(203, 'Geografia', 'Stolica panstwa Mali?', 'Bamako', '2015-05-12 18:28:41'),
+(204, 'Geografia', 'Stolica panstwa Malta?', 'Valletta', '2015-05-18 13:38:50'),
+(205, 'Geografia', 'Stolica panstwa Maroko?', 'Rabat', '2015-03-15 17:45:53'),
+(206, 'Geografia', 'Stolica panstwa Mauretania?', 'Nawakszut', '2015-05-17 13:45:34'),
+(207, 'Geografia', 'Stolica panstwa Mauritius?', 'Port Louis', '2015-05-18 13:16:03'),
+(208, 'Geografia', 'Stolica panstwa Meksyk?', 'Meksyk', '2015-05-01 20:38:03'),
+(209, 'Geografia', 'Stolica panstwa Mikronezja?', 'Palikir', '2015-05-07 17:49:32'),
+(210, 'Geografia', 'Stolica panstwa Mjanma?', 'Naypyidaw', '2015-05-09 18:28:47'),
+(211, 'Geografia', 'Stolica panstwa Moldawia?', 'Kiszyniow', '2015-05-16 13:38:43'),
+(212, 'Geografia', 'Stolica panstwa Monako?', 'Monako', '2015-05-02 17:50:44'),
+(213, 'Geografia', 'Stolica panstwa Mongolia?', 'Ulan Bator', '2015-05-13 18:28:30'),
+(214, 'Geografia', 'Stolica panstwa Mozambik?', 'Maputo', '2015-05-02 20:53:52'),
+(215, 'Geografia', 'Stolica panstwa Namibia?', 'Windhuk', '2015-04-24 15:25:26'),
+(216, 'Geografia', 'Stolica panstwa Nepal?', 'Katmandu', '2015-04-20 20:07:27'),
+(217, 'Geografia', 'Stolica panstwa Niemcy?', 'Berlin', '2015-05-11 18:40:34'),
+(218, 'Geografia', 'Stolica panstwa Niger?', 'Niamey', '2015-04-12 15:03:49'),
+(219, 'Geografia', 'Stolica panstwa Nigeria?', 'Abudza', '2015-05-18 15:16:36'),
+(220, 'Geografia', 'Stolica panstwa Nikaragua?', 'Managua', '2015-05-18 15:28:51'),
+(221, 'Geografia', 'Stolica panstwa Norwegia?', 'Oslo', '2015-05-08 15:04:03'),
+(222, 'Geografia', 'Stolica panstwa Nowa Zelandia?', 'Wellington', '2015-05-18 13:00:14'),
+(223, 'Geografia', 'Stolica panstwa Oman?', 'Maskat', '2015-03-29 20:32:07'),
+(224, 'Geografia', 'Stolica panstwa Pakistan?', 'Islamabad', '2015-05-19 18:49:06'),
+(225, 'Geografia', 'Stolica panstwa Palau?', 'Ngerulmud', '2015-05-18 18:35:17'),
+(226, 'Geografia', 'Stolica panstwa Panama?', 'Panama', '2015-04-24 17:18:27'),
+(227, 'Geografia', 'Stolica panstwa Papua-Nowa Gwinea?', 'Port Moresby', '2015-04-28 15:50:30'),
+(228, 'Geografia', 'Stolica panstwa Peru?', 'Lima', '2015-05-04 15:52:59'),
+(229, 'Geografia', 'Stolica panstwa Polska?', 'Warszawa', '2015-05-13 18:23:15'),
+(230, 'Geografia', 'Stolica panstwa Portugalia?', 'Lizbona', '2015-05-17 15:37:10'),
+(231, 'Geografia', 'Stolica panstwa Republika Poludniowej Afryki?', 'Pretoria', '2015-05-18 18:14:15'),
+(232, 'Geografia', 'Stolica panstwa Republika srodkowoafrykanska?', 'Bangi', '2015-05-17 15:21:26'),
+(233, 'Geografia', 'Stolica panstwa Republika Zielonego Przyladka?', 'Praia', '2015-05-19 13:01:55'),
+(234, 'Geografia', 'Stolica panstwa Rosja?', 'Moskwa', '2015-05-19 18:15:50'),
+(235, 'Geografia', 'Stolica panstwa Rumunia?', 'Bukareszt', '2015-05-15 15:45:52'),
+(236, 'Geografia', 'Stolica panstwa Rwanda?', 'Kigali', '2015-05-15 18:07:38'),
+(237, 'Geografia', 'Stolica panstwa Saint Kitts i Nevis?', 'Basseterre', '2015-05-17 18:11:03'),
+(238, 'Geografia', 'Stolica panstwa Saint Lucia?', 'Castries', '2015-04-21 15:16:20'),
+(239, 'Geografia', 'Stolica panstwa Saint Vincent i Grenadyny?', 'Kingstown', '2015-05-10 18:38:17'),
+(240, 'Geografia', 'Stolica panstwa Salwador?', 'San Salvador', '2015-05-09 18:42:48'),
+(241, 'Geografia', 'Stolica panstwa Samoa?', 'Apia', '2015-05-17 18:42:31'),
+(242, 'Geografia', 'Stolica panstwa San Marino?', 'San Marino', '2015-05-18 18:47:33'),
+(243, 'Geografia', 'Stolica panstwa Senegal?', 'Dakar', '2015-04-26 20:13:24'),
+(244, 'Geografia', 'Stolica panstwa Serbia?', 'Belgrad', '2015-04-18 15:56:51'),
+(245, 'Geografia', 'Stolica panstwa Seszele?', 'Victoria', '2015-05-02 20:37:53'),
+(246, 'Geografia', 'Stolica panstwa Sierra Leone?', 'Freetown', '2015-05-06 15:12:26'),
+(247, 'Geografia', 'Stolica panstwa Singapur?', 'Singapur', '2015-05-13 13:42:31'),
+(248, 'Geografia', 'Stolica panstwa Slowacja?', 'Bratyslawa', '2015-05-05 15:03:42'),
+(249, 'Geografia', 'Stolica panstwa Slowenia?', 'Lublana', '2015-05-04 15:10:39'),
+(250, 'Geografia', 'Stolica panstwa Somalia?', 'Mogadiszu', '2015-05-15 13:58:17'),
+(251, 'Geografia', 'Stolica panstwa Stany Zjednoczone?', 'Waszyngton', '2015-05-17 18:49:30'),
+(252, 'Geografia', 'Stolica panstwa Sudan?', 'Chartum', '2015-05-17 15:03:58'),
+(253, 'Geografia', 'Stolica panstwa Sudan Poludniowy?', 'Dzuba', '2015-04-28 15:05:45'),
+(254, 'Geografia', 'Stolica panstwa Surinam?', 'Paramaribo', '2015-03-13 17:51:10'),
+(255, 'Geografia', 'Stolica panstwa Syria?', 'Damaszek', '2015-05-19 15:02:15'),
+(256, 'Geografia', 'Stolica panstwa Szwajcaria?', 'Berno', '2015-04-29 17:39:45'),
+(257, 'Geografia', 'Stolica panstwa Szwecja?', 'Sztokholm', '2015-03-21 15:56:36'),
+(258, 'Geografia', 'Stolica panstwa Tadzykistan?', 'Duszanbe', '2015-05-11 13:17:49'),
+(259, 'Geografia', 'Stolica panstwa Tajlandia?', 'Bangkok', '2015-05-19 15:25:05'),
+(260, 'Geografia', 'Stolica panstwa Timor Wschodni?', 'Dili', '2015-05-15 18:47:56'),
+(261, 'Geografia', 'Stolica panstwa Trynidad i Tobago?', 'Port-of-Spain', '2015-04-27 17:56:05'),
+(262, 'Geografia', 'Stolica panstwa Tunezja?', 'Tunis', '2015-05-07 18:56:35'),
+(263, 'Geografia', 'Stolica panstwa Turcja?', 'Ankara', '2015-04-15 15:44:54'),
+(264, 'Geografia', 'Stolica panstwa Turkmenistan?', 'Aszchabad', '2015-05-19 18:56:06'),
+(265, 'Geografia', 'Stolica panstwa Uganda?', 'Kampala', '2015-05-17 18:02:20'),
+(266, 'Geografia', 'Stolica panstwa Ukraina?', 'Kijow', '2015-04-21 17:54:03'),
+(267, 'Geografia', 'Stolica panstwa Urugwaj?', 'Montevideo', '2015-05-17 18:51:15'),
+(268, 'Geografia', 'Stolica panstwa Uzbekistan?', 'Taszkent', '2015-04-23 15:30:25'),
+(269, 'Geografia', 'Stolica panstwa Vanuatu?', 'Port Vila', '2015-05-13 15:16:06'),
+(270, 'Geografia', 'Stolica panstwa Watykan?', 'Watykan', '2015-05-07 15:00:14'),
+(271, 'Geografia', 'Stolica panstwa Wenezuela?', 'Caracas', '2015-04-23 20:58:01'),
+(272, 'Geografia', 'Stolica panstwa Wegry?', 'Budapeszt', '2015-05-09 15:35:53'),
+(273, 'Geografia', 'Stolica panstwa Wielka Brytania?', 'Londyn', '2015-03-27 15:17:54'),
+(274, 'Geografia', 'Stolica panstwa Wietnam?', 'Hanoi', '2015-04-26 17:31:02'),
+(275, 'Geografia', 'Stolica panstwa Wlochy?', 'Rzym', '2015-05-09 13:49:21'),
+(276, 'Geografia', 'Stolica panstwa Wyspy Marshalla?', 'Majuro', '2015-04-12 20:02:17'),
+(277, 'Geografia', 'Stolica panstwa Wyspy Salomona?', 'Honiara', '2015-04-25 15:50:26'),
+(278, 'Geografia', 'Stolica panstwa Zambia?', 'Lusaka', '2015-05-16 13:47:28'),
+(279, 'Geografia', 'Stolica panstwa Zimbabwe?', 'Harare', '2015-05-18 18:58:03'),
+(281, 'Sport', 'Jaki był wynik finałowego meczu euro w 2012 roku?', '4:0', '2015-05-05 15:58:26'),
+(282, 'Sport', 'Gdzie odbyl sie finalowy mecz euro w 2012 roku?', 'Kijow', '2015-05-15 15:16:01'),
+(283, 'Sport', 'Gdzie odbyl sie mecz otwarcia euro w 2012 roku?', 'Warszawa', '2015-05-16 15:07:46'),
+(284, 'Sport', 'Jak nazywala sie pilka ktora grali pilkarze podczas mundialu w 2010r. w RPA?', 'jabulani', '2015-05-13 13:21:22'),
+(285, 'Sport', 'Kto strzelil bramke dla Polakow w meczu otwarcia euro 2012?', 'Robert Lewandowski', '2015-03-21 20:28:22'),
+(286, 'Sport', 'Co ile lat odbywaja sie mistrzostwa swiata w pilce noznej?', 'co 4', '2015-04-17 17:43:08'),
+(287, 'Sport', 'Ile minut trwa dogrywka w meczu pilki noznej?', '30', '2015-05-12 15:08:58'),
+(288, 'Sport', 'Gdzie odbyl sie finalowy mecz Ligi Mistrzow w 2013 roku?', 'Wembley', '2015-04-23 20:47:18'),
+(289, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1930 roku? ', 'Urugwaj', '2015-05-05 20:28:23'),
+(290, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1934 roku? ', 'Wlochy', '2015-05-08 18:42:04'),
+(291, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1938 roku?', 'Francja', '2015-05-06 17:35:27'),
+(292, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1950 roku?', 'Brazylia', '2015-04-26 20:27:42'),
+(293, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1954 roku?', 'Szwajcaria', '2015-04-26 15:53:51'),
+(294, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1958 roku? ', 'Szwecja', '2015-05-17 13:56:06'),
+(295, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1962 roku? ', 'Chile', '2015-05-04 17:24:49'),
+(296, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1966 roku?', 'Anglia', '2015-05-19 18:21:05'),
+(297, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1970 roku? ', 'Meksyk', '2015-04-24 20:20:23'),
+(298, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1974 roku? ', 'RFN', '2015-05-07 17:09:05'),
+(299, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1978 roku? ', 'Argentyna', '2015-03-30 17:12:44'),
+(300, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1982 roku?', 'Hiszpania', '2015-05-04 15:00:05'),
+(301, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1986 roku? ', 'Meksyk', '2015-05-16 13:24:42'),
+(302, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1990 roku?', 'Wlochy', '2015-05-18 15:55:01'),
+(303, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1994 roku?', 'Stany Zjednoczone', '2015-04-24 15:41:31'),
+(304, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 1998 roku?', 'Francja', '2015-05-10 18:05:13'),
+(305, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2002 roku?', 'Korea Poludniowa i Japonia', '2015-05-19 15:18:03'),
+(306, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2006 roku?', 'Niemcy', '2015-05-11 13:58:11'),
+(307, 'Sport', 'Gdzie odbyly sie Mistrzostwa Swiata w Pilce Noznej w 2010 roku?', 'RPA', '2015-05-02 15:10:57'),
+(308, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2014 roku?', 'Brazylia', '2015-05-16 18:56:48'),
+(309, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2018 roku?', 'Rosja', '2015-04-17 17:44:55'),
+(310, 'Sport', 'Gdzie odbeda sie Mistrzostwa Swiata w Pilce Noznej w 2022 roku?', 'Katar', '2015-05-03 15:57:05'),
+(311, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1960 roku?', 'Francja', '2015-04-18 20:48:23'),
+(312, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1964 roku?', 'Hiszpania', '2015-03-29 15:42:04'),
+(313, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1968 roku? ', 'Wlochy', '2015-04-30 17:29:13'),
+(314, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1972 roku?', 'Belgia', '2015-05-06 15:03:37'),
+(315, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1976 roku?', 'Jugoslawia', '2015-05-17 13:52:35'),
+(316, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1980 roku?', 'Wlochy', '2015-05-15 15:05:29'),
+(317, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1984 roku?', 'Francja', '2015-05-12 18:14:38'),
+(318, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1988 roku? ', 'RFN', '2015-05-14 15:51:13'),
+(319, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1992 roku?', 'Szwecja', '2015-04-03 17:12:49'),
+(320, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 1996 roku?', 'Anglia', '2015-05-04 15:58:17'),
+(321, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2000 roku?', 'Belgia i Holandia', '2015-05-15 18:00:37'),
+(322, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2004 roku?', 'Portugalia', '2015-03-29 17:07:48'),
+(323, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2008 roku?', 'Austria i Szwajcaria', '2015-05-19 18:05:22'),
+(324, 'Historia', 'Podaj rok, w ktorym upadlo cesarstwo Zachodniorzymskie', '476', '2015-05-06 20:07:25'),
+(325, 'Historia', 'Podaj rok, w ktorym koronowano Karola Wielkiego na cesarza', '800', '2015-05-17 15:07:27'),
+(326, 'Historia', 'Podaj rok, w ktorym nastapil chrzest Polski', '966', '2015-04-12 20:45:03'),
+(327, 'Historia', 'Podaj rok bitwy pod Cedynia', '972', '2015-05-16 13:12:26'),
+(328, 'Historia', 'Podaj rok zjazdu gnieznienskiego', '1000', '2015-05-05 20:16:02'),
+(329, 'Historia', 'Podaj rok koronacji Boleslawa Chrobrego na krola Polski', '1025', '2015-05-14 13:02:00'),
+(330, 'Historia', 'Podaj rok bitwy pod Legnica', '1241', '2015-05-02 17:02:38'),
+(331, 'Historia', 'Podaj rok koronacji Wladyslawa lokietka na krola Polski', '1320', '2015-05-11 18:37:05'),
+(332, 'Historia', 'Podaj rok smierci krola Kazimiera, ostatniego Piasta na tronie polskim', '1370', '2015-05-19 13:59:53'),
+(333, 'Historia', 'Podaj rok koronacji Jadwigi na krolowa Polski', '1384', '2015-05-13 15:02:04'),
+(334, 'Historia', 'Podaj rok odkrycia Ameryki przez Kolumba', '1492', '2015-04-25 15:02:03'),
+(335, 'Historia', 'Podaj rok I rozbioru Polski', '1772', '2015-04-14 20:09:42'),
+(336, 'Historia', 'Podaj rok II rozbioru Polski', '1793', '2015-05-17 13:05:21'),
+(337, 'Historia', 'Podaj rok III rozbioru Polski', '1795', '2015-05-18 13:30:05'),
+(338, 'Historia', 'Podaj rok wybuchu I Wojny swiatowej', '1914', '2015-05-13 18:18:01'),
+(339, 'Historia', 'Podaj rok, w ktorym Gagarin polecial w kosmos', '1960', '2015-04-04 20:12:58'),
+(340, 'Historia', 'Podaj rok, w ktorym Lech Walesa zostal prezydentem', '1990', '2015-05-01 20:43:24'),
+(341, 'Historia', 'Podaj rok, w ktorym utworzono Unie Europejska', '1993', '2015-05-19 18:19:20'),
+(342, 'Astronomia', 'Jak nazywa sie gwiazda polozona najblizej Ziemi?', 'Slonce', '2015-05-07 18:14:29'),
+(343, 'Astronomia', 'Ktora z planet Ukladu Slonecznego jest najwieksza?', 'Jowisz', '2015-04-29 17:29:03'),
+(344, 'Astronomia', 'Jak nazywa sie naturalny satelita Ziemi?', 'Ksiezyc', '2015-04-30 17:36:20'),
+(345, 'Astronomia', 'Podaj imie i nazwisko polskiego astronoma, ktory "wstrzymal Slonce i ruszyl Ziemie"', 'Mikolaj Kopernik', '2015-05-07 18:09:11'),
+(346, 'Astronomia', 'Ktora planeta Ukladu Slonecznego jest najzimniejsza?', 'Neptun', '2015-04-14 17:20:03'),
+(347, 'Astronomia', 'Ktora planeta jest najblizej slonca?', 'Merkury', '2015-03-21 17:37:16'),
+(348, 'Astronomia', 'Podaj imie i nazwisko pierwszej kobiety kosmonautki, ktora poleciala w kosmos.', 'Walentyna Tiereszkowa', '2015-05-19 18:22:50'),
+(349, 'Gry', 'W ktorym roku wydana zostala gra GTA 4?', '2008', '2015-05-15 13:45:57'),
+(350, 'Gry', 'Jak nazywa sie skorumpowany policjant, ktorego scigamy w ostatniej misji GTA SA?', 'Tenpenny', '2015-05-11 15:58:23'),
+(351, 'Gry', 'Jak nazywa sie protagonista w grze GTA San Andreas?', 'Carl Johnson', '2015-05-15 15:59:56'),
+(352, 'Gry', 'Jak nazywa sie protagonista w grze GTA 4', 'Niko Bellic', '2015-05-16 13:35:13'),
+(353, 'Gry', 'Jak nazywa sie protagonista w grze GTA III', 'Claude Speed', '2015-03-22 17:12:55'),
+(354, 'Gry', 'Jak nazywa sie protagonista w grze GTA Vice City', 'Tommy Vercetti', '2015-05-17 15:28:26'),
+(355, 'Filmy', 'Indyjski odpowiednik Hollywood?', 'Bollywood', '2015-05-18 18:40:33'),
+(356, 'Geografia', 'Ktory kraj Europy jest najgesciej zaludniony (osoba/km^2)?', 'Monako', '2015-05-15 18:18:09'),
+(357, 'Astronomia', 'Jak nazywa sie najglebiej polozona czesc planety?', 'Jadro', '2015-05-19 15:46:09'),
+(358, 'Astronomia', 'Jak nazywa sie warstwa gazow otaczajaca wiekszosc planet i niektore ksiezyce?', 'Atmosfera', '2015-05-03 20:55:43'),
+(359, 'Astronomia', 'Jak nazywa sie szlak, po ktorym porusza sie planeta wokol Slonca lub ksiezyc dookola planety?', 'Orbita', '2015-04-23 15:25:04'),
+(360, 'Astronomia', 'Jedna z wewnetrznych warstw planety, zlokalizowany ponizej skorupy.', 'Plaszcz', '2015-05-11 13:26:37'),
+(361, 'Astronomia', 'Punkt po przeciwnej stronie niz zenit?', 'nadir', '2015-04-24 20:15:01'),
+(362, 'Astronomia', 'Jak sie nazywa najstarszy wahadlowiec?', 'Columbia', '2015-03-28 17:59:25'),
+(363, 'Astronomia', 'Jak sie nazywa wlascicielka rekordu najdluzszego pobytu kobiety w kosmosie?', 'Lucid', '2015-05-13 13:23:08'),
+(364, 'Astronomia', 'Kto pierwszy opisal kanaly na Marsie?', 'Schiaparelli', '2015-05-05 20:08:59'),
+(365, 'Astronomia', 'Jak sie nazywa najdalszy ksiezyc Urana?', 'Setebos', '2015-05-05 20:51:19'),
+(366, 'Astronomia', 'Ile ksiezycow ma Neptun?', '11', '2015-04-30 15:39:36'),
+(367, 'Astronomia', '3.26 roku swietlnego to inaczej... ?', 'parsek', '2015-04-22 17:32:40'),
+(368, 'Astronomia', 'Jaka jest najjasniejsza gwiazda na polskim niebie?', 'Slonce', '2015-05-19 15:12:47'),
+(369, 'Astronomia', 'Jaka planeta ma orbite najbardziej zblizona do okregu?', 'Wenus', '2015-05-12 15:05:28'),
+(370, 'Astronomia', 'Z jakiego filmu pochodzila nazwa pierwszego wahadlowca?', 'Star Trek', '2015-05-09 18:05:57'),
+(371, 'Sport', 'Gdzie odbyly sie Mistrzostwa Europy w Pilce Noznej w 2012 roku? ', 'Polska i Ukraina', '2015-05-19 15:53:10'),
+(372, 'Sport', 'Gdzie odbeda sie Mistrzostwa Europy w Pilce Noznej w 2016 roku?', 'Francja', '2015-04-24 20:54:21'),
+(373, 'Sport', 'W jakiej miejscowosci Robert Lewandowski strzelil swoja pierwsza bramke dla reprezentacji Polski?', 'Serravelle', '2015-05-16 18:18:24'),
+(374, 'Sport', 'Jak nazywana jest federacja regionalna Ameryki Polnocnej?', 'CONCACAF', '2015-04-30 17:57:44'),
+(375, 'Sport', 'Ilu znajduje sie sedziow na meczu pilki noznej?', 'szesciu', '2015-04-22 17:11:14'),
+(376, 'Sport', 'W jakim klubie gra Marcin Gortat?', 'Washington Wizadrs', '2015-04-27 15:26:57'),
+(377, 'Sport', 'Ile minut trwa mecz pilki recznej?', '60', '2015-04-23 20:27:39'),
+(378, 'Sport', 'Z ilu kwart sklada sie mecz koszykowki?', 'czterech', '2015-03-14 20:42:21'),
+(379, 'Sport', 'W ktorym z wielkoszlemowych turniejow Agnieszka Radwanska pokonala Marie Szarapowa?', 'US Open', '2015-04-24 15:21:51'),
+(380, 'Sport', 'Kto zaprojektowal flage olimpijska?', 'Pierre de Coubertin', '2015-04-26 20:16:59'),
+(381, 'Sport', 'Ile kol ma flaga olimpijska?', 'piec', '2015-05-19 18:24:35'),
+(382, 'Sport', 'Co oznaczaja kolory kol na fladze olimpijskiej?', 'kontynenty', '2015-05-07 17:03:48'),
+(383, 'Sport', 'Nazwa sportu zimowego, w ktorym jezdzi sie na jednej desce to ...', 'snowboard', '2015-05-18 18:45:48'),
+(384, 'Przyslowia', 'Baba z wozu ...', 'koniom lzej', '2015-05-14 18:35:18'),
+(385, 'Sport', 'Nazwa pojazdu Formuly 1?', 'bolid', '2015-05-17 18:26:46'),
+(386, 'Rozne', 'Dziedzina nauki, ktora zajmuije sie badaniem pogody?', 'meteorologia', '2015-04-18 15:58:37'),
+(387, 'Przyslowia', 'Gdy sie czlowiek spieszy ...', 'to sie diabel cieszy', '2015-04-16 15:16:20'),
+(388, 'Formula 1', 'Ktory z kierowcow zdobyl najwiecej tytulow mistrza swiata F1?', 'Michael Schumacher', '2015-05-07 17:10:50'),
+(389, 'Formula 1', 'Jak w skrocie nazywa sie Miedzynarodowa Federacja Samochodowa?', 'FIA', '2015-05-16 13:52:42'),
+(390, 'Formula 1', 'Z ilu wyscigow skladal sie pierwszy sezon F1 w 1950 roku?', 'siedmiu', '2015-05-03 15:01:54'),
+(391, 'Formula 1', 'Kto w GP Australi wykluczyl szanse na dojechanie do mety Roberta Kubicy niszczac mu tylne zawieszenie?', 'Kazuki Nakajima', '2015-05-16 18:46:22'),
+(392, 'Formula 1', 'W ktorym roku zadebiutowala Formula 1?', '1950', '2015-05-08 15:51:33'),
+(393, 'Motoryzacja', 'Od ktorego roku produkowane sa samochody BMW?', '1913', '2015-05-03 15:28:37'),
+(394, 'Motoryzacja', 'Jakiego koloru byl ostatni wyprodukowany FIAT 126 Maluch?', 'zolty', '2015-05-16 13:21:12'),
+(395, 'Mitologia', 'Grecka bogini pieknosci to?', 'afrodyta', '2015-05-03 20:09:27'),
+(396, 'Mitologia', 'Matka Heraklesa byla...', 'Alkmena', '2015-05-11 15:14:28'),
+(397, 'Mitologia', 'Kto byl ojcem Heraklesa?', 'Zeus', '2015-05-19 18:36:51'),
+(398, 'Mitologia', 'Kto byl przywodca wyprawy po zlote runo?', 'Jazon', '2015-05-14 18:54:31'),
+(399, 'Mitologia', 'Jak nazywaja se boginki lasow, wod i pol?', 'nimfy', '2015-04-20 20:18:08'),
+(400, 'Mitologia', 'Jak nazywa sie siedziba bogow greckich?', 'Olimp', '2015-05-09 15:27:07'),
+(401, 'Mitologia', 'Czarodziejka, ktora zamienila towarzyszy Odysa w wieprze to...', 'Kirke', '2015-05-14 18:58:01'),
+(402, 'Mitologia', 'Greckim bogiem wojny byl...', 'Ares', '2015-04-27 15:23:23'),
+(403, 'Mitologia', 'Jak nazywal sie statek argonautow?', 'Argo', '2015-04-19 20:11:22'),
+(404, 'Mitologia', 'zona Odyseusza byla...', 'Penelopa', '2015-05-16 18:11:22'),
+(405, 'Mitologia', 'Ukochana Erosa to...', 'Psyche', '2015-05-13 13:05:30'),
+(406, 'Mitologia', 'zona Zeusa jest...', 'Hera', '2015-04-22 17:02:18'),
+(407, 'Mitologia', 'Ile jest muz w mitologii greckiej?', 'dziewiec', '2015-05-03 17:15:01'),
+(408, 'Informatyka', 'Rozwin skrot WWW', 'World Wide Web', '2015-05-19 15:19:49'),
+(409, 'Informatyka', 'Szerokopasmowa transmisja danych umozliwiajaca korzystanie z internetu metoda bezprzewodowa to...', 'UMTS', '2015-05-18 18:01:59'),
+(410, 'Informatyka', 'Protokol wykorzystywany do komunikacji ze stronami WWW to...', 'HTTP', '2015-05-15 13:23:04'),
+(411, 'Informatyka', 'Urzadzenie pozwalajace na przesylanie informacji miedzy komputerami za pomoca linii telefonicznych to...', 'modem', '2015-05-02 15:23:23'),
+(412, 'Astronomia', 'Jak nazywa sie gwiazdozbior, w ktorego sklad wchodzi Gwiazda Polarna?', 'Mala Niedzwiedzica', '2015-05-02 20:21:54'),
+(413, 'Astronomia', 'Jak nazywa sie wiekszy z dwoch ksiezycow Marsa?', 'Fobos', '2015-05-06 15:28:18'),
+(414, 'Astronomia', 'Jak nazywa sie mniejszy z dwoch ksiezycow Marsa?', 'Deimos', '2015-05-14 13:03:46'),
+(415, 'Astronomia', 'Jak nazywa sie galaktyka, w ktorej znajduje sie Ziemia?', 'Droga Mleczna', '2015-04-15 17:50:39'),
+(416, 'Astronomia', 'W jakim miescie znajduje sie najwieksze polskie planetarium?', 'Chorzow', '2015-04-16 20:00:26'),
+(417, 'Geografia', 'Jakie miasto bylo pierwsza stolica Polski?', 'Gniezno', '2015-03-30 20:18:04'),
+(418, 'Geografia', 'Jakie miasto bylo druga stolica Polski?', 'Krakow', '2015-05-13 15:56:25'),
+(419, 'Geografia', 'Ile metrow n.p.m. wznosi sie najwyzszy szczyt polski - Rysy?', '2499', '2015-05-09 18:02:26'),
+(420, 'Geografia', 'Ile jest aktualnie w Polsce wojewodztw?', '16', '2015-05-18 18:30:01'),
+(421, 'Geografia', 'Ktore polskie wojewodztwo ma najmniejsza powierzchnie?', 'opolskie', '2015-05-19 13:58:08'),
+(422, 'Geografia', 'Ktore polskie wojewodztwo ma najmniejsza liczbe ludnosci?', 'lubuskie', '2015-05-08 13:59:58'),
+(423, 'Informatyka', 'Najlepiej sprzedajacy sie model komputera w historii to?', 'Commodore 64', '2015-05-13 13:14:19'),
+(424, 'Motoryzacja', 'W jakim miescie byly produkowane samochody dostawcze FSC Zuk?', 'Lublin', '2015-05-14 15:47:43'),
+(425, 'Przyslowia', 'Niedaleko pada...', 'jablko od jabloni', '2015-05-12 15:00:12'),
+(426, 'Przyslowia', 'Bez pracy...', 'nie ma kolaczy', '2015-05-18 18:59:48'),
+(427, 'Przyslowia', 'Komu w droge..', 'temu czas', '2015-05-19 15:11:02'),
+(428, 'Przyslowia', 'Gdzie kucharek szesc...', 'tam nie ma co jesc', '2015-05-13 18:21:30'),
+(429, 'Sport', 'Ile razy Ruch Chorzow i Gornik Zabrze zdobyly MP w pilce noznej?', '14', '2015-05-10 18:36:32'),
+(430, 'Sport', 'Kto zdobyl najwiecej goli dla reprezentacji Polski w pilce noznej?', 'Wlodzimierz Lubanski', '2015-05-13 18:00:32'),
+(431, 'Sport', 'Ktory polski bramkarz to "czlowiek, ktory zatrzymal Anglie"?', 'Jan Tomaszewski', '2015-05-02 17:57:52'),
+(432, 'Sport', 'Ktory polski trener mawial "pilka jest okragla, a bramki sa dwie"?', 'Kazimierz Gorski', '2015-05-04 20:44:19'),
+(433, 'Sport', 'Kto jest rekordzista Polski w dlugosci lotu narciarskiego?', 'Piotr Zyla i Kamil Stoch', '2015-05-11 13:52:55'),
+(434, 'Sport', 'Kto jest rekordzista swiata w długosci lotu narciarskiego?', 'Johan Remen Evensen', '2015-05-05 15:05:28'),
+(435, 'Sport', 'Jak nazywa sie najbardziej znana skocznia narciarska w Polsce?', 'Wielka Krokiew', '2015-05-19 13:38:49'),
+(436, 'Sport', 'Kto ma najwiecej zwyciestw w konkursach PS w skokach narciarskich?', 'Gregor Schlierenzauer', '2015-03-31 20:34:56'),
+(437, 'Sport', 'Ile razy Adam Malysz stal na podium zawodow PS w skokach narciarskich?', '92', '2015-05-16 15:23:36'),
+(438, 'Sport', 'Jaki skoczek narciarski 5-krotnie wygrywal Turniej Czterech Skoczni?', 'Janne Ahonen', '2015-05-17 15:14:27'),
+(439, 'Sport', 'W jakim miescie znajduje sie najwieksza mamucia skocznia narciarska?', 'Vikersund', '2015-05-19 15:49:39'),
+(440, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ssakow ladowych to?', 'Slon afrykanski', '2015-05-04 15:15:56'),
+(441, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ssakow to?', 'Pletwal blekitny', '2015-03-25 17:05:39'),
+(442, 'Zoologia', 'Najszybsze zwierze ladowe to?', 'Gepard', '2015-05-09 15:30:38'),
+(443, 'Zoologia', 'Jaki gatunek zwierzecia potrafi wytworzyc napiecie 600V?', 'Wegorz elektryczny', '2015-05-18 15:18:21'),
+(444, 'Film', 'Jak ma na nazwisko aktor, odtworca glownych rol w filmach "Rambo"?', 'Stallone', '2015-04-20 17:32:37'),
+(445, 'Film', 'Jaki podtytul nosi pierwsza czesc trylogii "Wladca Pierscieni"?', 'Druzyna Pierscienia', '2015-05-17 13:38:35'),
+(446, 'Film', 'Jaki podtytul nosi druga czesc trylogii "Wladca Pierscieni"?', 'Dwie Wieze', '2015-05-18 18:21:15'),
+(447, 'Film', 'Jaki podtytul nosi trzecia czesc trylogii "Wladca Pierscieni"?', 'Powrot Krola', '2015-04-26 20:04:27'),
+(448, 'Film', 'Podaj nazwisko aktora, odtworce filmowej roli Terminatora T-800?', 'Schwarzenegger', '2015-05-12 15:21:16'),
+(449, 'Matematyka', 'Ile wynosi pierwiastek 3-go stopnia z 64?', '4', '2015-05-06 15:30:03'),
+(450, 'Matematyka', 'Ile wierzcholkow ma szescian?', '8', '2015-04-21 17:25:34'),
+(451, 'Matematyka', 'Ile krawedzi ma szescian?', '12', '2015-04-27 17:23:52'),
+(452, 'Matematyka', 'Ile krawedzi ma ostroslup o podstawie trojkata?', '6', '2015-04-10 15:55:27'),
+(453, 'Matematyka', 'Ile wynosi 2 do 6-tej potegi?', '64', '2015-05-15 13:05:30'),
+(454, 'Matematyka', 'Jak nazywa sie odwrotnosc calki?', 'rozniczka', '2015-04-28 15:20:04'),
+(455, 'Fizyka', 'Jak nazywa sie jednostka pracy w ukladzie SI?', 'dzul', '2015-04-29 17:18:20'),
+(456, 'Fizyka', 'Jak nazywa sie jednostka mocy w ukladzie SI?', 'wat', '2015-05-07 17:02:03'),
+(457, 'Fizyka', 'Jak nazywa sie jednostka cisnienia w ukladzie SI?', 'paskal', '2015-05-09 18:09:28'),
+(458, 'Fizyka', 'Jak nazywa sie jednostka sily w ukladzie SI?', 'niuton', '2015-05-02 15:34:03'),
+(459, 'Fizyka', 'Jak nazywa sie jednostka napiecia elektrycznego w ukladzie SI?', 'wolt', '2015-05-13 15:31:51'),
+(460, 'Fizyka', 'Jak nazywa sie jednostka pojemnosci elektrycznej w ukladzie SI?', 'farad', '2015-04-22 20:48:47'),
+(461, 'Fizyka', 'Jak nazywa sie jednostka natezenia pradu elektrycznego w ukladzie SI?', 'amper', '2015-05-11 15:26:46'),
+(462, 'Fizyka', 'Jak nazywa sie jednostka oporu elektrycznego w ukladzie SI?', 'om', '2015-05-08 15:33:57'),
+(463, 'Fizyka', 'Jak nazywa sie jednostka czestotliwosci w ukladzie SI?', 'herc', '2015-05-05 20:49:33'),
+(464, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia ciala stalego w gaz?', 'sublimacja', '2015-05-12 13:26:40'),
+(465, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia gazu w cialo stale?', 'resublimacja', '2015-05-18 15:06:04'),
+(466, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia ciala stalego w ciecz?', 'topnienie', '2015-05-17 18:39:01'),
+(467, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia cieczy w cialo stale?', 'krzepniecie', '2015-05-05 17:14:20'),
+(468, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia gazu w ciecz?', 'skraplanie', '2015-05-09 18:39:18'),
+(469, 'Fizyka', 'Jak nazywa sie zmiana stanu skupienia cieczy w gaz?', 'parowanie', '2015-05-16 15:55:15'),
+(470, 'Fizyka', 'Przyrzad do pomiaru wydzielanego lub pobieranego ciepla to?', 'kalorymetr', '2015-03-08 17:33:30'),
+(471, 'Fizyka', 'Przyrzad do pomiaru gestosci cieczy to?', 'areometr', '2015-04-18 17:28:39'),
+(472, 'Fizyka', 'Przyrzad do pomiaru cisnienia to?', 'manometr', '2015-05-19 13:00:10'),
+(473, 'Geografia', 'Linie laczace punkty na mapie o takiej samej wartosci cisnienia to?', 'izobary', '2015-05-18 18:10:46'),
+(474, 'Geografia', 'Linie laczace punkty na mapie o takiej samej wartosci temperatury to?', 'izotermy', '2015-05-14 15:42:26'),
+(475, 'Geografia', 'Jaka jest druga nazwa najwyzszego szczytu swiata Mount Everest?', 'Czomolungma', '2015-04-30 15:14:33'),
+(476, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu Polski Fiat 126p?', '1973', '2015-05-09 13:42:21'),
+(477, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu FSO Polonez?', '1978', '2015-04-28 20:20:18'),
+(478, 'Motoryzacja', 'W ktorym roku rozpoczela sie produkcja samochodu Polski Fiat 125p?', '1967', '2015-05-11 18:12:38'),
+(479, 'Literatura', 'Z ilu ksiag sklada sie "Pan Tadeusz"?', '12', '2015-05-16 18:23:40'),
+(480, 'Informatyka', 'Rozwin skrot RAM', 'Random Access Memory', '2015-05-18 18:33:32'),
+(481, 'Informatyka', 'Rozwin skrot ROM', 'Read Only Memory', '2015-05-09 15:00:50'),
+(482, 'Informatyka', 'Jeden bajt to ile bitow?', '8', '2015-05-03 15:23:16'),
+(483, 'Informatyka', 'Jeden kilobajt to ile bajtow?', '1024', '2015-04-23 15:46:30'),
+(484, 'Informatyka', 'Liczba binarna 101101 jest rowna jakiej liczbie dziesiatkowej?', '45', '2015-05-14 13:47:44'),
+(485, 'Informatyka', 'Liczba szesnastkowa FF jest rowna jakiej liczbie dziesiatkowej?', '255', '2015-05-18 15:25:21'),
+(486, 'Rozne', 'Z ilu liter sklada sie polski alfabet?', '32', '2015-05-15 18:04:07'),
+(487, 'Historia', 'Podaj rok Holdu Pruskiego?', '1525', '2015-05-04 20:07:21'),
+(488, 'Literatura', 'Jak mial na imie Pan Kleks z "Akademii Pana Kleksa"?', 'Ambrozy', '2015-05-19 18:03:37'),
+(489, 'Biologia', 'Ile czlowiek ma par zeber?', '12', '2015-05-01 20:23:47'),
+(490, 'Biologia', 'Ile dorosly czlowiek ma zebow?', '32', '2015-05-16 13:03:41'),
+(491, 'Biologia', 'Jaka jest najpospolitsza wsrod ludzi grupa krwi?', '0', '2015-05-16 15:00:44'),
+(492, 'Biologia', 'Jaka jest najrzadsza wsrod ludzi grupa krwi?', 'AB', '2015-04-17 17:59:08'),
+(493, 'Biologia', 'Najpospolitszym drzewem Polski jest?', 'sosna', '2015-05-07 17:54:48'),
+(494, 'Biologia', 'Jak nazywa sie hormon obnizajacy poziom cukru we krwi?', 'insulina', '2015-04-19 20:22:02'),
+(495, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow ptakow to?', 'Strus afrykanski', '2015-04-17 17:25:21'),
+(496, 'Zoologia', 'Najwiekszy ze wspolczesnie zyjacych gatunkow wezy to?', 'Pyton siatkowy', '2015-05-13 18:14:31'),
+(497, 'Astronomia', 'Ile osob do tej pory stanelo na Ksiezycu?', '12', '2015-05-07 15:51:17'),
+(498, 'Astronomia', 'Jak nazywa sie najwiekszy ksiezyc Plutona?', 'Charon', '2015-05-15 15:33:34'),
+(499, 'Literatura', 'Jak nazywa sie autor powiesci "Lalka"?', 'Boleslaw Prus', '2015-04-15 20:22:03'),
+(500, 'Literatura', 'Jak nazywa sie autor dramatu "Dziady"?', 'Adam Mickiewicz', '2015-05-19 18:50:51'),
+(501, 'Literatura', 'Jak nazywa sie autor powiesci "Chlopi"?', 'Wladyslaw Reymont', '2015-05-16 18:39:25'),
+(502, 'Literatura', 'Jak nazywa sie autor powiesci "Przedwiosnie"?', 'Stefan Zeromski', '2015-05-18 13:17:49'),
+(503, 'Literatura', 'Jak nazywa sie autor noweli "Janko Muzykant"?', 'Henryk Sienkiewicz', '2015-03-18 20:32:04'),
+(504, 'Literatura', 'Jaka polska pisarka otrzymala literacka nagrode Nobla w 1996?', 'Wislawa Szymborska', '2015-05-09 15:53:27'),
+(505, 'Literatura', 'Jak nazywa sie autorka powiesci "Nad Niemnem"?', 'Eliza Orzeszkowa', '2015-05-12 15:54:36'),
+(506, 'Literatura', 'Autor licznych bajek i satyr, m.in. "Kruk i lis", "Zona modna" to?', 'Ignacy Krasicki', '2015-03-26 20:55:50'),
+(507, 'Literatura', 'Jak brzmi prawdziwe imie i nazwisko Boleslawa Prusa?', 'Aleksander Glowacki', '2015-03-30 20:21:33'),
+(508, 'Literatura', 'Jak nazywa sie autor dramatu "Odprawa poslow greckich"?', 'Jan Kochanowski', '2015-05-17 13:08:50'),
+(509, 'Literatura', 'Jak nazywa sie autor tragedii "Balladyna"?', 'Juliusz Slowacki', '2015-05-18 13:19:34'),
+(510, 'Literatura', 'Jak nazywa sie autor komedii "Zemsta"?', 'Aleksander Fredro', '2015-05-13 15:40:37'),
+(511, 'Literatura', 'Jak nazywa sie autorka wiersza "Rota"?', 'Maria Konopnicka', '2015-05-16 15:04:15'),
+(512, 'Literatura', 'Jak nazywa sie autor dramatu "Wesele"?', 'Stanislaw Wyspianski', '2015-05-13 13:40:45'),
+(513, 'Literatura', 'Jak nazywa sie autorka dramatu "Moralnosc pani Dulskiej"?', 'Gabriela Zapolska', '2015-05-18 18:54:33'),
+(514, 'Literatura', 'Jak nazywa sie autor dramatu "Antygona"?', 'Sofokles', '2015-05-16 13:08:56'),
+(515, 'Literatura', 'Kto jest znany ze zwrotu: "Polacy nie gesi, i swoj jezyk maja"?', 'Mikolaj Rej', '2015-05-19 13:47:36'),
+(516, 'Literatura', 'Jak nazywa sie autor poematu "Boska Komedia"?', 'Dante Alighieri', '2015-05-18 13:47:36'),
+(517, 'Literatura', 'Jaka epoka literacka nastapila po renesansie?', 'barok', '2015-05-07 15:31:56'),
+(518, 'Literatura', 'Jaka epoka literacka nastapila po baroku?', 'oswiecenie', '2015-05-15 15:54:39'),
+(519, 'Literatura', 'Jaka epoka literacka nastapila po oswieceniu?', 'romantyzm', '2015-05-17 13:42:05'),
+(520, 'Literatura', 'Jaka epoka literacka nastapila po romantyzmie?', 'pozytywizm', '2015-05-17 18:12:48'),
+(521, 'Literatura', 'Jak nazywa sie trzeci rodzaj literacki po epice i liryce?', 'dramat', '2015-05-17 18:35:30'),
+(522, 'Literatura', 'Utwor liryczny o charakterze zalobnym to?', 'tren', '2015-05-16 18:06:07'),
+(523, 'Informatyka', 'Rozwin skrot AMD', 'Advanced Micro Devices', '2015-04-17 20:16:31'),
+(524, 'Informatyka', 'Rozwin skrot BIOS', 'Basic Input Output System', '2015-05-11 13:40:38'),
+(525, 'Informatyka', 'Rozwin skrot CPU', 'Central Processing Unit', '2015-05-02 15:42:56'),
+(526, 'Informatyka', 'Rozwin skrot FDD', 'Floppy Disk Drive', '2015-05-19 13:12:27'),
+(527, 'Informatyka', 'Rozwin skrot FTP', 'File Transfer Protocol', '2015-05-15 18:33:57'),
+(528, 'Informatyka', 'Rozwin skrot FAT', 'File Allocation Table', '2015-04-16 17:16:45'),
+(529, 'Informatyka', 'Rozwin skrot LAN', 'Local Area Network', '2015-05-19 13:35:18'),
+(530, 'Informatyka', 'Rozwin skrot MBR', 'Master Boot Record', '2015-04-22 15:37:59'),
+(531, 'Informatyka', 'Rozwin skrot NTFS', 'New Technology File System', '2015-04-28 15:55:53'),
+(532, 'Informatyka', 'Rozwin skrot P2P', 'Peer To Peer', '2015-05-07 17:17:52'),
+(533, 'Informatyka', 'Rozwin skrot PCI', 'Peripheral Component Interconnect', '2015-04-15 20:11:21'),
+(534, 'Informatyka', 'Rozwin skrot RGB', 'Red Green Blue', '2015-05-15 18:46:11'),
+(535, 'Informatyka', 'Rozwin skrot IP', 'Internet Protocol', '2015-04-02 15:43:40'),
+(536, 'Informatyka', 'Rozwin skrot USB', 'Universal Serial Bus', '2015-03-07 17:16:25'),
+(537, 'Informatyka', 'Rozwin skrot WAN', 'Wide Area Network', '2015-04-19 15:33:50'),
+(538, 'Informatyka', 'Rozwin skrot Wi-Fi', 'Wireless Fidelity', '2015-05-18 15:11:20'),
+(539, 'Informatyka', 'Rozwin skrot CMYK', 'Cyan Magenta Yellow BlacK', '2015-05-09 18:58:32'),
+(540, 'Informatyka', 'Rozwin skrot HDD', 'Hard Disk Drive', '2015-05-07 15:49:32'),
+(541, 'Fizyka', 'Podaj nazwisko odkrywcy zjawiska indukcji elektromagnetycznej', 'Faraday', '2015-05-19 13:08:56'),
+(542, 'Rozne', 'Podaj nazwisko wynalazcy telefonu', 'Bell', '2015-05-14 13:44:13'),
+(543, 'Rozne', 'Podaj nazwisko wynalazcy zarowki elektrycznej', 'Edison', '2015-04-16 17:48:50'),
+(544, 'Rozne', 'Podaj nazwisko wynalazcy szczepionki przeciwko wsciekliznie', 'Pasteur', '2015-05-05 20:31:55'),
+(545, 'Rozne', 'Podaj nazwisko wynalazcy lampy naftowej', 'Lukasiewicz', '2015-05-08 15:56:50'),
+(546, 'Rozne', 'Podaj nazwisko wynalazcy bomby atomowej', 'Einstein', '2015-05-18 18:03:45'),
+(547, 'Rozne', 'Podaj nazwisko wynalazcy dynamitu', 'Nobel', '2015-04-03 20:56:27'),
+(548, 'Rozne', 'Podaj nazwisko wynalazcy ogumienia pneumatycznego', 'Dunlop', '2015-05-03 15:19:43'),
+(549, 'Rozne', 'Podaj nazwisko wynalazcy piorunochronu', 'Franklin', '2015-05-05 15:44:19'),
+(550, 'Rozne', 'Podaj nazwisko wynalazcy m.in. silnika elektrycznego, dynama i radia', 'Tesla', '2015-04-12 20:50:24'),
+(551, 'Rozne', 'Podaj nazwisko braci - wynalazcow samolotu', 'Wright', '2015-05-12 18:23:25'),
+(552, 'Rozne', 'Podaj nazwisko wynalazcy czcionek drukarskich', 'Gutenberg', '2015-05-11 15:00:26'),
+(553, 'Rozne', 'Podaj nazwisko wynalazcy pierwszego syntezatora muzycznego', 'Moog', '2015-04-28 20:50:41'),
+(554, 'Rozne', 'Podaj nazwisko wynalazcy silnika wysokopreznego (na olej napedowy)', 'Diesel', '2015-05-05 17:03:44'),
+(555, 'Rozne', 'Podaj nazwisko tworcy alfabetu dla niewidomych', 'Braille', '2015-05-18 15:51:33'),
+(556, 'Rozne', 'Jak nazywa sie choroba polegajaca na niemoznosci rozpoznawania barw?', 'daltonizm', '2015-05-18 13:23:04'),
+(557, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2010 roku w RPA?', 'Hiszpania', '2015-04-16 17:52:24'),
+(558, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2006 roku w Niemczech?', 'Wlochy', '2015-05-16 13:28:13'),
+(559, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 2002 roku w Korei/Japonii?', 'Brazylia', '2015-05-16 15:02:30'),
+(560, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1998 roku we Francji?', 'Francja', '2015-05-17 13:29:49'),
+(561, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1994 roku w USA?', 'Brazylia', '2015-05-17 15:44:08'),
+(562, 'Sport', 'Jaka druzyna zdobyla MS w pilce noznej w 1990 roku we Wloszech?', 'RFN', '2015-04-21 15:39:29'),
+(563, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2012 roku w Polsce/Ukrainie?', 'Hiszpania', '2015-05-11 13:30:07'),
+(564, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2008 roku w Austrii/Szwajcarii?', 'Hiszpania', '2015-05-19 13:05:26'),
+(565, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2004 roku w Portugalii?', 'Grecja', '2015-04-26 15:25:09'),
+(566, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 2000 roku w Belgii/Holandii?', 'Francja', '2015-05-19 15:32:06'),
+(567, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 1996 roku w Anglii?', 'Niemcy', '2015-05-08 13:51:15'),
+(568, 'Sport', 'Jaka druzyna zdobyla ME w pilce noznej w 1992 roku w Szwecji?', 'Dania', '2015-04-21 17:14:54'),
+(569, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kto? co?', 'mianownik', '2015-05-16 18:04:21'),
+(570, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kogo? czego?', 'dopelniacz', '2015-05-14 18:56:16'),
+(571, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania komu? czemu?', 'celownik', '2015-05-15 18:19:55'),
+(572, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania kogo? co?', 'biernik', '2015-05-08 13:14:29'),
+(573, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania z kim? z czym?', 'narzednik', '2015-05-19 13:26:30'),
+(574, 'Jezyk polski', 'Jak nazywa sie przypadek odpowiadajacy na pytania o kim? o czym?', 'miejscownik', '2015-05-04 17:14:12'),
+(575, 'Jezyk polski', 'Jak nazywa sie przypadek uzywany w zawolaniach (nie posiadajacy pyt.)?', 'wolacz', '2015-05-09 13:56:23'),
+(576, 'Jezyk polski', 'Ile jest przypadkow w jezyku polskim?', '7', '2015-05-16 13:14:11'),
+(577, 'Jezyk polski', 'Czesc zdania oznaczajaca wykonawce czynnosci wyrazonej orzeczeniem to?', 'podmiot', '2015-05-12 15:51:05'),
+(578, 'Jezyk polski', 'Czesc zdania opisujaca czynnosc podmiotu to?', 'orzeczenie', '2015-05-08 18:49:04'),
+(579, 'Jezyk polski', 'CZesc zdania okreslajaca rzeczownik, a wyrazona np. przymiotnikiem to?', 'przydawka', '2015-04-21 15:46:36'),
+(580, 'Jezyk polski', 'Czesc zdania oznaczajaca przedmiot czynnosci wyrazonej orzeczeniem to?', 'dopelnienie', '2015-05-11 15:17:59'),
+(581, 'Jezyk polski', 'Czesc zdania pelniaca funkcje okreslajaca czasownik to?', 'okolicznik', '2015-04-29 15:07:12'),
+(582, 'Jezyk polski', 'Czesc mowy nazywajaca rzeczy, obiekty, miejsca, osoby, zjawiska itp. to?', 'rzeczownik', '2015-04-26 20:20:33'),
+(583, 'Jezyk polski', 'Czesc mowy okreslajaca cechy istot zywych, rzeczy, zjawisk i pojec to?', 'przymiotnik', '2015-05-17 13:36:50'),
+(584, 'Jezyk polski', 'Czesc mowy przedstawiajaca dziejace sie czynnosci i niektore stany to?', 'czasownik', '2015-05-18 13:12:32'),
+(585, 'Jezyk polski', 'Czesc mowy okreslajaca liczbe, ilosc, liczebnosc lub kolejnosc to?', 'liczebnik', '2015-05-18 13:59:53'),
+(587, 'Rozne', 'Pierwsza litera alfabetu greckiego to?', 'alfa', '2015-05-13 13:39:00'),
+(588, 'Rozne', 'Druga litera alfabetu greckiego to?', 'beta', '2015-05-18 13:03:45');
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
-(589, 'Rozne', 'Trzecia litera alfabetu greckiego to?', 'gamma', '2014-04-24 13:47:12'),
-(590, 'Rozne', 'Czwarta litera alfabetu greckiego to?', 'delta', '2014-04-13 13:07:28'),
-(591, 'Rozne', 'Ostatnia litera alfabetu greckiego to?', 'omega', '2014-04-21 18:40:36'),
-(592, 'Rozne', 'Jak nazywa sie japonska sztuka skladania papieru', 'origami', '2014-04-29 15:29:44'),
-(593, 'Malarstwo', 'Podaj nazwisko autora obrazu "Krzyk"', 'Munch', '2014-04-25 18:49:01'),
-(594, 'Malarstwo', 'Podaj nazwisko autora obrazu "Stanczyk"', 'Matejko', '2014-04-29 18:34:52'),
-(595, 'Malarstwo', 'Podaj nazwisko autora obrazu "Ostatnia wieczerza"', 'da Vinci', '2014-04-24 18:35:49'),
-(596, 'Malarstwo', 'Podaj nazwisko autora obrazu "Trwalosc pamieci"', 'Dali', '2014-04-14 18:58:05'),
-(597, 'Malarstwo', 'Podaj nazwisko autora obrazu "Guernica"', 'Picasso', '2014-04-13 18:14:53'),
-(598, 'Malarstwo', 'Podaj nazwisko autora obrazu "Sloneczniki"', 'van Gogh', '2014-04-14 18:47:56'),
-(599, 'Malarstwo', 'Podaj nazwisko autora obrazu "Lekcja anatomii doktora Tulpa"', 'Rembrandt', '2014-04-20 18:55:33'),
-(600, 'Rozne', 'Jak oficjalnie nazywa sie waluta Stanow Zjednoczonych?', 'dolar amerykanski', '2014-03-29 18:09:43'),
-(601, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wielkiej Brytanii?', 'funt szterling', '2014-04-29 13:42:23'),
-(602, 'Rozne', 'Jak oficjalnie nazywa sie waluta Szwajcarii?', 'frank szwajcarski', '2014-04-27 18:39:45'),
-(603, 'Rozne', 'Jak oficjalnie nazywa sie waluta Unii Europejskiej?', 'euro', '2014-04-20 13:00:12'),
-(604, 'Rozne', 'Jak oficjalnie nazywa sie waluta Australii?', 'dolar australijski', '2014-04-28 18:21:10'),
-(605, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kanady?', 'dolar kanadyjski', '2014-04-21 15:20:47'),
-(606, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wegier?', 'forint wegierski', '2014-04-29 15:18:31'),
-(607, 'Rozne', 'Jak oficjalnie nazywa sie waluta Czech?', 'korona czeska', '2014-04-29 18:07:52'),
-(608, 'Rozne', 'Jak oficjalnie nazywa sie waluta Danii?', 'korona dunska', '2014-04-18 13:07:40'),
-(609, 'Rozne', 'Jak oficjalnie nazywa sie waluta Norwegii?', 'korona norweska', '2014-04-13 15:20:30'),
-(610, 'Rozne', 'Jak oficjalnie nazywa sie waluta Szwecji?', 'korona szwedzka', '2014-04-29 18:02:02'),
-(611, 'Rozne', 'Jak oficjalnie nazywa sie waluta Bulgarii?', 'lew bulgarski', '2014-04-17 13:35:39'),
-(612, 'Rozne', 'Jak oficjalnie nazywa sie waluta Rumunii?', 'lej rumunski', '2014-04-27 15:32:31'),
-(613, 'Rozne', 'Jak oficjalnie nazywa sie waluta Litwy?', 'lit litewski', '2014-04-19 15:40:56'),
-(614, 'Rozne', 'Jak oficjalnie nazywa sie waluta Islandii?', 'korona islandzka', '2014-04-22 13:32:02'),
-(615, 'Rozne', 'Jak oficjalnie nazywa sie waluta Rosji?', 'rubel rosyjski', '2014-04-25 13:19:18'),
-(616, 'Rozne', 'Jak oficjalnie nazywa sie waluta Ukrainy?', 'hrywna ukrainska', '2014-04-19 17:33:47'),
-(617, 'Rozne', 'Jak oficjalnie nazywa sie waluta Bialorusi?', 'rubel bialoruski', '2014-04-29 15:30:38'),
-(618, 'Rozne', 'Jak oficjalnie nazywa sie waluta Macedonii?', 'denar macedonski', '2014-04-25 15:28:03'),
-(619, 'Rozne', 'Jak oficjalnie nazywa sie waluta Chorwacji?', 'kuna chorwacka', '2014-04-29 13:36:06'),
-(620, 'Rozne', 'Jak oficjalnie nazywa sie waluta Serbii?', 'dinar serbski', '2014-04-24 18:29:25'),
-(621, 'Rozne', 'Jak oficjalnie nazywa sie waluta Turcji?', 'lira turecka', '2014-04-10 13:19:28'),
-(622, 'Rozne', 'Jak oficjalnie nazywa sie waluta Lotwy?', 'lat lotewski', '2014-04-29 13:51:21'),
-(623, 'Rozne', 'Jak oficjalnie nazywa sie waluta Meksyku?', 'peso meksykanskie', '2014-04-18 08:59:31'),
-(624, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kuby?', 'peso kubanskie', '2014-04-28 15:07:41'),
-(625, 'Rozne', 'Jak oficjalnie nazywa sie waluta Argentyny?', 'peso argentynskie', '2014-03-31 17:36:47'),
-(626, 'Rozne', 'Jak oficjalnie nazywa sie waluta Brazylii?', 'real brazylijski', '2014-04-19 15:30:02'),
-(627, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wenezueli?', 'bolivar wenezuelski', '2014-04-17 18:22:15'),
-(628, 'Rozne', 'Jak oficjalnie nazywa sie waluta Chin?', 'yuan chinski', '2014-04-29 13:26:44'),
-(629, 'Rozne', 'Jak oficjalnie nazywa sie waluta Japonii?', 'jen japonski', '2014-04-22 17:02:35'),
-(630, 'Gry', 'Jak nazywa sie firma, ktora wyprodukowala gry z serii Doom?', 'id Software', '2014-04-28 15:58:59'),
-(631, 'Informatyka', 'Do jakiej marki naleza 8-bitowe modele komputerow 800XL i 65XE?', 'Atari', '2014-04-11 18:33:56'),
-(632, 'Informatyka', 'Jak nazywal sie zalozyciel firmy Commodore, a pozniej wlasciciel Atari?', 'Jack Tramiel', '2014-04-27 18:33:04'),
-(633, 'Informatyka', 'Do jakiej marki naleza 16-bitowe modele komputerow 500, 600 i 1200?', 'Amiga', '2014-04-16 08:35:20'),
-(634, 'Geografia', 'Jakie jest najwieksze miasto Slaska?', 'Wroclaw', '2014-04-22 17:46:00'),
-(635, 'Muzyka', 'Jak nazywa sie gitarzysta zespolu Queen?', 'Brian May', '2014-04-28 13:57:28'),
-(636, 'Administracja', 'Kto jest przedstawicielem Rady Ministrow w wojewodztwie?', 'Wojewoda', '2014-04-22 13:38:30'),
-(637, 'Rozne', 'Jaka brzmi pelna nazwa panstwa niemieckiego?', 'Republika Federalna Niemiec', '2014-04-16 15:25:53'),
-(638, 'Historia', 'Kto byl pierwszym Prezesem Rady Ministrow III Rzeczpospolitej?', 'Tadeusz Mazowiecki', '2014-04-29 15:04:10'),
-(639, 'Historia', 'Kto byl pierwszym prezydentem Polski?', 'Gabriel Narutowicz', '2014-04-02 17:10:18'),
-(640, 'Architektura', 'Kto zaprojektowal wroclawska Hale Stulecia?', 'Max Berg', '2014-04-29 18:26:43'),
-(641, 'Historia', 'Jak nazywal sie niemiecki minister propagandy w latach 1933-1945?', 'Joseph Goebbels', '2014-04-16 08:16:20'),
-(642, 'Muzyka', 'Jaki zespol wydal piosenke "The Winner Takes It All"?', 'ABBA', '2014-04-29 13:54:02'),
-(643, 'Muzyka', 'Jaki zespol wydal album "Brothers in Arms"?', 'Dire Straits', '2014-04-29 18:30:47'),
-(644, 'Geografia', 'Ktory amerykanski stan ma najwieksza powierzchnie?', 'Alaska', '2014-04-17 08:29:57'),
-(645, 'Sport', 'Jaka nazwe nosi pilkarski stadion narodowy Anglii?', 'Wembley', '2014-04-21 18:46:58'),
-(646, 'Geografia', 'Czescia skladowa jakiego panstwa jest Republika Serbska?', 'Bosnia i Hercegowina', '2014-04-21 15:47:00'),
-(647, 'Cytaty', 'Kto jest autorem frazy "religia jest opium ludu"?', 'Karol Marks', '2014-04-17 13:53:58'),
-(648, 'Historia', 'Ktory amerykanski prezydent ustapil z funkcji po wykryciu afery Watergate?', 'Richard Nixon', '2014-04-18 15:48:08'),
-(649, 'Muzyka', 'Kto jest autorem walca "Nad pieknym modrym Dunajem"?', 'Johann Strauss', '2014-04-19 18:55:01'),
-(650, 'Historia', 'Jak nazywal sie cesarz Imperium Rzymskiego, wnuk Karola Mlota?', 'Karol Wielki', '2014-04-24 18:11:36'),
-(651, 'Geografia', 'Na terenie jakiego obecnie istniejacego panstwa znajduje sie Waterloo - miejsce bitwy z 1815 roku?', 'Belgia', '2014-04-28 13:21:23'),
-(652, 'Historia', 'Jaka nazwe nosilo miasto Wroclaw przed 1945 rokiem?', 'Breslau', '2014-04-13 18:46:43'),
-(653, 'Historia', 'Kto byl pierwszym przywodca Korei Polnocnej?', 'Kim Ir Sen', '2014-04-22 17:33:50'),
-(654, 'Motoryzacja', 'W jakim miescie swoja siedzibe ma przedsiebiorstwo BMW?', 'Monachium', '2014-04-19 15:14:36'),
-(655, 'Geografia', 'W jakim amerykanskim stanie znajduje sie miasto Salt Lake City?', 'Utah', '2014-04-13 15:10:24'),
-(656, 'Polityka', 'W jakim niemieckim kraju zwiazkowym funkcjonuje partia CSU?', 'Bawaria', '2014-04-20 17:51:03'),
-(657, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ch?', 'Szwajcaria', '2014-04-25 13:29:36'),
-(658, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ua?', 'Ukraina', '2014-04-21 18:52:52'),
-(659, 'Historia', 'Jakie miasto stanowilo stolice Królestwa SHS?', 'Belgrad', '2014-04-18 13:28:11'),
-(660, 'Sport', 'Jak nazywa sie mamucia skocznia narciarska w Planicy? ', 'Letalnica', '2014-04-21 08:40:21'),
-(661, 'Administracja', 'Kto w Polsce stanowi naczelny organ administracji rzadowej?', 'Prezes Rady Ministrow', '2014-04-24 18:09:47'),
-(662, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.03 a 20.04?', 'Baran', '2014-04-14 08:35:11'),
-(663, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.04 a 21.05?', 'Byk', '2014-04-27 18:54:02'),
-(664, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.05 a 21.06?', 'Bliznieta', '2014-04-28 13:41:24'),
-(665, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.06 a 23.07?', 'Rak', '2014-04-12 13:03:03'),
-(666, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.07 a 23.08?', 'Lew', '2014-04-28 13:16:04'),
-(667, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.08 a 23.09?', 'Panna', '2014-04-24 15:29:42'),
-(668, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.09 a 23.10?', 'Waga', '2014-04-19 18:22:27'),
-(669, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.10 a 22.11?', 'Skorpion', '2014-04-28 13:28:29'),
-(670, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 23.11 a 21.12?', 'Strzelec', '2014-04-25 15:17:45'),
-(671, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.12 a 19.01?', 'Koziorozec', '2014-04-29 13:59:22'),
-(672, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 20.01 a 19.02?', 'Wodnik', '2014-04-17 15:24:42'),
-(673, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 20.02 a 20.03?', 'Ryby', '2014-04-22 17:52:57'),
-(674, 'Geografia', 'Co nastepuje corocznie miedzy 20-go a 21-go marca?', 'rownonoc wiosenna', '2014-04-18 15:08:48'),
-(675, 'Geografia', 'Co nastepuje corocznie miedzy 22-go a 23-go wrzesnia?', 'rownonoc jesienna', '2014-04-15 08:26:33'),
-(676, 'Geografia', 'Co nastepuje corocznie 21-go czerwca?', 'przesilenie letnie', '2014-04-25 18:53:33'),
-(677, 'Geografia', 'Co nastepuje corocznie 22-go grudnia?', 'przesilenie zimowe', '2014-04-14 13:26:40'),
-(678, 'Geografia', 'Zjawisko swietlne wystepujace za kolem podbiegunowym to?', 'zorza polarna', '2014-04-19 17:16:27'),
-(679, 'Astronomia', 'Kosmiczna eksplozja tworzaca wpierw jasny, a wkrotce niewidoczny obiekt?', 'supernowa', '2014-04-25 13:42:57'),
-(680, 'Astronomia', 'Obiekt astronomiczny skladajacy sie ze zdegenerowanej materii to?', 'bialy karzel', '2014-04-17 13:26:52'),
-(681, 'Astronomia', 'Obszar czasoprzestrzeni, ktorego nic nie moze opuscic to?', 'czarna dziura', '2014-04-12 15:50:34'),
-(682, 'Astronomia', 'Planeta nie majaca stalej powierzchni to?', 'gazowy olbrzym', '2014-04-19 17:54:37'),
-(683, 'Astronomia', 'Gwiazda bedaca na schylkowym etapie ewolucji to?', 'czerwony olbrzym', '2014-04-28 13:48:32'),
-(684, 'Astronomia', 'Poczatkowy etap ewolucji gwiazdy to?', 'protogwiazda', '2014-04-21 15:06:59'),
-(685, 'Astronomia', 'Oblok gazu i pylu powstalego po zakonczeniu syntezy jadrowej gwiazdy to?', 'mglawica planetarna', '2014-04-24 13:35:15'),
-(686, 'Astronomia', 'Obszar Ukladu Slonecznego rozciagajacy sie za orbita Neptuna to?', 'pas Kuipera', '2014-04-24 15:57:41'),
-(687, 'Astronomia', 'Krancowy obszar Ukladu Slonecznego skladajacy sie z pylu i planetoid to?', 'oblok Oorta', '2014-04-25 15:28:56'),
-(688, 'Astronomia', 'Obiekt astronomiczny, posredni miedzy planetami a malymi cialami nieb.?', 'planeta karlowata', '2014-04-19 18:57:45'),
-(689, 'Astronomia', 'Cialo niebieskie o rozmiarach od kilku m do 1000 km obiegajace Slonce?', 'planetoida', '2014-04-22 18:40:34'),
-(690, 'Astronomia', 'Bezzalogowa sonda kosmiczna NASA, wystrzelona 5 wrzesnia 1977 to?', 'Voyager 1', '2014-04-20 08:40:17'),
-(691, 'Astronomia', 'Bezzalogowa sonda kosmiczna NASA, wystrzelona 20 sierpnia 1977 to?', 'Voyager 2', '2014-04-22 15:02:57'),
-(692, 'Astronomia', 'Glowny skladnik atmosfery Wenus i Marsa to?', 'dwutlenek wegla', '2014-04-29 13:20:29'),
-(693, 'Astronomia', 'Glowny skladnik atmosfery Merkurego to?', 'tlen', '2014-04-21 13:31:36'),
-(694, 'Astronomia', 'Glowny skladnik atmosfery Ziemi to?', 'azot', '2014-04-16 13:33:49'),
-(695, 'Astronomia', 'Glowny skladnik atmosfery Jowisza, Saturna, Urana i Neptuna to?', 'wodor', '2014-04-29 18:43:01'),
-(696, 'Astronomia', 'Jak nazywal sie pierwszy pies w kosmosie?', 'Lajka', '2014-04-09 18:34:55'),
-(697, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 4 pazdziernika 1957 przez ZSRR?', 'Sputnik 1', '2014-04-15 15:27:29'),
-(698, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 3 listopada 1957 przez ZSRR?', 'Sputnik 2', '2014-04-10 13:38:30'),
-(699, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 15 maja 1958 przez ZSRR?', 'Sputnik 3', '2014-04-21 15:35:27'),
-(700, 'Astronomia', 'Seria radzieckich jednosobowych pojazdow kosmicznych to?', 'Wostok', '2014-04-25 18:12:47'),
-(701, 'Astronomia', 'Zrodlo promieniowania elektromagnetycznego przypominajace gwiazde to?', 'kwazar', '2014-04-28 13:49:26'),
-(702, 'Astronomia', 'Jakim typem galaktyki jest Droga Mleczna?', 'galaktyka spiralna z poprzeczka', '2014-04-22 15:25:15'),
-(703, 'Astronomia', 'Duzy, grawitacyjnie zwiazany uklad gwiazd, pylu, gazu i materii to?', 'galaktyka', '2014-04-16 18:41:55'),
-(704, 'Astronomia', 'Materia nieemitujaca i nieodbijajaca promieniowania elektromagnet. to?', 'ciemna materia', '2014-04-24 15:53:37'),
-(705, 'Astronomia', 'Jak nazywa sie gwiazda polozona najblizej Slonca?', 'Proxima Centauri', '2014-04-21 08:16:06'),
-(706, 'Astronomia', 'Strumien protonow i elektronow o duzej energii wyplywajacych ze Slonca?', 'wiatr sloneczny', '2014-04-22 13:39:24'),
-(707, 'Astronomia', 'Najbardziej zewnetrzna czesc atmosfery slonecznej to?', 'korona sloneczna', '2014-04-20 08:33:21'),
-(708, 'Astronomia', 'Odleglosc, jaka pokonuje swiatlo w prozni w ciagu jednego roku kal. to?', 'rok swietlny', '2014-04-22 15:07:03'),
-(709, 'Astronomia', 'Grupa gwiazd zajmujacych okreslony obszar sfery niebieskiej to?', 'gwiazdozbior', '2014-04-25 15:27:09'),
-(710, 'Muzyka', 'Jaki przeboj Guns N`Roses mozemy uslyszec w Radiu X?', 'Welcome to the Jungle', '2014-04-22 18:25:29'),
-(711, 'Muzyka', 'Jaki utwor Depeche Mode mozna znalezc w Radiu X?', 'Personal Jesus', '2014-04-27 18:55:50'),
-(712, 'Muzyka', 'Kto jest wykonawca utworu "Hellraiser" znanego z Radia X?', 'Ozzy Osbourne', '2014-04-24 15:02:18'),
-(713, 'Muzyka', 'Zespol, ktory w Radiu X wykonuje utwór "Mother" to?', 'Danzig', '2014-04-17 13:33:49'),
-(714, 'Muzyka', 'W Radiu K-DST mozemy uslyszec utwor "White Wedding" w wykonaniu?', 'Billy Idol', '2014-04-27 18:11:57'),
-(715, 'Muzyka', 'Utwor Joe Cockera, ktory mozna uslyszec w Radiu K-DST?', 'Woman to woman', '2014-04-24 18:00:17'),
-(716, 'Muzyka', 'Jaki utwor zespolu KISS znajdziemy na soundtracku z GTA SAMP?', 'Strutter', '2014-04-22 15:43:26'),
-(717, 'Muzyka', 'Wykonawca utworu "I don`t give a fuck" to?', '2 Pac', '2014-04-29 18:27:37'),
-(718, 'Muzyka', 'Kto wykonuje "Rebel Without a Pause"?', 'Public Enemy', '2014-04-27 18:57:37'),
-(719, 'Muzyka', 'Jaki utwor Juice Newton znajdziemy w Radiu K-Rose?', 'Queen of hearts', '2014-04-29 13:41:30'),
-(720, 'Muzyka', 'Jaki utwor Eddie Rabbit`a znajdziemy w Radiu K-Rose?', 'I love a rainy night', '2014-04-20 18:49:13'),
-(721, 'Muzyka', 'Jaka piesn jest oficjalnym hymnem panstwowym Rzeczpospolitej Polskiej?', 'Mazurek Dabrowskiego', '2014-04-25 15:44:13'),
-(722, 'Muzyka', 'Kto jest autorem "Mazurka Dabrowskiego"?', 'Jozef Wybicki', '2014-04-17 13:19:56'),
-(723, 'Muzyka', 'Polski taniec ludowy pochodzacy z Kujaw?', 'Kujawiak', '2014-04-21 13:02:50'),
-(724, 'Muzyka', 'Taniec ludowy zaliczany do polskich tancow narodowych?', 'Krakowiak', '2014-04-18 13:02:28'),
-(725, 'Muzyka', 'Polski taniec narodowy, ktory inauguruje niektore uroczystosci?', 'Polonez', '2014-04-24 18:34:54'),
-(726, 'Muzyka', 'Polski taniec ludowy tanczony na weselach po oczepinach panny mlodej to?', 'Chmielowy', '2014-04-28 18:14:52'),
-(727, 'Muzyka', 'Przedstawiciel tzw. polskiej szkoly kompozytorskiej w latach 60-tych to?', 'Krzysztof Eugeniusz Penderecki', '2014-04-01 13:09:35'),
-(728, 'Muzyka', 'Kto w 2011 roku otrzymal tytul honor.czl. Zwiazku Kompozytorow Polskich?', 'Zygmunt Krauze', '2014-04-15 15:35:47'),
-(729, 'Muzyka', 'Tytul jedynej opery Ignacego Jana Paderewskiego?', 'Manru', '2014-04-21 18:09:55'),
-(730, 'Muzyka', 'Polski kompozytor i pianista urodzony w Zelazowej Woli to?', 'Fryderyk Chopin', '2014-04-14 08:09:16'),
-(731, 'Muzyka', 'Sceniczne dzielo muzyczne, gdzie muzyka wspoldziala z akcja dramat. to?', 'opera', '2014-04-21 13:00:09'),
-(732, 'Muzyka', 'Rodzaj powaznej opery z elementami komicznymi?', 'opera semiseria', '2014-04-24 15:15:21'),
-(733, 'Muzyka', 'Rodzaj opery komicznej to?', 'opera buffa', '2014-04-20 18:07:27'),
-(734, 'Muzyka', 'Forma muzyczna zlozona z 4 czesci (allegro, adagio, menuet, allegro) to?', 'sonata klasyczna', '2014-04-25 18:26:47'),
-(735, 'Muzyka', 'Orkiestrowy odpowiednik sonaty to?', 'symfonia', '2014-04-21 13:41:30'),
-(736, 'Muzyka', 'Forma muzyczna z powracajacymi refrenem i kupletami to?', 'rondo', '2014-04-22 17:23:25'),
-(737, 'Muzyka', 'Niemiecki kompozytor i pianista, prekursor romantyzmu w muzyce to?', 'Ludwig van Beethoven', '2014-04-22 13:23:19'),
-(738, 'Muzyka', 'Kto napisal muzyke do "Bastien i Bastienne"?', 'Wolfgang Amadeusz Mozart', '2014-04-29 18:08:46'),
-(739, 'Muzyka', 'Okres w rozwoju muzyki pomiedzy barokiem a romantyzmem?', 'klasycyzm', '2014-04-22 15:34:20'),
-(740, 'Muzyka', 'Niemiecki kompozytor, pianista i klawesynista, zwany Bachem hamburskim?', 'Carl Philipp Emanuel Bach', '2014-04-28 13:46:46'),
-(741, 'Muzyka', 'W ktorym roku urodzil sie Johann Sebastian Bach?', '1685', '2014-04-25 15:41:04'),
-(742, 'Muzyka', 'W ktorym roku urodzil sie Carl Philipp Emanuel Bach?', '1714', '2014-04-18 17:26:48'),
-(743, 'Muzyka', 'Sztuka organizacji struktur dzwiekowych w czasie to?', 'muzyka', '2014-04-27 18:30:22'),
-(744, 'Muzyka', 'Kierunek w muzyce lezacy na pograniczu muzyki wspolcz., jazzu i rocka?', 'surrealizm', '2014-04-19 17:52:53'),
-(745, 'Muzyka', 'Kierunek w myzyce stworzony przez Claude Debussy''ego to?', 'impresjonizm', '2014-04-21 13:18:35'),
-(746, 'Muzyka', 'Francuski kompozytor, przedstawiciel impresjonizmu muzycznego?', 'Claude Debussy', '2014-04-28 15:22:06'),
-(747, 'Muzyka', 'Styl w muzyce, ktory siega do pierwotnych instynktow czlowieka?', 'witalizm', '2014-04-16 08:37:04'),
-(748, 'Muzyka', 'Nurt w muzyce zapoczatkowany przez Russola?', 'bruityzm', '2014-04-21 18:03:39'),
-(749, 'Muzyka', 'Do ktorego kierunku w muzyce zalicza sie ambient?', 'prymitywizm', '2014-04-25 15:57:44'),
-(750, 'Muzyka', 'Muzyka oparta na skali innej niż 12-stopniowa skala chromatyczna to?', 'muzyka mikrotonowa', '2014-04-25 15:49:10'),
-(751, 'Muzyka', 'Muzyka stworzona przy pomocy procesu stochastycznego to?', 'muzyka stochastyczna', '2014-04-19 18:27:31'),
-(752, 'Muzyka', 'Kierunek w muzyce zaliczany do nurtow "Drugiej Awangardy" to?', 'sonoryzm', '2014-04-17 13:25:08'),
-(753, 'Muzyka', 'Muzyka tworzona za pomoca elektrofonow i urzadzen elektronicznych?', 'muzyka elektroniczna', '2014-04-10 18:20:42'),
-(754, 'Muzyka', 'Inaczej elektroniczne instrumenty muzyczne?', 'elektrofony', '2014-04-17 08:02:15'),
-(755, 'Muzyka', 'Gatunek muzyczny, polaczenie muzyki zachodnioafryk. i europ.-ameryk.?', 'jazz', '2014-04-24 13:27:29'),
-(756, 'Muzyka', 'Styl muzyczny, ktorego prekursorem byl zespol Nirvana?', 'grunge', '2014-04-27 18:49:34'),
-(757, 'Muzyka', 'Podstawowa forma lezaca u fundamentow wszystkich stylow rockowych to?', 'rock and roll', '2014-04-27 15:52:57'),
-(758, 'Informatyka', 'Ile wartosci moze przyjac jeden bit?', '2', '2014-04-29 18:31:42'),
-(759, 'Informatyka', 'Ile wartosci moze przyjac jeden bajt?', '256', '2014-04-20 17:40:39'),
-(760, 'Informatyka', 'W jakich jednostkach podaje sie rozdzielczosc drukarki?', 'dpi', '2014-04-21 13:14:59'),
-(761, 'Informatyka', 'Jakiego klawisza nalezy uzyc aby uruchomic system Windows w trybie awaryjnym?', 'f8', '2014-04-20 18:51:02'),
-(762, 'Informatyka', 'Co oznacza skrot DOS?', 'Disk Operating System', '2014-04-29 15:26:09'),
-(763, 'Muzyka', 'Styl w muzyce wokal. poleg. na rytmiczno-ekspresyjnym wypowiadaniu slow?', 'rap', '2014-04-15 15:59:17'),
-(764, 'Muzyka', 'Polski zywy taniec ludowy o skocznej melodii w rytmie nieparzystym to?', 'oberek', '2014-04-28 15:25:42'),
-(765, 'Muzyka', 'Polski taniec narodowy z Mazowsza w zywym tempie i metrum 3/4 to?', 'mazur', '2014-04-28 18:12:36'),
-(766, 'Muzyka', 'Czeski taniec ludowy, w metrum 2/4, w szybkim tempie to?', 'polka', '2014-04-25 15:55:56'),
-(767, 'Muzyka', 'Piesni zeglarskie to inaczej?', 'szanty', '2014-04-22 18:11:20'),
-(768, 'Muzyka', 'Odmiana muzyki rozrywkowej, powstala w USA w 1-wszym 10-cioleciu XX-w.?', 'country', '2014-04-13 08:26:25'),
-(769, 'Muzyka', 'Najnizszy glos meski to?', 'bas', '2014-04-24 13:37:05'),
-(770, 'Muzyka', 'Najwyzszy glos zenski to?', 'sopran', '2014-04-22 17:44:16'),
-(771, 'Muzyka', 'Glos, ktorym posluguje sie polski spiewak operowy Marek Torzewski to?', 'tenor', '2014-04-16 18:09:38'),
-(772, 'Muzyka', 'Znak graficzny okreslajacy wysokosc i czas trwania dzwieku muzycznego?', 'nuta', '2014-04-24 13:22:29'),
-(773, 'Muzyka', 'Interwal prosty zawarty miedzy osmioma kolejnymi stopniami skali muz.?', 'oktawa', '2014-04-16 18:13:48'),
-(774, 'Muzyka', 'Znak chromatyczny, obnizajacy wysokosc dzwieku o pol tonu to?', 'bemol', '2014-04-18 18:26:47'),
-(775, 'Muzyka', 'Znak chromatyczny, podwyzszajacy wysokosc dzwieku o pol tonu to?', 'krzyzyk', '2014-04-16 18:17:01'),
-(776, 'Film', 'Aktor wcielajacy sie w role Ferdka w serialu "Swiat wg Kiepskich" to?', 'Andrzej Grabowski', '2014-04-12 17:30:00'),
-(777, 'Film', 'Aktor wcielajacy sie w role Waldka w serialu "Swiat wg Kiepskich" to?', 'Bartosz Zukowski', '2014-04-21 15:29:15'),
-(778, 'Film', 'Aktor wcielajacy sie w role Pazdziocha w serialu "Swiat wg Kiepskich"?', 'Ryszard Kotys', '2014-04-22 15:08:52'),
-(779, 'Film', 'Aktor wcielajacy sie w role Boczka w serialu "Swiat wg Kiepskich" to?', 'Dariusz Gnatowski', '2014-04-19 13:04:13'),
-(780, 'Film', 'Aktor wcielajacy sie w role Edzia w serialu "Swiat wg Kiepskich" to?', 'Bohdan Smolen', '2014-04-20 15:05:10'),
-(781, 'Historia', 'W jakim miesce znajdowala sie siedziba dowodztwa Polnocnej Grupy Wojsk Armii Radzieckiej?', 'Legnica', '2014-04-05 15:27:29'),
-(782, 'Literatura', 'W jakim miescie toczy sie akcja powiesci "Zbrodnia i kara"?', 'Petersburg', '2014-04-03 13:15:58'),
-(783, 'Gospodarka', 'W jakim miescie znajduje sie siedziba KGHM Polska Miedz?', 'Lubin', '2014-04-12 08:36:59'),
-(784, 'Historia', 'Kto byl ostatnim kanclerzem II Rzeszy Niemieckiej?', 'Friedrich Ebert', '2014-04-29 15:01:01'),
-(785, 'Rozne', 'Podaj nazwe zdawkowej jednostki pienieznej uzywanej w Austrii do 2001 roku', 'grosz', '2014-04-29 13:57:35'),
-(786, 'Sport', 'Gdzie zawsze odbywa sie noworoczny konkurs w skokach narciarskich?', 'Garmisch-Partenkirchen', '2014-04-25 13:11:12'),
-(787, 'Geografia', 'Podaj nazwe autonomicznej republiki polozonej w granicach Ukrainy', 'Krym', '2014-04-07 18:53:32'),
-(788, 'Rozne', 'Jak brzmi obecna nazwa miasta Krolewiec?', 'Kaliningrad', '2014-04-18 15:17:52'),
-(789, 'Mitologia', 'Jak nazywa sie slowianski bog grzmotow i piorunow?', 'Perun', '2014-04-20 15:58:52'),
-(790, 'Historia', 'W ktorym roku miala miejsce Operacja Barbarossa?', '1941', '2014-04-11 15:13:01'),
-(791, 'Historia', 'Jakiego panstwa prezydentem byl Carl Gustaf Mannerheim?', 'Finlandia', '2014-04-22 18:41:29'),
-(792, 'Sport', 'W jakim miescie znajduje sie siedziba Miedzynarodowego Komitetu Olimpijskiego?', 'Lozanna', '2014-04-22 15:55:45'),
-(793, 'Architektura', 'W jakim panstwie w latach 1974–1991 znajdowala sie najwyzsza konstrukcja na swiecie?', 'Polska', '2014-04-22 08:26:34'),
-(794, 'Historia', 'Jak nazywal sie system scislej segregacji rasowej istniejacy w RPA?', 'Apartheid', '2014-04-24 15:04:34'),
-(795, 'Muzyka', 'Jaki zespol muzyczny znany jest z utworow m.in.: "Das Model" oraz "Radioaktivitat"? ', 'Kraftwerk', '2014-04-25 18:21:21'),
-(796, 'Rozne', 'W jakim europejskim panstwie istnieje monarchia absolutna?', 'Watykan', '2014-04-25 15:20:53'),
-(797, 'Rozne', 'Ktorego dnia obchodzone jest Swieto Konstytucji na Litwie?', '3 maja', '2014-04-20 13:11:52'),
-(798, 'Geografia', 'Na terenie jakiego kraju znajduje sie kosmodrom Bajkonur? ', 'Kazachstan', '2014-04-20 18:10:12'),
-(799, 'Rozne', 'Kto jest patronem kosmodromu polozonego na przyladku Canaveral?', 'John F. Kennedy', '2014-04-20 13:26:29'),
-(800, 'Polityka', 'Kto byl pierwszym prezydentem USA wybranym z ramienia Partii Republikanskiej? ', 'Abraham Lincoln', '2014-04-15 13:28:44'),
-(801, 'Rozne', 'W ktorym roku uchwalona zostala Konstytucja Rzeczypospolitej Polskiej?', '1997', '2014-04-29 18:42:07'),
-(802, 'Literatura', 'Jak nazywal sie slynny slaski poeta religijny epoki baroku?', 'Angelus Silesius', '2014-04-29 15:51:19'),
-(803, 'Motoryzacja', 'Na ktorej polskiej autostradzie pobito 3 rekordy predkosci samochodem Polski Fiat 125p 1.5 CC?', 'A4', '2014-04-14 18:17:35'),
-(804, 'Mitologia', 'Jak nazywa sie slowianska bogini zimy i smierci?', 'Marzanna', '2014-04-20 13:16:05'),
-(805, 'Mitologia', 'Kto w mitologii slowianskiej przedstawiany jest jako trojglowy demon o kozlich uszach i woskowych skrzydłach?', 'Trojan', '2014-04-16 15:00:15'),
-(806, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Thriller"?', 'Michael Jackson', '2014-04-25 15:07:29'),
-(807, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Dark Side of the Moon"?', 'Pink Floyd', '2014-04-19 18:08:11'),
-(808, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Back in Black"?', 'AC/DC', '2014-04-21 13:28:24'),
-(809, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Hybrid Theory"?', 'Linkin Park', '2014-04-29 18:45:43'),
-(810, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "No Angel"?', 'Dido', '2014-04-01 13:14:30'),
-(811, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Like a Virgin"?', 'Madonna', '2014-04-19 18:12:47'),
-(812, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Master of Puppets"?', 'Metallica', '2014-04-22 08:33:30'),
-(813, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Yellow Submarine"?', 'The Beatles', '2014-04-28 18:40:40'),
-(814, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Number of the Beast"?', 'Iron Maiden', '2014-04-24 18:49:33'),
-(815, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Nevermind"?', 'Nirvana', '2014-04-25 13:28:42'),
-(816, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Joshua Tree"?', 'U2', '2014-04-17 18:23:38'),
-(817, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Black Celebration"?', 'Depeche Mode', '2014-04-24 15:36:53'),
-(818, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Pornography"?', 'The Cure', '2014-04-24 18:39:29'),
-(819, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Paranoid"?', 'Black Sabbath', '2014-04-21 15:45:40'),
-(820, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Reign in Blood"?', 'Slayer', '2014-04-18 13:19:56'),
-(821, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Painkiller"?', 'Judas Priest', '2014-04-18 13:52:46'),
-(822, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Dont Break the Oath"?', 'Mercyful Fate', '2014-04-27 15:39:45'),
-(823, 'Biologia', 'Polaczenie biocenozy i biotopu to?', 'ekosystem', '2014-04-20 15:27:31'),
-(824, 'Biologia', 'Inaczej srodowisko nieozywione to?', 'biotop', '2014-04-28 15:13:05'),
-(825, 'Biologia', 'Ogol organizmow zyjacych na dnie to?', 'bentos', '2014-04-29 18:54:17'),
-(826, 'Astronomia', 'Co zawiera mlode gwiazdy oraz gazy i pyly?', 'dysk galaktyczny', '2014-04-22 13:49:19'),
-(827, 'Astronomia', 'Ciala niebieskie otaczajace planety to?', 'ksiezyce', '2014-04-25 13:34:57'),
-(828, 'Astronomia', 'Gazowa powloka okrywajaca cialo niebieskie to?', 'atmosfera', '2014-04-17 17:26:49'),
-(829, 'Rozne', 'Organizacja militarna i polityczna to?', 'NATO', '2014-04-28 18:02:10'),
-(830, 'Rozne', 'Rozwin skrot: ONZ', 'Organizacja Narodow Zjednoczonych', '2014-04-29 15:17:38'),
-(831, 'Rozne', 'Organizacja narodow zjednoczonych do spraw oswiaty i nauki to?', 'UNESCO', '2014-04-22 18:55:10'),
-(832, 'Rozne', 'Fundusz narodow zjednoczonych pomocy dzieciom to?', 'UNICEF', '2014-04-28 15:53:35'),
-(833, 'Rozne', 'Swiatowa organizacja handlu to?', 'WTO', '2014-04-27 13:56:42'),
-(834, 'Rozne', 'Miedzynarodowa organizacja meteorologiczna to?', 'WMO', '2014-04-27 18:59:51'),
-(835, 'Rozne', 'Rozwin skrot: WTO', 'World Trade Organisation', '2014-04-28 15:01:51'),
-(836, 'Rozne', 'Rozwin skrot: NATO', 'North Atlantic Treaty Organization', '2014-04-19 15:01:00'),
-(837, 'Fizyka', 'Pomiar promieniowania elektromagnetycznego oraz fal akustycznych to?', 'technika teledetekcji', '2014-04-29 15:08:12'),
-(838, 'Geografia', 'Najnizszy punkt sfery niebieskiej to?', 'nadir', '2014-04-25 15:19:06'),
-(839, 'Geografia', 'Najwyzszy punkt sfery niebieskiej to?', 'zenit', '2014-04-18 18:19:57'),
-(840, 'Geografia', 'Zewnetrzna powloka Ziemi to?', 'magnetosfera', '2014-04-17 18:43:00'),
-(841, 'Geografia', 'Twarda, skalista powloka Ziemi to?', 'litosfera', '2014-04-15 18:52:11'),
-(842, 'Geografia', 'Niszczace dzialanie wody lub lodu na podloze to?', 'erozja', '2014-04-18 18:40:56'),
-(843, 'Geografia', 'Zawartosc pary wodnej w powietrzu to inaczej?', 'wilgotnosc powietrza', '2014-04-28 13:47:39'),
-(844, 'Geografia', 'Stopien pokrycia nieba przez chmury to?', 'zachmurzenie', '2014-04-25 13:33:10'),
-(845, 'Geografia', 'Produkt kondensacji pary wodnej spadajacej z chmur to?', 'opady atmosferyczne', '2014-04-29 18:46:38'),
-(846, 'Geografia', 'Wodna powloka Ziemi to?', 'hydrosfera', '2014-04-16 13:50:52'),
-(847, 'Geografia', 'Forma przedstawiajaca ilosc wody w obiegu to?', 'bilans wodny', '2014-04-11 13:46:23'),
-(848, 'Geografia', 'Chlorkowe wody zawierajace NaCl to?', 'solanki', '2014-04-21 08:14:22'),
-(849, 'Geografia', 'Kwasne wody zawierajace glownie CO2 to?', 'szczawy', '2014-04-29 15:20:19'),
-(850, 'Geografia', 'Pionowy przekroj przez warstwe gleby to?', 'profil glebowy', '2014-04-22 15:13:26'),
-(851, 'Geografia', 'Podstawa, na ktorej rozwija sie gleba to?', 'podloze skalne', '2014-04-21 13:27:07'),
-(852, 'Geografia', 'Zbiorowiska roslinne, charakteryzujace sie podobnymi cechami to?', 'formacja roslinna', '2014-04-29 18:23:07'),
-(853, 'Geografia', 'Bagienne zarosla rosnace w klimacie goracym to?', 'dzungla', '2014-04-29 15:54:00'),
-(854, 'Geografia', 'Niszczace oddzialywanie na system biologicznego przezycia to?', 'kleski', '2014-04-25 15:47:22'),
-(855, 'Geografia', 'Zjawiska wywolane gwaltownym ruchem mas skalnych w obrebie litosfery to?', 'trzesienia ziemi', '2014-04-21 15:37:14'),
-(856, 'Geografia', 'Skala, ktora mierzy sile trzesienia ziemi to?', 'skala Richtera', '2014-04-24 18:46:20'),
-(857, 'Geografia', 'Skala skutkow jakie wywoluje trzesienie ziemi to?', 'skala Mercallego', '2014-04-28 18:42:28'),
-(858, 'Geografia', 'Proces wyrebu lasu to?', 'deforestacja', '2014-04-22 08:57:48'),
-(859, 'Geografia', 'Sztuczne uprawy ryb, mieczakow, skorupiakow to?', 'akwakultura', '2014-04-28 13:23:10'),
-(860, 'Geografia', 'Dlugotrwaly i powolny wzrost sredniej temperatury na powierzchni Ziemi to?', 'efekt cieplarniany', '2014-04-28 18:58:40'),
-(861, 'Geografia', 'Obszary niezamieszkane i niewykorzystywane to?', 'anekumena', '2014-04-25 15:45:07'),
-(862, 'Geografia', 'Obszary zaludnione okresowo to?', 'subekumena', '2014-04-20 15:55:17'),
-(863, 'Geografia', 'Roznica miedzy liczba urodzen a liczba zgonow w danej populacji to?', 'przyrost naturalny', '2014-04-06 18:14:06'),
-(864, 'Geografia', 'Zestawienie przyrostu naturalnego ze wspolczynnikiem migracji to?', 'przyrost rzeczywisty', '2014-04-24 13:46:17'),
-(865, 'Geografia', 'Powrot emigrantow do pierwotnego miejsca pobytu to?', 'reemigracja', '2014-04-18 08:49:07'),
-(866, 'Geografia', 'Skupisko polozonych blisko siebie miast to?', 'aglomeracja', '2014-04-20 18:56:27'),
-(867, 'Geografia', 'Aglomeracja majaca duze znaczenie miedzynarodowe to?', 'metropolia', '2014-04-19 13:56:13'),
-(868, 'Geografia', 'Aglomeracje, ktore sie integruja i rozwijaja to?', 'megalopolis', '2014-04-21 17:35:17'),
-(869, 'Geografia', 'Rozdzielenie koryta rzeki na dwie odnogi lub wiecej to?', 'bifurkacja', '2014-04-25 15:30:44'),
-(870, 'Geografia', 'Skala, ktora opisuje sile wiatru to?', 'skala Beauforta', '2014-04-27 15:38:51'),
-(871, 'Geografia', 'Bezlesne zbiorowisko roslinnosci w klim. strefy arkt. i subarkt. to?', 'tundra', '2014-04-11 15:56:45'),
-(872, 'Geografia', 'Lasy iglaste w obrebie klimatu umiarkow. chlodnego na polkuli poln. to?', 'tajga', '2014-04-19 13:25:01'),
-(873, 'Geografia', 'Rownina pozbawiona drzew, rzek i jezior to?', 'step', '2014-04-24 15:21:11'),
-(874, 'Geografia', 'Rozlegle obszary porosniete roslinnoscia trawiasta w Ameryce Pn. to?', 'preria', '2014-04-22 18:30:31'),
-(875, 'Geografia', 'Formacja trawiasta strefy miedzyzwrotnikowej o klimacie goracym to?', 'sawanna', '2014-04-18 15:27:47'),
-(876, 'Geografia', 'Piaszczyste wzniesienie usypane przez wiatr to?', 'wydma', '2014-04-19 08:33:31'),
-(877, 'Geografia', 'Teren bez zwartej szaty roslinnej o malej il. opadow i wys. temp. pow.?', 'pustynia', '2014-04-18 15:07:53'),
-(878, 'Geografia', 'Teren o bardzo skapej roslinnosci, pokryw. od 10 do 50proc. powierzchni?', 'polpustynia', '2014-04-19 17:59:49'),
-(879, 'Geografia', 'Polska pustynia lezaca na pogran. Wyzyny Slaskiej i Wyzyny Olkuskiej to?', 'Pustynia Bledowska', '2014-04-28 18:08:04'),
-(880, 'Geografia', 'Polska przybrzezna wyspa stanowiaca poludniowy brzeg Zat. Pomorskiej to?', 'Wolin', '2014-04-29 18:50:15'),
-(881, 'Geografia', 'Wyspa przybrzezna na Baltyku na pograniczu Polski i Niemiec to?', 'Uznam', '2014-04-02 13:25:12'),
-(882, 'Geografia', 'Trzecia najdluzsza rzeka Polski (808 km) to?', 'Warta', '2014-04-28 18:43:22'),
-(883, 'Geografia', 'Czwarta najdluzsza rzeka Polski (587 km na terenie kraju) to?', 'Bug', '2014-04-14 18:18:57'),
-(884, 'Geografia', 'Piata najdluzsza rzeka Polski (448 km na terenie kraju) to?', 'Narew', '2014-04-29 13:00:26'),
-(885, 'Geografia', 'Ujscie rzeki w postaci kilku odnog, tworzacych bagienny obszar nizinny?', 'delta', '2014-04-21 15:32:48'),
-(886, 'Geografia', 'Obszar ladu polozony ponizej poziomu morza to?', 'depresja', '2014-04-27 18:47:48'),
-(887, 'Geografia', 'Najwyzszy szczyt Beskidu Zywieckiego (1725 m.n.p.m.) to?', 'Babia Gora', '2014-04-06 13:31:40'),
-(888, 'Geografia', 'Najwyzszy szczyt Karkonoszy (1602 m.n.p.m.) to?', 'Sniezka', '2014-04-28 15:51:47'),
-(889, 'Geografia', 'Najwyzszy szczyt Bieszczadow (1346 m.n.p.m.) to?', 'Tarnica', '2014-04-25 18:27:41'),
-(890, 'Geografia', 'Najwyzszy szczyt Gorcow (1310 m.n.p.m.) to?', 'Turbacz', '2014-04-24 13:29:19'),
-(891, 'Geografia', 'Najwyzszy szczyt Beskidu Sadeckiego (1262 m.n.p.m.) to?', 'Radziejowa', '2014-04-12 13:45:42'),
-(892, 'Geografia', 'Najwyzszy szczyt Beskidu Slaskiego (1257 m.n.p.m.) to?', 'Skrzyczne', '2014-04-15 18:59:59'),
-(893, 'Geografia', 'Najwyzszy szczyt Masywu Snieznika (1425 m.n.p.m.) to?', 'Snieznik', '2014-04-22 15:17:59'),
-(894, 'Geografia', 'Jaki polski szczyt jest znany z 15-metrowego metalowego krzyza?', 'Wielki Giewont', '2014-04-20 13:12:38'),
-(895, 'Chemia', 'Zmiana struktury chemicznej substancji pod wplywem napiecia elektr. to?', 'elektroliza', '2014-04-25 13:16:38'),
-(896, 'Chemia', 'Jon o ladunku dodatnim to?', 'kation', '2014-04-25 18:30:51'),
-(897, 'Chemia', 'Jon o ladunku ujemnym to?', 'anion', '2014-04-29 18:43:56'),
-(898, 'Chemia', 'Rozpad czasteczek zwiazkow chem. na jony pod wplywem rozpuszczalnika to?', 'dysocjacja elektrolityczna', '2014-04-14 13:52:47'),
-(899, 'Chemia', 'Rozpad czasteczek zwiazkow chem. na atomy pod wplywem temperatury to?', 'dysocjacja termiczna', '2014-04-25 15:39:16'),
-(900, 'Chemia', 'Zjawisko powstawania jonu z obojetnego atomu lub czasteczki to?', 'jonizacja', '2014-04-17 18:42:05'),
-(901, 'Chemia', 'Proces odwrotny do jonizacji to?', 'rekombinacja', '2014-04-20 13:40:20'),
-(902, 'Chemia', 'Reakcja chem. miedzy kwasem a zasada powodujaca zobojetnienie odczynu?', 'neutralizacja', '2014-04-21 18:29:17'),
-(903, 'Chemia', 'Homogeniczna mieszanina dwoch lub wiecej zwiazkow chemicznych to?', 'roztwor', '2014-04-18 18:15:22'),
-(904, 'Chemia', 'Roztwor nie zmieniajacy stezenia w kontakcie z substancja rozpuszczona?', 'roztwor nasycony', '2014-04-27 13:59:51'),
-(905, 'Chemia', 'Roztwor, w ktorym mozna rozpuscic jeszcze pewna ilosc danej substancji?', 'roztwor nienasycony', '2014-04-27 15:26:37'),
-(906, 'Chemia', 'Roztwor o stezeniu wiekszym od stezenia roztworu nasyconego to?', 'roztwor przesycony', '2014-04-18 17:23:20'),
-(907, 'Chemia', 'Reakcja chem., w ktorej atom przechodzi na wyzszy stopien utlenienia to?', 'utlenianie', '2014-04-06 18:45:20'),
-(908, 'Chemia', 'Kazde trwale polaczenie dwoch atomow to?', 'wiazanie chemiczne', '2014-04-03 18:46:11'),
-(909, 'Chemia', 'Reakcja chemiczna tworzaca zlozone produkty z prostych substratow to?', 'synteza', '2014-04-13 18:30:35'),
-(910, 'Chemia', 'Liczba okreslajaca ile protonow znajduje sie w jadrze danego atomu to?', 'liczba atomowa', '2014-04-24 15:58:35'),
-(911, 'Chemia', 'Obojetna elektrycz. czastka subatomowa występujaca w jadrach atomowych?', 'neutron', '2014-04-20 17:23:19'),
-(912, 'Chemia', 'Liczba nukleonow w jadrze atomu danego izotopu danego pierwiastka to?', 'liczba masowa', '2014-04-17 15:44:31'),
-(913, 'Chemia', 'Substancja chemiczna skladajaca sie z jednego typu atomow to?', 'pierwiastek', '2014-04-19 17:45:57'),
-(914, 'Chemia', 'Zestawienie wszystkich pierwiastkow chem. w postaci rozbudowanej tabeli?', 'uklad okresowy', '2014-04-22 18:29:09'),
-(915, 'Muzyka', 'Instrument dety australijskich aborygenow to?', 'didgeridoo', '2014-04-29 13:14:15'),
-(916, 'Muzyka', 'Instrument muzyczny posiadajacy 4 pary strun strojonych w kwintach to?', 'mandolina', '2014-04-25 15:13:43'),
-(917, 'Muzyka', 'Instrument dety drewniany z grupy aerofonow wargowych to?', 'flet', '2014-04-27 13:46:52'),
-(918, 'Muzyka', 'Instr. strunowy z grupy chordofonow smyczkowych wiekszy od skrzypiec to?', 'altowka', '2014-04-22 18:45:35'),
-(919, 'Matematyka', 'Gorna czesc ulamka to?', 'licznik', '2014-04-20 17:47:35'),
-(920, 'Matematyka', 'Dolna czesc ulamka to?', 'mianownik', '2014-04-13 15:50:10'),
-(921, 'Matematyka', 'Linia oddzielajaca licznik od mianownika to?', 'kreska ulamkowa', '2014-04-18 18:24:58'),
-(922, 'Biologia', 'Ciagly proces, polegajacy na stopniowych zmianach cech gatunkowych to?', 'ewolucja', '2014-04-25 15:03:53'),
-(923, 'Biologia', 'Zjawisko scislego i korzystnego wspolzycia co najmniej dwoch organizmow?', 'symbioza', '2014-04-21 17:54:20'),
-(924, 'Biologia', 'Forma wspolz. 2-och organizmow, dla 1-go korzystna, dla 2-go szkodliwa?', 'pasozytnictwo', '2014-04-21 13:38:48'),
-(925, 'Biologia', 'Najliczniejsza na Ziemi grupa zwierzat to?', 'owady', '2014-04-24 18:40:51'),
-(926, 'Biologia', 'Dzial zoologii zajmujacy sie owadami to?', 'entomologia', '2014-04-12 18:15:28'),
-(927, 'Biologia', 'Nauka przyrodnicza zajmujaca sie badaniem zycia i organizmow zywych to?', 'biologia', '2014-04-20 17:42:23'),
-(928, 'Biologia', 'Urzadzenie sluz. do obserwacji malych obiektow w duzym powiekszeniu to?', 'mikroskop', '2014-04-29 13:05:48'),
-(929, 'Biologia', 'Dzial biologii zajmujacy sie roslinami to?', 'botanika', '2014-04-25 18:33:07'),
-(930, 'Biologia', 'Dzial biologii zajmujacy sie zwierzetami to?', 'zoologia', '2014-04-15 17:38:49'),
-(931, 'Biologia', 'Najmniejsza strukturalna i funkcjonalna jednostka organizmow zywych to?', 'komorka', '2014-04-28 13:19:36'),
-(932, 'Geografia', 'Pierwszy okres ery Paleozoicznej to?', 'Kambr', '2014-04-16 15:51:09'),
-(933, 'Geografia', 'Drugi okres ery Paleozoicznej to?', 'Ordowik', '2014-04-24 15:59:29'),
-(934, 'Geografia', 'Trzeci okres ery Paleozoicznej to?', 'Sylur', '2014-04-29 15:23:54'),
-(935, 'Geografia', 'Czwarty okres ery Paleozoicznej to?', 'Dewon', '2014-04-29 18:32:09'),
-(936, 'Geografia', 'Piaty okres ery Paleozoicznej to?', 'Karbon', '2014-04-28 13:32:56'),
-(937, 'Geografia', 'Szosty okres ery Paleozoicznej to?', 'Perm', '2014-04-18 18:31:20'),
-(938, 'Geografia', 'Pierwszy okres ery Mezozoicznej to?', 'Trias', '2014-04-20 15:13:39'),
-(939, 'Geografia', 'Drugi okres ery Mezozoicznej to?', 'Jura', '2014-04-18 08:52:35'),
-(940, 'Geografia', 'Trzeci okres ery Mezozoicznej to?', 'Kreda', '2014-04-29 15:22:06'),
-(941, 'Geografia', 'Pierwszy okres ery Kenozoicznej to?', 'Paleogen', '2014-04-25 18:25:53'),
-(942, 'Geografia', 'Drugi okres ery Kenozoicznej to?', 'Neogen', '2014-04-20 15:30:12'),
-(943, 'Geografia', 'Trzeci okres ery Kenozoicznej to?', 'Plejstocen', '2014-04-20 13:09:11'),
-(944, 'Geografia', 'Czwarty okres ery Kenozoicznej to?', 'Holocen', '2014-04-19 15:48:39'),
-(945, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Dziadka?', '22 stycznia', '2014-04-21 18:20:42'),
-(946, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Andrzejki?', '29 listopada', '2014-04-29 13:22:43'),
-(947, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Babci?', '21 stycznia', '2014-04-17 13:32:26'),
-(948, 'Rozne', 'Ktorego dnia obchodzona jest w Polsce Barborka?', '4 grudnia', '2014-04-18 17:04:16'),
-(949, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Chlopaka?', '30 wrzesnia', '2014-04-28 13:30:16'),
-(950, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Dozynki?', '23 wrzesnia', '2014-04-29 13:16:29'),
-(951, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Dziecka?', '1 czerwca', '2014-04-29 18:00:14'),
-(952, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Matki?', '26 maja', '2014-04-20 13:21:17'),
-(953, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Kobiet?', '8 marca', '2014-04-25 18:15:29'),
-(954, 'Rozne', 'Ktorego dnia obchodzone jest w Polsce Swieto Niepodleglosci?', '11 listopada', '2014-04-18 15:22:23'),
-(955, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Ojca?', '23 czerwca', '2014-04-17 18:36:05'),
-(956, 'Rozne', 'Ktorego dnia obchodzone jest w Polsce Swieto Pracy?', '1 maja', '2014-04-13 15:39:12'),
-(957, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Strazaka?', '4 maja', '2014-04-24 15:22:59'),
-(958, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Walentynki?', '14 lutego', '2014-04-16 08:45:43'),
-(959, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Wszystkich Swietych?', '1 listopada', '2014-04-27 18:17:20'),
-(960, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Zaduszki?', '2 listopada', '2014-04-28 13:32:02'),
-(961, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Księga Tajemnicza. Prolog', 'Kaliber 44', '2014-04-27 18:06:35'),
-(962, 'Muzyka', 'Jaki polski zespol punk rockowy powstal w 1978 r. w Ustrzykach Dolnych?', 'KSU', '2014-04-24 13:37:32'),
-(963, 'Muzyka', 'Wokalista i basista ktorego polskiego zespolu metalowego jest Titus?', 'Acid Drinkers', '2014-04-28 18:45:10'),
-(964, 'Muzyka', 'Ktora polska wokalistka odspiewala hymn podczas MS w Korei/Japonii 2002?', 'Edyta Gorniak', '2014-04-28 18:37:57'),
-(965, 'Muzyka', 'Podaj pseudonim rapera nazywajacego sie Marshall Bruce Mathers III?', 'Eminem', '2014-04-27 15:48:51'),
-(966, 'Muzyka', 'Wokalista i gitarzysta ktorego polskiego zespolu metalowego jest Nergal?', 'Behemoth', '2014-04-27 18:58:57'),
-(967, 'Muzyka', 'Wokalista i gitarzysta ktorego polskiego zespolu metalowego jest Peter?', 'Vader', '2014-04-21 18:36:04'),
-(968, 'Muzyka', 'Jak nazywa sie nagroda muzyczna przyznawana w Polsce od roku 1995?', 'Fryderyk', '2014-04-29 18:44:50'),
-(969, 'Muzyka', 'Podaj pelne imie i nazwisko rapera 2Pac', 'Tupac Amaru Shakur', '2014-04-29 15:38:44'),
-(970, 'Muzyka', 'W jakim zespole dzialali Fokus, Rahim i Magik?', 'Paktofonika', '2014-04-29 18:01:08'),
-(971, 'Muzyka', 'Jaki niemiecki zespol stworzyl gatunek "tanz metal"?', 'Rammstein', '2014-04-22 15:10:41'),
-(972, 'Muzyka', 'Tenorowo-basowy instrument strunowy z grupy smyczkowych to?', 'wiolonczela', '2014-04-16 18:35:56'),
-(973, 'Biologia', 'Dzial zoologii zajmujacy sie rybami to?', 'ichtiologia', '2014-04-16 17:49:20'),
-(974, 'Biologia', 'Dzial zoologii zajmujacy sie ssakami to?', 'teriologia', '2014-04-19 13:16:17'),
-(975, 'Biologia', 'Dzial zoologii zajmujacy sie ptakami to?', 'ornitologia', '2014-04-25 18:35:50'),
-(976, 'Biologia', 'Dzial zoologii zajmujacy sie plazami i gadami to?', 'herpetologia', '2014-04-12 15:23:39'),
-(977, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Las Venturas?', 'Las Vegas', '2014-04-25 15:11:03'),
-(978, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest San Fierro?', 'San Francisco', '2014-04-19 13:17:38'),
-(979, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Los Santos?', 'Los Angeles', '2014-04-22 13:33:04'),
-(980, 'Gry', 'Seria gier pilkarskich z firmy Konami to?', 'Pro Evolution Soccer', '2014-04-20 08:26:26'),
-(981, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 100?', '10', '2014-04-13 15:59:45'),
-(982, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 121?', '11', '2014-04-15 15:19:41'),
-(983, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 144?', '12', '2014-04-06 18:22:14'),
-(984, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 169?', '13', '2014-04-20 18:28:36'),
-(985, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 196?', '14', '2014-04-20 08:22:58'),
-(986, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 225?', '15', '2014-04-16 17:16:23'),
-(987, 'Matematyka', 'Ile wynosi 5 procent z liczby 200?', '10', '2014-04-21 13:09:07'),
-(988, 'Matematyka', 'Ile wynosi 20 procent z liczby 400?', '80', '2014-04-29 18:36:41'),
-(989, 'Matematyka', 'Ile wynosi 75 procent z liczby 120?', '90', '2014-04-22 17:14:44'),
-(990, 'Matematyka', 'Ile wynosi 60 procent z liczby 150?', '90', '2014-04-14 18:42:52'),
-(991, 'Matematyka', 'Ile wynosi 25 procent z liczby 180?', '45', '2014-04-27 15:36:08'),
-(992, 'Matematyka', 'Ile wynosi 30 procent z liczby 600?', '180', '2014-04-16 18:54:47'),
-(993, 'Informatyka', 'Liczba binarna 110101 jest rowna jakiej liczbie dziesiatkowej?', '53', '2014-04-15 17:56:13'),
-(994, 'Informatyka', 'Liczba binarna 1100 jest rowna jakiej liczbie dziesiatkowej?', '12', '2014-04-29 18:39:24'),
-(995, 'Informatyka', 'Liczba binarna 1001 jest rowna jakiej liczbie dziesiatkowej?', '9', '2014-04-21 08:43:49'),
-(996, 'Informatyka', 'Liczba binarna 10011 jest rowna jakiej liczbie dziesiatkowej?', '19', '2014-04-28 13:58:21'),
-(997, 'Informatyka', 'Liczba binarna 10101 jest rowna jakiej liczbie dziesiatkowej?', '21', '2014-04-20 13:43:55'),
-(998, 'Informatyka', 'Liczba szesnastkowa A0 jest rowna jakiej liczbie dziesiatkowej?', '160', '2014-04-21 08:03:59'),
-(999, 'Informatyka', 'Liczba szesnastkowa D8 jest rowna jakiej liczbie dziesiatkowej?', '216', '2014-04-21 18:44:42'),
-(1000, 'Informatyka', 'Liczba szesnastkowa 4B jest rowna jakiej liczbie dziesiatkowej?', '75', '2014-04-19 13:54:29'),
-(1001, 'Informatyka', 'Liczba szesnastkowa 12 jest rowna jakiej liczbie dziesiatkowej?', '18', '2014-04-11 15:39:33'),
-(1002, 'Informatyka', 'Liczba szesnastkowa BE jest rowna jakiej liczbie dziesiatkowej?', '190', '2014-04-28 15:49:58'),
-(1003, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 2 cm?', '8', '2014-04-24 13:38:28'),
-(1004, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 3 cm?', '12', '2014-04-18 13:25:01'),
-(1005, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 4 cm?', '16', '2014-04-29 18:56:31'),
-(1006, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 5 cm?', '20', '2014-04-27 18:43:20'),
-(1007, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 6 cm?', '24', '2014-04-22 13:59:48'),
-(1008, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 2 cm?', '4', '2014-04-29 15:43:41'),
-(1009, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 3 cm?', '9', '2014-04-29 13:33:25'),
-(1010, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 4 cm?', '16', '2014-04-11 13:56:26'),
-(1011, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 5 cm?', '25', '2014-04-15 15:35:19'),
-(1012, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 6 cm?', '36', '2014-04-25 18:03:14'),
-(1013, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 3 cm?', '10', '2014-04-25 13:07:35'),
-(1014, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 1 i 3 cm?', '8', '2014-04-22 08:35:14'),
-(1015, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 4 cm?', '12', '2014-04-29 13:49:34'),
-(1016, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 5 cm?', '14', '2014-03-31 17:42:17'),
-(1017, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 3 i 5 cm?', '16', '2014-04-14 13:19:44'),
-(1018, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 3 cm?', '6', '2014-04-29 18:19:04'),
-(1019, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 1 i 3 cm?', '3', '2014-04-28 15:49:04'),
-(1020, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 4 cm?', '8', '2014-04-28 13:09:53'),
-(1021, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 5 cm?', '10', '2014-04-19 15:20:57'),
-(1022, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 3 i 5 cm?', '15', '2014-04-27 13:42:56'),
-(1023, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 3 i 5 cm?', '15', '2014-04-28 13:00:59'),
-(1024, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 2,6,10,...?', '14', '2014-04-28 15:11:17'),
-(1025, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 3,5,7,...?', '9', '2014-04-16 13:17:55'),
-(1026, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 1,-2,-5,...?', '-8', '2014-04-29 15:07:18'),
-(1027, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 9,7,5,...?', '3', '2014-04-12 13:38:49'),
-(1028, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,4,8,...?', '16', '2014-04-28 15:18:57'),
-(1029, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,6,18,...?', '54', '2014-04-29 18:16:23'),
-(1030, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,-4,8,...?', '-16', '2014-04-27 15:14:54'),
-(1031, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego -1,-9,-27,...?', '-81', '2014-04-21 13:28:55'),
-(1032, 'Matematyka', 'Ile stopni wynosi suma katow wewnetrznych w trojkacie?', '180', '2014-04-28 15:17:09'),
-(1033, 'Matematyka', 'Ile stopni wynosi suma katow wewnetrznych w czworokacie?', '360', '2014-04-24 18:43:35'),
-(1034, 'Matematyka', 'Ile wynosi 2 do 5-tej potegi?', '32', '2014-04-16 13:25:59'),
-(1035, 'Matematyka', 'Ile wynosi 2 do 7-ej potegi?', '128', '2014-04-17 13:18:12'),
-(1036, 'Matematyka', 'Ile wynosi 2 do 8-ej potegi?', '256', '2014-04-29 18:52:03'),
-(1037, 'Matematyka', 'Ile wynosi 3 do 3-ciej potegi?', '27', '2014-04-22 08:28:18'),
-(1038, 'Matematyka', 'Ile wynosi 3 do 4-tej potegi?', '81', '2014-04-27 18:28:34'),
-(1039, 'Matematyka', 'Ile wynosi 4 do 3-ciej potegi?', '64', '2014-04-20 13:13:39'),
-(1040, 'Matematyka', 'Ile wynosi 4 do 4-tej potegi?', '256', '2014-04-28 18:16:40'),
-(1041, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3+4+5 ?', '15', '2014-04-22 15:55:18'),
-(1042, 'Matematyka', 'Ile wynosi wynik dzialania 1+2-3-4+5 ?', '1', '2014-04-28 13:03:40');
+(589, 'Rozne', 'Trzecia litera alfabetu greckiego to?', 'gamma', '2015-04-10 20:12:53'),
+(590, 'Rozne', 'Czwarta litera alfabetu greckiego to?', 'delta', '2015-03-19 20:12:33'),
+(591, 'Rozne', 'Ostatnia litera alfabetu greckiego to?', 'omega', '2015-05-16 13:07:11'),
+(592, 'Rozne', 'Jak nazywa sie japonska sztuka skladania papieru', 'origami', '2015-05-15 18:35:41'),
+(593, 'Malarstwo', 'Podaj nazwisko autora obrazu "Krzyk"', 'Munch', '2015-05-02 20:29:00'),
+(594, 'Malarstwo', 'Podaj nazwisko autora obrazu "Stanczyk"', 'Matejko', '2015-05-18 18:42:18'),
+(595, 'Malarstwo', 'Podaj nazwisko autora obrazu "Ostatnia wieczerza"', 'da Vinci', '2015-05-14 18:00:20'),
+(596, 'Malarstwo', 'Podaj nazwisko autora obrazu "Trwalosc pamieci"', 'Dali', '2015-05-04 20:33:45'),
+(597, 'Malarstwo', 'Podaj nazwisko autora obrazu "Guernica"', 'Picasso', '2015-05-15 18:42:40'),
+(598, 'Malarstwo', 'Podaj nazwisko autora obrazu "Sloneczniki"', 'van Gogh', '2015-05-15 13:40:40'),
+(599, 'Malarstwo', 'Podaj nazwisko autora obrazu "Lekcja anatomii doktora Tulpa"', 'Rembrandt', '2015-05-10 18:40:01'),
+(600, 'Rozne', 'Jak oficjalnie nazywa sie waluta Stanow Zjednoczonych?', 'dolar amerykanski', '2015-03-17 15:42:33'),
+(601, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wielkiej Brytanii?', 'funt szterling', '2015-05-04 17:51:22'),
+(602, 'Rozne', 'Jak oficjalnie nazywa sie waluta Szwajcarii?', 'frank szwajcarski', '2015-04-16 15:41:18'),
+(603, 'Rozne', 'Jak oficjalnie nazywa sie waluta Unii Europejskiej?', 'euro', '2015-05-14 15:52:59'),
+(604, 'Rozne', 'Jak oficjalnie nazywa sie waluta Australii?', 'dolar australijski', '2015-04-26 20:59:54'),
+(605, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kanady?', 'dolar kanadyjski', '2015-05-18 13:21:19'),
+(606, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wegier?', 'forint wegierski', '2015-05-17 13:59:36'),
+(607, 'Rozne', 'Jak oficjalnie nazywa sie waluta Czech?', 'korona czeska', '2015-05-19 13:21:14'),
+(608, 'Rozne', 'Jak oficjalnie nazywa sie waluta Danii?', 'korona dunska', '2015-03-16 20:28:46'),
+(609, 'Rozne', 'Jak oficjalnie nazywa sie waluta Norwegii?', 'korona norweska', '2015-04-27 20:32:46'),
+(610, 'Rozne', 'Jak oficjalnie nazywa sie waluta Szwecji?', 'korona szwedzka', '2015-05-18 13:35:20'),
+(611, 'Rozne', 'Jak oficjalnie nazywa sie waluta Bulgarii?', 'lew bulgarski', '2015-05-13 15:42:22'),
+(612, 'Rozne', 'Jak oficjalnie nazywa sie waluta Rumunii?', 'lej rumunski', '2015-05-13 13:28:25'),
+(613, 'Rozne', 'Jak oficjalnie nazywa sie waluta Litwy?', 'lit litewski', '2015-02-25 17:13:16'),
+(614, 'Rozne', 'Jak oficjalnie nazywa sie waluta Islandii?', 'korona islandzka', '2015-05-19 15:28:35'),
+(615, 'Rozne', 'Jak oficjalnie nazywa sie waluta Rosji?', 'rubel rosyjski', '2015-04-29 17:46:54'),
+(616, 'Rozne', 'Jak oficjalnie nazywa sie waluta Ukrainy?', 'hrywna ukrainska', '2015-05-07 18:18:07'),
+(617, 'Rozne', 'Jak oficjalnie nazywa sie waluta Bialorusi?', 'rubel bialoruski', '2015-05-08 13:39:01'),
+(618, 'Rozne', 'Jak oficjalnie nazywa sie waluta Macedonii?', 'denar macedonski', '2015-04-07 20:17:42'),
+(619, 'Rozne', 'Jak oficjalnie nazywa sie waluta Chorwacji?', 'kuna chorwacka', '2015-04-25 17:54:35'),
+(620, 'Rozne', 'Jak oficjalnie nazywa sie waluta Serbii?', 'dinar serbski', '2015-05-09 13:05:33'),
+(621, 'Rozne', 'Jak oficjalnie nazywa sie waluta Turcji?', 'lira turecka', '2015-05-18 18:31:47'),
+(622, 'Rozne', 'Jak oficjalnie nazywa sie waluta Lotwy?', 'lat lotewski', '2015-05-16 18:58:32'),
+(623, 'Rozne', 'Jak oficjalnie nazywa sie waluta Meksyku?', 'peso meksykanskie', '2015-05-17 15:59:50'),
+(624, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kuby?', 'peso kubanskie', '2015-05-09 13:23:05'),
+(625, 'Rozne', 'Jak oficjalnie nazywa sie waluta Argentyny?', 'peso argentynskie', '2015-05-17 13:03:37'),
+(626, 'Rozne', 'Jak oficjalnie nazywa sie waluta Brazylii?', 'real brazylijski', '2015-04-05 15:28:16'),
+(627, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wenezueli?', 'bolivar wenezuelski', '2015-05-19 18:57:51'),
+(628, 'Rozne', 'Jak oficjalnie nazywa sie waluta Chin?', 'yuan chinski', '2015-05-14 18:33:33'),
+(629, 'Rozne', 'Jak oficjalnie nazywa sie waluta Japonii?', 'jen japonski', '2015-05-17 18:56:30'),
+(630, 'Gry', 'Jak nazywa sie firma, ktora wyprodukowala gry z serii Doom?', 'id Software', '2015-05-12 13:40:44'),
+(631, 'Informatyka', 'Do jakiej marki naleza 8-bitowe modele komputerow 800XL i 65XE?', 'Atari', '2015-05-18 15:42:52'),
+(632, 'Informatyka', 'Jak nazywal sie zalozyciel firmy Commodore, a pozniej wlasciciel Atari?', 'Jack Tramiel', '2015-03-18 20:42:37'),
+(633, 'Informatyka', 'Do jakiej marki naleza 16-bitowe modele komputerow 500, 600 i 1200?', 'Amiga', '2015-04-24 15:11:08'),
+(634, 'Geografia', 'Jakie jest najwieksze miasto Slaska?', 'Wroclaw', '2015-05-17 18:07:34'),
+(635, 'Muzyka', 'Jak nazywa sie gitarzysta zespolu Queen?', 'Brian May', '2015-05-19 18:47:21'),
+(636, 'Administracja', 'Kto jest przedstawicielem Rady Ministrow w wojewodztwie?', 'Wojewoda', '2015-05-02 17:20:27'),
+(637, 'Rozne', 'Jaka brzmi pelna nazwa panstwa niemieckiego?', 'Republika Federalna Niemiec', '2015-05-08 13:18:00'),
+(638, 'Historia', 'Kto byl pierwszym Prezesem Rady Ministrow III Rzeczpospolitej?', 'Tadeusz Mazowiecki', '2015-05-14 15:40:41'),
+(639, 'Historia', 'Kto byl pierwszym prezydentem Polski?', 'Gabriel Narutowicz', '2015-04-27 20:23:48'),
+(640, 'Architektura', 'Kto zaprojektowal wroclawska Hale Stulecia?', 'Max Berg', '2015-05-05 15:30:12'),
+(641, 'Historia', 'Jak nazywal sie niemiecki minister propagandy w latach 1933-1945?', 'Joseph Goebbels', '2015-05-19 18:40:21'),
+(642, 'Muzyka', 'Jaki zespol wydal piosenke "The Winner Takes It All"?', 'ABBA', '2015-05-11 13:21:20'),
+(643, 'Muzyka', 'Jaki zespol wydal album "Brothers in Arms"?', 'Dire Straits', '2015-05-03 15:05:28'),
+(644, 'Geografia', 'Ktory amerykanski stan ma najwieksza powierzchnie?', 'Alaska', '2015-05-18 13:37:05'),
+(645, 'Sport', 'Jaka nazwe nosi pilkarski stadion narodowy Anglii?', 'Wembley', '2015-05-15 13:37:09'),
+(646, 'Geografia', 'Czescia skladowa jakiego panstwa jest Republika Serbska?', 'Bosnia i Hercegowina', '2015-04-28 20:52:28'),
+(647, 'Cytaty', 'Kto jest autorem frazy "religia jest opium ludu"?', 'Karol Marks', '2015-04-27 15:00:06'),
+(648, 'Historia', 'Ktory amerykanski prezydent ustapil z funkcji po wykryciu afery Watergate?', 'Richard Nixon', '2015-05-19 18:07:07'),
+(649, 'Muzyka', 'Kto jest autorem walca "Nad pieknym modrym Dunajem"?', 'Johann Strauss', '2015-04-26 20:58:06'),
+(650, 'Historia', 'Jak nazywal sie cesarz Imperium Rzymskiego, wnuk Karola Mlota?', 'Karol Wielki', '2015-05-08 13:07:28'),
+(651, 'Geografia', 'Na terenie jakiego obecnie istniejacego panstwa znajduje sie Waterloo - miejsce bitwy z 1815 roku?', 'Belgia', '2015-04-28 20:48:53'),
+(652, 'Historia', 'Jaka nazwe nosilo miasto Wroclaw przed 1945 rokiem?', 'Breslau', '2015-05-12 18:44:29'),
+(653, 'Historia', 'Kto byl pierwszym przywodca Korei Polnocnej?', 'Kim Ir Sen', '2015-05-08 18:50:48'),
+(654, 'Motoryzacja', 'W jakim miescie swoja siedzibe ma przedsiebiorstwo BMW?', 'Monachium', '2015-05-08 13:46:01'),
+(655, 'Geografia', 'W jakim amerykanskim stanie znajduje sie miasto Salt Lake City?', 'Utah', '2015-04-11 17:59:27'),
+(656, 'Polityka', 'W jakim niemieckim kraju zwiazkowym funkcjonuje partia CSU?', 'Bawaria', '2015-04-30 17:20:16'),
+(657, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ch?', 'Szwajcaria', '2015-04-02 20:35:21'),
+(658, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ua?', 'Ukraina', '2015-05-13 18:12:46'),
+(659, 'Historia', 'Jakie miasto stanowilo stolice Królestwa SHS?', 'Belgrad', '2015-05-17 18:19:47'),
+(660, 'Sport', 'Jak nazywa sie mamucia skocznia narciarska w Planicy? ', 'Letalnica', '2015-05-05 20:47:47'),
+(661, 'Administracja', 'Kto w Polsce stanowi naczelny organ administracji rzadowej?', 'Prezes Rady Ministrow', '2015-05-15 15:47:37'),
+(662, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.03 a 20.04?', 'Baran', '2015-04-02 20:47:32'),
+(663, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.04 a 21.05?', 'Byk', '2015-05-13 13:26:39'),
+(664, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.05 a 21.06?', 'Bliznieta', '2015-04-03 17:19:46'),
+(665, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.06 a 23.07?', 'Rak', '2015-04-27 20:54:15'),
+(666, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.07 a 23.08?', 'Lew', '2015-04-24 20:06:05'),
+(667, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.08 a 23.09?', 'Panna', '2015-05-02 15:48:16'),
+(668, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.09 a 23.10?', 'Waga', '2015-05-15 15:38:50'),
+(669, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 24.10 a 22.11?', 'Skorpion', '2015-05-01 17:56:05'),
+(670, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 23.11 a 21.12?', 'Strzelec', '2015-05-08 13:35:31'),
+(671, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.12 a 19.01?', 'Koziorozec', '2015-04-26 20:43:48'),
+(672, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 20.01 a 19.02?', 'Wodnik', '2015-04-28 15:03:58'),
+(673, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 20.02 a 20.03?', 'Ryby', '2015-05-14 15:58:15'),
+(674, 'Geografia', 'Co nastepuje corocznie miedzy 20-go a 21-go marca?', 'rownonoc wiosenna', '2015-04-12 15:28:46'),
+(675, 'Geografia', 'Co nastepuje corocznie miedzy 22-go a 23-go wrzesnia?', 'rownonoc jesienna', '2015-05-14 18:03:50'),
+(676, 'Geografia', 'Co nastepuje corocznie 21-go czerwca?', 'przesilenie letnie', '2015-05-15 15:01:58'),
+(677, 'Geografia', 'Co nastepuje corocznie 22-go grudnia?', 'przesilenie zimowe', '2015-05-16 18:42:53'),
+(678, 'Geografia', 'Zjawisko swietlne wystepujace za kolem podbiegunowym to?', 'zorza polarna', '2015-05-15 18:51:26'),
+(679, 'Astronomia', 'Kosmiczna eksplozja tworzaca wpierw jasny, a wkrotce niewidoczny obiekt?', 'supernowa', '2015-04-30 20:52:22'),
+(680, 'Astronomia', 'Obiekt astronomiczny skladajacy sie ze zdegenerowanej materii to?', 'bialy karzel', '2015-05-06 17:53:08'),
+(681, 'Astronomia', 'Obszar czasoprzestrzeni, ktorego nic nie moze opuscic to?', 'czarna dziura', '2015-05-05 20:33:41'),
+(682, 'Astronomia', 'Planeta nie majaca stalej powierzchni to?', 'gazowy olbrzym', '2015-04-30 17:11:19'),
+(683, 'Astronomia', 'Gwiazda bedaca na schylkowym etapie ewolucji to?', 'czerwony olbrzym', '2015-05-02 20:48:32'),
+(684, 'Astronomia', 'Poczatkowy etap ewolucji gwiazdy to?', 'protogwiazda', '2015-04-18 17:00:24'),
+(685, 'Astronomia', 'Oblok gazu i pylu powstalego po zakonczeniu syntezy jadrowej gwiazdy to?', 'mglawica planetarna', '2015-05-19 15:40:53'),
+(686, 'Astronomia', 'Obszar Ukladu Slonecznego rozciagajacy sie za orbita Neptuna to?', 'pas Kuipera', '2015-05-12 13:33:42'),
+(687, 'Astronomia', 'Krancowy obszar Ukladu Slonecznego skladajacy sie z pylu i planetoid to?', 'oblok Oorta', '2015-05-12 13:58:19'),
+(688, 'Astronomia', 'Obiekt astronomiczny, posredni miedzy planetami a malymi cialami nieb.?', 'planeta karlowata', '2015-03-28 15:10:43'),
+(689, 'Astronomia', 'Cialo niebieskie o rozmiarach od kilku m do 1000 km obiegajace Slonce?', 'planetoida', '2015-04-04 15:59:23'),
+(690, 'Astronomia', 'Bezzalogowa sonda kosmiczna NASA, wystrzelona 5 wrzesnia 1977 to?', 'Voyager 1', '2015-04-23 15:51:51'),
+(691, 'Astronomia', 'Bezzalogowa sonda kosmiczna NASA, wystrzelona 20 sierpnia 1977 to?', 'Voyager 2', '2015-05-13 13:51:19'),
+(692, 'Astronomia', 'Glowny skladnik atmosfery Wenus i Marsa to?', 'dwutlenek wegla', '2015-05-07 18:12:43'),
+(693, 'Astronomia', 'Glowny skladnik atmosfery Merkurego to?', 'tlen', '2015-05-03 20:04:06'),
+(694, 'Astronomia', 'Glowny skladnik atmosfery Ziemi to?', 'azot', '2015-04-30 15:59:17'),
+(695, 'Astronomia', 'Glowny skladnik atmosfery Jowisza, Saturna, Urana i Neptuna to?', 'wodor', '2015-05-09 13:07:18'),
+(696, 'Astronomia', 'Jak nazywal sie pierwszy pies w kosmosie?', 'Lajka', '2015-05-17 15:12:42'),
+(697, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 4 pazdziernika 1957 przez ZSRR?', 'Sputnik 1', '2015-05-03 20:39:43'),
+(698, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 3 listopada 1957 przez ZSRR?', 'Sputnik 2', '2015-05-18 13:54:37'),
+(699, 'Astronomia', 'Sztuczny satelita wyniesiony na orbite 15 maja 1958 przez ZSRR?', 'Sputnik 3', '2015-05-13 13:33:43'),
+(700, 'Astronomia', 'Seria radzieckich jednosobowych pojazdow kosmicznych to?', 'Wostok', '2015-05-17 13:47:19'),
+(701, 'Astronomia', 'Zrodlo promieniowania elektromagnetycznego przypominajace gwiazde to?', 'kwazar', '2015-05-12 15:07:13'),
+(702, 'Astronomia', 'Jakim typem galaktyki jest Droga Mleczna?', 'galaktyka spiralna z poprzeczka', '2015-05-03 20:27:15'),
+(703, 'Astronomia', 'Duzy, grawitacyjnie zwiazany uklad gwiazd, pylu, gazu i materii to?', 'galaktyka', '2015-05-17 13:50:50'),
+(704, 'Astronomia', 'Materia nieemitujaca i nieodbijajaca promieniowania elektromagnet. to?', 'ciemna materia', '2015-05-14 15:12:33'),
+(705, 'Astronomia', 'Jak nazywa sie gwiazda polozona najblizej Slonca?', 'Proxima Centauri', '2015-04-20 15:33:49'),
+(706, 'Astronomia', 'Strumien protonow i elektronow o duzej energii wyplywajacych ze Slonca?', 'wiatr sloneczny', '2015-05-19 15:37:22'),
+(707, 'Astronomia', 'Najbardziej zewnetrzna czesc atmosfery slonecznej to?', 'korona sloneczna', '2015-05-09 18:14:44'),
+(708, 'Astronomia', 'Odleglosc, jaka pokonuje swiatlo w prozni w ciagu jednego roku kal. to?', 'rok swietlny', '2015-04-17 20:32:25'),
+(709, 'Astronomia', 'Grupa gwiazd zajmujacych okreslony obszar sfery niebieskiej to?', 'gwiazdozbior', '2015-05-11 15:16:14'),
+(710, 'Muzyka', 'Jaki przeboj Guns N`Roses mozemy uslyszec w Radiu X?', 'Welcome to the Jungle', '2015-05-19 15:07:31'),
+(711, 'Muzyka', 'Jaki utwor Depeche Mode mozna znalezc w Radiu X?', 'Personal Jesus', '2015-05-18 18:56:18'),
+(712, 'Muzyka', 'Kto jest wykonawca utworu "Hellraiser" znanego z Radia X?', 'Ozzy Osbourne', '2015-04-23 20:29:26'),
+(713, 'Muzyka', 'Zespol, ktory w Radiu X wykonuje utwór "Mother" to?', 'Danzig', '2015-05-19 18:10:36'),
+(714, 'Muzyka', 'W Radiu K-DST mozemy uslyszec utwor "White Wedding" w wykonaniu?', 'Billy Idol', '2015-05-15 13:01:59'),
+(715, 'Muzyka', 'Utwor Joe Cockera, ktory mozna uslyszec w Radiu K-DST?', 'Woman to woman', '2015-05-08 13:30:16'),
+(716, 'Muzyka', 'Jaki utwor zespolu KISS znajdziemy na soundtracku z GTA SAMP?', 'Strutter', '2015-05-11 15:53:06'),
+(717, 'Muzyka', 'Wykonawca utworu "I don`t give a fuck" to?', '2 Pac', '2015-05-19 15:23:20'),
+(718, 'Muzyka', 'Kto wykonuje "Rebel Without a Pause"?', 'Public Enemy', '2015-05-14 18:52:46'),
+(719, 'Muzyka', 'Jaki utwor Juice Newton znajdziemy w Radiu K-Rose?', 'Queen of hearts', '2015-04-21 15:09:13'),
+(720, 'Muzyka', 'Jaki utwor Eddie Rabbit`a znajdziemy w Radiu K-Rose?', 'I love a rainy night', '2015-04-28 15:43:21'),
+(721, 'Muzyka', 'Jaka piesn jest oficjalnym hymnem panstwowym Rzeczpospolitej Polskiej?', 'Mazurek Dabrowskiego', '2015-05-13 15:14:21'),
+(722, 'Muzyka', 'Kto jest autorem "Mazurka Dabrowskiego"?', 'Jozef Wybicki', '2015-05-14 18:10:49'),
+(723, 'Muzyka', 'Polski taniec ludowy pochodzacy z Kujaw?', 'Kujawiak', '2015-05-03 17:50:39'),
+(724, 'Muzyka', 'Taniec ludowy zaliczany do polskich tancow narodowych?', 'Krakowiak', '2015-05-19 13:07:11'),
+(725, 'Muzyka', 'Polski taniec narodowy, ktory inauguruje niektore uroczystosci?', 'Polonez', '2015-05-16 18:00:51'),
+(726, 'Muzyka', 'Polski taniec ludowy tanczony na weselach po oczepinach panny mlodej to?', 'Chmielowy', '2015-05-07 18:40:51'),
+(727, 'Muzyka', 'Przedstawiciel tzw. polskiej szkoly kompozytorskiej w latach 60-tych to?', 'Krzysztof Eugeniusz Penderecki', '2015-05-03 17:25:42'),
+(728, 'Muzyka', 'Kto w 2011 roku otrzymal tytul honor.czl. Zwiazku Kompozytorow Polskich?', 'Zygmunt Krauze', '2015-05-02 15:25:10'),
+(729, 'Muzyka', 'Tytul jedynej opery Ignacego Jana Paderewskiego?', 'Manru', '2015-05-06 17:42:31'),
+(730, 'Muzyka', 'Polski kompozytor i pianista urodzony w Zelazowej Woli to?', 'Fryderyk Chopin', '2015-04-18 15:19:46'),
+(731, 'Muzyka', 'Sceniczne dzielo muzyczne, gdzie muzyka wspoldziala z akcja dramat. to?', 'opera', '2015-05-17 15:09:12'),
+(732, 'Muzyka', 'Rodzaj powaznej opery z elementami komicznymi?', 'opera semiseria', '2015-05-08 15:44:31'),
+(733, 'Muzyka', 'Rodzaj opery komicznej to?', 'opera buffa', '2015-05-03 20:05:53'),
+(734, 'Muzyka', 'Forma muzyczna zlozona z 4 czesci (allegro, adagio, menuet, allegro) to?', 'sonata klasyczna', '2015-04-29 15:19:41'),
+(735, 'Muzyka', 'Orkiestrowy odpowiednik sonaty to?', 'symfonia', '2015-05-15 13:44:12'),
+(736, 'Muzyka', 'Forma muzyczna z powracajacymi refrenem i kupletami to?', 'rondo', '2015-04-22 20:38:03'),
+(737, 'Muzyka', 'Niemiecki kompozytor i pianista, prekursor romantyzmu w muzyce to?', 'Ludwig van Beethoven', '2015-04-23 17:47:13'),
+(738, 'Muzyka', 'Kto napisal muzyke do "Bastien i Bastienne"?', 'Wolfgang Amadeusz Mozart', '2015-04-14 17:27:10'),
+(739, 'Muzyka', 'Okres w rozwoju muzyki pomiedzy barokiem a romantyzmem?', 'klasycyzm', '2015-04-14 17:36:03'),
+(740, 'Muzyka', 'Niemiecki kompozytor, pianista i klawesynista, zwany Bachem hamburskim?', 'Carl Philipp Emanuel Bach', '2015-05-08 15:30:26'),
+(741, 'Muzyka', 'W ktorym roku urodzil sie Johann Sebastian Bach?', '1685', '2015-05-08 18:21:05'),
+(742, 'Muzyka', 'W ktorym roku urodzil sie Carl Philipp Emanuel Bach?', '1714', '2015-05-17 13:15:48'),
+(743, 'Muzyka', 'Sztuka organizacji struktur dzwiekowych w czasie to?', 'muzyka', '2015-04-07 15:39:07'),
+(744, 'Muzyka', 'Kierunek w muzyce lezacy na pograniczu muzyki wspolcz., jazzu i rocka?', 'surrealizm', '2015-05-11 13:59:56'),
+(745, 'Muzyka', 'Kierunek w myzyce stworzony przez Claude Debussy''ego to?', 'impresjonizm', '2015-05-07 18:23:22'),
+(746, 'Muzyka', 'Francuski kompozytor, przedstawiciel impresjonizmu muzycznego?', 'Claude Debussy', '2015-05-08 18:12:19'),
+(747, 'Muzyka', 'Styl w muzyce, ktory siega do pierwotnych instynktow czlowieka?', 'witalizm', '2015-05-08 18:31:35'),
+(748, 'Muzyka', 'Nurt w muzyce zapoczatkowany przez Russola?', 'bruityzm', '2015-04-23 15:19:42'),
+(749, 'Muzyka', 'Do ktorego kierunku w muzyce zalicza sie ambient?', 'prymitywizm', '2015-04-24 20:07:52'),
+(750, 'Muzyka', 'Muzyka oparta na skali innej niż 12-stopniowa skala chromatyczna to?', 'muzyka mikrotonowa', '2015-04-26 17:22:06'),
+(751, 'Muzyka', 'Muzyka stworzona przy pomocy procesu stochastycznego to?', 'muzyka stochastyczna', '2015-05-16 15:21:51'),
+(752, 'Muzyka', 'Kierunek w muzyce zaliczany do nurtow "Drugiej Awangardy" to?', 'sonoryzm', '2015-05-17 13:35:05'),
+(753, 'Muzyka', 'Muzyka tworzona za pomoca elektrofonow i urzadzen elektronicznych?', 'muzyka elektroniczna', '2015-05-15 15:24:48'),
+(754, 'Muzyka', 'Inaczej elektroniczne instrumenty muzyczne?', 'elektrofony', '2015-05-06 15:10:40'),
+(755, 'Muzyka', 'Gatunek muzyczny, polaczenie muzyki zachodnioafryk. i europ.-ameryk.?', 'jazz', '2015-05-14 15:54:44'),
+(756, 'Muzyka', 'Styl muzyczny, ktorego prekursorem byl zespol Nirvana?', 'grunge', '2015-05-19 15:47:54'),
+(757, 'Muzyka', 'Podstawowa forma lezaca u fundamentow wszystkich stylow rockowych to?', 'rock and roll', '2015-03-17 15:17:57'),
+(758, 'Informatyka', 'Ile wartosci moze przyjac jeden bit?', '2', '2015-05-14 18:02:05'),
+(759, 'Informatyka', 'Ile wartosci moze przyjac jeden bajt?', '256', '2015-03-31 20:54:03'),
+(760, 'Informatyka', 'W jakich jednostkach podaje sie rozdzielczosc drukarki?', 'dpi', '2015-05-11 18:54:30'),
+(761, 'Informatyka', 'Jakiego klawisza nalezy uzyc aby uruchomic system Windows w trybie awaryjnym?', 'f8', '2015-05-11 18:30:06'),
+(762, 'Informatyka', 'Co oznacza skrot DOS?', 'Disk Operating System', '2015-05-02 20:32:33'),
+(763, 'Muzyka', 'Styl w muzyce wokal. poleg. na rytmiczno-ekspresyjnym wypowiadaniu slow?', 'rap', '2015-05-04 17:38:58'),
+(764, 'Muzyka', 'Polski zywy taniec ludowy o skocznej melodii w rytmie nieparzystym to?', 'oberek', '2015-05-19 13:33:32'),
+(765, 'Muzyka', 'Polski taniec narodowy z Mazowsza w zywym tempie i metrum 3/4 to?', 'mazur', '2015-05-15 13:14:17'),
+(766, 'Muzyka', 'Czeski taniec ludowy, w metrum 2/4, w szybkim tempie to?', 'polka', '2015-05-11 13:05:30'),
+(767, 'Muzyka', 'Piesni zeglarskie to inaczej?', 'szanty', '2015-05-13 15:00:19'),
+(768, 'Muzyka', 'Odmiana muzyki rozrywkowej, powstala w USA w 1-wszym 10-cioleciu XX-w.?', 'country', '2015-04-01 17:17:55'),
+(769, 'Muzyka', 'Najnizszy glos meski to?', 'bas', '2015-05-13 13:35:28'),
+(770, 'Muzyka', 'Najwyzszy glos zenski to?', 'sopran', '2015-05-14 13:09:03'),
+(771, 'Muzyka', 'Glos, ktorym posluguje sie polski spiewak operowy Marek Torzewski to?', 'tenor', '2015-05-02 15:53:36'),
+(772, 'Muzyka', 'Znak graficzny okreslajacy wysokosc i czas trwania dzwieku muzycznego?', 'nuta', '2015-03-19 20:58:19'),
+(773, 'Muzyka', 'Interwal prosty zawarty miedzy osmioma kolejnymi stopniami skali muz.?', 'oktawa', '2015-04-21 17:23:47'),
+(774, 'Muzyka', 'Znak chromatyczny, obnizajacy wysokosc dzwieku o pol tonu to?', 'bemol', '2015-04-11 15:02:12'),
+(775, 'Muzyka', 'Znak chromatyczny, podwyzszajacy wysokosc dzwieku o pol tonu to?', 'krzyzyk', '2015-04-24 17:02:22'),
+(776, 'Film', 'Aktor wcielajacy sie w role Ferdka w serialu "Swiat wg Kiepskich" to?', 'Andrzej Grabowski', '2015-05-18 13:52:52'),
+(777, 'Film', 'Aktor wcielajacy sie w role Waldka w serialu "Swiat wg Kiepskich" to?', 'Bartosz Zukowski', '2015-05-07 17:28:25'),
+(778, 'Film', 'Aktor wcielajacy sie w role Pazdziocha w serialu "Swiat wg Kiepskich"?', 'Ryszard Kotys', '2015-05-14 18:30:03'),
+(779, 'Film', 'Aktor wcielajacy sie w role Boczka w serialu "Swiat wg Kiepskich" to?', 'Dariusz Gnatowski', '2015-05-18 13:56:22'),
+(780, 'Film', 'Aktor wcielajacy sie w role Edzia w serialu "Swiat wg Kiepskich" to?', 'Bohdan Smolen', '2015-04-07 15:46:11'),
+(781, 'Historia', 'W jakim miesce znajdowala sie siedziba dowodztwa Polnocnej Grupy Wojsk Armii Radzieckiej?', 'Legnica', '2015-05-15 15:31:49'),
+(782, 'Literatura', 'W jakim miescie toczy sie akcja powiesci "Zbrodnia i kara"?', 'Petersburg', '2015-04-01 17:54:31'),
+(783, 'Gospodarka', 'W jakim miescie znajduje sie siedziba KGHM Polska Miedz?', 'Lubin', '2015-05-05 15:26:40'),
+(784, 'Historia', 'Kto byl ostatnim kanclerzem II Rzeszy Niemieckiej?', 'Friedrich Ebert', '2015-05-07 18:30:22'),
+(785, 'Rozne', 'Podaj nazwe zdawkowej jednostki pienieznej uzywanej w Austrii do 2001 roku', 'grosz', '2015-05-03 17:39:58'),
+(786, 'Sport', 'Gdzie zawsze odbywa sie noworoczny konkurs w skokach narciarskich?', 'Garmisch-Partenkirchen', '2015-04-29 20:20:29'),
+(787, 'Geografia', 'Podaj nazwe autonomicznej republiki polozonej w granicach Ukrainy', 'Krym', '2015-04-30 20:36:20'),
+(788, 'Rozne', 'Jak brzmi obecna nazwa miasta Krolewiec?', 'Kaliningrad', '2015-05-01 20:32:42'),
+(789, 'Mitologia', 'Jak nazywa sie slowianski bog grzmotow i piorunow?', 'Perun', '2015-04-14 17:14:42'),
+(790, 'Historia', 'W ktorym roku miala miejsce Operacja Barbarossa?', '1941', '2015-04-14 20:59:36'),
+(791, 'Historia', 'Jakiego panstwa prezydentem byl Carl Gustaf Mannerheim?', 'Finlandia', '2015-04-04 17:37:14'),
+(792, 'Sport', 'W jakim miescie znajduje sie siedziba Miedzynarodowego Komitetu Olimpijskiego?', 'Lozanna', '2015-05-10 18:22:38'),
+(793, 'Architektura', 'W jakim panstwie w latach 1974–1991 znajdowala sie najwyzsza konstrukcja na swiecie?', 'Polska', '2015-05-18 15:39:22'),
+(794, 'Historia', 'Jak nazywal sie system scislej segregacji rasowej istniejacy w RPA?', 'Apartheid', '2015-04-27 17:09:32'),
+(795, 'Muzyka', 'Jaki zespol muzyczny znany jest z utworow m.in.: "Das Model" oraz "Radioaktivitat"? ', 'Kraftwerk', '2015-05-08 13:49:31'),
+(796, 'Rozne', 'W jakim europejskim panstwie istnieje monarchia absolutna?', 'Watykan', '2015-05-06 20:14:30'),
+(797, 'Rozne', 'Ktorego dnia obchodzone jest Swieto Konstytucji na Litwie?', '3 maja', '2015-05-06 17:14:14'),
+(798, 'Geografia', 'Na terenie jakiego kraju znajduje sie kosmodrom Bajkonur? ', 'Kazachstan', '2015-05-13 18:05:47'),
+(799, 'Rozne', 'Kto jest patronem kosmodromu polozonego na przyladku Canaveral?', 'John F. Kennedy', '2015-04-03 17:49:20'),
+(800, 'Polityka', 'Kto byl pierwszym prezydentem USA wybranym z ramienia Partii Republikanskiej? ', 'Abraham Lincoln', '2015-05-13 13:44:16'),
+(801, 'Rozne', 'W ktorym roku uchwalona zostala Konstytucja Rzeczypospolitej Polskiej?', '1997', '2015-05-19 18:45:36'),
+(802, 'Literatura', 'Jak nazywal sie slynny slaski poeta religijny epoki baroku?', 'Angelus Silesius', '2015-05-13 15:19:36'),
+(803, 'Motoryzacja', 'Na ktorej polskiej autostradzie pobito 3 rekordy predkosci samochodem Polski Fiat 125p 1.5 CC?', 'A4', '2015-05-11 15:40:48'),
+(804, 'Mitologia', 'Jak nazywa sie slowianska bogini zimy i smierci?', 'Marzanna', '2015-04-24 17:14:53'),
+(805, 'Mitologia', 'Kto w mitologii slowianskiej przedstawiany jest jako trojglowy demon o kozlich uszach i woskowych skrzydłach?', 'Trojan', '2015-04-25 20:07:57'),
+(806, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Thriller"?', 'Michael Jackson', '2015-05-12 18:05:55'),
+(807, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Dark Side of the Moon"?', 'Pink Floyd', '2015-05-19 18:28:05'),
+(808, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Back in Black"?', 'AC/DC', '2015-04-13 17:34:32'),
+(809, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Hybrid Theory"?', 'Linkin Park', '2015-05-12 15:10:44'),
+(810, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "No Angel"?', 'Dido', '2015-05-04 15:12:25'),
+(811, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Like a Virgin"?', 'Madonna', '2015-05-15 15:19:31'),
+(812, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Master of Puppets"?', 'Metallica', '2015-05-07 15:03:46'),
+(813, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Yellow Submarine"?', 'The Beatles', '2015-04-25 15:00:15'),
+(814, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Number of the Beast"?', 'Iron Maiden', '2015-04-06 17:11:05'),
+(815, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Nevermind"?', 'Nirvana', '2015-05-08 13:09:13'),
+(816, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "The Joshua Tree"?', 'U2', '2015-05-04 15:56:31'),
+(817, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Black Celebration"?', 'Depeche Mode', '2015-04-27 17:52:30'),
+(818, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Pornography"?', 'The Cure', '2015-05-08 18:29:50'),
+(819, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Paranoid"?', 'Black Sabbath', '2015-05-15 15:07:14'),
+(820, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Reign in Blood"?', 'Slayer', '2015-05-13 18:59:56'),
+(821, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Painkiller"?', 'Judas Priest', '2015-05-08 13:42:31'),
+(822, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Dont Break the Oath"?', 'Mercyful Fate', '2015-05-16 15:39:25'),
+(823, 'Biologia', 'Polaczenie biocenozy i biotopu to?', 'ekosystem', '2015-04-16 15:52:01'),
+(824, 'Biologia', 'Inaczej srodowisko nieozywione to?', 'biotop', '2015-05-11 18:07:24'),
+(825, 'Biologia', 'Ogol organizmow zyjacych na dnie to?', 'bentos', '2015-03-13 20:58:13'),
+(826, 'Astronomia', 'Co zawiera mlode gwiazdy oraz gazy i pyly?', 'dysk galaktyczny', '2015-05-14 13:49:29'),
+(827, 'Astronomia', 'Ciala niebieskie otaczajace planety to?', 'ksiezyce', '2015-05-07 18:33:52'),
+(828, 'Astronomia', 'Gazowa powloka okrywajaca cialo niebieskie to?', 'atmosfera', '2015-05-09 13:19:35'),
+(829, 'Rozne', 'Organizacja militarna i polityczna to?', 'NATO', '2015-05-10 18:57:23'),
+(830, 'Rozne', 'Rozwin skrot: ONZ', 'Organizacja Narodow Zjednoczonych', '2015-05-17 15:26:41'),
+(831, 'Rozne', 'Organizacja narodow zjednoczonych do spraw oswiaty i nauki to?', 'UNESCO', '2015-05-17 15:40:39'),
+(832, 'Rozne', 'Fundusz narodow zjednoczonych pomocy dzieciom to?', 'UNICEF', '2015-05-07 18:19:52'),
+(833, 'Rozne', 'Swiatowa organizacja handlu to?', 'WTO', '2015-05-03 15:30:24'),
+(834, 'Rozne', 'Miedzynarodowa organizacja meteorologiczna to?', 'WMO', '2015-05-07 17:44:15'),
+(835, 'Rozne', 'Rozwin skrot: WTO', 'World Trade Organisation', '2015-05-18 18:49:18'),
+(836, 'Rozne', 'Rozwin skrot: NATO', 'North Atlantic Treaty Organization', '2015-05-02 15:16:17'),
+(837, 'Fizyka', 'Pomiar promieniowania elektromagnetycznego oraz fal akustycznych to?', 'technika teledetekcji', '2015-04-16 20:30:40'),
+(838, 'Geografia', 'Najnizszy punkt sfery niebieskiej to?', 'nadir', '2015-05-07 15:14:19'),
+(839, 'Geografia', 'Najwyzszy punkt sfery niebieskiej to?', 'zenit', '2015-05-16 15:13:03'),
+(840, 'Geografia', 'Zewnetrzna powloka Ziemi to?', 'magnetosfera', '2015-05-18 18:09:01'),
+(841, 'Geografia', 'Twarda, skalista powloka Ziemi to?', 'litosfera', '2015-04-21 17:06:01'),
+(842, 'Geografia', 'Niszczace dzialanie wody lub lodu na podloze to?', 'erozja', '2015-05-17 13:43:49'),
+(843, 'Geografia', 'Zawartosc pary wodnej w powietrzu to inaczej?', 'wilgotnosc powietrza', '2015-04-26 15:09:01'),
+(844, 'Geografia', 'Stopien pokrycia nieba przez chmury to?', 'zachmurzenie', '2015-05-19 15:44:23'),
+(845, 'Geografia', 'Produkt kondensacji pary wodnej spadajacej z chmur to?', 'opady atmosferyczne', '2015-04-18 17:14:31'),
+(846, 'Geografia', 'Wodna powloka Ziemi to?', 'hydrosfera', '2015-05-05 17:19:37'),
+(847, 'Geografia', 'Forma przedstawiajaca ilosc wody w obiegu to?', 'bilans wodny', '2015-05-15 13:54:46'),
+(848, 'Geografia', 'Chlorkowe wody zawierajace NaCl to?', 'solanki', '2015-05-15 18:05:53'),
+(849, 'Geografia', 'Kwasne wody zawierajace glownie CO2 to?', 'szczawy', '2015-04-26 17:38:11'),
+(850, 'Geografia', 'Pionowy przekroj przez warstwe gleby to?', 'profil glebowy', '2015-05-14 15:09:02'),
+(851, 'Geografia', 'Podstawa, na ktorej rozwija sie gleba to?', 'podloze skalne', '2015-04-29 20:45:30'),
+(852, 'Geografia', 'Zbiorowiska roslinne, charakteryzujace sie podobnymi cechami to?', 'formacja roslinna', '2015-03-22 15:22:55'),
+(853, 'Geografia', 'Bagienne zarosla rosnace w klimacie goracym to?', 'dzungla', '2015-04-15 17:22:07'),
+(854, 'Geografia', 'Niszczace oddzialywanie na system biologicznego przezycia to?', 'kleski', '2015-05-09 15:28:53'),
+(855, 'Geografia', 'Zjawiska wywolane gwaltownym ruchem mas skalnych w obrebie litosfery to?', 'trzesienia ziemi', '2015-05-12 15:03:42'),
+(856, 'Geografia', 'Skala, ktora mierzy sile trzesienia ziemi to?', 'skala Richtera', '2015-05-12 15:33:34'),
+(857, 'Geografia', 'Skala skutkow jakie wywoluje trzesienie ziemi to?', 'skala Mercallego', '2015-05-18 18:17:45'),
+(858, 'Geografia', 'Proces wyrebu lasu to?', 'deforestacja', '2015-05-18 15:46:21'),
+(859, 'Geografia', 'Sztuczne uprawy ryb, mieczakow, skorupiakow to?', 'akwakultura', '2015-04-26 17:50:41'),
+(860, 'Geografia', 'Dlugotrwaly i powolny wzrost sredniej temperatury na powierzchni Ziemi to?', 'efekt cieplarniany', '2015-05-12 18:58:31'),
+(861, 'Geografia', 'Obszary niezamieszkane i niewykorzystywane to?', 'anekumena', '2015-05-13 15:12:36'),
+(862, 'Geografia', 'Obszary zaludnione okresowo to?', 'subekumena', '2015-05-18 18:28:16'),
+(863, 'Geografia', 'Roznica miedzy liczba urodzen a liczba zgonow w danej populacji to?', 'przyrost naturalny', '2015-05-06 20:12:44'),
+(864, 'Geografia', 'Zestawienie przyrostu naturalnego ze wspolczynnikiem migracji to?', 'przyrost rzeczywisty', '2015-05-03 17:32:50'),
+(865, 'Geografia', 'Powrot emigrantow do pierwotnego miejsca pobytu to?', 'reemigracja', '2015-04-25 15:34:17'),
+(866, 'Geografia', 'Skupisko polozonych blisko siebie miast to?', 'aglomeracja', '2015-05-06 17:19:32'),
+(867, 'Geografia', 'Aglomeracja majaca duze znaczenie miedzynarodowe to?', 'metropolia', '2015-05-09 18:00:41'),
+(868, 'Geografia', 'Aglomeracje, ktore sie integruja i rozwijaja to?', 'megalopolis', '2015-05-17 18:40:46'),
+(869, 'Geografia', 'Rozdzielenie koryta rzeki na dwie odnogi lub wiecej to?', 'bifurkacja', '2015-03-16 17:09:31'),
+(870, 'Geografia', 'Skala, ktora opisuje sile wiatru to?', 'skala Beauforta', '2015-05-18 15:04:19'),
+(871, 'Geografia', 'Bezlesne zbiorowisko roslinnosci w klim. strefy arkt. i subarkt. to?', 'tundra', '2015-04-22 20:21:58'),
+(872, 'Geografia', 'Lasy iglaste w obrebie klimatu umiarkow. chlodnego na polkuli poln. to?', 'tajga', '2015-05-15 15:23:02'),
+(873, 'Geografia', 'Rownina pozbawiona drzew, rzek i jezior to?', 'step', '2015-05-02 20:23:41'),
+(874, 'Geografia', 'Rozlegle obszary porosniete roslinnoscia trawiasta w Ameryce Pn. to?', 'preria', '2015-05-12 15:58:06'),
+(875, 'Geografia', 'Formacja trawiasta strefy miedzyzwrotnikowej o klimacie goracym to?', 'sawanna', '2015-05-01 20:09:31'),
+(876, 'Geografia', 'Piaszczyste wzniesienie usypane przez wiatr to?', 'wydma', '2015-05-19 13:23:00'),
+(877, 'Geografia', 'Teren bez zwartej szaty roslinnej o malej il. opadow i wys. temp. pow.?', 'pustynia', '2015-04-17 17:32:28'),
+(878, 'Geografia', 'Teren o bardzo skapej roslinnosci, pokryw. od 10 do 50proc. powierzchni?', 'polpustynia', '2015-05-13 15:52:54'),
+(879, 'Geografia', 'Polska pustynia lezaca na pogran. Wyzyny Slaskiej i Wyzyny Olkuskiej to?', 'Pustynia Bledowska', '2015-05-07 17:35:28'),
+(880, 'Geografia', 'Polska przybrzezna wyspa stanowiaca poludniowy brzeg Zat. Pomorskiej to?', 'Wolin', '2015-05-10 18:10:26'),
+(881, 'Geografia', 'Wyspa przybrzezna na Baltyku na pograniczu Polski i Niemiec to?', 'Uznam', '2015-05-16 13:22:57'),
+(882, 'Geografia', 'Trzecia najdluzsza rzeka Polski (808 km) to?', 'Warta', '2015-04-14 17:25:23'),
+(883, 'Geografia', 'Czwarta najdluzsza rzeka Polski (587 km na terenie kraju) to?', 'Bug', '2015-04-27 15:03:41'),
+(884, 'Geografia', 'Piata najdluzsza rzeka Polski (448 km na terenie kraju) to?', 'Narew', '2015-04-25 20:25:51'),
+(885, 'Geografia', 'Ujscie rzeki w postaci kilku odnog, tworzacych bagienny obszar nizinny?', 'delta', '2015-05-13 15:45:53'),
+(886, 'Geografia', 'Obszar ladu polozony ponizej poziomu morza to?', 'depresja', '2015-05-01 20:48:45'),
+(887, 'Geografia', 'Najwyzszy szczyt Beskidu Zywieckiego (1725 m.n.p.m.) to?', 'Babia Gora', '2015-05-02 20:39:40'),
+(888, 'Geografia', 'Najwyzszy szczyt Karkonoszy (1602 m.n.p.m.) to?', 'Sniezka', '2015-05-14 13:30:09'),
+(889, 'Geografia', 'Najwyzszy szczyt Bieszczadow (1346 m.n.p.m.) to?', 'Tarnica', '2015-05-16 15:34:09'),
+(890, 'Geografia', 'Najwyzszy szczyt Gorcow (1310 m.n.p.m.) to?', 'Turbacz', '2015-05-17 18:58:15'),
+(891, 'Geografia', 'Najwyzszy szczyt Beskidu Sadeckiego (1262 m.n.p.m.) to?', 'Radziejowa', '2015-04-30 20:47:01'),
+(892, 'Geografia', 'Najwyzszy szczyt Beskidu Slaskiego (1257 m.n.p.m.) to?', 'Skrzyczne', '2015-04-23 15:35:47'),
+(893, 'Geografia', 'Najwyzszy szczyt Masywu Snieznika (1425 m.n.p.m.) to?', 'Snieznik', '2015-04-22 17:04:05'),
+(894, 'Geografia', 'Jaki polski szczyt jest znany z 15-metrowego metalowego krzyza?', 'Wielki Giewont', '2015-05-13 15:10:51'),
+(895, 'Chemia', 'Zmiana struktury chemicznej substancji pod wplywem napiecia elektr. to?', 'elektroliza', '2015-05-05 15:47:51'),
+(896, 'Chemia', 'Jon o ladunku dodatnim to?', 'kation', '2015-05-08 18:59:32'),
+(897, 'Chemia', 'Jon o ladunku ujemnym to?', 'anion', '2015-05-14 18:38:48'),
+(898, 'Chemia', 'Rozpad czasteczek zwiazkow chem. na jony pod wplywem rozpuszczalnika to?', 'dysocjacja elektrolityczna', '2015-04-28 15:30:49'),
+(899, 'Chemia', 'Rozpad czasteczek zwiazkow chem. na atomy pod wplywem temperatury to?', 'dysocjacja termiczna', '2015-05-16 15:46:28'),
+(900, 'Chemia', 'Zjawisko powstawania jonu z obojetnego atomu lub czasteczki to?', 'jonizacja', '2015-04-22 17:43:22'),
+(901, 'Chemia', 'Proces odwrotny do jonizacji to?', 'rekombinacja', '2015-05-18 18:16:00'),
+(902, 'Chemia', 'Reakcja chem. miedzy kwasem a zasada powodujaca zobojetnienie odczynu?', 'neutralizacja', '2015-04-20 20:27:03'),
+(903, 'Chemia', 'Homogeniczna mieszanina dwoch lub wiecej zwiazkow chemicznych to?', 'roztwor', '2015-04-24 17:56:00'),
+(904, 'Chemia', 'Roztwor nie zmieniajacy stezenia w kontakcie z substancja rozpuszczona?', 'roztwor nasycony', '2015-05-11 13:47:39'),
+(905, 'Chemia', 'Roztwor, w ktorym mozna rozpuscic jeszcze pewna ilosc danej substancji?', 'roztwor nienasycony', '2015-05-10 18:06:57'),
+(906, 'Chemia', 'Roztwor o stezeniu wiekszym od stezenia roztworu nasyconego to?', 'roztwor przesycony', '2015-05-07 18:26:52'),
+(907, 'Chemia', 'Reakcja chem., w ktorej atom przechodzi na wyzszy stopien utlenienia to?', 'utlenianie', '2015-05-09 18:27:02'),
+(908, 'Chemia', 'Kazde trwale polaczenie dwoch atomow to?', 'wiazanie chemiczne', '2015-05-02 17:07:59'),
+(909, 'Chemia', 'Reakcja chemiczna tworzaca zlozone produkty z prostych substratow to?', 'synteza', '2015-04-11 17:43:26'),
+(910, 'Chemia', 'Liczba okreslajaca ile protonow znajduje sie w jadrze danego atomu to?', 'liczba atomowa', '2015-04-01 15:49:01'),
+(911, 'Chemia', 'Obojetna elektrycz. czastka subatomowa występujaca w jadrach atomowych?', 'neutron', '2015-04-29 15:17:54'),
+(912, 'Chemia', 'Liczba nukleonow w jadrze atomu danego izotopu danego pierwiastka to?', 'liczba masowa', '2015-05-08 13:26:46'),
+(913, 'Chemia', 'Substancja chemiczna skladajaca sie z jednego typu atomow to?', 'pierwiastek', '2015-04-30 20:54:09'),
+(914, 'Chemia', 'Zestawienie wszystkich pierwiastkow chem. w postaci rozbudowanej tabeli?', 'uklad okresowy', '2015-05-16 18:32:26'),
+(915, 'Muzyka', 'Instrument dety australijskich aborygenow to?', 'didgeridoo', '2015-05-15 18:16:24'),
+(916, 'Muzyka', 'Instrument muzyczny posiadajacy 4 pary strun strojonych w kwintach to?', 'mandolina', '2015-05-16 15:14:48'),
+(917, 'Muzyka', 'Instrument dety drewniany z grupy aerofonow wargowych to?', 'flet', '2015-04-25 17:11:34'),
+(918, 'Muzyka', 'Instr. strunowy z grupy chordofonow smyczkowych wiekszy od skrzypiec to?', 'altowka', '2015-05-12 15:31:48'),
+(919, 'Matematyka', 'Gorna czesc ulamka to?', 'licznik', '2015-05-11 13:54:40'),
+(920, 'Matematyka', 'Dolna czesc ulamka to?', 'mianownik', '2015-05-17 13:26:19'),
+(921, 'Matematyka', 'Linia oddzielajaca licznik od mianownika to?', 'kreska ulamkowa', '2015-05-04 17:54:55'),
+(922, 'Biologia', 'Ciagly proces, polegajacy na stopniowych zmianach cech gatunkowych to?', 'ewolucja', '2015-05-09 15:46:25'),
+(923, 'Biologia', 'Zjawisko scislego i korzystnego wspolzycia co najmniej dwoch organizmow?', 'symbioza', '2015-05-13 18:26:45'),
+(924, 'Biologia', 'Forma wspolz. 2-och organizmow, dla 1-go korzystna, dla 2-go szkodliwa?', 'pasozytnictwo', '2015-05-01 15:25:25'),
+(925, 'Biologia', 'Najliczniejsza na Ziemi grupa zwierzat to?', 'owady', '2015-04-16 17:50:37'),
+(926, 'Biologia', 'Dzial zoologii zajmujacy sie owadami to?', 'entomologia', '2015-05-04 20:51:22'),
+(927, 'Biologia', 'Nauka przyrodnicza zajmujaca sie badaniem zycia i organizmow zywych to?', 'biologia', '2015-05-07 15:10:48'),
+(928, 'Biologia', 'Urzadzenie sluz. do obserwacji malych obiektow w duzym powiekszeniu to?', 'mikroskop', '2015-05-13 15:49:24'),
+(929, 'Biologia', 'Dzial biologii zajmujacy sie roslinami to?', 'botanika', '2015-05-07 17:37:13'),
+(930, 'Biologia', 'Dzial biologii zajmujacy sie zwierzetami to?', 'zoologia', '2015-05-15 13:00:14'),
+(931, 'Biologia', 'Najmniejsza strukturalna i funkcjonalna jednostka organizmow zywych to?', 'komorka', '2015-05-04 17:17:44'),
+(932, 'Geografia', 'Pierwszy okres ery Paleozoicznej to?', 'Kambr', '2015-05-05 17:12:34'),
+(933, 'Geografia', 'Drugi okres ery Paleozoicznej to?', 'Ordowik', '2015-04-30 17:02:22'),
+(934, 'Geografia', 'Trzeci okres ery Paleozoicznej to?', 'Sylur', '2015-04-27 20:43:30'),
+(935, 'Geografia', 'Czwarty okres ery Paleozoicznej to?', 'Dewon', '2015-04-04 15:05:28'),
+(936, 'Geografia', 'Piaty okres ery Paleozoicznej to?', 'Karbon', '2015-04-20 17:16:37'),
+(937, 'Geografia', 'Szosty okres ery Paleozoicznej to?', 'Perm', '2015-05-18 13:01:59'),
+(938, 'Geografia', 'Pierwszy okres ery Mezozoicznej to?', 'Trias', '2015-05-03 15:48:11'),
+(939, 'Geografia', 'Drugi okres ery Mezozoicznej to?', 'Jura', '2015-05-08 18:01:50'),
+(940, 'Geografia', 'Trzeci okres ery Mezozoicznej to?', 'Kreda', '2015-05-13 18:52:57'),
+(941, 'Geografia', 'Pierwszy okres ery Kenozoicznej to?', 'Paleogen', '2015-05-11 13:00:14'),
+(942, 'Geografia', 'Drugi okres ery Kenozoicznej to?', 'Neogen', '2015-05-04 20:49:36'),
+(943, 'Geografia', 'Trzeci okres ery Kenozoicznej to?', 'Plejstocen', '2015-05-05 17:51:22'),
+(944, 'Geografia', 'Czwarty okres ery Kenozoicznej to?', 'Holocen', '2015-04-28 17:13:16'),
+(945, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Dziadka?', '22 stycznia', '2015-04-28 17:49:03'),
+(946, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Andrzejki?', '29 listopada', '2015-05-16 18:34:11'),
+(947, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Babci?', '21 stycznia', '2015-05-09 18:21:46'),
+(948, 'Rozne', 'Ktorego dnia obchodzona jest w Polsce Barborka?', '4 grudnia', '2015-05-19 18:52:36'),
+(949, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Chlopaka?', '30 wrzesnia', '2015-05-09 18:44:33'),
+(950, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Dozynki?', '23 wrzesnia', '2015-05-11 15:47:49'),
+(951, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Dziecka?', '1 czerwca', '2015-05-01 15:43:16'),
+(952, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Matki?', '26 maja', '2015-05-04 17:05:22'),
+(953, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Kobiet?', '8 marca', '2015-04-27 17:13:07'),
+(954, 'Rozne', 'Ktorego dnia obchodzone jest w Polsce Swieto Niepodleglosci?', '11 listopada', '2015-05-19 18:12:21'),
+(955, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Ojca?', '23 czerwca', '2015-03-28 20:11:26'),
+(956, 'Rozne', 'Ktorego dnia obchodzone jest w Polsce Swieto Pracy?', '1 maja', '2015-05-17 15:58:05'),
+(957, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Strazaka?', '4 maja', '2015-05-14 13:23:07'),
+(958, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Walentynki?', '14 lutego', '2015-04-27 15:12:38'),
+(959, 'Rozne', 'Ktorego dnia obchodzony jest w Polsce Dzien Wszystkich Swietych?', '1 listopada', '2015-05-18 13:14:17'),
+(960, 'Rozne', 'Ktorego dnia obchodzone sa w Polsce Zaduszki?', '2 listopada', '2015-05-19 18:42:06'),
+(961, 'Muzyka', 'Jaki artysta lub zespol muzyczny nagral plyte "Księga Tajemnicza. Prolog', 'Kaliber 44', '2015-04-27 20:18:26'),
+(962, 'Muzyka', 'Jaki polski zespol punk rockowy powstal w 1978 r. w Ustrzykach Dolnych?', 'KSU', '2015-05-07 15:07:17'),
+(963, 'Muzyka', 'Wokalista i basista ktorego polskiego zespolu metalowego jest Titus?', 'Acid Drinkers', '2015-05-18 13:24:50'),
+(964, 'Muzyka', 'Ktora polska wokalistka odspiewala hymn podczas MS w Korei/Japonii 2002?', 'Edyta Gorniak', '2015-03-01 15:11:16'),
+(965, 'Muzyka', 'Podaj pseudonim rapera nazywajacego sie Marshall Bruce Mathers III?', 'Eminem', '2015-05-19 13:42:20'),
+(966, 'Muzyka', 'Wokalista i gitarzysta ktorego polskiego zespolu metalowego jest Nergal?', 'Behemoth', '2015-05-11 18:10:53'),
+(967, 'Muzyka', 'Wokalista i gitarzysta ktorego polskiego zespolu metalowego jest Peter?', 'Vader', '2015-05-08 15:12:51'),
+(968, 'Muzyka', 'Jak nazywa sie nagroda muzyczna przyznawana w Polsce od roku 1995?', 'Fryderyk', '2015-05-07 18:53:05'),
+(969, 'Muzyka', 'Podaj pelne imie i nazwisko rapera 2Pac', 'Tupac Amaru Shakur', '2015-04-30 15:12:46'),
+(970, 'Muzyka', 'W jakim zespole dzialali Fokus, Rahim i Magik?', 'Paktofonika', '2015-04-19 15:23:10'),
+(971, 'Muzyka', 'Jaki niemiecki zespol stworzyl gatunek "tanz metal"?', 'Rammstein', '2015-05-18 15:21:51'),
+(972, 'Muzyka', 'Tenorowo-basowy instrument strunowy z grupy smyczkowych to?', 'wiolonczela', '2015-05-01 17:25:45'),
+(973, 'Biologia', 'Dzial zoologii zajmujacy sie rybami to?', 'ichtiologia', '2015-05-19 13:40:35'),
+(974, 'Biologia', 'Dzial zoologii zajmujacy sie ssakami to?', 'teriologia', '2015-05-12 15:14:14'),
+(975, 'Biologia', 'Dzial zoologii zajmujacy sie ptakami to?', 'ornitologia', '2015-05-15 13:17:48'),
+(976, 'Biologia', 'Dzial zoologii zajmujacy sie plazami i gadami to?', 'herpetologia', '2015-05-14 13:45:58'),
+(977, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Las Venturas?', 'Las Vegas', '2015-04-24 17:59:34'),
+(978, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest San Fierro?', 'San Francisco', '2015-05-12 15:56:21'),
+(979, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Los Santos?', 'Los Angeles', '2015-05-15 13:03:45'),
+(980, 'Gry', 'Seria gier pilkarskich z firmy Konami to?', 'Pro Evolution Soccer', '2015-04-12 17:09:23'),
+(981, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 100?', '10', '2015-05-16 13:33:28'),
+(982, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 121?', '11', '2015-04-06 20:16:21'),
+(983, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 144?', '12', '2015-05-19 13:54:38'),
+(984, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 169?', '13', '2015-05-01 20:27:21'),
+(985, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 196?', '14', '2015-05-04 20:09:06'),
+(986, 'Matematyka', 'Ile wynosi pierwiastek 2-go stopnia z 225?', '15', '2015-05-19 18:59:36'),
+(987, 'Matematyka', 'Ile wynosi 5 procent z liczby 200?', '10', '2015-04-11 17:32:44'),
+(988, 'Matematyka', 'Ile wynosi 20 procent z liczby 400?', '80', '2015-04-25 15:12:47'),
+(989, 'Matematyka', 'Ile wynosi 75 procent z liczby 120?', '90', '2015-05-14 15:07:16'),
+(990, 'Matematyka', 'Ile wynosi 60 procent z liczby 150?', '90', '2015-04-30 17:18:29'),
+(991, 'Matematyka', 'Ile wynosi 25 procent z liczby 180?', '45', '2015-04-25 17:06:12'),
+(992, 'Matematyka', 'Ile wynosi 30 procent z liczby 600?', '180', '2015-05-15 18:23:26'),
+(993, 'Informatyka', 'Liczba binarna 110101 jest rowna jakiej liczbie dziesiatkowej?', '53', '2015-05-07 17:00:17'),
+(994, 'Informatyka', 'Liczba binarna 1100 jest rowna jakiej liczbie dziesiatkowej?', '12', '2015-05-04 17:07:08'),
+(995, 'Informatyka', 'Liczba binarna 1001 jest rowna jakiej liczbie dziesiatkowej?', '9', '2015-05-06 20:55:02'),
+(996, 'Informatyka', 'Liczba binarna 10011 jest rowna jakiej liczbie dziesiatkowej?', '19', '2015-05-11 15:25:01'),
+(997, 'Informatyka', 'Liczba binarna 10101 jest rowna jakiej liczbie dziesiatkowej?', '21', '2015-04-29 17:57:36'),
+(998, 'Informatyka', 'Liczba szesnastkowa A0 jest rowna jakiej liczbie dziesiatkowej?', '160', '2015-05-05 15:09:00'),
+(999, 'Informatyka', 'Liczba szesnastkowa D8 jest rowna jakiej liczbie dziesiatkowej?', '216', '2015-04-23 20:24:05'),
+(1000, 'Informatyka', 'Liczba szesnastkowa 4B jest rowna jakiej liczbie dziesiatkowej?', '75', '2015-05-07 15:28:24'),
+(1001, 'Informatyka', 'Liczba szesnastkowa 12 jest rowna jakiej liczbie dziesiatkowej?', '18', '2015-05-07 18:05:38'),
+(1002, 'Informatyka', 'Liczba szesnastkowa BE jest rowna jakiej liczbie dziesiatkowej?', '190', '2015-05-04 20:19:39'),
+(1003, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 2 cm?', '8', '2015-05-02 17:04:25'),
+(1004, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 3 cm?', '12', '2015-05-07 17:58:19'),
+(1005, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 4 cm?', '16', '2015-04-28 17:27:35'),
+(1006, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 5 cm?', '20', '2015-05-16 18:37:40'),
+(1007, 'Matematyka', 'Ile cm wynosi obwod kwadratu o boku 6 cm?', '24', '2015-05-11 18:28:21'),
+(1008, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 2 cm?', '4', '2015-05-13 13:00:13'),
+(1009, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 3 cm?', '9', '2015-05-05 20:00:09'),
+(1010, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 4 cm?', '16', '2015-05-13 13:19:36'),
+(1011, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 5 cm?', '25', '2015-05-10 18:33:03'),
+(1012, 'Matematyka', 'Ile cm2 wynosi pole kwadratu o boku 6 cm?', '36', '2015-05-17 13:01:52'),
+(1013, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 3 cm?', '10', '2015-05-16 13:10:41'),
+(1014, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 1 i 3 cm?', '8', '2015-04-02 20:17:57'),
+(1015, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 4 cm?', '12', '2015-04-21 20:45:07'),
+(1016, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 2 i 5 cm?', '14', '2015-05-13 15:05:35'),
+(1017, 'Matematyka', 'Ile cm wynosi obwod prostokata o bokach 3 i 5 cm?', '16', '2015-04-17 15:27:04'),
+(1018, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 3 cm?', '6', '2015-05-18 15:44:37'),
+(1019, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 1 i 3 cm?', '3', '2015-05-19 13:31:47'),
+(1020, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 4 cm?', '8', '2015-05-13 18:54:42'),
+(1021, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 2 i 5 cm?', '10', '2015-05-04 15:40:38'),
+(1022, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 3 i 5 cm?', '15', '2015-05-08 15:16:23'),
+(1023, 'Matematyka', 'Ile cm2 wynosi pole prostokata o bokach 3 i 5 cm?', '15', '2015-04-14 20:31:05'),
+(1024, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 2,6,10,...?', '14', '2015-05-04 20:10:52'),
+(1025, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 3,5,7,...?', '9', '2015-05-16 18:55:04'),
+(1026, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 1,-2,-5,...?', '-8', '2015-05-04 15:31:48'),
+(1027, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu arytmetycznego 9,7,5,...?', '3', '2015-05-06 15:33:35'),
+(1028, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,4,8,...?', '16', '2015-04-26 20:11:37'),
+(1029, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,6,18,...?', '54', '2015-04-24 15:03:59'),
+(1030, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego 2,-4,8,...?', '-16', '2015-04-29 15:10:46'),
+(1031, 'Matematyka', 'Jaki bedzie nastepny wyraz ciagu geometrycznego -1,-9,-27,...?', '-81', '2015-05-01 20:00:36'),
+(1032, 'Matematyka', 'Ile stopni wynosi suma katow wewnetrznych w trojkacie?', '180', '2015-04-30 15:16:21'),
+(1033, 'Matematyka', 'Ile stopni wynosi suma katow wewnetrznych w czworokacie?', '360', '2015-04-14 15:50:07'),
+(1034, 'Matematyka', 'Ile wynosi 2 do 5-tej potegi?', '32', '2015-04-25 17:15:09'),
+(1035, 'Matematyka', 'Ile wynosi 2 do 7-ej potegi?', '128', '2015-05-14 13:05:32'),
+(1036, 'Matematyka', 'Ile wynosi 2 do 8-ej potegi?', '256', '2015-05-05 17:58:26'),
+(1037, 'Matematyka', 'Ile wynosi 3 do 3-ciej potegi?', '27', '2015-05-16 15:30:39'),
+(1038, 'Matematyka', 'Ile wynosi 3 do 4-tej potegi?', '81', '2015-04-15 20:45:15'),
+(1039, 'Matematyka', 'Ile wynosi 4 do 3-ciej potegi?', '64', '2015-05-17 18:33:45'),
+(1040, 'Matematyka', 'Ile wynosi 4 do 4-tej potegi?', '256', '2015-05-12 18:49:45'),
+(1041, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3+4+5 ?', '15', '2015-04-30 17:43:27'),
+(1042, 'Matematyka', 'Ile wynosi wynik dzialania 1+2-3-4+5 ?', '1', '2015-04-23 20:02:39');
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
-(1043, 'Matematyka', 'Ile wynosi wynik dzialania 1-2+3-4+5 ?', '3', '2014-04-19 13:38:44'),
-(1044, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3-4-5 ?', '-3', '2014-04-29 15:14:02'),
-(1045, 'Matematyka', 'Ile wynosi wynik dzialania 1-2-3+4-5 ?', '-5', '2014-04-22 13:40:18'),
-(1046, 'Matematyka', 'Ile wynosi silnia z 3?', '6', '2014-04-18 17:47:36'),
-(1047, 'Matematyka', 'Ile wynosi silnia z 4?', '24', '2014-04-10 18:08:01'),
-(1048, 'Matematyka', 'Ile wynosi silnia z 5?', '120', '2014-04-20 18:17:32'),
-(1049, 'Matematyka', 'Ile wynosi silnia z 6?', '720', '2014-04-28 13:11:39'),
-(1051, 'Matematyka', 'Ile wynosi x w rownaniu: 2x+3=9 ?', '3', '2014-04-24 13:49:02'),
-(1052, 'Matematyka', 'Ile wynosi x w rownaniu: 3x+2=17 ?', '5', '2014-04-24 15:28:49'),
-(1053, 'Matematyka', 'Ile wynosi x w rownaniu: 2x+3=-5 ?', '-4', '2014-04-27 18:10:09'),
-(1054, 'Matematyka', 'Ile wynosi x w rownaniu: 4x+1=-7 ?', '-2', '2014-04-18 13:00:44'),
-(1055, 'Matematyka', 'Ile wynosi x w rownaniu: 3x-4=14 ?', '6', '2014-04-21 13:05:52'),
-(1056, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 20 i 25 ?', '5', '2014-04-28 15:32:53'),
-(1057, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 30 i 40 ?', '10', '2014-04-14 18:46:05'),
-(1058, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 12 i 16 ?', '4', '2014-04-22 17:39:03'),
-(1059, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 9 i 27 ?', '9', '2014-04-24 13:24:45'),
-(1060, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 9 i 12 ?', '3', '2014-04-16 15:38:44'),
-(1061, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 20 i 25 ?', '100', '2014-04-13 13:23:07'),
-(1062, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 30 i 40 ?', '120', '2014-04-29 13:09:22'),
-(1063, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 12 i 16 ?', '48', '2014-04-28 13:33:49'),
-(1064, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 9 i 27 ?', '27', '2014-04-27 18:37:04'),
-(1065, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 9 i 12 ?', '36', '2014-04-21 08:45:33'),
-(1066, 'Matematyka', 'Liczba naturalna, ktora dzieli sie tylko przez jedynke i siebie sama to?', 'liczba pierwsza', '2014-04-21 18:47:53'),
-(1067, 'Matematyka', 'Kazda liczba, ktora mozna przedstawic w postaci ulamka to?', 'liczba wymierna', '2014-03-27 18:47:24'),
-(1068, 'Matematyka', 'Czworokat majacy pare rownoleglych bokow nazywanych podstawami to?', 'trapez', '2014-04-25 18:24:58'),
-(1069, 'Matematyka', 'Czworokat majacy boki rownej dlugosci to?', 'romb', '2014-04-29 18:47:32'),
-(1070, 'Matematyka', 'Czworokat majacy wszystkie katy wewnetrzne proste to?', 'prostokat', '2014-04-22 08:45:39'),
-(1071, 'Matematyka', 'Czworokat foremny to inaczej?', 'kwadrat', '2014-04-22 18:26:24'),
-(1072, 'Matematyka', 'Czworokat, ktorego jedna z przekatnych lezy na jego osi symetrii to?', 'deltoid', '2014-04-25 13:12:07'),
-(1073, 'Matematyka', 'Czworokat majacy dwie pary rownoleglych bokow to?', 'rownoleglobok', '2014-04-14 18:23:05'),
-(1074, 'Matematyka', 'Kat o mierze od 0 do 90 stopni to?', 'kat ostry', '2014-04-19 13:34:41'),
-(1075, 'Matematyka', 'Kat o mierze 90 stopni to?', 'kat prosty', '2014-04-24 15:09:03'),
-(1076, 'Matematyka', 'Kat o mierze od 90 do 180 stopni to?', 'kat rozwarty', '2014-04-03 15:09:08'),
-(1077, 'Matematyka', 'Kat o mierze 180 stopni to?', 'kat polpelny', '2014-04-22 18:15:27'),
-(1078, 'Matematyka', 'Kat o mierze 360 stopni to?', 'kat pelny', '2014-04-11 13:01:12'),
-(1079, 'Rozne', 'Ktore z ukrainskich miast nazywane jest miastem widmo?', 'Prypec', '2014-04-16 08:31:53'),
-(1080, 'Muzyka', 'Podaj nazwe niemieckiego zespolu znanego m.in. z utworu "How Much Is the Fish?"', 'Scooter', '2014-04-29 18:40:19'),
-(1081, 'Historia', 'Podaj imie i nazwisko znanego czeskiego pisarza i dramaturga, pierwszego prezydenta Czech', 'Vaclav Havel', '2014-04-16 18:52:02'),
-(1082, 'Historia', 'Ile postulatow zostalo ogloszonych 17 sierpnia 1980 roku w Stoczni Gdanskiej przez MKS?', '21', '2014-04-19 18:54:06'),
-(1083, 'Historia', 'Pod jakim pseudonimem znany byl Wladimir Iljicz Uljanow?', 'Lenin', '2014-04-18 08:21:23'),
-(1084, 'Historia', 'W ktorym roku zatonal rosyjski okret podwodny K-141 Kursk?', '2000', '2014-04-22 17:11:16'),
-(1085, 'Geografia', 'W ktorym miescie znajduja sie Schody Potiomkinowskie?', 'Odessa', '2014-04-17 18:49:01'),
-(1086, 'Rozne', 'Jaki symbol przedstawiony jest na fladze Izraela?', 'Gwiazda Dawida', '2014-04-29 15:25:15'),
-(1087, 'Historia', 'Jak nazywal sie najwiekszy niemiecki oboz koncentracyjny istniejacy w latach 1940-1945 na Dolnym Slasku?', 'Gross-Rosen', '2014-04-29 13:10:15'),
-(1088, 'Historia', 'Jak brzmial kryptonim najwiekszego projektu gorniczo-budowlanego hitlerowskich Niemiec istniejacego w Gorach Sowich?', 'Riese', '2014-04-24 13:39:23'),
-(1089, 'Rozne', 'Jaka nazwe nosza sily powietrzne Republiki Federalnej Niemiec?', 'Luftwaffe', '2014-04-29 18:05:11'),
-(1090, 'Historia', 'Jak nazywal sie pierwszy prezydent Autonomii Palestynskiej?', 'Jaser Arafat', '2014-04-21 13:52:17'),
-(1091, 'Rozne', 'Jak brzmi stosowana przez Argentyne nazwa archipelagu Falklandy? ', 'Malwiny', '2014-04-27 15:11:46'),
-(1092, 'Rozne', 'Jakie miasto jest stolica Szkocji?', 'Edynburg', '2014-04-21 18:46:03'),
-(1093, 'Geografia', 'Ktora czesc skladowa Wielkiej Brytanii jest najwieksza?', 'Anglia', '2014-04-21 18:30:11'),
-(1094, 'Motoryzacja', 'Jaki model Fiata zostal wprowadzony jako nastepca modelu 126?', 'Cinquecento', '2014-04-22 15:07:57'),
-(1095, 'Motoryzacja', 'W jakim miescie swoja siedzibe ma koncern motoryzacyjny FIAT?', 'Turyn', '2014-04-22 15:39:20'),
-(1096, 'Rozne', 'Jakie miasto jest siedziba Prymasa Polski? ', 'Gniezno', '2014-04-24 18:53:40'),
-(1097, 'Sport', 'Jaki polski klub pilkarski gral 10 lat z rzedu w europejskich pucharach?', 'GKS Katowice', '2014-04-28 15:40:57'),
-(1098, 'Sport', 'Obecny trener reprezentacji Polski w skokach narciarskich to?', 'Lukasz Kruczek', '2014-04-10 15:50:08'),
-(1099, 'Sport', 'Obecny trener mlodziezowej reprezentacji Polski w skokach narciarskich?', 'Robert Mateja', '2014-04-28 13:04:34'),
-(1100, 'Sport', 'Obecny prezes Polskiego Zwiazku Narciarskiego to?', 'Apoloniusz Tajner', '2014-04-29 15:47:17'),
-(1101, 'Sport', 'Kto jest prekursorem stylu V w skokach narciarskich?', 'Jan Boklov', '2014-04-20 18:27:40'),
-(1102, 'Sport', 'Kto jako pierwszy Polak wygral w 1980 r. konkurs PS w skokach narc.?', 'Stanislaw Bobak', '2014-04-17 15:46:19'),
-(1103, 'Sport', 'Ktory polski skoczek narciarski wygral 3 konkursy PS w latach 80-86?', 'Piotr Fijas', '2014-04-29 15:03:16'),
-(1104, 'Sport', 'W ktorym roku Adam Malysz wygral swoj pierwszy konkurs PS?', '1996', '2014-04-29 13:50:28'),
-(1105, 'Sport', 'Ile razy Adam Malysz zdobyl zimowe Mistrzostwo Polski w skokach narc.?', '21', '2014-04-25 13:51:50'),
-(1106, 'Kulinaria', 'Napoj alkoholowy wytwarzany ze sfermentowanego soku z trzciny cukrowej?', 'rum', '2014-04-15 15:21:58'),
-(1107, 'Kulinaria', 'Rum rozcienczony woda i zawierajacy dodatkowo sok z cytrusow to?', 'grog', '2014-04-25 13:01:17'),
-(1108, 'Kulinaria', 'Napoj alkoholowy zawierajacy tujon i zwany zielona wrozka to?', 'absynt', '2014-04-25 18:04:09'),
-(1109, 'Kulinaria', 'Aromatyczny azjatycki napoj alkoholowy o smaku anyzowym to?', 'arak', '2014-04-27 18:34:51'),
-(1110, 'Kulinaria', 'Potoczne okreslenie taniego wina owocowego, najczesciej jablkowego to?', 'jabol', '2014-04-27 13:51:45'),
-(1111, 'Kulinaria', 'Bezbarwny klarowny napoj alkoholowy, anglosaski rodzaj jalowcowki to?', 'gin', '2014-04-17 18:15:21'),
-(1112, 'Kulinaria', 'Slaby napoj alkoholowy, przefermentowany sok z dojrzalych jablek to?', 'cydr', '2014-04-22 13:59:44'),
-(1113, 'Kulinaria', 'Alkohol produkowany poprzez prosty sprzet w warunkach amatorskich to?', 'bimber', '2014-04-20 08:55:52'),
-(1114, 'Kulinaria', 'Grecki napoj alkoholowy, odmiana brandy z domieszka wina to?', 'metaxa', '2014-04-24 15:40:30'),
-(1115, 'Kulinaria', 'Napoj alkoholowy (wytrawna wodka) destylowany z wina, glownie gronowego?', 'brandy', '2014-04-25 13:27:22'),
-(1116, 'Kulinaria', 'Szkocki napoj alkoholowy powstaly z destylacji zacieru zbozowego to?', 'whisky', '2014-04-12 08:45:39'),
-(1117, 'Kulinaria', 'Japonski napoj alkoholowy produkowany z ryzu to?', 'sake', '2014-04-29 13:21:49'),
-(1118, 'Kulinaria', 'Polaczenie jasnego piwa i cytrusowej lemoniady w proporcjach ok 50/50?', 'radler', '2014-04-24 18:57:47'),
-(1119, 'Kulinaria', 'Mieszany napoj alkoholowy, najczesciej podawany na goraco w wazie to?', 'poncz', '2014-04-29 18:37:36'),
-(1120, 'Kulinaria', 'Napoj alk. o slodkim smaku owocowym, korzennym lub korzenno-ziolowym to?', 'likier', '2014-04-09 13:13:24'),
-(1121, 'Kulinaria', 'Wyciag z owocow, korzeni, kwiatow lub ziol i nastepnie zalany alkoholem?', 'nalewka', '2014-04-25 13:25:35'),
-(1122, 'Kulinaria', 'Destylat alkoholowy rozcienczony woda w stosunku ok. 2:3 to?', 'wodka', '2014-04-21 15:31:55'),
-(1123, 'Kulinaria', 'Destylat alkoholu etylowego o zawartosci alkoholu około 96 procent to?', 'spirytus rektyfikowany', '2014-04-27 18:11:03'),
-(1124, 'Kulinaria', 'Hiszpanski napoj alkoholowy, robiony na bazie wina z dodatkiem owocow to?', 'sangria', '2014-04-24 13:58:39'),
-(1125, 'Kulinaria', 'Szczegolny rodzaj wina musujacego pochodzacy z Francji to?', 'szampan', '2014-04-28 15:41:51'),
-(1126, 'Kulinaria', 'Wysokoprocentowy napoj alkoholowy, produkowany ze sliwek wegierek to?', 'sliwowica', '2014-04-16 18:45:36'),
-(1127, 'Kulinaria', 'Napoj alkoholowy uzyskiwany w wyniku fermentacji moszczu z winogron to?', 'wino', '2014-04-29 15:42:47'),
-(1128, 'Kulinaria', 'Napoj alk. powstaly w wyniku fermentacji brzeczki miodu pszczelego to?', 'miod pitny', '2014-04-28 18:18:28'),
-(1129, 'Kulinaria', 'Ciemne, mocne piwo gornej fermentacji pochodzace z Anglii to?', 'porter', '2014-04-27 18:33:57'),
-(1130, 'Kulinaria', 'Wodka meksykanska, produkowana ze sfermentowanego soku agawy to?', 'tequila', '2014-04-19 13:25:16'),
-(1131, 'Kulinaria', 'Wegierska potrawa z papryki, pomidorow i cebuli to?', 'leczo', '2014-04-22 15:38:26'),
-(1132, 'Kulinaria', 'Slynna jarska potrawa prowansalska to?', 'ratatouille', '2014-04-20 18:31:48'),
-(1133, 'Kulinaria', 'Slynny na Wegrzech i Slowacji maczno-ziemniaczany czosnkowy placek to?', 'langosz', '2014-04-21 15:16:20'),
-(1134, 'Kulinaria', 'Japonska potrawa z ryzu i surowych dodatkow owinieta algami morskimi to?', 'sushi', '2014-04-22 17:49:28'),
-(1135, 'Kulinaria', 'Chinskie nalesniczki z nadzieniem miesno-warzywnym to?', 'sajgonki', '2014-04-28 15:58:05'),
-(1136, 'Kulinaria', 'Wloska zapiekana potrawa na bazie makaronu przekladanego farszem to?', 'lazania', '2014-04-19 18:26:09'),
-(1137, 'Kulinaria', 'Polska, litewska i bialoruska potrawa z kapusty i miesa to?', 'bigos', '2014-04-17 18:20:25'),
-(1138, 'Kulinaria', 'Zupa przyrzadzana na bazie zakwasu z razowej maki zytniej to?', 'zur', '2014-04-20 13:48:59'),
-(1139, 'Kulinaria', 'Ugotowany makaron wymieszany z odpowiednim sosem i posypany serem to?', 'spaghetti', '2014-04-19 13:16:21'),
-(1140, 'Kulinaria', 'Slaska zupa z chleba, czosnku oraz tluszczu zalewanych wrzatkiem to?', 'wodzionka', '2014-04-24 13:15:12'),
-(1141, 'Kulinaria', 'Goralska zupa z kiszonej kapusty, soku z kwaszonej kapusty i miesa to?', 'kwasnica', '2014-04-20 15:57:04'),
-(1142, 'Kulinaria', 'Turecka potrawa ze skrawanego miesa i surowek umieszczanych w bulce?', 'kebab', '2014-04-19 18:53:11'),
-(1143, 'Kulinaria', 'Smazone filety rybne w sosie warzywnym na cieplo lub zimno to?', 'ryba po grecku', '2014-04-16 17:44:08'),
-(1144, 'Kulinaria', 'Potrawa, ktora sklada sie z zapiekanego nalesnika z farszem to?', 'krokiet', '2014-04-21 15:27:02'),
-(1145, 'Kulinaria', 'Potrawa zlozona z farszu miesno-ryzowego zawinietego w liscie kapusty?', 'golabki', '2014-04-27 15:22:07'),
-(1146, 'Kulinaria', 'Polska i niemiecka potrawa skladajaca sie z kulek nadziewanych sliwkami?', 'knedle', '2014-04-20 08:35:05'),
-(1147, 'Kulinaria', 'Gotowane kluski przyrzadzane z twarogu, jaj i maki to?', 'pierogi leniwe', '2014-04-29 15:27:56'),
-(1148, 'Kulinaria', 'Meksykanski plaski placek z maki kukurydzianej to?', 'tortilla', '2014-04-15 18:38:52'),
-(1149, 'Kulinaria', 'Meksykanska potrawa skladajaca sie z farszu owinietego tortilla to?', 'burrito', '2014-04-29 13:30:45'),
-(1150, 'Kulinaria', 'Jak nazywa sie chrzan japonski?', 'wasabi', '2014-04-21 08:38:37'),
-(1151, 'Gry', 'Seria gier z czesciami Arena, Daggerfall, Morrowind, Oblivion i Skyrim?', 'The Elder Scrolls', '2014-04-22 15:06:08'),
-(1152, 'Gry', 'Podtytul pierwszej gry z serii The Elder Scrolls to?', 'Arena', '2014-04-16 17:31:59'),
-(1153, 'Gry', 'Podtytul drugiej gry z serii The Elder Scrolls to?', 'Daggerfall', '2014-04-17 13:59:53'),
-(1154, 'Gry', 'Podtytul trzeciej gry z serii The Elder Scrolls to?', 'Morrowind', '2014-04-27 18:14:38'),
-(1155, 'Gry', 'Podtytul czwartej gry z serii The Elder Scrolls to?', 'Oblivion', '2014-04-28 18:36:08'),
-(1156, 'Gry', 'Podtytul piatej gry z serii The Elder Scrolls to?', 'Skyrim', '2014-04-12 13:29:54'),
-(1157, 'Gry', 'Kontynent bedacy swiatem gry w serii The Elder Scrolls to?', 'Tamriel', '2014-04-24 15:00:56'),
-(1158, 'Gry', 'Kontynent bedacy swiatem gry w serii Gothic to?', 'Myrtana', '2014-04-22 15:30:14'),
-(1159, 'Gry', 'Seria kosmicznych gier RPG wydanych w latach 2007-2012 to?', 'Mass Effect', '2014-04-16 15:20:23'),
-(1160, 'Gry', 'Slynna seria gier RPG umiejscowionych w post-apokaliptycznym swiecie to?', 'Fallout', '2014-04-16 18:08:43'),
-(1161, 'Gry', 'Seria gier z gatunku survival horror dotyczaca epidemii zombie to?', 'Resident Evil', '2014-04-25 13:00:23'),
-(1162, 'Gry', 'Wydana przez EA seria gier typu FPS osadzona w realiach II WS to?', 'Medal of Honor', '2014-04-22 17:09:31'),
-(1163, 'Gry', 'Wydana przez Activision seria gier typu FPS osadzona w realiach II WS ?', 'Call of Duty', '2014-04-19 18:30:17'),
-(1164, 'Gry', 'Slynna seria gier wyscigowych wydawana przez Electronic Arts to?', 'Need For Speed', '2014-04-12 15:17:15'),
-(1165, 'Gry', 'Jak nazywa sie popularna w Polsce w latach 90 konsola, klon Famicom/NES?', 'Pegasus', '2014-04-19 15:55:29'),
-(1166, 'Biologia', 'Najglebsza strefa oceanu ponizej 1000-2000m wraz z dnem, to?', 'abisal', '2014-04-15 13:54:42'),
-(1167, 'Biologia', 'Inaczej wchlanianie', 'absorpcja', '2014-04-19 18:13:42'),
-(1168, 'Medycyna', 'Nabyty zespol zaniku odpornosci, to?', 'AIDS', '2014-04-15 13:59:44'),
-(1169, 'Medycyna', 'Choroba spowodowana nadmiernym wydzielaniem hormonu wzrostu to?', 'akromegalia', '2014-04-28 13:50:19'),
-(1170, 'Medycyna', 'Stan chorobowy wywolany niedoborem hemoglobiny lub erytrocytow, to?', 'anemia', '2014-04-29 15:55:21'),
-(1171, 'Biologia', 'Nauka zajmujaca sie procesem ewolucji, to?', 'ewolucjonizm', '2014-04-28 13:44:05'),
-(1172, 'Biologia', 'Wodniczka trawienna, to?', 'fagosom', '2014-04-29 13:28:31'),
-(1173, 'Biologia', 'Historia rozwoju ewolucyjnego grupy organizmow, to?', 'filogeneza', '2014-04-29 15:35:35'),
-(1174, 'Biologia', 'Gromada zmiennocieplnych kregowcow ladowych, to?', 'gady', '2014-04-28 18:33:25'),
-(1175, 'Biologia', 'Nauka o rozmieszczeniu roslin na Ziemi, to?', 'fitogeografia', '2014-04-28 15:12:11'),
-(1176, 'Biologia', 'Organizmy zyjace w glebie, to?', 'geobionty', '2014-04-28 18:59:34'),
-(1177, 'Biologia', 'Calosc informacji genetycznej organizmu, to?', 'genotyp', '2014-04-22 13:14:31'),
-(1178, 'Biologia', 'Jak nazywa sie nauka o dziedziczeniu?', 'genetyka', '2014-04-28 15:33:46'),
-(1179, 'Biologia', 'Jak nazywa sie nauka o mechanizmach odpornosciowych?', 'immunologia', '2014-04-19 18:32:06'),
-(1180, 'Biologia', 'Pozeranie osobnikow nalezacych do tego samego gatunku, to?', 'kanibalizm', '2014-04-25 13:23:47'),
-(1181, 'Biologia', 'Operacyjne usuniecie gonad (u zwierzat), to?', 'kastracja', '2014-04-15 08:02:22'),
-(1182, 'Biologia', 'System zatok, jam, naczyn, w ktorym krazy krew to?', 'uklad krwionosny', '2014-04-27 15:53:51'),
-(1183, 'Biologia', 'Wytwarzanie mleka w gruczolach mlecznych, to?', 'laktacja', '2014-04-29 13:25:50'),
-(1184, 'Biologia', 'Inaczej zbiorowiska roslinne z duzym udzialem drzew?', 'las', '2014-04-13 13:15:17'),
-(1185, 'Biologia', 'Inaczej sok mleczny?', 'lateks', '2014-04-22 18:44:13'),
-(1186, 'Biologia', 'Plyn ustrojowy krazacy w ukladzie limfatycznym, to?', 'limfa', '2014-04-27 15:18:31'),
-(1187, 'Biologia', 'Proces podzialu jadra komorkowego, to?', 'mitoza', '2014-04-25 13:57:39'),
-(1188, 'Biologia', 'Organizmy odzywiajace sie jednym rodzajem pokarmu, to?', 'monofagi', '2014-04-22 15:11:36'),
-(1189, 'Biologia', 'Jak nazywa sie epidemia o szerokim zasiegu?', 'pandemia', '2014-04-21 13:48:42'),
-(1190, 'Biologia', 'Jak nazywamy ogranizmy, ktore prowadza pasozytniczy tryb zycia?', 'pasozyty', '2014-04-28 13:02:47'),
-(1191, 'Biologia', 'Zewnetrzna warstwa ciala wielu pierwotniakow, to?', 'pellikula', '2014-04-18 08:38:42'),
-(1192, 'Biologia', 'Chemiczne, plynne lub sproszkowane srodki ochrony zywnosci, to?', 'pestycydy', '2014-04-25 15:06:35'),
-(1193, 'Biologia', 'Jak nazywa sie zgrubiala os pedu u drzew?', 'pien', '2014-04-18 13:02:36'),
-(1194, 'Biologia', 'Jak nazywaja sie barwniki naturalne lub syntetyczne?', 'pigmenty', '2014-04-29 13:55:49'),
-(1195, 'Biologia', 'Rogowe wytwory naskorka pokrywajace cialo ptakow, to?', 'piora', '2014-04-20 08:59:20'),
-(1196, 'Biologia', 'Jak nazwac zdolnosc danego osobnika do wydania potomstwa?', 'plodnosc', '2014-04-15 18:30:11'),
-(1197, 'Biologia', 'Wydzielina gruczolow potowych, to?', 'pot', '2014-04-21 15:43:54'),
-(1198, 'Biologia', 'Energia zdolna do wytwarzania jonow przy przenikaniu przez materie', 'promieniowanie jonizujace', '2014-04-11 15:09:53'),
-(1199, 'Biologia', 'Rozprzestrzenianie sie nasion i owocow, to?', 'rozsiewanie', '2014-04-28 13:16:57'),
-(1200, 'Biologia', 'Organelle odgrywajace kluczowa role w procesie translacji, to?', 'rybosomy', '2014-04-25 18:45:23'),
-(1201, 'Biologia', 'Jak nazywamy cialo organizmu wielokomorkowego?', 'soma', '2014-04-29 15:56:42'),
-(1202, 'Biologia', 'Nauka zajmujaca sie problemami ochrony srodowiska, to?', 'sozologia', '2014-04-29 13:45:58'),
-(1203, 'Biologia', 'Proces powstawania nowego gatunku, to?', 'specjacja', '2014-04-29 18:41:13'),
-(1204, 'Biologia', 'Narzady zmyslu rownowagi bezkregowcow i oslonic, to?', 'statocysty', '2014-04-27 18:51:22'),
-(1205, 'Biologia', 'Oddechowe narzady bezkregowcow, to?', 'tchawki', '2014-04-22 18:59:16'),
-(1206, 'Biologia', 'Organizmy cieplolubne, to?', 'termofile', '2014-04-27 15:03:13'),
-(1207, 'Biologia', 'Wprowadzenie obcego DNA do komorki eukariotycznej, to?', 'transfekcja', '2014-04-16 18:40:05'),
-(1208, 'Biologia', 'Zjawisko parowania wody i dyfuzji pary wodnej z powierzchni roslin.', 'transpiracja', '2014-04-27 15:27:31'),
-(1209, 'Biologia', 'Samiec pszczoly miodnej, to?', 'truten', '2014-04-28 18:31:37'),
-(1210, 'Biologia', 'Pokrycie ciala ptakow piorami, to?', 'upierzenie', '2014-04-06 18:57:36'),
-(1211, 'Biologia', 'Noworodek urodzony przedwczesnie, to?', 'wczesniak', '2014-04-28 15:56:17'),
-(1212, 'Biologia', 'Jak nazywa sie porod u owiec, koz i innych zwierzat ssacych?', 'wykot', '2014-04-20 18:25:50'),
-(1213, 'Biologia', 'Slepo zakonczony uchylek jelita grubego niektorych ssakow, to?', 'wyrostek robaczkowy', '2014-04-25 13:04:00'),
-(1214, 'Biologia', 'Zwierzeta wchodzace w sklad bentosu, to?', 'zoobentos', '2014-04-20 15:09:37'),
-(1215, 'Biologia', 'Zwierzeta wchodzace w sklad biocenozy, to?', 'zoocenoza', '2014-04-27 15:10:52'),
-(1216, 'Biologia', 'Organizmy zywiace sie wylacznie zwierzetami, to?', 'zoofagi', '2014-04-21 13:37:00'),
-(1217, 'Biologia', 'Odkladanie sie wapnia w tkankach, to?', 'zwapnienie', '2014-04-16 08:28:26'),
-(1218, 'Jezyk Polski', 'Wiersz abecadlowy, to?', 'abecedariusz', '2014-04-16 13:11:00'),
-(1219, 'Jezyk Polski', 'Pisemny skrot wyrazu lub grupy wyrazow, to?', 'abrewiacja', '2014-04-19 15:44:34'),
-(1220, 'Jezyk Polski', 'Dodatki do tesktu glownego, uzupelnienia, to?', 'addenda', '2014-04-24 18:02:06'),
-(1221, 'Jezyk Polski', 'Danse macabre to tak zwany?', 'taniec smierci', '2014-04-24 13:30:13'),
-(1222, 'Jezyk Polski', 'Elektroniczny odpowiednik ksiazki, to?', 'e-book', '2014-04-13 17:49:21'),
-(1223, 'Jezyk Polski', 'Slowo lub wyrazenie zapozyczone z obcych kultur, to?', 'egzotyzm', '2014-04-19 13:12:41'),
-(1224, 'Jezyk Polski', 'Jak nazywa sie utwor o tematyce milosnej?', 'erotyk', '2014-04-29 13:37:01'),
-(1225, 'Jezyk Polski', 'Sztuka harmonijnego, rytmicznego ksztaltowania wypowiedzi', 'eurytmia', '2014-04-28 13:08:07'),
-(1226, 'Jezyk Polski', 'Gatunek religijnej epiki sredniowiecznej, to?', 'exemplum', '2014-04-13 18:10:43'),
-(1227, 'Jezyk Polski', 'Wyraz lub zwrot zapozyczony z jezyka niemieckiego, to?', 'germanizm', '2014-04-22 13:04:31'),
-(1228, 'Jezyk Polski', 'Grono pisarzy, wystepujacych wspolnie i deklarujacych podobne cele.', 'grupa literacka', '2014-04-24 13:41:40'),
-(1229, 'Jezyk Polski', 'Pomyslny final wydarzen przedstawianych w powiesci, to?', 'happy end', '2014-04-27 18:22:44'),
-(1230, 'Jezyk Polski', 'Zasady stosowania tzw. znakow przestankowych, to?', 'interpunkcja', '2014-04-12 13:40:39'),
-(1231, 'Jezyk Polski', 'Jednakowa liczba zglosek w wersach w metryce, to?', 'izosylabizm', '2014-04-18 13:10:48'),
-(1232, 'Jezyk Polski', 'Jenorazowe wydawnictwo okolicznosciowe majace forme czasopisma, to?', 'jednodniowka', '2014-04-29 18:48:26'),
-(1233, 'Jezyk Polski', 'Odmiana jezyka literackiego, ktora operuje literatura piekna, to?', 'jezyk poetycki', '2014-04-28 18:29:20'),
-(1234, 'Jezyk Polski', 'Jak nazywa sie widowisko estradowe o charakterze humorystycznym?', 'kabaret', '2014-04-25 15:23:08'),
-(1235, 'Jezyk Polski', 'Ezoteryczno - mistyczny nurt w judaizmie.', 'kabala', '2014-04-20 13:40:19'),
-(1236, 'Jezyk Polski', 'Piekne, czytelne i staranne pismo.', 'kaligrafia', '2014-04-29 18:18:10'),
-(1237, 'Jezyk Polski', 'Doslowne tlumaczenie wyrazu lub zwrotu obcojezycznego.', 'kalka', '2014-04-25 18:22:16'),
-(1238, 'Jezyk Polski', 'Zbior spiewow liturgicznych w kosciele rzymskokatolickim', 'kancjonal', '2014-04-14 17:59:49'),
-(1239, 'Jezyk Polski', 'Jak nazywa sie poprawianie tekstu przed jego wydrukowaniem?', 'korekta', '2014-04-19 13:19:25'),
-(1240, 'Jezyk Polski', 'Wypowiedz lub fragment wypowiedzi postaci scenicznej, to?', 'kwestia', '2014-04-27 15:09:04'),
-(1241, 'Jezyk Polski', 'Inna nazwa piesni zalobnej.', 'lamentacja', '2014-04-21 13:09:20'),
-(1242, 'Jezyk Polski', 'Gatunek prozy reportazowej lub publicystycznej, to?', 'list z podrozy', '2014-04-24 13:06:34'),
-(1243, 'Jezyk Polski', 'Modlitwa o charakterze blagalnej piesni.', 'litania', '2014-04-14 13:53:42'),
-(1244, 'Jezyk Polski', 'Powtarzalne, stereotypowe zwroty, frazesy.', 'loci communes', '2014-04-20 13:03:58'),
-(1245, 'Jezyk Polski', 'Wyraz lub zwrot nasladujacy slowa i skladnie lacinska.', 'makaronizm', '2014-04-22 13:20:23'),
-(1246, 'Jezyk Polski', 'Jak nazywa sie opowiesc o przedhistorycznych wydarzeniach?', 'mit', '2014-04-15 13:32:49'),
-(1247, 'Jezyk Polski', 'Miekka, luzno nalozona na ksiazke okladka z nadrukiem, to?', 'obwoluta', '2014-04-24 15:49:32'),
-(1248, 'Jezyk Polski', 'Jak nazywamy najwybitniejsze dzielo danego autora?', 'opus vitae', '2014-04-14 18:35:30'),
-(1249, 'Jezyk Polski', 'Drobny fragment tekstu, ustep, urywek.', 'passus', '2014-04-21 13:12:48'),
-(1250, 'Jezyk Polski', 'Dlugie, nudne, nadete przemowienie, to?', 'perora', '2014-04-11 13:21:45'),
-(1251, 'Jezyk Polski', 'Pogardliwe okreslenie pisarza lub dziennikarza.', 'pismak', '2014-04-19 17:02:34'),
-(1252, 'Jezyk Polski', 'Jedna z odmian podrecznika, to?', 'repetytorium', '2014-04-04 13:14:59'),
-(1253, 'Jezyk Polski', 'Ponowne tlumaczenie utworu z przekladu na jezyk oryginalny.', 'retrowersja', '2014-04-12 15:51:28'),
-(1254, 'Jezyk Polski', 'Jak nazywamy szybka i trafna odpowiedz?', 'riposta', '2014-04-27 18:50:28'),
-(1255, 'Jezyk Polski', 'Ustne lub pisemne przedstawienie przebiegu zdarzen lub dzialan.', 'sprawozdanie', '2014-04-29 18:11:27'),
-(1256, 'Jezyk Polski', 'Ustny lub pisemny skrot tekstu zawierajacy zasadnicze elementy tresci.', 'streszczenie', '2014-04-20 08:21:14'),
-(1257, 'Jezyk Polski', 'Wiersz pozbawiony rymow, to?', 'wiersz bialy', '2014-04-22 18:37:50'),
-(1258, 'Jezyk Polski', 'Zakonczenie wyrazu, zdania albo wersu.', 'wyglos', '2014-04-04 18:33:42'),
-(1259, 'Jezyk Polski', 'Jak nazywamy wypowiedz ujawniajaca sekret, zwierzenie?', 'wyznanie', '2014-04-28 15:29:17'),
-(1260, 'Jezyk Polski', 'Poezja cmentarna, to?', 'youngizm', '2014-04-18 18:34:04'),
-(1261, 'Jezyk Polski', 'Urwanie wypowiedzi sugerujace emocjonalne zaangazowanie mowiacego.', 'zamilkniecie', '2014-03-25 18:54:01'),
-(1262, 'Jezyk Polski', 'Grupa sylab podporzadkowana jednemu akcentowi glownemu.', 'zestoj akcentowy', '2014-04-29 13:38:49'),
-(1263, 'Gry', 'Podaj nick osoby, ktora mowi "fullserver rzadzi" przy wejsciu na FS?', 'Kicia', '2014-04-21 13:35:12'),
-(1265, 'Informatyka', 'Mozliwosc programowalnego uszkodzenia sprzetu komputerowego nazywa sie?', 'killer poke', '2014-04-27 15:23:00'),
-(1266, 'Informatyka', 'Osoba zajmujaca sie lamaniem zabezpieczen komputerowych to?', 'cracker', '2014-04-19 13:09:25'),
-(1267, 'Informatyka', 'Poprawka lub uaktualnienie do programu nazywa sie?', 'patch', '2014-04-17 17:07:44'),
-(1268, 'Informatyka', 'Plik, ktory moze byc uruchomiony bezposrednio w srodowisku syst. oper.?', 'plik wykonywalny', '2014-04-21 13:20:23'),
-(1269, 'Informatyka', 'Plik, ktory jest wykonywany bez wplywu uzytkownika na przebieg programu?', 'plik wsadowy', '2014-04-25 13:36:43'),
-(1270, 'Informatyka', 'Sposob na przelamanie technicznych zabezpieczen oprogramowania komp. to?', 'crack', '2014-04-28 18:15:46'),
-(1271, 'Informatyka', 'Liczba sluzaca do sprawdzania poprawnosci przetwarzanych danych to?', 'suma kontrolna', '2014-04-28 13:24:03'),
-(1272, 'Informatyka', 'Dziedzina wiedzy o przekazywaniu informacji w sposób zabezpieczony to?', 'kryptografia', '2014-04-18 13:51:01'),
-(1273, 'Informatyka', 'Skonczony ciag czynnosci, koniecznych do wykonan. pewnego rodzaju zadan?', 'algorytm', '2014-04-25 18:13:41'),
-(1274, 'Informatyka', 'Zbior danych zapisanych zgodnie z okreslonymi regulami to?', 'baza danych', '2014-04-25 13:02:38'),
-(1275, 'Informatyka', 'Obiektowy jezyk programowania do generowania stron int. w czasie rzecz.?', 'PHP', '2014-04-29 15:45:56'),
-(1276, 'Informatyka', 'Jezyk sluzacy do opisu formy prezentacji (wyswietlania) stron WWW to?', 'CSS', '2014-04-24 15:45:28'),
-(1277, 'Informatyka', 'Uniwersalny jezyk do reprezentowania danych w strukturalizowany sposob?', 'XML', '2014-04-27 15:00:58'),
-(1278, 'Informatyka', 'Podstawowy plik konfiguracyjny systemow operacyjnych MS-DOS i WIN9x to?', 'config.sys', '2014-04-22 18:05:51'),
-(1279, 'Informatyka', 'Nazwa programu wsadowego uruchamianego przy starcie systemu MS-DOS to?', 'autoexec.bat', '2014-04-06 15:14:08'),
-(1280, 'Informatyka', 'Hierarchiczna baza danych konfiguracyjnych w systemach Windows to?', 'rejestr', '2014-04-19 15:17:20'),
-(1281, 'Informatyka', 'Usluga katalogowa (hierarch. baza danych) dla systemów Windows Server?', 'Active Directory', '2014-04-13 15:02:36'),
-(1282, 'Informatyka', 'Aplikacja do przegladania systemu plikow w MS Windows, dostepna od W95?', 'Eksplorator Windows', '2014-04-22 13:17:41'),
-(1283, 'Informatyka', 'Tradycyjna nazwa uniksowego konta, ktore ma pelna kontrole nad systemem?', 'root', '2014-04-28 15:24:48'),
-(1284, 'Informatyka', 'Jaki czlowiek rozpoczal w 1991 roku historie Linuxa?', 'Linus Torvalds', '2014-04-28 18:47:53'),
-(1285, 'Informatyka', 'Aplikacja Windows gromadzaca narzedzia do zmiany parametrow syst. oper.?', 'Panel sterowania', '2014-04-20 08:17:46'),
-(1286, 'Informatyka', 'Znajdujacy sie przy dolnej krawedzi ekranu element GUI systemu Windows?', 'Pasek zadan', '2014-04-27 18:02:07'),
-(1287, 'Informatyka', 'Niewielki program mozliwy do osadzenia w stronie WWW to?', 'aplet', '2014-04-24 13:19:45'),
-(1288, 'Informatyka', 'Obiektowy jezyk programowania z firmy Sun Microsystems to?', 'Java', '2014-04-18 08:33:30'),
-(1289, 'Informatyka', 'Dodatek do systemow MS Windows chroniacy przed programami szpiegujacymi?', 'Windows Defender', '2014-04-20 13:19:57'),
-(1290, 'Informatyka', 'Darmowe oprogramowanie, ale zawierajace funkcje wyswietlajaca reklamy?', 'adware', '2014-04-22 18:38:45'),
-(1291, 'Informatyka', 'Licencja darmowego oprogramowania bez ujawniania kodu zrodlowego to?', 'freeware', '2014-04-17 08:43:49'),
-(1292, 'Informatyka', 'Oprogramowanie, ktorego tworca juz nie sprzedaje to?', 'abandonware', '2014-04-21 15:19:00'),
-(1293, 'Informatyka', 'Oprogramowanie rozpowszechniane z ograniczeniami w celu wyprobowania to?', 'shareware', '2014-04-10 13:23:26'),
-(1294, 'Informatyka', 'Samoreplikujacy sie program komputerowy, podobny do wirusa to?', 'robak', '2014-04-28 15:06:47'),
-(1295, 'Informatyka', 'Program zbierajacy inform. o klawiszach naciskanych przez uzytkownika?', 'keylogger', '2014-04-27 15:41:07'),
-(1296, 'Informatyka', 'Program udajacy przydatna aplikacje, z ukrytymi niepozadanymi funkcjami?', 'kon trojanski', '2014-04-17 13:07:46'),
-(1297, 'Informatyka', 'Programy, ktorych celem jest szpiegowanie dzialan uzytkownika to?', 'spyware', '2014-04-21 13:16:16'),
-(1298, 'Informatyka', 'Niechciane lub niepotrzebne wiadomosci elektroniczne to?', 'spam', '2014-04-24 15:12:39'),
-(1299, 'Informatyka', 'Wyludzanie poufnych informacji osobistych przez podszywanie sie to?', 'phishing', '2014-04-21 13:50:30'),
-(1300, 'Informatyka', 'Interfejs graficzny Windows Vista oraz Windows 7 to?', 'Windows Aero', '2014-04-22 18:19:06'),
-(1301, 'Informatyka', 'Usluga aktualizacji systemow z rodziny Windows opracowana przez MS?', 'Windows Update', '2014-04-13 18:39:21'),
-(1302, 'Informatyka', 'Proces eliminujacy powtarzajace sie dane w relacyjnej bazie danych to?', 'normalizacja', '2014-04-29 15:39:38'),
-(1303, 'Informatyka', 'Czynnosc polegajaca na poszukiwaniu informacji w bazach danych to?', 'zapytanie', '2014-04-29 15:31:32'),
-(1304, 'Informatyka', 'Typ grafiki, w ktorej obraz opisany jest za pomoca figur geometrycznych?', 'grafika wektorowa', '2014-04-28 15:35:34'),
-(1305, 'Informatyka', 'Typ grafiki, w ktorej obraz opisany jest za pomoca siatki pikseli?', 'grafika rastrowa', '2014-04-27 15:13:34'),
-(1306, 'Informatyka', 'Plik wykorzystujacy rastrowy sposob reprezen. komp. graf. dwuwymiarowej?', 'bitmapa', '2014-04-19 17:26:51'),
-(1307, 'Informatyka', 'Najmniejszy jednolity element obrazu wyswietlanego na ekranie to?', 'piksel', '2014-04-25 13:40:17'),
-(1308, 'Informatyka', 'Urzadzenie sluzace do przebiegowego odczytywania obrazu to?', 'skaner', '2014-04-25 13:34:03'),
-(1309, 'Muzyka', 'Z jakiego panstwa pochodzil rockowy zespol Bijelo Dugme?', 'Jugoslawia', '2014-04-27 13:52:39'),
-(1310, 'Rozne', 'Prezydent jakiego panstwa wspolnie z biskupem Seo de Urgell pelni funkcje ksiecia Andory?', 'Francja', '2014-04-13 08:31:37'),
-(1311, 'Rozne', 'Podaj imie i nazwisko papieza Benedykta XVI', 'Joseph Ratzinger', '2014-04-29 18:55:38'),
-(1312, 'Rozne', 'Nazwa jakiego miasta tlumaczona jest na jezyk polski jako "Pomyslne Wiatry"?', 'Buenos Aires', '2014-04-24 15:27:01'),
-(1313, 'Rozne', 'Jakie europejskie panstwo w swoim godle zawiera sierp i mlot? ', 'Austria', '2014-04-24 13:41:13'),
-(1314, 'Rozne', 'Jakie europejskie panstwo w swoim herbie zawiera slupy Heraklesa? ', 'Hiszpania', '2014-04-15 13:19:51'),
-(1315, 'Historia', 'Jak nazywal sie slynny albanski przywodca, bohater narodowy tego kraju?', 'Skanderbeg', '2014-04-27 18:37:58'),
-(1316, 'Geografia', 'Ktore balkanskie panstwo jest powierzchniowo najwieksze? ', 'Grecja', '2014-04-27 15:37:03'),
-(1317, 'Rozne', 'Na jakim terytorium jezykiem urzedowym jest jezyk farerski?', 'Wyspy Owcze', '2014-04-22 18:28:14'),
-(1318, 'Administacja', 'Ilu radnych posiadaja gminy poniżej 20 000 mieszkańców?', '15', '2014-04-16 13:57:48'),
-(1319, 'Geografia', 'Z jakim nieslowianskim panstwem, oprocz Niemiec graniczy Polska? ', 'Litwa', '2014-04-21 13:11:04'),
-(1320, 'Muzyka', 'Z jakiego kraju pochodzi rockowy zespol Bajaga i Instruktori? ', 'Serbia', '2014-04-17 18:49:56'),
-(1321, 'Historia', 'Jaki byly wiceprezydent USA zostal w 2007 roku odznaczony Pokojowa Nagroda Nobla? ', 'Al Gore', '2014-04-24 13:21:34'),
-(1322, 'Sport', 'Gdzie znajduja sie dwie skocznie narciarskie Bloudkova Velikanka? ', 'Planica', '2014-04-15 18:37:57'),
-(1323, 'Sport', 'Jaki przydomek nosi klub pilkarski Zaglebie Lubin?', 'Miedziowi', '2014-04-21 13:47:27'),
-(1324, 'Rozne', 'W jakim miescie znajduje sie najstarsza huta miedzi w Polsce?', 'Legnica', '2014-04-28 13:36:03'),
-(1325, 'Gry', 'Seria przygodowych gier akcji umiejscowionych podczas wypraw krzyzowych?', 'Assassin''s Creed', '2014-04-29 18:33:58'),
-(1326, 'Gry', 'Seria gier strateg.-ekonom. pochodzaca z Amigi i przeniesiona na PC to?', 'The Settlers', '2014-04-24 13:17:29'),
-(1327, 'Gry', 'Pochodzaca z Polski, a dobrze znana na swiecie seria gier FPS to?', 'Painkiller', '2014-04-28 13:53:53'),
-(1328, 'Gry', 'Seria gier wyscigowych na konsole PlayStation z mnostwem modeli aut to?', 'Gran Turismo', '2014-04-29 15:02:22'),
-(1329, 'Gry', 'Seria gier RTS umozliwiajaca udzial w rozwoju pierwszych cywilizacji to?', 'Age of Empires', '2014-04-29 13:53:09'),
-(1330, 'Gry', 'Seria gier typu FPS, stworzonych przez Digital Illusions CE to?', 'Battlefield', '2014-04-22 08:19:37'),
-(1345, 'Geografia', 'W jakim miescie znajduje sie piramida Cheopsa?', 'Giza', '2014-04-28 18:35:14'),
-(1332, 'Gry', 'Seria strateg. gier turowych o rozbudowywaniu wlasnych cywilizacji to?', 'Civilization', '2014-04-27 18:46:01'),
-(1333, 'Gry', 'Seria kontrowersyjnych gier TPP pozwalajaca wcielic sie w "Kolesia" to?', 'Postal', '2014-04-29 15:13:08'),
-(1334, 'Gry', 'Seria gier z gatunku bijatyk charakteryzujaca sie spora brutalnoscia to?', 'Mortal Kombat', '2014-04-20 17:07:43'),
-(1335, 'Gry', 'Seria konsolowych bijatyk, tworzona i wydawana przez firme Namco to?', 'Tekken', '2014-04-21 13:37:04'),
-(1336, 'Gry', 'Seria gier strategiczno-zrecznosciowych o walkach robakow to?', 'Worms', '2014-04-25 13:13:56'),
-(1337, 'Gry', 'Gra symulujaca ewolucje i pozwalajaca graczowi ja dowolnie kreowac to?', 'Spore', '2014-04-28 18:56:25'),
-(1338, 'Gry', 'Jak nazywa sie bohaterka serii Tomb Raider?', 'Lara Croft', '2014-04-28 13:37:50'),
-(1339, 'Gry', 'Seria gier TPP o policjancie tropiacym mordercow jego rodziny to?', 'Max Payne', '2014-04-24 13:56:49'),
-(1340, 'Gry', 'Seria gier symulujacych codzienne, ludzkie zycie to?', 'The Sims', '2014-04-22 13:56:20'),
-(1341, 'Gry', 'Seria gier z gatunku hack and slash autorstwa Blizzard Entertainment to?', 'Diablo', '2014-04-25 13:08:29'),
-(1342, 'Gry', 'Seria gier RTS z fabula w kosmosie, bardzo popularna online to?', 'StarCraft', '2014-04-28 15:27:29'),
-(1343, 'Gry', 'Popularna sieciowa gra FPS, bedaca modyfikacja Half-Life to?', 'Counter-Strike', '2014-04-22 18:56:59'),
-(1344, 'Gry', 'Seria gier o skokach narciarskich, bardzo popularna w Polsce, to?', 'Deluxe Ski Jump', '2014-04-27 15:34:20'),
-(1346, 'Geografia', 'Przez jakie panstwo otoczone jest San Marino?', 'Wlochy', '2014-04-24 13:52:14'),
-(1347, 'Geografia', 'Nauka zajmujaca sie tworzeniem map to?', 'kartografia', '2014-04-28 15:47:16'),
-(1348, 'Matematyka', 'Dzial matematyki zajmujacy sie zdarzeniami losowymi to?', 'rachunek prawdopodobienstwa', '2014-04-17 08:03:59'),
-(1349, 'Matematyka', 'Kto rozpropagowal idee prostokatnego ukladu wspolrzednych?', 'Kartezjusz', '2014-04-22 15:20:15'),
-(1350, 'Jezyk polski', 'Srodek stylistyczny nadajacy roslinom lub zwierzetom cechy ludzkie to?', 'uosobienie', '2014-04-25 18:34:02'),
-(1351, 'Jezyk polski', 'Srodek stylistyczny nadajacy przedmiotom cechy istot zywych to?', 'ozywienie', '2014-04-29 18:53:23'),
-(1352, 'Jezyk polski', 'Jakiego innego okreslenia mozna uzyc na "metafore"?', 'przenosnia', '2014-04-27 15:05:28'),
-(1353, 'Jezyk polski', 'Co to jest onomatopeja?', 'dzwiekonasladownictwo', '2014-04-29 13:31:38'),
-(1354, 'Jezyk polski', 'Wyraz, konstrukcja skladniowa lub zwiazek wyrazowy, ktory wyszedl z uzycia to?', 'archaizm', '2014-04-20 15:26:37'),
-(1355, 'Jezyk polski', 'Wyraz (przymiotnik, rzeczownik lub imieslow) okreslajacy rzeczownik to?', 'epitet', '2014-04-18 08:56:03'),
-(1356, 'Jezyk polski', 'Zamierzona niezgodnosc dwoch poziomow wypowiedzi: doslownego i ukrytego to?', 'ironia', '2014-04-22 18:00:22'),
-(1357, 'Jezyk polski', 'Zestawienie wyrazow o przeciwstawnych znaczeniach to?', 'oksymoron', '2014-04-14 15:16:29'),
-(1358, 'Jezyk polski', 'Przerobka tekstu, ktora modyfikuje tresc zachowujac jego zasadniczy sens to?', 'parafraza', '2014-04-20 15:44:05'),
-(1359, 'Jezyk polski', 'Twierdzenie logiczne prowadzace do zaskakujacych lub sprzecznych wnioskow to?', 'paradoks', '2014-04-29 13:15:09'),
-(1360, 'Jezyk polski', 'Wyraz, wyrazenie lub forma skladni stosowane tylko w jezyku potocznym to?', 'kolokwializm', '2014-04-27 15:54:46'),
-(1361, 'Jezyk polski', 'Wyraz lub dluzsze okreslenie rownowazne znaczeniowo innemu to?', 'synonim', '2014-04-19 18:04:59'),
-(1362, 'Jezyk polski', 'Wyraz, wyrazenie lub zwrot uznawany jako nieprzyzwoity, ordynarny to?', 'wulgaryzm', '2014-04-25 15:20:00'),
-(1363, 'Jezyk polski', 'Utrwalone w uzyciu z ustalonym znaczeniem polaczenie dwoch lub wiecej wyrazow to?', 'zwiazek frazeologiczny', '2014-04-27 15:20:18'),
-(1364, 'Jezyk polski', 'Pytanie zadane nie dla uzyskania odpowiedzi, lecz w celu sklonienia do przemyslen to?', 'pytanie retoryczne', '2014-04-28 18:27:31'),
-(1365, 'Jezyk polski', 'Wyraz zastepujacy slowo, ktore ze wzgledu na okreslone tabu nie powinno byc uzywane to?', 'eufemizm', '2014-04-20 15:25:44'),
-(1366, 'Jezyk polski', 'Wyolbrzymienie, przejaskrawienie cech przedmiotow, osob, zjawisk to?', 'hiperbola', '2014-04-24 18:25:46'),
-(1367, 'Jezyk polski', 'Przywolanie wczesniejszych wydarzen przez bohatera w utworze epickim to?', 'retrospekcja', '2014-04-27 13:43:48'),
-(1368, 'Jezyk polski', 'Termin oznaczajacy przeciwienstwo, odwrotnosc znaczeniowa innego terminu to?', 'antonim', '2014-04-17 18:04:20'),
-(1369, 'Jezyk polski', 'Nazwa uzywana zamiast znanej powszechnie, zwykle dla ukrycia jej prawdziwego znaczenia to?', 'kryptonim', '2014-04-18 13:09:24'),
-(1370, 'Jezyk polski', 'Indywidualna nazwa danej osoby, inna niz oficjalne imie i nazwisko to?', 'pseudonim', '2014-04-18 13:35:03'),
-(1371, 'Jezyk polski', 'Relacja wyrazania roznych znaczen za pomoca identycznych form jezykowych to?', 'homonimia', '2014-04-28 15:39:09'),
-(1372, 'Jezyk polski', 'Slowo utworzone przez skrocenie wyrazenia zlozonego z 2 lub wiecej slow to?', 'akronim', '2014-04-25 15:46:01'),
-(1373, 'Jezyk polski', 'Nowy wyraz, utworzony by nazwac nieznany wczesniej przedmiot czy sytuacje to?', 'neologizm', '2014-04-28 18:13:03'),
-(1374, 'Jezyk polski', 'Dzial nauk humanistycznych badajacych istote, budowe i rozwoj jezyka to?', 'lingwistyka', '2014-04-16 18:25:47'),
-(1375, 'Jezyk polski', 'Nauka o zasadach budowy i odmiany wyrazow oraz o regulach skladni to?', 'gramatyka', '2014-04-17 18:27:46'),
-(1376, 'Jezyk polski', 'Dziedzina jezykoznawstwa zajmujaca sie analiza tresci wyrazen jezykowych to?', 'semantyka', '2014-04-24 18:14:21'),
-(1377, 'Jezyk polski', 'Dzial jezykoznawstwa badajacy strone dzwiekowa jezyka (gloski) to?', 'fonetyka', '2014-04-22 13:31:15'),
-(1378, 'Jezyk polski', 'Dzial jezykoznawstwa badajacy pochodzenie wyrazow, zmiany ich znaczenia i formy to?', 'etymologia', '2014-04-29 13:24:57'),
-(1379, 'Jezyk polski', 'Pochodzacy z jezyka obcego zwrot lub forma gramatyczna wplatany do jezyka ojczystego to?', 'makaronizm', '2014-04-18 18:38:39'),
-(1380, 'Jezyk polski', 'Zaleznosc znaczenia fragmentu tekstu od znaczen slow poprzedzajacych i nastepujacych to?', 'kontekst', '2014-04-04 18:41:54'),
-(1381, 'Jezyk polski', 'Sprowadzenie pojecia do mniej szczegolowej postaci to?', 'uogolnienie', '2014-04-12 18:51:22'),
-(1382, 'Fizyka', 'Ruch, w ktorym cialo w jednak. odst. czasu przebywa jednak. odc. drogi to?', 'ruch jednostajny', '2014-04-18 15:24:11'),
-(1383, 'Fizyka', 'Ruch, w ktorym cialo zwieksza predkosc o jednak. wartosc w jednak. odst. czasu to?', 'ruch jednostajnie przyspieszony', '2014-04-27 15:08:10'),
-(1384, 'Fizyka', 'Krzywa zakreslana w przestrzeni przez poruszajace sie cialo to?', 'trajektoria', '2014-04-25 18:29:02'),
-(1385, 'Fizyka', 'Dzial fizyki zajmujacy sie badaniem geometrycznych wlasciwosci ruchu cial to?', 'kinematyka', '2014-04-21 13:59:35'),
-(1386, 'Fizyka', 'Obiekt fizyczny posiadajacy kierunek, zwrot, wartosc i punkt przylozenia to?', 'wektor', '2014-04-24 18:15:43'),
-(1387, 'Fizyka', 'Wielkosc fizyczna posiadajaca wartosc oraz (ewentualnie) jednostke to?', 'skalar', '2014-04-20 18:59:10'),
-(1388, 'Fizyka', 'Jak nazwiemy proces, w ktorym temperatura ciala wzrasta?', 'ogrzewanie', '2014-04-08 13:22:49'),
-(1389, 'Biologia', 'Organiczne zwiazki chemiczne nadajace roslinom zielony kolor to?', 'chlorofile', '2014-04-17 13:21:00'),
-(1390, 'Biologia', 'Jaja skladane w grupowej formie przez plazy to?', 'skrzek', '2014-04-22 08:10:58'),
-(1391, 'Biologia', 'Choroba polegajaca na nieprawidlowym krzepnieciu krwi to?', 'hemofilia', '2014-04-24 18:03:28'),
-(1392, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest H?', 'wodor', '2014-04-21 15:34:34'),
-(1393, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest He?', 'hel', '2014-04-12 13:16:48'),
-(1394, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Li?', 'lit', '2014-04-28 13:10:46'),
-(1395, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Be?', 'beryl', '2014-04-20 17:21:35'),
-(1396, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest B?', 'bor', '2014-04-17 15:12:05'),
-(1397, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest C?', 'wegiel', '2014-04-22 18:56:04'),
-(1398, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest N?', 'azot', '2014-04-28 18:50:36'),
-(1399, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest O?', 'tlen', '2014-04-27 18:14:11'),
-(1400, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest F?', 'fluor', '2014-04-29 13:34:18'),
-(1401, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ne?', 'neon', '2014-04-27 15:09:58'),
-(1402, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Na?', 'sod', '2014-04-03 18:01:05'),
-(1403, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Mg?', 'magnez', '2014-04-15 18:44:50'),
-(1404, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Al?', 'glin', '2014-04-21 13:52:39'),
-(1405, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Si?', 'krzem', '2014-04-28 18:44:16'),
-(1406, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest P?', 'fosfor', '2014-04-14 08:30:00'),
-(1407, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest S?', 'siarka', '2014-04-08 15:03:50'),
-(1408, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cl?', 'chlor', '2014-04-22 13:00:45'),
-(1409, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ar?', 'argon', '2014-04-20 17:05:59'),
-(1410, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest K?', 'potas', '2014-04-22 18:30:04'),
-(1411, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ca?', 'wapn', '2014-04-13 08:57:36'),
-(1412, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cr?', 'chrom', '2014-04-25 15:37:01'),
-(1413, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Mn?', 'mangan', '2014-04-17 15:11:10'),
-(1414, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Fe?', 'zelazo', '2014-04-22 13:33:46'),
-(1415, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Co?', 'kobalt', '2014-04-18 15:55:48'),
-(1416, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ni?', 'nikiel', '2014-04-28 13:25:50'),
-(1417, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cu?', 'miedz', '2014-04-27 13:40:19'),
-(1418, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Zn?', 'cynk', '2014-04-17 18:14:26'),
-(1419, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Se?', 'selen', '2014-04-27 13:59:24'),
-(1420, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Br?', 'brom', '2014-04-21 17:43:56'),
-(1421, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ag?', 'srebro', '2014-04-24 18:59:37'),
-(1422, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cd?', 'kadm', '2014-04-28 15:18:03'),
-(1423, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Sn?', 'Cyna', '2014-04-29 13:40:36'),
-(1424, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest I?', 'jod', '2014-04-28 13:07:14'),
-(1425, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pt?', 'platyna', '2014-04-15 08:55:56'),
-(1426, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Au?', 'zloto', '2014-04-22 15:29:20'),
-(1427, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Hg?', 'rtec', '2014-04-19 17:40:45'),
-(1428, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pb?', 'olow', '2014-04-29 18:12:48'),
-(1429, 'Chemia', 'Zwiazki, ktorych roztwory przewodza prad elektryczny to?', 'elektrolity', '2014-04-24 13:42:36'),
-(1430, 'Film', 'Aktor, ktory w filmie "Kiler" wystepowal jako komisarz Ryba to?', 'Jerzy Stuhr', '2014-04-28 13:05:27'),
-(1431, 'Film', 'Aktor grajacy glowna role w filmie "Wejscie Smoka" to?', 'Bruce Lee', '2014-04-16 13:05:00'),
-(1432, 'Historia', 'Pierwszy koronowany krol Polski to?', 'Boleslaw I Chrobry', '2014-04-27 18:46:54'),
-(1433, 'Historia', 'Nauka humanistyczna i spoleczna, ktora zajmuje sie badaniem przeszlosci to?', 'historia', '2014-04-21 18:36:59'),
-(1434, 'Mitologia', 'Najwyzszy z bogow w mitologii greckiej to?', 'Zeus', '2014-04-18 13:55:30'),
-(1435, 'Mitologia', 'W mitologii egipskiej bog smierci i odrodzonego zycia to?', 'Ozyrys', '2014-04-28 18:10:47'),
-(1436, 'Mitologia', 'Egipski bog nieba, opiekun monarchii egipskiej, syn ozyrysa to?', 'Horus', '2014-04-18 18:45:59'),
-(1437, 'Mitologia', 'W mitologii egipskiej bog o glowie szakala, kojarzony z zyciem pozagrobowym to?', 'Anubis', '2014-04-21 17:21:25'),
-(1438, 'Mitologia', 'W mitologii egipskiej bogini milosci i plodnosci, kobieta z glowa kota to?', 'Bastet', '2014-04-17 13:42:04'),
-(1439, 'Mitologia', 'Egipski bog Slonca, stworca swiata i pan ladu we Wszechswiecie to?', 'Ra', '2014-04-24 13:33:52'),
-(1440, 'Mitologia', 'Mityczny ptak, uznawany za symbol Slonca oraz wiecznego odradzania sie zycia?', 'Feniks', '2014-04-17 13:51:11'),
-(1441, 'Mitologia', 'Postac z mitologii greckiej, czlowiek z glowa byka to?', 'Minotaur', '2014-04-11 13:09:15'),
-(1442, 'Mitologia', 'Postac z mitologii greckiej, pol czlowiek, pol kon to?', 'Centaur', '2014-04-16 13:30:04'),
-(1443, 'Mitologia', 'W mitologii greckiej uskrzydlony potwor o ciele lwa i glowie kobiety to?', 'Sfinks', '2014-04-16 13:29:40'),
-(1444, 'Mitologia', 'W mitologii greckiej potwor przedstawiany jako wieloglowy waz wodny to?', 'Hydra', '2014-04-19 15:18:14'),
-(1445, 'Mitologia', 'Diabel z polskich legend, zamieszkujacy podziemia zamku w Leczycy to?', 'Boruta', '2014-04-28 18:08:58'),
-(1446, 'Mitologia', 'Diabel z polskich legend, zamieszkujacy gore Chyb to?', 'Rokita', '2014-04-24 18:42:41'),
-(1447, 'Mitologia', 'Demon z wierzen slowianskich, postac podobna do wampira to?', 'Strzyga', '2014-04-29 18:35:47'),
-(1448, 'Mitologia', 'Demon z wierzen slowianskich, zamieszkujacy zbiorniki wodne to?', 'Utopiec', '2014-04-19 13:47:33'),
-(1449, 'Mitologia', 'Duch z wierzen slowianskich, zamieszkujacy kopalnie to?', 'Skarbnik', '2014-04-28 18:03:32'),
-(1450, 'Sport', 'Jaki kraj bedzie gospodarzem MS2014 w pilce moznej?', 'Brazylia', '2014-04-27 15:37:57'),
-(1451, 'Sport', 'Jaki kraj bedzie gospodarzem ME2016 w pilce moznej?', 'Francja', '2014-04-29 13:37:55'),
-(1452, 'Sport', 'Kto zostal najnowszym zimowym mistrzem Polski w skokach narciarskich?', 'Maciej Kot', '2014-03-12 18:34:16'),
-(1453, 'Astronomia', 'Narzedzie sluzace do obserwacji odleglych obiektow (np. gwiazd) to?', 'teleskop', '2014-04-01 08:14:25'),
-(1454, 'Astronomia', 'Faza Ksiezyca, podczas ktorej jest niewidoczny z Ziemi to?', 'now', '2014-04-21 08:10:54'),
-(1455, 'Astronomia', 'Faza Ksiezyca, podczas ktorej cala oswietlona strona jest widoczna z Ziemi to?', 'pelnia', '2014-04-24 13:12:28'),
-(1456, 'Literatura', 'Jurand ze Spychowa byl glownym bohaterem ktorej z powiesci Sienkiewicza?', 'Krzyzacy', '2014-04-27 15:47:01'),
-(1457, 'Literatura', 'Do jakiej epoki literackiej nalezy "Romeo i Julia"?', 'renesans', '2014-04-20 13:57:39'),
-(1458, 'Informatyka', 'Wydzielony logicznie obszar dysku twardego to?', 'partycja', '2014-04-20 15:06:03'),
-(1459, 'Informatyka', 'Urzadzenie najczesciej obecnie zastepujace funkcjonalnie mysz w laptopach to?', 'touchpad', '2014-04-22 17:04:19'),
-(1460, 'Informatyka', 'Urzadzenie wskazujace w postaci kulki poruszanej dlonia to?', 'trackball', '2014-04-08 18:45:22'),
-(1461, 'Informatyka', 'Urzadzenie wskazujace w postaci miniaturowego joysticka na klawiaturze?', 'trackpoint', '2014-04-22 13:27:10'),
-(1462, 'Informatyka', 'Urzadzenie wskazujace w postaci drazka na podstawce to?', 'joystick', '2014-04-15 08:28:17'),
-(1463, 'Muzyka', 'Polski zespol rockowy, ktory nagral utwor do "Swiata wedlug Kiepskich" to?', 'Big Cyc', '2014-04-22 13:28:05'),
-(1464, 'Muzyka', 'Instrument strunowy szarpany w ksztalcie stylizowanego trojkata to?', 'harfa', '2014-04-28 13:43:11'),
-(1465, 'Muzyka', 'Ktora zagraniczna wokalistka wykonuje utwor pt."Diamonds"?', 'Rihanna', '2014-04-24 13:54:04'),
-(1466, 'Gry', 'Slynna postac z gier wideo w osobie wasatego hydraulika to?', 'Mario', '2014-04-28 15:09:29'),
-(1467, 'Gry', 'Zawod, ktorym zajmuje sie bohaterka gry Tomb Raider, Lara Croft to?', 'archeologia', '2014-04-18 13:45:49'),
-(1468, 'Gry', 'Gra, ktorej akcja toczy sie na powierzchni i w podziemiach miasta Tristram?', 'Diablo', '2014-04-28 15:28:23'),
-(1469, 'Astronautyka', 'Dowodca jakiej misji kosmicznej na ksiezyc byl James A. Lovell?', 'Apollo 13', '2014-04-29 13:44:10'),
-(1470, 'Astronautyka', 'Jak nazywa sie rosyjska agencja kosmiczna?', 'Roskosmos', '2014-04-20 17:00:47'),
-(1471, 'Astronomia', 'Jak nazywa sie najwyzsza gora ukladu slonecznego?', 'Olympus Mons', '2014-04-21 15:40:47'),
-(1472, 'Administracja', 'W ktorym roku zostala przyjeta Europejska Karta Samorzadu Lokalnego?', '1985', '2014-04-25 15:15:04'),
-(1473, 'Administracja', 'Ile miast w Polsce posiada prawa powiatu?', '66', '2014-04-11 13:30:01'),
-(1474, 'Rozne', 'Jak nazywa się siostra Apple Bloom z serialu My Little Pony?', 'Applejack', '2014-04-22 15:48:54'),
-(1475, 'Sport', 'Kto zostal krolem strzelcow podczas Euro 2008?', 'David Villa', '2014-04-24 18:45:25'),
-(1476, 'Geografia', 'Jakie jest najwieksze miasto Walii?', 'Cardiff', '2014-04-17 18:16:16');
+(1043, 'Matematyka', 'Ile wynosi wynik dzialania 1-2+3-4+5 ?', '3', '2015-05-18 15:34:06'),
+(1044, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3-4-5 ?', '-3', '2015-04-20 15:10:43'),
+(1045, 'Matematyka', 'Ile wynosi wynik dzialania 1-2-3+4-5 ?', '-5', '2015-04-20 15:49:49'),
+(1046, 'Matematyka', 'Ile wynosi silnia z 3?', '6', '2015-04-13 15:42:47'),
+(1047, 'Matematyka', 'Ile wynosi silnia z 4?', '24', '2015-05-18 15:07:49'),
+(1048, 'Matematyka', 'Ile wynosi silnia z 5?', '120', '2015-05-16 15:42:57'),
+(1049, 'Matematyka', 'Ile wynosi silnia z 6?', '720', '2015-05-19 13:44:05'),
+(1051, 'Matematyka', 'Ile wynosi x w rownaniu: 2x+3=9 ?', '3', '2015-05-15 13:10:47'),
+(1052, 'Matematyka', 'Ile wynosi x w rownaniu: 3x+2=17 ?', '5', '2015-05-17 15:33:41'),
+(1053, 'Matematyka', 'Ile wynosi x w rownaniu: 2x+3=-5 ?', '-4', '2015-05-18 18:24:46'),
+(1054, 'Matematyka', 'Ile wynosi x w rownaniu: 4x+1=-7 ?', '-2', '2015-04-23 20:06:13'),
+(1055, 'Matematyka', 'Ile wynosi x w rownaniu: 3x-4=14 ?', '6', '2015-05-16 18:28:56'),
+(1056, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 20 i 25 ?', '5', '2015-04-20 15:32:02'),
+(1057, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 30 i 40 ?', '10', '2015-04-12 15:14:31'),
+(1058, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 12 i 16 ?', '4', '2015-05-09 13:21:20'),
+(1059, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 9 i 27 ?', '9', '2015-05-06 20:33:53'),
+(1060, 'Matematyka', 'Ile wynosi najwiekszy wspolny dzielnik liczb 9 i 12 ?', '3', '2015-03-15 15:56:32'),
+(1061, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 20 i 25 ?', '100', '2015-05-01 17:59:39'),
+(1062, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 30 i 40 ?', '120', '2015-05-12 13:44:15'),
+(1063, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 12 i 16 ?', '48', '2015-05-13 15:47:38'),
+(1064, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 9 i 27 ?', '27', '2015-04-01 17:12:41'),
+(1065, 'Matematyka', 'Ile wynosi najmniejsza wspolna wielokrotnosc liczb 9 i 12 ?', '36', '2015-05-19 18:43:51'),
+(1066, 'Matematyka', 'Liczba naturalna, ktora dzieli sie tylko przez jedynke i siebie sama to?', 'liczba pierwsza', '2015-05-15 13:31:52'),
+(1067, 'Matematyka', 'Kazda liczba, ktora mozna przedstawic w postaci ulamka to?', 'liczba wymierna', '2015-04-17 15:32:24'),
+(1068, 'Matematyka', 'Czworokat majacy pare rownoleglych bokow nazywanych podstawami to?', 'trapez', '2015-05-13 18:19:45'),
+(1069, 'Matematyka', 'Czworokat majacy boki rownej dlugosci to?', 'romb', '2015-05-12 13:00:16'),
+(1070, 'Matematyka', 'Czworokat majacy wszystkie katy wewnetrzne proste to?', 'prostokat', '2015-01-28 15:46:26'),
+(1071, 'Matematyka', 'Czworokat foremny to inaczej?', 'kwadrat', '2015-05-19 18:54:21'),
+(1072, 'Matematyka', 'Czworokat, ktorego jedna z przekatnych lezy na jego osi symetrii to?', 'deltoid', '2015-04-20 15:03:36'),
+(1073, 'Matematyka', 'Czworokat majacy dwie pary rownoleglych bokow to?', 'rownoleglobok', '2015-03-27 17:41:32'),
+(1074, 'Matematyka', 'Kat o mierze od 0 do 90 stopni to?', 'kat ostry', '2015-05-12 18:42:44'),
+(1075, 'Matematyka', 'Kat o mierze 90 stopni to?', 'kat prosty', '2015-05-07 18:46:05'),
+(1076, 'Matematyka', 'Kat o mierze od 90 do 180 stopni to?', 'kat rozwarty', '2015-04-29 17:23:41'),
+(1077, 'Matematyka', 'Kat o mierze 180 stopni to?', 'kat polpelny', '2015-05-16 18:35:56'),
+(1078, 'Matematyka', 'Kat o mierze 360 stopni to?', 'kat pelny', '2015-04-30 15:34:14'),
+(1079, 'Rozne', 'Ktore z ukrainskich miast nazywane jest miastem widmo?', 'Prypec', '2015-04-04 17:25:04'),
+(1080, 'Muzyka', 'Podaj nazwe niemieckiego zespolu znanego m.in. z utworu "How Much Is the Fish?"', 'Scooter', '2015-05-03 15:33:57'),
+(1081, 'Historia', 'Podaj imie i nazwisko znanego czeskiego pisarza i dramaturga, pierwszego prezydenta Czech', 'Vaclav Havel', '2015-05-19 15:58:26'),
+(1082, 'Historia', 'Ile postulatow zostalo ogloszonych 17 sierpnia 1980 roku w Stoczni Gdanskiej przez MKS?', '21', '2015-03-26 15:39:01'),
+(1083, 'Historia', 'Pod jakim pseudonimem znany byl Wladimir Iljicz Uljanow?', 'Lenin', '2015-05-18 15:00:49'),
+(1084, 'Historia', 'W ktorym roku zatonal rosyjski okret podwodny K-141 Kursk?', '2000', '2015-04-23 20:52:39'),
+(1085, 'Geografia', 'W ktorym miescie znajduja sie Schody Potiomkinowskie?', 'Odessa', '2015-04-18 17:39:15'),
+(1086, 'Rozne', 'Jaki symbol przedstawiony jest na fladze Izraela?', 'Gwiazda Dawida', '2015-05-18 15:32:21'),
+(1087, 'Historia', 'Jak nazywal sie najwiekszy niemiecki oboz koncentracyjny istniejacy w latach 1940-1945 na Dolnym Slasku?', 'Gross-Rosen', '2015-05-17 15:38:54'),
+(1088, 'Historia', 'Jak brzmial kryptonim najwiekszego projektu gorniczo-budowlanego hitlerowskich Niemiec istniejacego w Gorach Sowich?', 'Riese', '2015-05-07 18:03:52'),
+(1089, 'Rozne', 'Jaka nazwe nosza sily powietrzne Republiki Federalnej Niemiec?', 'Luftwaffe', '2015-05-05 20:21:20'),
+(1090, 'Historia', 'Jak nazywal sie pierwszy prezydent Autonomii Palestynskiej?', 'Jaser Arafat', '2015-05-04 17:33:39'),
+(1091, 'Rozne', 'Jak brzmi stosowana przez Argentyne nazwa archipelagu Falklandy? ', 'Malwiny', '2015-05-19 18:38:36'),
+(1092, 'Rozne', 'Jakie miasto jest stolica Szkocji?', 'Edynburg', '2015-05-18 13:31:50'),
+(1093, 'Geografia', 'Ktora czesc skladowa Wielkiej Brytanii jest najwieksza?', 'Anglia', '2015-04-04 17:33:46'),
+(1094, 'Motoryzacja', 'Jaki model Fiata zostal wprowadzony jako nastepca modelu 126?', 'Cinquecento', '2015-05-12 13:35:28'),
+(1095, 'Motoryzacja', 'W jakim miescie swoja siedzibe ma koncern motoryzacyjny FIAT?', 'Turyn', '2015-02-15 17:59:43'),
+(1096, 'Rozne', 'Jakie miasto jest siedziba Prymasa Polski? ', 'Gniezno', '2015-05-14 18:05:35'),
+(1097, 'Sport', 'Jaki polski klub pilkarski gral 10 lat z rzedu w europejskich pucharach?', 'GKS Katowice', '2015-05-16 13:43:58'),
+(1098, 'Sport', 'Obecny trener reprezentacji Polski w skokach narciarskich to?', 'Lukasz Kruczek', '2015-04-19 17:00:26'),
+(1099, 'Sport', 'Obecny trener mlodziezowej reprezentacji Polski w skokach narciarskich?', 'Robert Mateja', '2015-05-04 20:58:24'),
+(1100, 'Sport', 'Obecny prezes Polskiego Zwiazku Narciarskiego to?', 'Apoloniusz Tajner', '2015-04-30 20:41:41'),
+(1101, 'Sport', 'Kto jest prekursorem stylu V w skokach narciarskich?', 'Jan Boklov', '2015-05-19 18:14:06'),
+(1102, 'Sport', 'Kto jako pierwszy Polak wygral w 1980 r. konkurs PS w skokach narc.?', 'Stanislaw Bobak', '2015-05-03 20:46:49'),
+(1103, 'Sport', 'Ktory polski skoczek narciarski wygral 3 konkursy PS w latach 80-86?', 'Piotr Fijas', '2015-05-17 18:23:16'),
+(1104, 'Sport', 'W ktorym roku Adam Malysz wygral swoj pierwszy konkurs PS?', '1996', '2015-05-11 13:38:53'),
+(1105, 'Sport', 'Ile razy Adam Malysz zdobyl zimowe Mistrzostwo Polski w skokach narc.?', '21', '2015-05-18 15:49:49'),
+(1106, 'Kulinaria', 'Napoj alkoholowy wytwarzany ze sfermentowanego soku z trzciny cukrowej?', 'rum', '2015-05-09 15:07:50'),
+(1107, 'Kulinaria', 'Rum rozcienczony woda i zawierajacy dodatkowo sok z cytrusow to?', 'grog', '2015-05-19 18:17:35'),
+(1108, 'Kulinaria', 'Napoj alkoholowy zawierajacy tujon i zwany zielona wrozka to?', 'absynt', '2015-03-28 20:31:00'),
+(1109, 'Kulinaria', 'Aromatyczny azjatycki napoj alkoholowy o smaku anyzowym to?', 'arak', '2015-05-17 18:21:32'),
+(1110, 'Kulinaria', 'Potoczne okreslenie taniego wina owocowego, najczesciej jablkowego to?', 'jabol', '2015-05-19 15:21:34'),
+(1111, 'Kulinaria', 'Bezbarwny klarowny napoj alkoholowy, anglosaski rodzaj jalowcowki to?', 'gin', '2015-04-29 20:00:51'),
+(1112, 'Kulinaria', 'Slaby napoj alkoholowy, przefermentowany sok z dojrzalych jablek to?', 'cydr', '2015-05-18 15:37:37'),
+(1113, 'Kulinaria', 'Alkohol produkowany poprzez prosty sprzet w warunkach amatorskich to?', 'bimber', '2015-05-13 15:26:36'),
+(1114, 'Kulinaria', 'Grecki napoj alkoholowy, odmiana brandy z domieszka wina to?', 'metaxa', '2015-05-19 15:04:00'),
+(1115, 'Kulinaria', 'Napoj alkoholowy (wytrawna wodka) destylowany z wina, glownie gronowego?', 'brandy', '2015-05-17 13:31:35'),
+(1116, 'Kulinaria', 'Szkocki napoj alkoholowy powstaly z destylacji zacieru zbozowego to?', 'whisky', '2015-04-20 17:23:44'),
+(1117, 'Kulinaria', 'Japonski napoj alkoholowy produkowany z ryzu to?', 'sake', '2015-05-14 13:21:21'),
+(1118, 'Kulinaria', 'Polaczenie jasnego piwa i cytrusowej lemoniady w proporcjach ok 50/50?', 'radler', '2015-05-15 15:44:07'),
+(1119, 'Kulinaria', 'Mieszany napoj alkoholowy, najczesciej podawany na goraco w wazie to?', 'poncz', '2015-05-18 13:05:30'),
+(1120, 'Kulinaria', 'Napoj alk. o slodkim smaku owocowym, korzennym lub korzenno-ziolowym to?', 'likier', '2015-05-15 18:32:12'),
+(1121, 'Kulinaria', 'Wyciag z owocow, korzeni, kwiatow lub ziol i nastepnie zalany alkoholem?', 'nalewka', '2015-04-26 20:47:22'),
+(1122, 'Kulinaria', 'Destylat alkoholowy rozcienczony woda w stosunku ok. 2:3 to?', 'wodka', '2015-05-06 17:00:05'),
+(1123, 'Kulinaria', 'Destylat alkoholu etylowego o zawartosci alkoholu około 96 procent to?', 'spirytus rektyfikowany', '2015-05-14 15:02:00'),
+(1124, 'Kulinaria', 'Hiszpanski napoj alkoholowy, robiony na bazie wina z dodatkiem owocow to?', 'sangria', '2015-05-01 15:00:24'),
+(1125, 'Kulinaria', 'Szczegolny rodzaj wina musujacego pochodzacy z Francji to?', 'szampan', '2015-05-13 18:09:17'),
+(1126, 'Kulinaria', 'Wysokoprocentowy napoj alkoholowy, produkowany ze sliwek wegierek to?', 'sliwowica', '2015-05-19 15:39:07'),
+(1127, 'Kulinaria', 'Napoj alkoholowy uzyskiwany w wyniku fermentacji moszczu z winogron to?', 'wino', '2015-05-04 17:42:30'),
+(1128, 'Kulinaria', 'Napoj alk. powstaly w wyniku fermentacji brzeczki miodu pszczelego to?', 'miod pitny', '2015-05-01 15:20:03'),
+(1129, 'Kulinaria', 'Ciemne, mocne piwo gornej fermentacji pochodzace z Anglii to?', 'porter', '2015-05-17 15:56:21'),
+(1130, 'Kulinaria', 'Wodka meksykanska, produkowana ze sfermentowanego soku agawy to?', 'tequila', '2015-05-19 18:01:52'),
+(1131, 'Kulinaria', 'Wegierska potrawa z papryki, pomidorow i cebuli to?', 'leczo', '2015-04-17 17:36:02'),
+(1132, 'Kulinaria', 'Slynna jarska potrawa prowansalska to?', 'ratatouille', '2015-04-12 17:28:57'),
+(1133, 'Kulinaria', 'Slynny na Wegrzech i Slowacji maczno-ziemniaczany czosnkowy placek to?', 'langosz', '2015-05-19 13:45:51'),
+(1134, 'Kulinaria', 'Japonska potrawa z ryzu i surowych dodatkow owinieta algami morskimi to?', 'sushi', '2015-04-22 20:59:30'),
+(1135, 'Kulinaria', 'Chinskie nalesniczki z nadzieniem miesno-warzywnym to?', 'sajgonki', '2015-05-12 13:16:06'),
+(1136, 'Kulinaria', 'Wloska zapiekana potrawa na bazie makaronu przekladanego farszem to?', 'lazania', '2015-05-11 18:09:08'),
+(1137, 'Kulinaria', 'Polska, litewska i bialoruska potrawa z kapusty i miesa to?', 'bigos', '2015-05-16 18:41:09'),
+(1138, 'Kulinaria', 'Zupa przyrzadzana na bazie zakwasu z razowej maki zytniej to?', 'zur', '2015-04-23 15:16:08'),
+(1139, 'Kulinaria', 'Ugotowany makaron wymieszany z odpowiednim sosem i posypany serem to?', 'spaghetti', '2015-04-27 15:05:28'),
+(1140, 'Kulinaria', 'Slaska zupa z chleba, czosnku oraz tluszczu zalewanych wrzatkiem to?', 'wodzionka', '2015-05-09 13:00:17'),
+(1141, 'Kulinaria', 'Goralska zupa z kiszonej kapusty, soku z kwaszonej kapusty i miesa to?', 'kwasnica', '2015-05-18 18:26:31'),
+(1142, 'Kulinaria', 'Turecka potrawa ze skrawanego miesa i surowek umieszczanych w bulce?', 'kebab', '2015-05-08 15:23:25'),
+(1143, 'Kulinaria', 'Smazone filety rybne w sosie warzywnym na cieplo lub zimno to?', 'ryba po grecku', '2015-05-06 20:53:16'),
+(1144, 'Kulinaria', 'Potrawa, ktora sklada sie z zapiekanego nalesnika z farszem to?', 'krokiet', '2015-05-07 15:56:34'),
+(1145, 'Kulinaria', 'Potrawa zlozona z farszu miesno-ryzowego zawinietego w liscie kapusty?', 'golabki', '2015-05-01 17:02:35'),
+(1146, 'Kulinaria', 'Polska i niemiecka potrawa skladajaca sie z kulek nadziewanych sliwkami?', 'knedle', '2015-05-03 15:58:52'),
+(1147, 'Kulinaria', 'Gotowane kluski przyrzadzane z twarogu, jaj i maki to?', 'pierogi leniwe', '2015-05-08 18:43:49'),
+(1148, 'Kulinaria', 'Meksykanski plaski placek z maki kukurydzianej to?', 'tortilla', '2015-04-19 20:43:21'),
+(1149, 'Kulinaria', 'Meksykanska potrawa skladajaca sie z farszu owinietego tortilla to?', 'burrito', '2015-05-14 18:40:33'),
+(1150, 'Kulinaria', 'Jak nazywa sie chrzan japonski?', 'wasabi', '2015-04-12 20:00:31'),
+(1151, 'Gry', 'Seria gier z czesciami Arena, Daggerfall, Morrowind, Oblivion i Skyrim?', 'The Elder Scrolls', '2015-04-02 17:59:49'),
+(1152, 'Gry', 'Podtytul pierwszej gry z serii The Elder Scrolls to?', 'Arena', '2015-05-07 17:14:21'),
+(1153, 'Gry', 'Podtytul drugiej gry z serii The Elder Scrolls to?', 'Daggerfall', '2015-05-14 15:16:03'),
+(1154, 'Gry', 'Podtytul trzeciej gry z serii The Elder Scrolls to?', 'Morrowind', '2015-05-04 15:35:20'),
+(1155, 'Gry', 'Podtytul czwartej gry z serii The Elder Scrolls to?', 'Oblivion', '2015-05-08 18:05:20'),
+(1156, 'Gry', 'Podtytul piatej gry z serii The Elder Scrolls to?', 'Skyrim', '2015-05-06 20:39:10'),
+(1157, 'Gry', 'Kontynent bedacy swiatem gry w serii The Elder Scrolls to?', 'Tamriel', '2015-05-18 18:12:30'),
+(1158, 'Gry', 'Kontynent bedacy swiatem gry w serii Gothic to?', 'Myrtana', '2015-05-06 15:42:23'),
+(1159, 'Gry', 'Seria kosmicznych gier RPG wydanych w latach 2007-2012 to?', 'Mass Effect', '2015-05-15 13:51:14'),
+(1160, 'Gry', 'Slynna seria gier RPG umiejscowionych w post-apokaliptycznym swiecie to?', 'Fallout', '2015-05-04 15:08:53'),
+(1161, 'Gry', 'Seria gier z gatunku survival horror dotyczaca epidemii zombie to?', 'Resident Evil', '2015-03-26 17:05:45'),
+(1162, 'Gry', 'Wydana przez EA seria gier typu FPS osadzona w realiach II WS to?', 'Medal of Honor', '2015-04-25 20:47:19'),
+(1163, 'Gry', 'Wydana przez Activision seria gier typu FPS osadzona w realiach II WS ?', 'Call of Duty', '2015-05-14 13:58:16'),
+(1164, 'Gry', 'Slynna seria gier wyscigowych wydawana przez Electronic Arts to?', 'Need For Speed', '2015-03-25 15:28:18'),
+(1165, 'Gry', 'Jak nazywa sie popularna w Polsce w latach 90 konsola, klon Famicom/NES?', 'Pegasus', '2015-05-14 15:24:51'),
+(1166, 'Biologia', 'Najglebsza strefa oceanu ponizej 1000-2000m wraz z dnem, to?', 'abisal', '2015-05-15 13:12:32'),
+(1167, 'Biologia', 'Inaczej wchlanianie', 'absorpcja', '2015-05-11 18:59:44'),
+(1168, 'Medycyna', 'Nabyty zespol zaniku odpornosci, to?', 'AIDS', '2015-05-10 18:41:46'),
+(1169, 'Medycyna', 'Choroba spowodowana nadmiernym wydzielaniem hormonu wzrostu to?', 'akromegalia', '2015-05-05 17:00:13'),
+(1170, 'Medycyna', 'Stan chorobowy wywolany niedoborem hemoglobiny lub erytrocytow, to?', 'anemia', '2015-04-16 17:32:48'),
+(1171, 'Biologia', 'Nauka zajmujaca sie procesem ewolucji, to?', 'ewolucjonizm', '2015-05-17 15:31:56'),
+(1172, 'Biologia', 'Wodniczka trawienna, to?', 'fagosom', '2015-05-01 17:13:17'),
+(1173, 'Biologia', 'Historia rozwoju ewolucyjnego grupy organizmow, to?', 'filogeneza', '2015-05-02 15:07:24'),
+(1174, 'Biologia', 'Gromada zmiennocieplnych kregowcow ladowych, to?', 'gady', '2015-05-04 17:28:21'),
+(1175, 'Biologia', 'Nauka o rozmieszczeniu roslin na Ziemi, to?', 'fitogeografia', '2015-05-09 13:02:03'),
+(1176, 'Biologia', 'Organizmy zyjace w glebie, to?', 'geobionty', '2015-04-20 20:53:49'),
+(1177, 'Biologia', 'Calosc informacji genetycznej organizmu, to?', 'genotyp', '2015-05-17 18:14:32'),
+(1178, 'Biologia', 'Jak nazywa sie nauka o dziedziczeniu?', 'genetyka', '2015-05-14 13:37:12'),
+(1179, 'Biologia', 'Jak nazywa sie nauka o mechanizmach odpornosciowych?', 'immunologia', '2015-05-08 15:37:29'),
+(1180, 'Biologia', 'Pozeranie osobnikow nalezacych do tego samego gatunku, to?', 'kanibalizm', '2015-04-23 20:33:00'),
+(1181, 'Biologia', 'Operacyjne usuniecie gonad (u zwierzat), to?', 'kastracja', '2015-03-01 17:22:27'),
+(1182, 'Biologia', 'System zatok, jam, naczyn, w ktorym krazy krew to?', 'uklad krwionosny', '2015-04-27 15:57:24'),
+(1183, 'Biologia', 'Wytwarzanie mleka w gruczolach mlecznych, to?', 'laktacja', '2015-05-03 17:13:14'),
+(1184, 'Biologia', 'Inaczej zbiorowiska roslinne z duzym udzialem drzew?', 'las', '2015-05-16 13:19:27'),
+(1185, 'Biologia', 'Inaczej sok mleczny?', 'lateks', '2015-05-12 18:16:23'),
+(1186, 'Biologia', 'Plyn ustrojowy krazacy w ukladzie limfatycznym, to?', 'limfa', '2015-05-17 13:10:35'),
+(1187, 'Biologia', 'Proces podzialu jadra komorkowego, to?', 'mitoza', '2015-05-14 13:14:19'),
+(1188, 'Biologia', 'Organizmy odzywiajace sie jednym rodzajem pokarmu, to?', 'monofagi', '2015-05-11 18:03:54'),
+(1189, 'Biologia', 'Jak nazywa sie epidemia o szerokim zasiegu?', 'pandemia', '2015-05-01 17:36:27'),
+(1190, 'Biologia', 'Jak nazywamy ogranizmy, ktore prowadza pasozytniczy tryb zycia?', 'pasozyty', '2015-05-19 15:42:38'),
+(1191, 'Biologia', 'Zewnetrzna warstwa ciala wielu pierwotniakow, to?', 'pellikula', '2015-05-18 15:41:07'),
+(1192, 'Biologia', 'Chemiczne, plynne lub sproszkowane srodki ochrony zywnosci, to?', 'pestycydy', '2015-04-16 20:39:34'),
+(1193, 'Biologia', 'Jak nazywa sie zgrubiala os pedu u drzew?', 'pien', '2015-05-19 15:56:41'),
+(1194, 'Biologia', 'Jak nazywaja sie barwniki naturalne lub syntetyczne?', 'pigmenty', '2015-04-11 17:41:39'),
+(1195, 'Biologia', 'Rogowe wytwory naskorka pokrywajace cialo ptakow, to?', 'piora', '2015-05-19 13:37:04'),
+(1196, 'Biologia', 'Jak nazwac zdolnosc danego osobnika do wydania potomstwa?', 'plodnosc', '2015-05-18 15:27:06'),
+(1197, 'Biologia', 'Wydzielina gruczolow potowych, to?', 'pot', '2015-05-14 13:24:53'),
+(1198, 'Biologia', 'Energia zdolna do wytwarzania jonow przy przenikaniu przez materie', 'promieniowanie jonizujace', '2015-05-15 15:26:33'),
+(1199, 'Biologia', 'Rozprzestrzenianie sie nasion i owocow, to?', 'rozsiewanie', '2015-05-12 15:19:30'),
+(1200, 'Biologia', 'Organelle odgrywajace kluczowa role w procesie translacji, to?', 'rybosomy', '2015-05-13 18:51:12'),
+(1201, 'Biologia', 'Jak nazywamy cialo organizmu wielokomorkowego?', 'soma', '2015-03-30 17:16:12'),
+(1202, 'Biologia', 'Nauka zajmujaca sie problemami ochrony srodowiska, to?', 'sozologia', '2015-05-07 18:28:37'),
+(1203, 'Biologia', 'Proces powstawania nowego gatunku, to?', 'specjacja', '2015-05-09 13:51:07'),
+(1204, 'Biologia', 'Narzady zmyslu rownowagi bezkregowcow i oslonic, to?', 'statocysty', '2015-05-04 20:53:07'),
+(1205, 'Biologia', 'Oddechowe narzady bezkregowcow, to?', 'tchawki', '2015-05-11 13:28:22'),
+(1206, 'Biologia', 'Organizmy cieplolubne, to?', 'termofile', '2015-04-23 15:00:04'),
+(1207, 'Biologia', 'Wprowadzenie obcego DNA do komorki eukariotycznej, to?', 'transfekcja', '2015-04-23 20:43:43'),
+(1208, 'Biologia', 'Zjawisko parowania wody i dyfuzji pary wodnej z powierzchni roslin.', 'transpiracja', '2015-04-30 15:55:42'),
+(1209, 'Biologia', 'Samiec pszczoly miodnej, to?', 'truten', '2015-02-27 17:20:36'),
+(1210, 'Biologia', 'Pokrycie ciala ptakow piorami, to?', 'upierzenie', '2015-05-16 15:51:44'),
+(1211, 'Biologia', 'Noworodek urodzony przedwczesnie, to?', 'wczesniak', '2015-05-18 18:52:48'),
+(1212, 'Biologia', 'Jak nazywa sie porod u owiec, koz i innych zwierzat ssacych?', 'wykot', '2015-05-15 13:56:31'),
+(1213, 'Biologia', 'Slepo zakonczony uchylek jelita grubego niektorych ssakow, to?', 'wyrostek robaczkowy', '2015-04-22 17:39:48'),
+(1214, 'Biologia', 'Zwierzeta wchodzace w sklad bentosu, to?', 'zoobentos', '2015-05-11 18:31:50'),
+(1215, 'Biologia', 'Zwierzeta wchodzace w sklad biocenozy, to?', 'zoocenoza', '2015-05-19 15:16:18'),
+(1216, 'Biologia', 'Organizmy zywiace sie wylacznie zwierzetami, to?', 'zoofagi', '2015-05-17 13:28:04'),
+(1217, 'Biologia', 'Odkladanie sie wapnia w tkankach, to?', 'zwapnienie', '2015-05-17 13:49:05'),
+(1218, 'Jezyk Polski', 'Wiersz abecadlowy, to?', 'abecedariusz', '2015-05-02 15:05:37'),
+(1219, 'Jezyk Polski', 'Pisemny skrot wyrazu lub grupy wyrazow, to?', 'abrewiacja', '2015-05-11 18:24:51'),
+(1220, 'Jezyk Polski', 'Dodatki do tesktu glownego, uzupelnienia, to?', 'addenda', '2015-05-07 18:47:50'),
+(1221, 'Jezyk Polski', 'Danse macabre to tak zwany?', 'taniec smierci', '2015-05-01 17:09:43'),
+(1222, 'Jezyk Polski', 'Elektroniczny odpowiednik ksiazki, to?', 'e-book', '2015-03-29 17:32:08'),
+(1223, 'Jezyk Polski', 'Slowo lub wyrazenie zapozyczone z obcych kultur, to?', 'egzotyzm', '2015-04-11 15:30:43'),
+(1224, 'Jezyk Polski', 'Jak nazywa sie utwor o tematyce milosnej?', 'erotyk', '2015-05-03 17:31:03'),
+(1225, 'Jezyk Polski', 'Sztuka harmonijnego, rytmicznego ksztaltowania wypowiedzi', 'eurytmia', '2015-04-29 20:07:59'),
+(1226, 'Jezyk Polski', 'Gatunek religijnej epiki sredniowiecznej, to?', 'exemplum', '2015-05-17 15:51:06'),
+(1227, 'Jezyk Polski', 'Wyraz lub zwrot zapozyczony z jezyka niemieckiego, to?', 'germanizm', '2015-05-05 20:23:06'),
+(1228, 'Jezyk Polski', 'Grono pisarzy, wystepujacych wspolnie i deklarujacych podobne cele.', 'grupa literacka', '2015-05-17 15:52:51'),
+(1229, 'Jezyk Polski', 'Pomyslny final wydarzen przedstawianych w powiesci, to?', 'happy end', '2015-05-08 15:09:19'),
+(1230, 'Jezyk Polski', 'Zasady stosowania tzw. znakow przestankowych, to?', 'interpunkcja', '2015-04-26 20:31:17'),
+(1231, 'Jezyk Polski', 'Jednakowa liczba zglosek w wersach w metryce, to?', 'izosylabizm', '2015-05-12 15:49:20'),
+(1232, 'Jezyk Polski', 'Jenorazowe wydawnictwo okolicznosciowe majace forme czasopisma, to?', 'jednodniowka', '2015-05-11 18:26:36'),
+(1233, 'Jezyk Polski', 'Odmiana jezyka literackiego, ktora operuje literatura piekna, to?', 'jezyk poetycki', '2015-05-18 15:30:36'),
+(1234, 'Jezyk Polski', 'Jak nazywa sie widowisko estradowe o charakterze humorystycznym?', 'kabaret', '2015-03-14 20:03:41'),
+(1235, 'Jezyk Polski', 'Ezoteryczno - mistyczny nurt w judaizmie.', 'kabala', '2015-05-14 18:19:34'),
+(1236, 'Jezyk Polski', 'Piekne, czytelne i staranne pismo.', 'kaligrafia', '2015-05-08 13:32:00'),
+(1237, 'Jezyk Polski', 'Doslowne tlumaczenie wyrazu lub zwrotu obcojezycznego.', 'kalka', '2015-04-27 20:41:43'),
+(1238, 'Jezyk Polski', 'Zbior spiewow liturgicznych w kosciele rzymskokatolickim', 'kancjonal', '2015-04-29 20:18:42'),
+(1239, 'Jezyk Polski', 'Jak nazywa sie poprawianie tekstu przed jego wydrukowaniem?', 'korekta', '2015-05-05 20:56:36'),
+(1240, 'Jezyk Polski', 'Wypowiedz lub fragment wypowiedzi postaci scenicznej, to?', 'kwestia', '2015-05-12 18:04:10'),
+(1241, 'Jezyk Polski', 'Inna nazwa piesni zalobnej.', 'lamentacja', '2015-05-15 18:54:56'),
+(1242, 'Jezyk Polski', 'Gatunek prozy reportazowej lub publicystycznej, to?', 'list z podrozy', '2015-05-09 13:47:36'),
+(1243, 'Jezyk Polski', 'Modlitwa o charakterze blagalnej piesni.', 'litania', '2015-05-16 13:45:43'),
+(1244, 'Jezyk Polski', 'Powtarzalne, stereotypowe zwroty, frazesy.', 'loci communes', '2015-04-10 15:35:53'),
+(1245, 'Jezyk Polski', 'Wyraz lub zwrot nasladujacy slowa i skladnie lacinska.', 'makaronizm', '2015-05-12 18:40:59'),
+(1246, 'Jezyk Polski', 'Jak nazywa sie opowiesc o przedhistorycznych wydarzeniach?', 'mit', '2015-04-10 15:57:14'),
+(1247, 'Jezyk Polski', 'Miekka, luzno nalozona na ksiazke okladka z nadrukiem, to?', 'obwoluta', '2015-04-24 17:50:38'),
+(1248, 'Jezyk Polski', 'Jak nazywamy najwybitniejsze dzielo danego autora?', 'opus vitae', '2015-04-29 20:49:04'),
+(1249, 'Jezyk Polski', 'Drobny fragment tekstu, ustep, urywek.', 'passus', '2015-04-05 17:59:54'),
+(1250, 'Jezyk Polski', 'Dlugie, nudne, nadete przemowienie, to?', 'perora', '2015-04-18 20:39:33'),
+(1251, 'Jezyk Polski', 'Pogardliwe okreslenie pisarza lub dziennikarza.', 'pismak', '2015-04-21 15:05:39'),
+(1252, 'Jezyk Polski', 'Jedna z odmian podrecznika, to?', 'repetytorium', '2015-05-05 17:53:08'),
+(1253, 'Jezyk Polski', 'Ponowne tlumaczenie utworu z przekladu na jezyk oryginalny.', 'retrowersja', '2015-04-02 15:47:08'),
+(1254, 'Jezyk Polski', 'Jak nazywamy szybka i trafna odpowiedz?', 'riposta', '2015-04-20 15:14:16'),
+(1255, 'Jezyk Polski', 'Ustne lub pisemne przedstawienie przebiegu zdarzen lub dzialan.', 'sprawozdanie', '2015-05-12 15:28:17'),
+(1256, 'Jezyk Polski', 'Ustny lub pisemny skrot tekstu zawierajacy zasadnicze elementy tresci.', 'streszczenie', '2015-04-23 17:27:32'),
+(1257, 'Jezyk Polski', 'Wiersz pozbawiony rymow, to?', 'wiersz bialy', '2015-05-04 17:44:17'),
+(1258, 'Jezyk Polski', 'Zakonczenie wyrazu, zdania albo wersu.', 'wyglos', '2015-05-18 15:02:34'),
+(1259, 'Jezyk Polski', 'Jak nazywamy wypowiedz ujawniajaca sekret, zwierzenie?', 'wyznanie', '2015-03-12 15:40:23'),
+(1260, 'Jezyk Polski', 'Poezja cmentarna, to?', 'youngizm', '2015-04-11 17:25:37'),
+(1261, 'Jezyk Polski', 'Urwanie wypowiedzi sugerujace emocjonalne zaangazowanie mowiacego.', 'zamilkniecie', '2015-05-14 15:14:18'),
+(1262, 'Jezyk Polski', 'Grupa sylab podporzadkowana jednemu akcentowi glownemu.', 'zestoj akcentowy', '2015-04-19 20:39:48'),
+(1263, 'Gry', 'Podaj nick osoby, ktora mowi "fullserver rzadzi" przy wejsciu na FS?', 'Kicia', '2015-05-04 20:24:57'),
+(1265, 'Informatyka', 'Mozliwosc programowalnego uszkodzenia sprzetu komputerowego nazywa sie?', 'killer poke', '2015-04-18 17:02:09'),
+(1266, 'Informatyka', 'Osoba zajmujaca sie lamaniem zabezpieczen komputerowych to?', 'cracker', '2015-04-06 17:35:31'),
+(1267, 'Informatyka', 'Poprawka lub uaktualnienie do programu nazywa sie?', 'patch', '2015-05-17 15:19:42'),
+(1268, 'Informatyka', 'Plik, ktory moze byc uruchomiony bezposrednio w srodowisku syst. oper.?', 'plik wykonywalny', '2015-05-12 13:23:08'),
+(1269, 'Informatyka', 'Plik, ktory jest wykonywany bez wplywu uzytkownika na przebieg programu?', 'plik wsadowy', '2015-05-06 15:37:06'),
+(1270, 'Informatyka', 'Sposob na przelamanie technicznych zabezpieczen oprogramowania komp. to?', 'crack', '2015-05-11 18:38:49'),
+(1271, 'Informatyka', 'Liczba sluzaca do sprawdzania poprawnosci przetwarzanych danych to?', 'suma kontrolna', '2015-05-01 17:23:58'),
+(1272, 'Informatyka', 'Dziedzina wiedzy o przekazywaniu informacji w sposób zabezpieczony to?', 'kryptografia', '2015-03-10 15:29:54'),
+(1273, 'Informatyka', 'Skonczony ciag czynnosci, koniecznych do wykonan. pewnego rodzaju zadan?', 'algorytm', '2015-05-16 13:31:43'),
+(1274, 'Informatyka', 'Zbior danych zapisanych zgodnie z okreslonymi regulami to?', 'baza danych', '2015-05-12 15:23:01'),
+(1275, 'Informatyka', 'Obiektowy jezyk programowania do generowania stron int. w czasie rzecz.?', 'PHP', '2015-05-04 20:16:08'),
+(1276, 'Informatyka', 'Jezyk sluzacy do opisu formy prezentacji (wyswietlania) stron WWW to?', 'CSS', '2015-05-13 15:09:06'),
+(1277, 'Informatyka', 'Uniwersalny jezyk do reprezentowania danych w strukturalizowany sposob?', 'XML', '2015-05-09 18:48:03'),
+(1278, 'Informatyka', 'Podstawowy plik konfiguracyjny systemow operacyjnych MS-DOS i WIN9x to?', 'config.sys', '2015-03-22 20:42:51'),
+(1279, 'Informatyka', 'Nazwa programu wsadowego uruchamianego przy starcie systemu MS-DOS to?', 'autoexec.bat', '2015-05-04 20:30:14'),
+(1280, 'Informatyka', 'Hierarchiczna baza danych konfiguracyjnych w systemach Windows to?', 'rejestr', '2015-04-06 17:32:02'),
+(1281, 'Informatyka', 'Usluga katalogowa (hierarch. baza danych) dla systemów Windows Server?', 'Active Directory', '2015-05-05 15:17:50'),
+(1282, 'Informatyka', 'Aplikacja do przegladania systemu plikow w MS Windows, dostepna od W95?', 'Eksplorator Windows', '2015-04-27 20:11:15'),
+(1283, 'Informatyka', 'Tradycyjna nazwa uniksowego konta, ktore ma pelna kontrole nad systemem?', 'root', '2015-05-19 18:33:21'),
+(1284, 'Informatyka', 'Jaki czlowiek rozpoczal w 1991 roku historie Linuxa?', 'Linus Torvalds', '2015-04-03 15:22:46'),
+(1285, 'Informatyka', 'Aplikacja Windows gromadzaca narzedzia do zmiany parametrow syst. oper.?', 'Panel sterowania', '2015-05-02 17:59:39'),
+(1286, 'Informatyka', 'Znajdujacy sie przy dolnej krawedzi ekranu element GUI systemu Windows?', 'Pasek zadan', '2015-04-25 20:33:01'),
+(1287, 'Informatyka', 'Niewielki program mozliwy do osadzenia w stronie WWW to?', 'aplet', '2015-05-04 17:47:49'),
+(1288, 'Informatyka', 'Obiektowy jezyk programowania z firmy Sun Microsystems to?', 'Java', '2015-05-12 18:32:12'),
+(1289, 'Informatyka', 'Dodatek do systemow MS Windows chroniacy przed programami szpiegujacymi?', 'Windows Defender', '2015-05-10 18:19:09'),
+(1290, 'Informatyka', 'Darmowe oprogramowanie, ale zawierajace funkcje wyswietlajaca reklamy?', 'adware', '2015-05-13 18:37:15'),
+(1291, 'Informatyka', 'Licencja darmowego oprogramowania bez ujawniania kodu zrodlowego to?', 'freeware', '2015-05-18 15:09:35'),
+(1292, 'Informatyka', 'Oprogramowanie, ktorego tworca juz nie sprzedaje to?', 'abandonware', '2015-04-12 17:04:03'),
+(1293, 'Informatyka', 'Oprogramowanie rozpowszechniane z ograniczeniami w celu wyprobowania to?', 'shareware', '2015-05-14 13:53:00'),
+(1294, 'Informatyka', 'Samoreplikujacy sie program komputerowy, podobny do wirusa to?', 'robak', '2015-02-05 20:48:47'),
+(1295, 'Informatyka', 'Program zbierajacy inform. o klawiszach naciskanych przez uzytkownika?', 'keylogger', '2015-05-09 13:44:06'),
+(1296, 'Informatyka', 'Program udajacy przydatna aplikacje, z ukrytymi niepozadanymi funkcjami?', 'kon trojanski', '2015-05-09 15:14:51'),
+(1297, 'Informatyka', 'Programy, ktorych celem jest szpiegowanie dzialan uzytkownika to?', 'spyware', '2015-05-16 15:41:11'),
+(1298, 'Informatyka', 'Niechciane lub niepotrzebne wiadomosci elektroniczne to?', 'spam', '2015-05-11 18:33:35'),
+(1299, 'Informatyka', 'Wyludzanie poufnych informacji osobistych przez podszywanie sie to?', 'phishing', '2015-05-11 13:19:35'),
+(1300, 'Informatyka', 'Interfejs graficzny Windows Vista oraz Windows 7 to?', 'Windows Aero', '2015-04-21 15:02:06'),
+(1301, 'Informatyka', 'Usluga aktualizacji systemow z rodziny Windows opracowana przez MS?', 'Windows Update', '2015-05-03 17:11:27'),
+(1302, 'Informatyka', 'Proces eliminujacy powtarzajace sie dane w relacyjnej bazie danych to?', 'normalizacja', '2015-05-14 13:17:50'),
+(1303, 'Informatyka', 'Czynnosc polegajaca na poszukiwaniu informacji w bazach danych to?', 'zapytanie', '2015-05-17 18:25:01'),
+(1304, 'Informatyka', 'Typ grafiki, w ktorej obraz opisany jest za pomoca figur geometrycznych?', 'grafika wektorowa', '2015-04-29 20:11:33'),
+(1305, 'Informatyka', 'Typ grafiki, w ktorej obraz opisany jest za pomoca siatki pikseli?', 'grafika rastrowa', '2015-05-04 20:23:11'),
+(1306, 'Informatyka', 'Plik wykorzystujacy rastrowy sposob reprezen. komp. graf. dwuwymiarowej?', 'bitmapa', '2015-02-18 15:05:34'),
+(1307, 'Informatyka', 'Najmniejszy jednolity element obrazu wyswietlanego na ekranie to?', 'piksel', '2015-05-09 15:06:05'),
+(1308, 'Informatyka', 'Urzadzenie sluzace do przebiegowego odczytywania obrazu to?', 'skaner', '2015-05-07 17:47:46'),
+(1309, 'Muzyka', 'Z jakiego panstwa pochodzil rockowy zespol Bijelo Dugme?', 'Jugoslawia', '2015-05-19 13:51:07'),
+(1310, 'Rozne', 'Prezydent jakiego panstwa wspolnie z biskupem Seo de Urgell pelni funkcje ksiecia Andory?', 'Francja', '2015-05-11 18:49:17'),
+(1311, 'Rozne', 'Podaj imie i nazwisko papieza Benedykta XVI', 'Joseph Ratzinger', '2015-05-08 18:14:05'),
+(1312, 'Rozne', 'Nazwa jakiego miasta tlumaczona jest na jezyk polski jako "Pomyslne Wiatry"?', 'Buenos Aires', '2015-05-09 13:35:21'),
+(1313, 'Rozne', 'Jakie europejskie panstwo w swoim godle zawiera sierp i mlot? ', 'Austria', '2015-03-16 15:52:55'),
+(1314, 'Rozne', 'Jakie europejskie panstwo w swoim herbie zawiera slupy Heraklesa? ', 'Hiszpania', '2015-05-07 15:12:34'),
+(1315, 'Historia', 'Jak nazywal sie slynny albanski przywodca, bohater narodowy tego kraju?', 'Skanderbeg', '2015-05-14 18:21:19'),
+(1316, 'Geografia', 'Ktore balkanskie panstwo jest powierzchniowo najwieksze? ', 'Grecja', '2015-05-12 18:35:43'),
+(1317, 'Rozne', 'Na jakim terytorium jezykiem urzedowym jest jezyk farerski?', 'Wyspy Owcze', '2015-05-03 17:41:45'),
+(1318, 'Administacja', 'Ilu radnych posiadaja gminy poniżej 20 000 mieszkańców?', '15', '2015-05-18 13:28:20'),
+(1319, 'Geografia', 'Z jakim nieslowianskim panstwem, oprocz Niemiec graniczy Polska? ', 'Litwa', '2015-03-27 20:27:21'),
+(1320, 'Muzyka', 'Z jakiego kraju pochodzi rockowy zespol Bajaga i Instruktori? ', 'Serbia', '2015-04-17 17:07:33'),
+(1321, 'Historia', 'Jaki byly wiceprezydent USA zostal w 2007 roku odznaczony Pokojowa Nagroda Nobla? ', 'Al Gore', '2015-05-14 13:07:17'),
+(1322, 'Sport', 'Gdzie znajduja sie dwie skocznie narciarskie Bloudkova Velikanka? ', 'Planica', '2015-05-09 18:34:02'),
+(1323, 'Sport', 'Jaki przydomek nosi klub pilkarski Zaglebie Lubin?', 'Miedziowi', '2015-05-19 13:03:41'),
+(1324, 'Rozne', 'W jakim miescie znajduje sie najstarsza huta miedzi w Polsce?', 'Legnica', '2015-05-13 13:16:05'),
+(1325, 'Gry', 'Seria przygodowych gier akcji umiejscowionych podczas wypraw krzyzowych?', 'Assassin''s Creed', '2015-05-09 18:12:59'),
+(1326, 'Gry', 'Seria gier strateg.-ekonom. pochodzaca z Amigi i przeniesiona na PC to?', 'The Settlers', '2015-05-19 15:14:32'),
+(1327, 'Gry', 'Pochodzaca z Polski, a dobrze znana na swiecie seria gier FPS to?', 'Painkiller', '2015-04-29 15:23:15'),
+(1328, 'Gry', 'Seria gier wyscigowych na konsole PlayStation z mnostwem modeli aut to?', 'Gran Turismo', '2015-04-25 20:11:32'),
+(1329, 'Gry', 'Seria gier RTS umozliwiajaca udzial w rozwoju pierwszych cywilizacji to?', 'Age of Empires', '2015-04-25 15:46:51'),
+(1330, 'Gry', 'Seria gier typu FPS, stworzonych przez Digital Illusions CE to?', 'Battlefield', '2015-05-11 18:56:15'),
+(1345, 'Geografia', 'W jakim miescie znajduje sie piramida Cheopsa?', 'Giza', '2015-05-16 18:53:19'),
+(1332, 'Gry', 'Seria strateg. gier turowych o rozbudowywaniu wlasnych cywilizacji to?', 'Civilization', '2015-04-30 20:50:35'),
+(1333, 'Gry', 'Seria kontrowersyjnych gier TPP pozwalajaca wcielic sie w "Kolesia" to?', 'Postal', '2015-05-15 18:49:41'),
+(1334, 'Gry', 'Seria gier z gatunku bijatyk charakteryzujaca sie spora brutalnoscia to?', 'Mortal Kombat', '2015-05-15 13:38:54'),
+(1335, 'Gry', 'Seria konsolowych bijatyk, tworzona i wydawana przez firme Namco to?', 'Tekken', '2015-04-29 15:39:19'),
+(1336, 'Gry', 'Seria gier strategiczno-zrecznosciowych o walkach robakow to?', 'Worms', '2015-05-15 18:53:11'),
+(1337, 'Gry', 'Gra symulujaca ewolucje i pozwalajaca graczowi ja dowolnie kreowac to?', 'Spore', '2015-05-06 15:00:06'),
+(1338, 'Gry', 'Jak nazywa sie bohaterka serii Tomb Raider?', 'Lara Croft', '2015-05-15 13:16:03'),
+(1339, 'Gry', 'Seria gier TPP o policjancie tropiacym mordercow jego rodziny to?', 'Max Payne', '2015-05-18 13:49:22'),
+(1340, 'Gry', 'Seria gier symulujacych codzienne, ludzkie zycie to?', 'The Sims', '2015-05-03 15:10:48'),
+(1341, 'Gry', 'Seria gier z gatunku hack and slash autorstwa Blizzard Entertainment to?', 'Diablo', '2015-05-09 18:25:17'),
+(1342, 'Gry', 'Seria gier RTS z fabula w kosmosie, bardzo popularna online to?', 'StarCraft', '2015-04-30 15:10:59'),
+(1343, 'Gry', 'Popularna sieciowa gra FPS, bedaca modyfikacja Half-Life to?', 'Counter-Strike', '2015-05-13 15:07:20'),
+(1344, 'Gry', 'Seria gier o skokach narciarskich, bardzo popularna w Polsce, to?', 'Deluxe Ski Jump', '2015-05-17 18:30:16'),
+(1346, 'Geografia', 'Przez jakie panstwo otoczone jest San Marino?', 'Wlochy', '2015-05-15 18:14:39'),
+(1347, 'Geografia', 'Nauka zajmujaca sie tworzeniem map to?', 'kartografia', '2015-05-07 18:58:20'),
+(1348, 'Matematyka', 'Dzial matematyki zajmujacy sie zdarzeniami losowymi to?', 'rachunek prawdopodobienstwa', '2015-05-14 13:00:14'),
+(1349, 'Matematyka', 'Kto rozpropagowal idee prostokatnego ukladu wspolrzednych?', 'Kartezjusz', '2015-05-06 15:08:54'),
+(1350, 'Jezyk polski', 'Srodek stylistyczny nadajacy roslinom lub zwierzetom cechy ludzkie to?', 'uosobienie', '2015-05-09 13:14:19'),
+(1351, 'Jezyk polski', 'Srodek stylistyczny nadajacy przedmiotom cechy istot zywych to?', 'ozywienie', '2015-04-05 15:26:31'),
+(1352, 'Jezyk polski', 'Jakiego innego okreslenia mozna uzyc na "metafore"?', 'przenosnia', '2015-03-26 15:46:08'),
+(1353, 'Jezyk polski', 'Co to jest onomatopeja?', 'dzwiekonasladownictwo', '2015-05-12 15:16:00'),
+(1354, 'Jezyk polski', 'Wyraz, konstrukcja skladniowa lub zwiazek wyrazowy, ktory wyszedl z uzycia to?', 'archaizm', '2015-05-12 13:53:03'),
+(1355, 'Jezyk polski', 'Wyraz (przymiotnik, rzeczownik lub imieslow) okreslajacy rzeczownik to?', 'epitet', '2015-05-12 15:38:49'),
+(1356, 'Jezyk polski', 'Zamierzona niezgodnosc dwoch poziomow wypowiedzi: doslownego i ukrytego to?', 'ironia', '2015-05-16 13:00:11'),
+(1357, 'Jezyk polski', 'Zestawienie wyrazow o przeciwstawnych znaczeniach to?', 'oksymoron', '2015-05-03 15:00:06'),
+(1358, 'Jezyk polski', 'Przerobka tekstu, ktora modyfikuje tresc zachowujac jego zasadniczy sens to?', 'parafraza', '2015-04-27 20:25:36'),
+(1359, 'Jezyk polski', 'Twierdzenie logiczne prowadzace do zaskakujacych lub sprzecznych wnioskow to?', 'paradoks', '2015-04-07 15:02:04'),
+(1360, 'Jezyk polski', 'Wyraz, wyrazenie lub forma skladni stosowane tylko w jezyku potocznym to?', 'kolokwializm', '2015-04-23 20:08:00'),
+(1361, 'Jezyk polski', 'Wyraz lub dluzsze okreslenie rownowazne znaczeniowo innemu to?', 'synonim', '2015-05-09 15:41:10'),
+(1362, 'Jezyk polski', 'Wyraz, wyrazenie lub zwrot uznawany jako nieprzyzwoity, ordynarny to?', 'wulgaryzm', '2015-04-16 15:32:23'),
+(1363, 'Jezyk polski', 'Utrwalone w uzyciu z ustalonym znaczeniem polaczenie dwoch lub wiecej wyrazow to?', 'zwiazek frazeologiczny', '2015-04-28 17:07:54'),
+(1364, 'Jezyk polski', 'Pytanie zadane nie dla uzyskania odpowiedzi, lecz w celu sklonienia do przemyslen to?', 'pytanie retoryczne', '2015-05-18 15:14:51'),
+(1365, 'Jezyk polski', 'Wyraz zastepujacy slowo, ktore ze wzgledu na okreslone tabu nie powinno byc uzywane to?', 'eufemizm', '2015-04-26 20:06:15'),
+(1366, 'Jezyk polski', 'Wyolbrzymienie, przejaskrawienie cech przedmiotow, osob, zjawisk to?', 'hiperbola', '2015-04-19 15:21:24'),
+(1367, 'Jezyk polski', 'Przywolanie wczesniejszych wydarzen przez bohatera w utworze epickim to?', 'retrospekcja', '2015-04-23 17:07:51'),
+(1368, 'Jezyk polski', 'Termin oznaczajacy przeciwienstwo, odwrotnosc znaczeniowa innego terminu to?', 'antonim', '2015-05-02 20:18:21'),
+(1369, 'Jezyk polski', 'Nazwa uzywana zamiast znanej powszechnie, zwykle dla ukrycia jej prawdziwego znaczenia to?', 'kryptonim', '2015-05-16 18:07:52'),
+(1370, 'Jezyk polski', 'Indywidualna nazwa danej osoby, inna niz oficjalne imie i nazwisko to?', 'pseudonim', '2015-05-07 17:51:17'),
+(1371, 'Jezyk polski', 'Relacja wyrazania roznych znaczen za pomoca identycznych form jezykowych to?', 'homonimia', '2015-04-30 15:46:46'),
+(1372, 'Jezyk polski', 'Slowo utworzone przez skrocenie wyrazenia zlozonego z 2 lub wiecej slow to?', 'akronim', '2015-05-10 18:00:00'),
+(1373, 'Jezyk polski', 'Nowy wyraz, utworzony by nazwac nieznany wczesniej przedmiot czy sytuacje to?', 'neologizm', '2015-05-06 20:47:59'),
+(1374, 'Jezyk polski', 'Dzial nauk humanistycznych badajacych istote, budowe i rozwoj jezyka to?', 'lingwistyka', '2015-05-11 18:57:59'),
+(1375, 'Jezyk polski', 'Nauka o zasadach budowy i odmiany wyrazow oraz o regulach skladni to?', 'gramatyka', '2015-04-26 15:12:36'),
+(1376, 'Jezyk polski', 'Dziedzina jezykoznawstwa zajmujaca sie analiza tresci wyrazen jezykowych to?', 'semantyka', '2015-03-30 20:16:20'),
+(1377, 'Jezyk polski', 'Dzial jezykoznawstwa badajacy strone dzwiekowa jezyka (gloski) to?', 'fonetyka', '2015-04-30 20:55:56'),
+(1378, 'Jezyk polski', 'Dzial jezykoznawstwa badajacy pochodzenie wyrazow, zmiany ich znaczenia i formy to?', 'etymologia', '2015-04-20 15:46:15'),
+(1379, 'Jezyk polski', 'Pochodzacy z jezyka obcego zwrot lub forma gramatyczna wplatany do jezyka ojczystego to?', 'makaronizm', '2015-04-26 15:50:16'),
+(1380, 'Jezyk polski', 'Zaleznosc znaczenia fragmentu tekstu od znaczen slow poprzedzajacych i nastepujacych to?', 'kontekst', '2015-05-11 15:39:03'),
+(1381, 'Jezyk polski', 'Sprowadzenie pojecia do mniej szczegolowej postaci to?', 'uogolnienie', '2015-05-03 17:16:48'),
+(1382, 'Fizyka', 'Ruch, w ktorym cialo w jednak. odst. czasu przebywa jednak. odc. drogi to?', 'ruch jednostajny', '2015-05-06 20:18:01'),
+(1383, 'Fizyka', 'Ruch, w ktorym cialo zwieksza predkosc o jednak. wartosc w jednak. odst. czasu to?', 'ruch jednostajnie przyspieszony', '2015-04-25 20:45:32'),
+(1384, 'Fizyka', 'Krzywa zakreslana w przestrzeni przez poruszajace sie cialo to?', 'trajektoria', '2015-05-17 18:52:59'),
+(1385, 'Fizyka', 'Dzial fizyki zajmujacy sie badaniem geometrycznych wlasciwosci ruchu cial to?', 'kinematyka', '2015-05-18 13:33:35'),
+(1386, 'Fizyka', 'Obiekt fizyczny posiadajacy kierunek, zwrot, wartosc i punkt przylozenia to?', 'wektor', '2015-05-14 13:12:34'),
+(1387, 'Fizyka', 'Wielkosc fizyczna posiadajaca wartosc oraz (ewentualnie) jednostke to?', 'skalar', '2015-05-07 18:54:50'),
+(1388, 'Fizyka', 'Jak nazwiemy proces, w ktorym temperatura ciala wzrasta?', 'ogrzewanie', '2015-05-14 13:38:57'),
+(1389, 'Biologia', 'Organiczne zwiazki chemiczne nadajace roslinom zielony kolor to?', 'chlorofile', '2015-05-14 18:12:34'),
+(1390, 'Biologia', 'Jaja skladane w grupowej formie przez plazy to?', 'skrzek', '2015-05-11 15:28:31'),
+(1391, 'Biologia', 'Choroba polegajaca na nieprawidlowym krzepnieciu krwi to?', 'hemofilia', '2015-04-11 17:23:50'),
+(1392, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest H?', 'wodor', '2015-05-10 18:26:06'),
+(1393, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest He?', 'hel', '2015-04-13 15:19:36'),
+(1394, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Li?', 'lit', '2015-05-14 18:51:01'),
+(1395, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Be?', 'beryl', '2015-05-11 13:09:01'),
+(1396, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest B?', 'bor', '2015-05-06 15:21:15'),
+(1397, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest C?', 'wegiel', '2015-04-21 20:34:26'),
+(1398, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest N?', 'azot', '2015-05-04 15:03:36'),
+(1399, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest O?', 'tlen', '2015-05-11 15:19:45'),
+(1400, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest F?', 'fluor', '2015-05-14 15:23:06'),
+(1401, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ne?', 'neon', '2015-05-09 18:32:17'),
+(1402, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Na?', 'sod', '2015-05-17 15:30:11'),
+(1403, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Mg?', 'magnez', '2015-04-13 20:39:40'),
+(1404, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Al?', 'glin', '2015-05-06 17:56:41'),
+(1405, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Si?', 'krzem', '2015-05-08 13:21:30'),
+(1406, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest P?', 'fosfor', '2015-04-21 20:30:52'),
+(1407, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest S?', 'siarka', '2015-05-11 13:10:47'),
+(1408, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cl?', 'chlor', '2015-05-05 15:01:56'),
+(1409, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ar?', 'argon', '2015-04-30 15:36:02'),
+(1410, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest K?', 'potas', '2015-04-20 17:30:51'),
+(1411, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ca?', 'wapn', '2015-05-16 13:54:27'),
+(1412, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cr?', 'chrom', '2015-05-02 15:14:30'),
+(1413, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Mn?', 'mangan', '2015-05-19 13:24:45'),
+(1414, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Fe?', 'zelazo', '2015-05-16 13:59:42'),
+(1415, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Co?', 'kobalt', '2015-05-19 18:29:50'),
+(1416, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ni?', 'nikiel', '2015-04-13 20:50:23'),
+(1417, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cu?', 'miedz', '2015-05-19 13:19:29'),
+(1418, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Zn?', 'cynk', '2015-05-15 13:49:29'),
+(1419, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Se?', 'selen', '2015-05-14 13:33:41'),
+(1420, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Br?', 'brom', '2015-05-08 15:26:55'),
+(1421, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Ag?', 'srebro', '2015-04-26 17:36:24'),
+(1422, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cd?', 'kadm', '2015-05-15 15:30:04'),
+(1423, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Sn?', 'Cyna', '2015-03-31 15:45:33'),
+(1424, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest I?', 'jod', '2015-05-15 13:42:26'),
+(1425, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pt?', 'platyna', '2015-05-17 18:16:17'),
+(1426, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Au?', 'zloto', '2015-04-19 20:38:01'),
+(1427, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Hg?', 'rtec', '2015-05-15 18:12:54'),
+(1428, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pb?', 'olow', '2015-04-25 20:09:45'),
+(1429, 'Chemia', 'Zwiazki, ktorych roztwory przewodza prad elektryczny to?', 'elektrolity', '2015-05-06 17:23:04'),
+(1430, 'Film', 'Aktor, ktory w filmie "Kiler" wystepowal jako komisarz Ryba to?', 'Jerzy Stuhr', '2015-05-15 18:44:25'),
+(1431, 'Film', 'Aktor grajacy glowna role w filmie "Wejscie Smoka" to?', 'Bruce Lee', '2015-05-18 15:20:06'),
+(1432, 'Historia', 'Pierwszy koronowany krol Polski to?', 'Boleslaw I Chrobry', '2015-04-07 20:12:25'),
+(1433, 'Historia', 'Nauka humanistyczna i spoleczna, ktora zajmuje sie badaniem przeszlosci to?', 'historia', '2015-05-08 18:19:20'),
+(1434, 'Mitologia', 'Najwyzszy z bogow w mitologii greckiej to?', 'Zeus', '2015-04-26 20:56:19'),
+(1435, 'Mitologia', 'W mitologii egipskiej bog smierci i odrodzonego zycia to?', 'Ozyrys', '2015-05-07 18:32:07'),
+(1436, 'Mitologia', 'Egipski bog nieba, opiekun monarchii egipskiej, syn ozyrysa to?', 'Horus', '2015-05-16 15:16:34'),
+(1437, 'Mitologia', 'W mitologii egipskiej bog o glowie szakala, kojarzony z zyciem pozagrobowym to?', 'Anubis', '2015-04-27 15:46:40'),
+(1438, 'Mitologia', 'W mitologii egipskiej bogini milosci i plodnosci, kobieta z glowa kota to?', 'Bastet', '2015-05-19 18:00:09'),
+(1439, 'Mitologia', 'Egipski bog Slonca, stworca swiata i pan ladu we Wszechswiecie to?', 'Ra', '2015-03-04 17:54:47'),
+(1440, 'Mitologia', 'Mityczny ptak, uznawany za symbol Slonca oraz wiecznego odradzania sie zycia?', 'Feniks', '2015-04-29 20:32:59'),
+(1441, 'Mitologia', 'Postac z mitologii greckiej, czlowiek z glowa byka to?', 'Minotaur', '2015-04-29 20:54:26'),
+(1442, 'Mitologia', 'Postac z mitologii greckiej, pol czlowiek, pol kon to?', 'Centaur', '2015-05-11 15:35:32'),
+(1443, 'Mitologia', 'W mitologii greckiej uskrzydlony potwor o ciele lwa i glowie kobiety to?', 'Sfinks', '2015-03-28 15:32:05'),
+(1444, 'Mitologia', 'W mitologii greckiej potwor przedstawiany jako wieloglowy waz wodny to?', 'Hydra', '2015-05-06 20:10:58'),
+(1445, 'Mitologia', 'Diabel z polskich legend, zamieszkujacy podziemia zamku w Leczycy to?', 'Boruta', '2015-05-19 13:10:42'),
+(1446, 'Mitologia', 'Diabel z polskich legend, zamieszkujacy gore Chyb to?', 'Rokita', '2015-05-17 18:32:01'),
+(1447, 'Mitologia', 'Demon z wierzen slowianskich, postac podobna do wampira to?', 'Strzyga', '2015-05-19 18:08:51'),
+(1448, 'Mitologia', 'Demon z wierzen slowianskich, zamieszkujacy zbiorniki wodne to?', 'Utopiec', '2015-05-04 15:42:24'),
+(1449, 'Mitologia', 'Duch z wierzen slowianskich, zamieszkujacy kopalnie to?', 'Skarbnik', '2015-04-24 15:37:56'),
+(1450, 'Sport', 'Jaki kraj bedzie gospodarzem MS2014 w pilce moznej?', 'Brazylia', '2015-05-07 17:21:24'),
+(1451, 'Sport', 'Jaki kraj bedzie gospodarzem ME2016 w pilce moznej?', 'Francja', '2015-05-14 18:09:04'),
+(1452, 'Sport', 'Kto zostal najnowszym zimowym mistrzem Polski w skokach narciarskich?', 'Maciej Kot', '2015-05-06 17:10:42'),
+(1453, 'Astronomia', 'Narzedzie sluzace do obserwacji odleglych obiektow (np. gwiazd) to?', 'teleskop', '2015-04-16 15:07:25'),
+(1454, 'Astronomia', 'Faza Ksiezyca, podczas ktorej jest niewidoczny z Ziemi to?', 'now', '2015-05-19 13:14:12'),
+(1455, 'Astronomia', 'Faza Ksiezyca, podczas ktorej cala oswietlona strona jest widoczna z Ziemi to?', 'pelnia', '2015-05-14 18:17:49'),
+(1456, 'Literatura', 'Jurand ze Spychowa byl glownym bohaterem ktorej z powiesci Sienkiewicza?', 'Krzyzacy', '2015-04-27 17:04:10'),
+(1457, 'Literatura', 'Do jakiej epoki literackiej nalezy "Romeo i Julia"?', 'renesans', '2015-05-18 18:05:30'),
+(1458, 'Informatyka', 'Wydzielony logicznie obszar dysku twardego to?', 'partycja', '2015-05-17 13:33:20'),
+(1459, 'Informatyka', 'Urzadzenie najczesciej obecnie zastepujace funkcjonalnie mysz w laptopach to?', 'touchpad', '2015-05-11 15:49:35'),
+(1460, 'Informatyka', 'Urzadzenie wskazujace w postaci kulki poruszanej dlonia to?', 'trackball', '2015-05-18 18:44:03'),
+(1461, 'Informatyka', 'Urzadzenie wskazujace w postaci miniaturowego joysticka na klawiaturze?', 'trackpoint', '2015-04-13 17:39:52'),
+(1462, 'Informatyka', 'Urzadzenie wskazujace w postaci drazka na podstawce to?', 'joystick', '2015-04-28 20:00:39'),
+(1463, 'Muzyka', 'Polski zespol rockowy, ktory nagral utwor do "Swiata wedlug Kiepskich" to?', 'Big Cyc', '2015-05-03 15:37:31'),
+(1464, 'Muzyka', 'Instrument strunowy szarpany w ksztalcie stylizowanego trojkata to?', 'harfa', '2015-05-15 18:21:40'),
+(1465, 'Muzyka', 'Ktora zagraniczna wokalistka wykonuje utwor pt."Diamonds"?', 'Rihanna', '2015-05-16 18:20:09'),
+(1466, 'Gry', 'Slynna postac z gier wideo w osobie wasatego hydraulika to?', 'Mario', '2015-05-07 17:24:54'),
+(1467, 'Gry', 'Zawod, ktorym zajmuje sie bohaterka gry Tomb Raider, Lara Croft to?', 'archeologia', '2015-05-12 18:25:11'),
+(1468, 'Gry', 'Gra, ktorej akcja toczy sie na powierzchni i w podziemiach miasta Tristram?', 'Diablo', '2015-05-11 13:23:06'),
+(1469, 'Astronautyka', 'Dowodca jakiej misji kosmicznej na ksiezyc byl James A. Lovell?', 'Apollo 13', '2015-05-06 17:12:28'),
+(1470, 'Astronautyka', 'Jak nazywa sie rosyjska agencja kosmiczna?', 'Roskosmos', '2015-03-31 17:28:42'),
+(1471, 'Astronomia', 'Jak nazywa sie najwyzsza gora ukladu slonecznego?', 'Olympus Mons', '2015-05-14 13:54:45'),
+(1472, 'Administracja', 'W ktorym roku zostala przyjeta Europejska Karta Samorzadu Lokalnego?', '1985', '2015-05-17 15:23:11'),
+(1473, 'Administracja', 'Ile miast w Polsce posiada prawa powiatu?', '66', '2015-04-24 17:32:45'),
+(1474, 'Rozne', 'Jak nazywa się siostra Apple Bloom z serialu My Little Pony?', 'Applejack', '2015-05-17 13:07:05'),
+(1475, 'Sport', 'Kto zostal krolem strzelcow podczas Euro 2008?', 'David Villa', '2015-04-18 15:26:50'),
+(1476, 'Geografia', 'Jakie jest najwieksze miasto Walii?', 'Cardiff', '2015-04-05 17:51:09');
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
-(1477, 'Muzyka', 'W jakim miescie odbywa sie tradycyjny noworoczny koncert filharmonikow?', 'Wieden', '2014-04-24 15:35:59'),
-(1478, 'Rozne', 'Z jakim narodem najblizej spokrewnieni sa Finowie?', 'Estonczycy', '2014-04-27 15:43:50'),
-(1479, 'Rozne', 'Jakie panstwo uznawane jest za najbardziej ateistyczne na swiecie?', 'Czechy', '2014-04-16 13:39:48'),
-(1480, 'Astronomia', 'Kto jest autorem ksiazki "Błekitna kropka. Czlowiek i jego przyszlosc w kosmosie"?', 'Carl Sagan', '2014-04-22 13:57:00'),
-(1481, 'Historia', 'Kto byl pierwszym premierem II Rzeczypospolitej?', 'Ignacy Daszynski', '2014-04-22 08:36:58'),
-(1482, 'Historia', 'Jakie miasto bylo siedziba rzadu RP w latach 1940-1990?', 'Londyn', '2014-04-15 08:23:06'),
-(1483, 'Film', 'Jaki aktor zagral postac Jima Lovella w filmie Apollo 13?', 'Tom Hanks', '2014-04-20 15:18:08'),
-(1484, 'Muzyka', 'Z jakiego panstwa pochodzi zespol Aerosmith?', 'Stany Zjednoczone', '2014-04-28 13:29:23'),
-(1485, 'Historia', 'Kto byl pierwszym premierem Panstwa Izrael?', 'Dawid Ben Gurion', '2014-04-28 18:34:20'),
-(1486, 'Historia', 'W ktorym roku Kosowo oglosilo swoja niepodleglosc?', '2008', '2014-04-25 13:32:16'),
-(1487, 'Gry', 'Jak na imie ma protagonista gry Chrono Trigger?', 'Crono', '2014-04-17 13:52:55'),
-(1488, 'Rozne', 'Ktora polska autostrada przebiega rownolegii do Via Regia?', 'A4', '2014-04-17 13:45:45'),
-(1489, 'Geografia', 'Stolica stanu Nowy Jork?', 'Albany', '2014-04-22 13:48:25'),
-(1490, 'Geografia', 'Stolica stanu Vermont?', 'Montpelier', '2014-04-28 13:52:06'),
-(1491, 'Geografia', 'Stolica stanu Alabama?', 'Montgomery', '2014-04-15 13:57:00'),
-(1492, 'Geografia', 'Stolica stanu Alaska?', 'Juneau', '2014-04-29 13:18:42'),
-(1493, 'Geografia', 'Stolica stanu Arizona?', 'Phoenix', '2014-04-16 17:21:35'),
-(1494, 'Geografia', 'Stolica stanu Arkansas?', 'Little Rock', '2014-04-22 17:47:44'),
-(1495, 'Geografia', 'Stolica stanu Connecticut?', 'Hartford', '2014-04-24 13:07:28'),
-(1496, 'Geografia', 'Stolica stanu Dakota Poludniowa?', 'Pierre', '2014-04-16 13:25:04'),
-(1497, 'Geografia', 'Stolica stanu Dakota Polnocna?', 'Bismarck', '2014-04-29 18:02:56'),
-(1498, 'Geografia', 'Stolica stanu Delaware?', 'Dover', '2014-04-11 15:26:29'),
-(1499, 'Geografia', 'Stolica stanu Floryda?', 'Tallahassee', '2014-04-22 13:24:00'),
-(1500, 'Geografia', 'Stolica stanu Georgia?', 'Atlanta', '2014-04-29 15:44:35'),
-(1501, 'Geografia', 'Stolica stanu Hawaje?', 'Honolulu', '2014-04-21 15:02:05'),
-(1502, 'Geografia', 'Stolica stanu Idaho?', 'Boise', '2014-04-28 13:34:43'),
-(1503, 'Geografia', 'Stolica stanu Illinois?', 'Springfield', '2014-04-28 18:07:09'),
-(1504, 'Geografia', 'Stolica stanu Indiana?', 'Indianapolis', '2014-04-22 13:00:00'),
-(1505, 'Geografia', 'Stolica stanu Iowa?', 'Des Moines', '2014-04-21 15:51:25'),
-(1506, 'Geografia', 'Stolica stanu Kalifornia?', 'Sacramento', '2014-04-24 13:18:24'),
-(1507, 'Geografia', 'Stolica stanu Kansas?', 'Topeka', '2014-04-19 13:50:00'),
-(1508, 'Geografia', 'Stolica stanu Karolina Poludniowa?', 'Columbia', '2014-04-28 18:13:57'),
-(1509, 'Geografia', 'Stolica stanu Karolina Polnocna?', 'Raleigh', '2014-04-24 13:09:44'),
-(1510, 'Geografia', 'Stolica stanu Kentucky?', 'Frankfort', '2014-04-25 18:14:35'),
-(1511, 'Geografia', 'Stolica stanu Kolorado?', 'Denver', '2014-04-21 13:38:48'),
-(1512, 'Geografia', 'Stolica stanu Luizjana?', 'Baton Rouge', '2014-04-22 13:25:21'),
-(1513, 'Geografia', 'Stolica stanu Maine?', 'Augusta', '2014-04-14 18:13:55'),
-(1514, 'Geografia', 'Stolica stanu Maryland?', 'Annapolis', '2014-04-28 15:26:36'),
-(1515, 'Geografia', 'Stolica stanu Massachusetts?', 'Boston', '2014-04-16 18:52:57'),
-(1516, 'Geografia', 'Stolica stanu Michigan?', 'Lansing', '2014-04-16 08:56:05'),
-(1517, 'Geografia', 'Stolica stanu Minnesota?', 'Saint Paul', '2014-04-28 18:57:19'),
-(1518, 'Geografia', 'Stolica stanu Missisipi?', 'Jackson', '2014-03-28 18:31:28'),
-(1519, 'Geografia', 'Stolica stanu Missouri?', 'Jefferson City', '2014-04-15 18:22:25'),
-(1520, 'Geografia', 'Stolica stanu Montana?', 'Helena', '2014-04-24 18:50:55'),
-(1521, 'Geografia', 'Stolica stanu Nebraska?', 'Lincoln', '2014-04-18 15:26:53'),
-(1522, 'Geografia', 'Stolica stanu Nevada?', 'Carson City', '2014-04-21 13:57:51'),
-(1523, 'Geografia', 'Stolica stanu New Hampshire?', 'Concord', '2014-04-27 18:20:01'),
-(1524, 'Geografia', 'Stolica stanu New Jersey?', 'Trenton', '2014-04-25 13:42:03'),
-(1525, 'Geografia', 'Stolica stanu Nowy Meksyk?', 'Santa Fe', '2014-04-22 15:15:43'),
-(1526, 'Geografia', 'Stolica stanu Ohio?', 'Columbus', '2014-04-21 18:05:27'),
-(1527, 'Geografia', 'Stolica stanu Oklahoma?', 'Oklahoma City', '2014-04-20 18:44:11'),
-(1528, 'Geografia', 'Stolica stanu Oregon?', 'Salem', '2014-04-15 13:00:44'),
-(1529, 'Geografia', 'Stolica stanu Pensylwania?', 'Harrisburg', '2014-04-20 13:17:15'),
-(1530, 'Geografia', 'Stolica stanu Rhode Island?', 'Providence', '2014-04-28 18:53:44'),
-(1531, 'Geografia', 'Stolica stanu Teksas?', 'Austin', '2014-04-25 15:50:31'),
-(1532, 'Geografia', 'Stolica stanu Tennessee?', 'Nashville', '2014-04-11 13:18:07'),
-(1533, 'Geografia', 'Stolica stanu Waszyngton?', 'Olympia', '2014-04-14 17:52:51'),
-(1534, 'Geografia', 'Stolica stanu Wirginia?', 'Richmond', '2014-04-17 15:45:25'),
-(1535, 'Geografia', 'Stolica kraju Badenia-Wirtembergia?', 'Stuttgart', '2014-04-28 13:14:18'),
-(1536, 'Geografia', 'Stolica kraju Bawaria?', 'Monachium', '2014-04-27 15:29:20'),
-(1537, 'Geografia', 'Stolica kraju Brandenburgia?', 'Poczdam', '2014-04-20 13:45:32'),
-(1538, 'Geografia', 'Stolica kraju Dolna Saksonia?', 'Hanower', '2014-04-25 13:30:29'),
-(1539, 'Geografia', 'Stolica kraju Hesja?', 'Wiesbaden', '2014-04-14 13:12:44'),
-(1540, 'Geografia', 'Stolica kraju Meklemburgia-Pomorze Przednie?', 'Schwerin', '2014-04-22 17:58:10'),
-(1541, 'Geografia', 'Stolica kraju Nadrenia-Palatynat?', 'Moguncja', '2014-04-24 18:20:17'),
-(1542, 'Geografia', 'Stolica kraju Nadrenia Polnocna-Westfalia?', 'Duesseldorf', '2014-04-07 18:06:32'),
-(1543, 'Geografia', 'Stolica kraju Saara?', 'Saarbruecken', '2014-04-21 13:19:29'),
-(1544, 'Geografia', 'Stolica kraju Saksonia?', 'Drezno', '2014-04-29 18:38:30'),
-(1545, 'Geografia', 'Stolica kraju Saksonia-Anhalt?', 'Magdeburg', '2014-04-21 18:10:49'),
-(1546, 'Geografia', 'Stolica kraju Szlezwik-Holsztyn?', 'Kilonia', '2014-04-22 15:58:31'),
-(1547, 'Geografia', 'Stolica kraju Turyngia?', 'Erfurt', '2014-04-28 18:00:22'),
-(1548, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2014-04-21 13:45:43'),
-(1549, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2014-04-28 13:39:37'),
-(1550, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2014-04-22 13:36:40'),
-(1551, 'Ekonomia', 'Dlugotrwaly wzrost wartosci akcji na gieldzie to?', 'hossa', '2014-04-29 15:11:47'),
-(1552, 'Ekonomia', 'Dlugotrwaly spadek wartosci akcji na gieldzie to?', 'bessa', '2014-04-20 15:43:11'),
-(1553, 'Ekonomia', 'Dlugotrwaly spadek wartosci akcji na gieldzie to?', 'bessa', '2014-04-17 13:46:12'),
-(1554, 'Biologia', 'Krotkie rozgalezione wypustki ciala komorki to?', 'Dendryt', '2014-04-19 08:31:47'),
-(1555, 'Biologia', 'Krotkie rozgalezione wypustki ciala komorki to?', 'Dendryt', '2014-04-25 13:43:50'),
-(1556, 'Geografia', 'Stolica panstwa Antigua i Barbuda?', 'Saint John''s', '2014-04-19 13:41:53'),
-(1557, 'Geografia', 'Stolica panstwa Benin?', 'Porto-Novo', '2014-04-21 17:16:13'),
-(1558, 'Geografia', 'Stolica panstwa Kiribati?', 'South Tarawa', '2014-04-28 13:00:06'),
-(1559, 'Geografia', 'Stolica panstwa Malezja?', 'Kuala Lumpur', '2014-04-25 18:43:06'),
-(1560, 'Geografia', 'Stolica panstwa Suazi?', 'Mbabane', '2014-04-16 15:15:49'),
-(1561, 'Geografia', 'Stolica panstwa Tanzania?', 'Dodoma', '2014-04-28 18:22:05'),
-(1563, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2014-04-22 15:59:25'),
-(1564, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2014-04-27 18:42:26'),
-(1565, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2014-04-29 13:07:35'),
-(1566, 'Historia', 'W ktorym roku odbyly sie obrady Okraglego Stolu w Polsce?', '1989', '2014-04-16 17:18:07'),
-(1567, 'Sport', 'Jak nazywa sie mecz finalowy ligi NFL?', 'Super Bowl', '2014-04-22 13:51:07'),
-(1568, 'Rozne', 'Jak nazywa sie seria urzaden Samsunga z systemem operacyjnym Android?', 'Galaxy', '2014-04-25 13:22:54'),
-(1569, 'Rozne', 'Jak nazywa sie seria urzaden od Google z systemem operacyjnym Android?', 'Nexus', '2014-04-19 15:31:51'),
-(1570, 'Literatura', 'Jaki kwiat pokochal Maly Ksiaze?', 'Roza', '2014-04-22 18:50:08'),
-(1571, 'Prawo', 'Ile wynosi limit punktów karnych dla kierowcow, ktorzy posiadaja prawo jazdy dluzej niz rok?', '24', '2014-04-29 18:15:29'),
-(1572, 'Geografia', 'Na terenie ktorego panstwa znajduje sie wielkie jeziora Niedzwiedzie i Niewolnicze?', 'Kanada', '2014-04-29 18:29:26'),
-(1573, 'Polityka', 'Ile lat trwa kadencja Trybunalu Stanu? ', '4', '2014-04-20 08:29:54'),
-(1574, 'Botanika', 'Jak nazywaja sie nasiona lnu zwyczajnego? ', 'siemie lniane', '2014-04-18 13:57:58'),
-(1575, 'Geografia', 'Ktore dzisiejsze panstwo to dawna Persja?', 'Iran', '2014-04-11 13:36:45'),
-(1576, 'Ekonomia', 'Jaka waluta obowiazuje w Irlandii?', 'euro', '2014-04-18 13:44:09'),
-(1577, 'Sport', 'W ktorym Grand Prix Robert Kubica zajal pierwsze miejsce na podium w  F1?', 'GP Kanady', '2014-04-13 18:45:47'),
-(1578, 'Sport', 'Ile tytulow mistrza swiata konstruktorow zdobyla Scuderia Ferrari?', '16', '2014-04-20 15:51:43'),
-(1579, 'Sport', ' Ile druzyn startuje w F1 w 2014 roku?', '11', '2014-04-25 15:32:32'),
-(1580, 'Malarstwo', 'Kto jest autorem obrazu "Rejtan - upadek Polski"?', 'Jan Matejko', '2014-04-25 18:39:28'),
-(1581, 'Sztuka', 'W ktorym panstwie narodził sie w XIX wieku impresjonizm (kierunek w malarstwie i rzezbie)?', 'Francja', '2014-04-25 13:50:57'),
-(1582, 'Geometria', 'Jak nazywa sie najdluzsza cieciwa okregu?', 'Srednica', '2014-04-20 17:31:59'),
-(1583, 'Sport', 'Jaki kolor ma pas, ktorym przewiazany jest najmniej zaawansowany zawodnik Judo?', 'bialy', '2014-04-27 13:58:30'),
-(1584, 'Literatura', 'Które drzewo w Czarnolesie bylo tematem fraszek Jana Kochanowskiego?', 'lipa', '2014-04-20 18:26:45'),
-(1585, 'Rozne', 'Jak nazywamy wizerunek twarzy widzianej z boku?', 'profil', '2014-04-12 15:34:08'),
-(1586, 'Rozne', 'Jak nazywa sie opad atmosferyczny zlozony z brylek lodu?', 'grad', '2014-04-21 17:09:17'),
-(1587, 'Rozne', 'Rozwin skrot: WAT.', 'Wojskowa Akademia Techniczna', '2014-04-18 18:34:59'),
-(1588, 'Rozne', 'Zielony nalot powstajacy w wyniku reakcji miedzi z dwutlenkiem wegla i wody to?', 'patyna', '2014-04-28 18:48:47'),
-(1589, 'Biologia', 'Intensywny rozwoj roslin i mikroorganizmow wodnych to?', 'eutrofizacja', '2014-04-28 18:05:21'),
-(1590, 'Rozne', 'W jakim miescie urodzil sie Barack Obama?', 'Honolulu', '2014-04-28 15:42:45'),
-(1591, 'Historia', 'W ktorym roku miala miejsce Noc Krysztalowa?', '1938', '2014-04-22 18:51:58'),
-(1592, 'Historia', 'W ktorym roku mial miejsce przewrot majowy?', '1926', '2014-04-18 13:29:06'),
-(1593, 'Historia', 'Podaj date smierci Jozefa Pilsudskiego.', '12 maja 1935', '2014-04-14 13:31:53'),
-(1594, 'Geometria', 'Dzial geometrii zajmujacy sie badaniami wlasnosci figur plaskich to?', 'planimetria', '2014-04-24 13:16:07'),
-(1595, 'Historia', 'Ktory Polal byl jednym z dowodcow w Bitwie o Monte Cassino?', 'Wladyslaw Anders', '2014-04-22 17:21:41'),
-(1596, 'Historia', 'W ktorym roku Jan Pawel II zostal wybrany na papieza?', '1978', '2014-04-19 08:40:27'),
-(1597, 'Rozne', 'Alotropowa odmiana tlenu skladajaca sie z trojatomowych czasteczek to?', 'tritlen', '2014-04-28 18:19:22'),
-(1598, 'Rozne', 'W ktorym roku doszlo do awarii elektrowni jadrowej w Czarnobylu?', '1986', '2014-04-10 13:29:15'),
-(1599, 'Rozne', 'W ktorym roku doszlo do zamachu bombowego w londynskim metrze?', '2005', '2014-04-18 17:18:08'),
-(1600, 'Rozne', 'Jak nazywa sie pilot, ktory 1 listopada 2011 roku awaryjnie wyladowal na lotnisku Chopina w Warszawie?', 'Tadeusz Wrona', '2014-04-05 13:08:41'),
-(1603, 'Rozne', 'Krotka, zartobliwa scenka z zywym dialogiem, oparta na humorze slownym lub sytuacyjnym to?', 'skecz', '2014-04-25 18:10:31'),
-(1604, 'Rozne', 'Rozwin skrot GROM.', 'Grupa Reagowania Operacyjno Manewrowego', '2014-04-20 18:02:54'),
-(1605, 'Historia', 'Popularne okreslenie mlodych obroncow polskiego Lwowa z lat 1918–1920 to?', 'Orleta Lwowskie', '2014-04-19 15:58:14'),
-(1606, 'Literatura', 'Autor tragedii Makbet to?', 'William Szekspir', '2014-04-16 17:09:27'),
-(1607, 'Rozne', 'Rozwin skrot ORMO.', 'Ochotnicza Rezerwa Milicji Obywatelskiej', '2014-04-27 18:25:26'),
-(1608, 'Rozne', 'Mgly, aerozole i czasteczki pary wodnej zawierajace produkty reakcji rozszczepienia jader?', 'opad promieniotworzczy', '2014-04-20 15:03:23'),
-(1609, 'Fizyka', 'Elektroda ujemna (np.baterii) lub elektroda, z ktorej następuje emisja elektronow to?', 'katoda', '2014-04-29 18:24:01'),
-(1610, 'Fizyka', 'Rodzaj elektrody przez ktory ladunek ujemny opuszcza dany uklad elektr. lub do ukladu jest dostarczany lad. dodatni to?', 'Anoda', '2014-04-29 15:50:26'),
-(1611, 'Informatyka', 'Co oznacza skrot DoS?', 'Denial of Service', '2014-04-27 18:07:29');
+(1477, 'Muzyka', 'W jakim miescie odbywa sie tradycyjny noworoczny koncert filharmonikow?', 'Wieden', '2015-04-30 17:50:35'),
+(1478, 'Rozne', 'Z jakim narodem najblizej spokrewnieni sa Finowie?', 'Estonczycy', '2015-05-18 15:35:52'),
+(1479, 'Rozne', 'Jakie panstwo uznawane jest za najbardziej ateistyczne na swiecie?', 'Czechy', '2015-05-12 18:12:53'),
+(1480, 'Astronomia', 'Kto jest autorem ksiazki "Błekitna kropka. Czlowiek i jego przyszlosc w kosmosie"?', 'Carl Sagan', '2015-05-19 15:33:51'),
+(1481, 'Historia', 'Kto byl pierwszym premierem II Rzeczypospolitej?', 'Ignacy Daszynski', '2015-05-14 15:03:46'),
+(1482, 'Historia', 'Jakie miasto bylo siedziba rzadu RP w latach 1940-1990?', 'Londyn', '2015-05-05 20:19:34'),
+(1483, 'Film', 'Jaki aktor zagral postac Jima Lovella w filmie Apollo 13?', 'Tom Hanks', '2015-05-15 15:40:36'),
+(1484, 'Muzyka', 'Z jakiego panstwa pochodzi zespol Aerosmith?', 'Stany Zjednoczone', '2015-04-21 17:45:09'),
+(1485, 'Historia', 'Kto byl pierwszym premierem Panstwa Izrael?', 'Dawid Ben Gurion', '2015-05-17 18:46:00'),
+(1486, 'Historia', 'W ktorym roku Kosowo oglosilo swoja niepodleglosc?', '2008', '2015-05-12 13:38:59'),
+(1487, 'Gry', 'Jak na imie ma protagonista gry Chrono Trigger?', 'Crono', '2015-05-13 15:54:40'),
+(1488, 'Rozne', 'Ktora polska autostrada przebiega rownolegii do Via Regia?', 'A4', '2015-04-18 20:43:05'),
+(1489, 'Geografia', 'Stolica stanu Nowy Jork?', 'Albany', '2015-05-17 15:00:28'),
+(1490, 'Geografia', 'Stolica stanu Vermont?', 'Montpelier', '2015-03-23 20:46:01'),
+(1491, 'Geografia', 'Stolica stanu Alabama?', 'Montgomery', '2015-05-01 15:27:12'),
+(1492, 'Geografia', 'Stolica stanu Alaska?', 'Juneau', '2015-05-19 18:26:20'),
+(1493, 'Geografia', 'Stolica stanu Arizona?', 'Phoenix', '2015-05-03 15:51:45'),
+(1494, 'Geografia', 'Stolica stanu Arkansas?', 'Little Rock', '2015-04-20 20:48:28'),
+(1495, 'Geografia', 'Stolica stanu Connecticut?', 'Hartford', '2015-04-23 20:25:52'),
+(1496, 'Geografia', 'Stolica stanu Dakota Poludniowa?', 'Pierre', '2015-05-14 18:07:19'),
+(1497, 'Geografia', 'Stolica stanu Dakota Polnocna?', 'Bismarck', '2015-04-27 17:05:57'),
+(1498, 'Geografia', 'Stolica stanu Delaware?', 'Dover', '2015-05-16 18:48:06'),
+(1499, 'Geografia', 'Stolica stanu Floryda?', 'Tallahassee', '2015-05-13 18:45:58'),
+(1500, 'Geografia', 'Stolica stanu Georgia?', 'Atlanta', '2015-05-02 15:39:22'),
+(1501, 'Geografia', 'Stolica stanu Hawaje?', 'Honolulu', '2015-04-15 17:45:18'),
+(1502, 'Geografia', 'Stolica stanu Idaho?', 'Boise', '2015-05-19 13:56:23'),
+(1503, 'Geografia', 'Stolica stanu Illinois?', 'Springfield', '2015-05-07 15:58:19'),
+(1504, 'Geografia', 'Stolica stanu Indiana?', 'Indianapolis', '2015-05-11 13:45:54'),
+(1505, 'Geografia', 'Stolica stanu Iowa?', 'Des Moines', '2015-05-09 13:45:51'),
+(1506, 'Geografia', 'Stolica stanu Kalifornia?', 'Sacramento', '2015-05-02 20:41:26'),
+(1507, 'Geografia', 'Stolica stanu Kansas?', 'Topeka', '2015-05-06 17:47:50'),
+(1508, 'Geografia', 'Stolica stanu Karolina Poludniowa?', 'Columbia', '2015-05-19 13:49:22'),
+(1509, 'Geografia', 'Stolica stanu Karolina Polnocna?', 'Raleigh', '2015-05-13 13:46:02'),
+(1510, 'Geografia', 'Stolica stanu Kentucky?', 'Frankfort', '2015-04-30 15:48:33'),
+(1511, 'Geografia', 'Stolica stanu Kolorado?', 'Denver', '2015-05-17 15:17:57'),
+(1512, 'Geografia', 'Stolica stanu Luizjana?', 'Baton Rouge', '2015-05-04 20:46:05'),
+(1513, 'Geografia', 'Stolica stanu Maine?', 'Augusta', '2015-03-19 15:35:24'),
+(1514, 'Geografia', 'Stolica stanu Maryland?', 'Annapolis', '2015-04-02 17:54:36'),
+(1515, 'Geografia', 'Stolica stanu Massachusetts?', 'Boston', '2015-05-08 18:17:35'),
+(1516, 'Geografia', 'Stolica stanu Michigan?', 'Lansing', '2015-05-16 13:17:41'),
+(1517, 'Geografia', 'Stolica stanu Minnesota?', 'Saint Paul', '2015-04-14 20:41:46'),
+(1518, 'Geografia', 'Stolica stanu Missisipi?', 'Jackson', '2015-05-19 15:51:25'),
+(1519, 'Geografia', 'Stolica stanu Missouri?', 'Jefferson City', '2015-04-30 17:30:59'),
+(1520, 'Geografia', 'Stolica stanu Montana?', 'Helena', '2015-04-29 15:00:04'),
+(1521, 'Geografia', 'Stolica stanu Nebraska?', 'Lincoln', '2015-03-21 20:30:08'),
+(1522, 'Geografia', 'Stolica stanu Nevada?', 'Carson City', '2015-05-09 13:10:49'),
+(1523, 'Geografia', 'Stolica stanu New Hampshire?', 'Concord', '2015-05-03 20:59:16'),
+(1524, 'Geografia', 'Stolica stanu New Jersey?', 'Trenton', '2015-05-09 15:21:52'),
+(1525, 'Geografia', 'Stolica stanu Nowy Meksyk?', 'Santa Fe', '2015-05-18 13:44:06'),
+(1526, 'Geografia', 'Stolica stanu Ohio?', 'Columbus', '2015-04-25 17:27:42'),
+(1527, 'Geografia', 'Stolica stanu Oklahoma?', 'Oklahoma City', '2015-05-09 13:12:34'),
+(1528, 'Geografia', 'Stolica stanu Oregon?', 'Salem', '2015-05-16 18:09:37'),
+(1529, 'Geografia', 'Stolica stanu Pensylwania?', 'Harrisburg', '2015-05-12 18:07:39'),
+(1530, 'Geografia', 'Stolica stanu Rhode Island?', 'Providence', '2015-05-14 18:42:17'),
+(1531, 'Geografia', 'Stolica stanu Teksas?', 'Austin', '2015-05-07 17:42:30'),
+(1532, 'Geografia', 'Stolica stanu Tennessee?', 'Nashville', '2015-05-19 15:30:21'),
+(1533, 'Geografia', 'Stolica stanu Waszyngton?', 'Olympia', '2015-05-12 15:17:45'),
+(1534, 'Geografia', 'Stolica stanu Wirginia?', 'Richmond', '2015-05-18 18:51:03'),
+(1535, 'Geografia', 'Stolica kraju Badenia-Wirtembergia?', 'Stuttgart', '2015-05-15 15:37:05'),
+(1536, 'Geografia', 'Stolica kraju Bawaria?', 'Monachium', '2015-04-18 20:55:28'),
+(1537, 'Geografia', 'Stolica kraju Brandenburgia?', 'Poczdam', '2015-05-18 13:51:07'),
+(1538, 'Geografia', 'Stolica kraju Dolna Saksonia?', 'Hanower', '2015-04-13 20:41:27'),
+(1539, 'Geografia', 'Stolica kraju Hesja?', 'Wiesbaden', '2015-05-16 15:27:08'),
+(1540, 'Geografia', 'Stolica kraju Meklemburgia-Pomorze Przednie?', 'Schwerin', '2015-04-27 17:38:10'),
+(1541, 'Geografia', 'Stolica kraju Nadrenia-Palatynat?', 'Moguncja', '2015-05-15 18:28:41'),
+(1542, 'Geografia', 'Stolica kraju Nadrenia Polnocna-Westfalia?', 'Duesseldorf', '2015-04-17 17:16:27'),
+(1543, 'Geografia', 'Stolica kraju Saara?', 'Saarbruecken', '2015-05-16 15:11:17'),
+(1544, 'Geografia', 'Stolica kraju Saksonia?', 'Drezno', '2015-05-12 13:10:49'),
+(1545, 'Geografia', 'Stolica kraju Saksonia-Anhalt?', 'Magdeburg', '2015-05-04 20:42:33'),
+(1546, 'Geografia', 'Stolica kraju Szlezwik-Holsztyn?', 'Kilonia', '2015-05-03 15:21:30'),
+(1547, 'Geografia', 'Stolica kraju Turyngia?', 'Erfurt', '2015-04-23 17:23:57'),
+(1548, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2015-05-11 15:23:15'),
+(1549, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2015-05-01 17:40:01'),
+(1550, 'Literatura', 'W ktorym roku urodzil sie Zygmunt Krasinski?', '1812', '2015-05-09 18:04:12'),
+(1551, 'Ekonomia', 'Dlugotrwaly wzrost wartosci akcji na gieldzie to?', 'hossa', '2015-05-18 13:40:36'),
+(1552, 'Ekonomia', 'Dlugotrwaly spadek wartosci akcji na gieldzie to?', 'bessa', '2015-04-23 20:54:26'),
+(1553, 'Ekonomia', 'Dlugotrwaly spadek wartosci akcji na gieldzie to?', 'bessa', '2015-05-16 13:56:12'),
+(1554, 'Biologia', 'Krotkie rozgalezione wypustki ciala komorki to?', 'Dendryt', '2015-05-09 18:11:13'),
+(1555, 'Biologia', 'Krotkie rozgalezione wypustki ciala komorki to?', 'Dendryt', '2015-05-08 18:28:05'),
+(1556, 'Geografia', 'Stolica panstwa Antigua i Barbuda?', 'Saint John''s', '2015-05-02 17:38:16'),
+(1557, 'Geografia', 'Stolica panstwa Benin?', 'Porto-Novo', '2015-04-19 15:08:56'),
+(1558, 'Geografia', 'Stolica panstwa Kiribati?', 'South Tarawa', '2015-04-10 15:00:19'),
+(1559, 'Geografia', 'Stolica panstwa Malezja?', 'Kuala Lumpur', '2015-05-17 15:05:42'),
+(1560, 'Geografia', 'Stolica panstwa Suazi?', 'Mbabane', '2015-04-10 20:21:46'),
+(1561, 'Geografia', 'Stolica panstwa Tanzania?', 'Dodoma', '2015-05-13 13:17:50'),
+(1563, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2015-05-02 15:44:42'),
+(1564, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2015-04-27 17:50:42'),
+(1565, 'Motoryzacja', 'Pierwszy masowo produkowanty samochod to?', 'Ford T', '2015-05-14 18:44:02'),
+(1566, 'Historia', 'W ktorym roku odbyly sie obrady Okraglego Stolu w Polsce?', '1989', '2015-05-08 15:19:54'),
+(1567, 'Sport', 'Jak nazywa sie mecz finalowy ligi NFL?', 'Super Bowl', '2015-05-18 15:48:05'),
+(1568, 'Rozne', 'Jak nazywa sie seria urzaden Samsunga z systemem operacyjnym Android?', 'Galaxy', '2015-04-24 20:57:55'),
+(1569, 'Rozne', 'Jak nazywa sie seria urzaden od Google z systemem operacyjnym Android?', 'Nexus', '2015-04-30 17:07:45'),
+(1570, 'Literatura', 'Jaki kwiat pokochal Maly Ksiaze?', 'Roza', '2015-04-26 15:35:55'),
+(1571, 'Prawo', 'Ile wynosi limit punktów karnych dla kierowcow, ktorzy posiadaja prawo jazdy dluzej niz rok?', '24', '2015-05-16 13:57:57'),
+(1572, 'Geografia', 'Na terenie ktorego panstwa znajduje sie wielkie jeziora Niedzwiedzie i Niewolnicze?', 'Kanada', '2015-04-27 20:07:40'),
+(1573, 'Polityka', 'Ile lat trwa kadencja Trybunalu Stanu? ', '4', '2015-05-12 13:47:47'),
+(1574, 'Botanika', 'Jak nazywaja sie nasiona lnu zwyczajnego? ', 'siemie lniane', '2015-05-11 15:05:42'),
+(1575, 'Geografia', 'Ktore dzisiejsze panstwo to dawna Persja?', 'Iran', '2015-05-16 18:27:11'),
+(1576, 'Ekonomia', 'Jaka waluta obowiazuje w Irlandii?', 'euro', '2015-04-17 15:59:05'),
+(1577, 'Sport', 'W ktorym Grand Prix Robert Kubica zajal pierwsze miejsce na podium w  F1?', 'GP Kanady', '2015-05-07 17:53:03'),
+(1578, 'Sport', 'Ile tytulow mistrza swiata konstruktorow zdobyla Scuderia Ferrari?', '16', '2015-05-08 15:21:39'),
+(1579, 'Sport', ' Ile druzyn startuje w F1 w 2014 roku?', '11', '2015-04-07 17:26:31'),
+(1580, 'Malarstwo', 'Kto jest autorem obrazu "Rejtan - upadek Polski"?', 'Jan Matejko', '2015-05-07 18:07:25'),
+(1581, 'Sztuka', 'W ktorym panstwie narodził sie w XIX wieku impresjonizm (kierunek w malarstwie i rzezbie)?', 'Francja', '2015-05-19 18:35:06'),
+(1582, 'Geometria', 'Jak nazywa sie najdluzsza cieciwa okregu?', 'Srednica', '2015-05-15 15:03:43'),
+(1583, 'Sport', 'Jaki kolor ma pas, ktorym przewiazany jest najmniej zaawansowany zawodnik Judo?', 'bialy', '2015-05-07 15:44:15'),
+(1584, 'Literatura', 'Które drzewo w Czarnolesie bylo tematem fraszek Jana Kochanowskiego?', 'lipa', '2015-05-14 13:56:31'),
+(1585, 'Rozne', 'Jak nazywamy wizerunek twarzy widzianej z boku?', 'profil', '2015-05-18 13:26:35'),
+(1586, 'Rozne', 'Jak nazywa sie opad atmosferyczny zlozony z brylek lodu?', 'grad', '2015-05-19 18:31:35'),
+(1587, 'Rozne', 'Rozwin skrot: WAT.', 'Wojskowa Akademia Techniczna', '2015-05-19 15:54:55'),
+(1588, 'Rozne', 'Zielony nalot powstajacy w wyniku reakcji miedzi z dwutlenkiem wegla i wody to?', 'patyna', '2015-05-05 15:49:37'),
+(1589, 'Biologia', 'Intensywny rozwoj roslin i mikroorganizmow wodnych to?', 'eutrofizacja', '2015-05-14 13:51:15'),
+(1590, 'Rozne', 'W jakim miescie urodzil sie Barack Obama?', 'Honolulu', '2015-05-09 15:58:44'),
+(1591, 'Historia', 'W ktorym roku miala miejsce Noc Krysztalowa?', '1938', '2015-05-02 20:00:35'),
+(1592, 'Historia', 'W ktorym roku mial miejsce przewrot majowy?', '1926', '2015-05-11 13:35:22'),
+(1593, 'Historia', 'Podaj date smierci Jozefa Pilsudskiego.', '12 maja 1935', '2015-05-05 20:30:09'),
+(1594, 'Geometria', 'Dzial geometrii zajmujacy sie badaniami wlasnosci figur plaskich to?', 'planimetria', '2015-04-14 17:16:29'),
+(1595, 'Historia', 'Ktory Polal byl jednym z dowodcow w Bitwie o Monte Cassino?', 'Wladyslaw Anders', '2015-05-19 15:26:50'),
+(1596, 'Historia', 'W ktorym roku Jan Pawel II zostal wybrany na papieza?', '1978', '2015-05-12 18:19:54'),
+(1597, 'Rozne', 'Alotropowa odmiana tlenu skladajaca sie z trojatomowych czasteczek to?', 'tritlen', '2015-05-11 15:51:20'),
+(1598, 'Rozne', 'W ktorym roku doszlo do awarii elektrowni jadrowej w Czarnobylu?', '1986', '2015-05-11 15:56:37'),
+(1599, 'Rozne', 'W ktorym roku doszlo do zamachu bombowego w londynskim metrze?', '2005', '2015-05-19 13:15:58'),
+(1600, 'Rozne', 'Jak nazywa sie pilot, ktory 1 listopada 2011 roku awaryjnie wyladowal na lotnisku Chopina w Warszawie?', 'Tadeusz Wrona', '2015-05-12 15:01:57'),
+(1603, 'Rozne', 'Krotka, zartobliwa scenka z zywym dialogiem, oparta na humorze slownym lub sytuacyjnym to?', 'skecz', '2015-05-07 15:46:01'),
+(1604, 'Rozne', 'Rozwin skrot GROM.', 'Grupa Reagowania Operacyjno Manewrowego', '2015-04-27 17:45:20'),
+(1605, 'Historia', 'Popularne okreslenie mlodych obroncow polskiego Lwowa z lat 1918–1920 to?', 'Orleta Lwowskie', '2015-04-07 15:40:53'),
+(1606, 'Literatura', 'Autor tragedii Makbet to?', 'William Szekspir', '2015-05-06 15:15:57'),
+(1607, 'Rozne', 'Rozwin skrot ORMO.', 'Ochotnicza Rezerwa Milicji Obywatelskiej', '2015-05-19 15:00:30'),
+(1608, 'Rozne', 'Mgly, aerozole i czasteczki pary wodnej zawierajace produkty reakcji rozszczepienia jader?', 'opad promieniotworzczy', '2015-04-29 15:28:37'),
+(1609, 'Fizyka', 'Elektroda ujemna (np.baterii) lub elektroda, z ktorej następuje emisja elektronow to?', 'katoda', '2015-05-18 15:58:29'),
+(1610, 'Fizyka', 'Rodzaj elektrody przez ktory ladunek ujemny opuszcza dany uklad elektr. lub do ukladu jest dostarczany lad. dodatni to?', 'Anoda', '2015-04-14 17:44:57'),
+(1611, 'Informatyka', 'Co oznacza skrot DoS?', 'Denial of Service', '2015-05-09 15:34:08');
 
 -- --------------------------------------------------------
 
@@ -6271,8 +6275,9 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 -- Struktura tabeli dla tabeli `fs_races`
 --
 
+DROP TABLE IF EXISTS `fs_races`;
 CREATE TABLE IF NOT EXISTS `fs_races` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '10',
   `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
@@ -6286,11 +6291,8 @@ CREATE TABLE IF NOT EXISTS `fs_races` (
   `scy` double DEFAULT NULL,
   `scz` double DEFAULT NULL,
   `limitrand` tinyint(4) NOT NULL DEFAULT '100',
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `minPlayers` (`minPlayers`,`maxPlayers`),
-  KEY `active` (`active`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116 ;
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_races`
@@ -6410,18 +6412,17 @@ INSERT INTO `fs_races` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `interior`,
 -- Struktura tabeli dla tabeli `fs_races_cp`
 --
 
+DROP TABLE IF EXISTS `fs_races_cp`;
 CREATE TABLE IF NOT EXISTS `fs_races_cp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
   `type` smallint(3) unsigned NOT NULL DEFAULT '0',
   `size` double NOT NULL DEFAULT '0',
-  `so` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4260 ;
+  `so` int(10) unsigned NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4260 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_races_cp`
@@ -9903,18 +9904,20 @@ INSERT INTO `fs_races_cp` (`id`, `aid`, `X`, `Y`, `Z`, `type`, `size`, `so`) VAL
 -- Struktura tabeli dla tabeli `fs_races_records`
 --
 
+DROP TABLE IF EXISTS `fs_races_records`;
 CREATE TABLE IF NOT EXISTS `fs_races_records` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `playerid` int(10) unsigned NOT NULL,
   `raceid` smallint(10) unsigned NOT NULL,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `recordtime` float unsigned NOT NULL,
   `opponents` mediumint(9) NOT NULL DEFAULT '1',
-  `finalposition` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `raceid` (`raceid`),
-  KEY `i1` (`playerid`,`raceid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `finalposition` smallint(5) unsigned NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_races_records`
+--
 
 -- --------------------------------------------------------
 
@@ -9922,16 +9925,15 @@ CREATE TABLE IF NOT EXISTS `fs_races_records` (
 -- Struktura tabeli dla tabeli `fs_races_sp`
 --
 
+DROP TABLE IF EXISTS `fs_races_sp`;
 CREATE TABLE IF NOT EXISTS `fs_races_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1477 ;
+  `angle` double NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=1477 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_races_sp`
@@ -11155,17 +11157,17 @@ INSERT INTO `fs_races_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 -- Struktura tabeli dla tabeli `fs_returnpickups`
 --
 
+DROP TABLE IF EXISTS `fs_returnpickups`;
 CREATE TABLE IF NOT EXISTS `fs_returnpickups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `pX` double NOT NULL,
   `pY` double NOT NULL,
   `pZ` double NOT NULL,
   `pi` int(11) NOT NULL,
   `pvw` int(11) NOT NULL,
   `opis` varchar(64) DEFAULT NULL,
-  `pickupid` int(10) unsigned NOT NULL DEFAULT '19197',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=152 ;
+  `pickupid` int(10) unsigned NOT NULL DEFAULT '19197'
+) ENGINE=MyISAM AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_returnpickups`
@@ -11305,18 +11307,16 @@ INSERT INTO `fs_returnpickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `pi
 -- Struktura tabeli dla tabeli `fs_sbans`
 --
 
+DROP TABLE IF EXISTS `fs_sbans`;
 CREATE TABLE IF NOT EXISTS `fs_sbans` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `serial` varchar(60) NOT NULL DEFAULT 'NONE',
   `ip_class` varchar(16) NOT NULL DEFAULT '.' COMMENT 'Domyslnie: "." - kazdy adres IP',
   `nick_exc` varchar(512) NOT NULL DEFAULT 'none;none;none;none;none;none;none;none;none;none;none;none;none;none;none' COMMENT 'nicki wylaczone z banowania || oddzielaj znakiem ; || max 15',
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `comment` tinytext NOT NULL,
-  `exception` int(1) NOT NULL DEFAULT '0' COMMENT 'pomijac banowanie ip po wejsciu gracza z serialem?',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `serial` (`serial`,`ip_class`),
-  KEY `date_created` (`date_created`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `exception` int(1) NOT NULL DEFAULT '0' COMMENT 'pomijac banowanie ip po wejsciu gracza z serialem?'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -11324,10 +11324,10 @@ CREATE TABLE IF NOT EXISTS `fs_sbans` (
 -- Struktura tabeli dla tabeli `fs_sluby`
 --
 
+DROP TABLE IF EXISTS `fs_sluby`;
 CREATE TABLE IF NOT EXISTS `fs_sluby` (
   `id_player1` int(11) NOT NULL,
-  `id_player2` int(11) NOT NULL,
-  UNIQUE KEY `para` (`id_player1`,`id_player2`)
+  `id_player2` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -11336,8 +11336,9 @@ CREATE TABLE IF NOT EXISTS `fs_sluby` (
 -- Struktura tabeli dla tabeli `fs_solo_matches`
 --
 
+DROP TABLE IF EXISTS `fs_solo_matches`;
 CREATE TABLE IF NOT EXISTS `fs_solo_matches` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `arenaid` smallint(5) unsigned NOT NULL,
   `weapon1` tinyint(3) unsigned NOT NULL,
   `weapon2` tinyint(3) unsigned NOT NULL,
@@ -11346,9 +11347,8 @@ CREATE TABLE IF NOT EXISTS `fs_solo_matches` (
   `fightlen` mediumint(8) unsigned NOT NULL,
   `hp` tinyint(3) unsigned NOT NULL,
   `ar` tinyint(3) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -11356,10 +11356,10 @@ CREATE TABLE IF NOT EXISTS `fs_solo_matches` (
 -- Struktura tabeli dla tabeli `fs_stats`
 --
 
+DROP TABLE IF EXISTS `fs_stats`;
 CREATE TABLE IF NOT EXISTS `fs_stats` (
   `option_name` varchar(32) NOT NULL,
-  `value` blob,
-  PRIMARY KEY (`option_name`)
+  `value` blob
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -11372,7 +11372,7 @@ INSERT INTO `fs_stats` (`option_name`, `value`) VALUES
 ('kick_count', 0x31323235),
 ('death_count', 0x353933323733),
 ('kill_count', 0x353432363634),
-('join_count', 0x3433323230),
+('join_count', 0x3433323231),
 ('ban_count', 0x31323137);
 
 -- --------------------------------------------------------
@@ -11381,16 +11381,16 @@ INSERT INTO `fs_stats` (`option_name`, `value`) VALUES
 -- Struktura tabeli dla tabeli `fs_telecheckpoints`
 --
 
+DROP TABLE IF EXISTS `fs_telecheckpoints`;
 CREATE TABLE IF NOT EXISTS `fs_telecheckpoints` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `fPOS` varchar(64) NOT NULL COMMENT 'X,Y,Z,A,interior',
   `fOPIS` varchar(64) DEFAULT NULL COMMENT 'opis na 3dtextlabel i gametext',
   `dPOS` varchar(64) NOT NULL,
   `dOPIS` varchar(64) DEFAULT NULL,
   `rozmiar` smallint(5) unsigned NOT NULL DEFAULT '8',
-  `aktywny` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+  `aktywny` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_telecheckpoints`
@@ -11407,8 +11407,9 @@ INSERT INTO `fs_telecheckpoints` (`id`, `fPOS`, `fOPIS`, `dPOS`, `dOPIS`, `rozmi
 -- Struktura tabeli dla tabeli `fs_telepickups`
 --
 
+DROP TABLE IF EXISTS `fs_telepickups`;
 CREATE TABLE IF NOT EXISTS `fs_telepickups` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `pX` double NOT NULL COMMENT 'Wspolrzedne pickupu',
   `pY` double NOT NULL,
   `pZ` double NOT NULL,
@@ -11428,9 +11429,8 @@ CREATE TABLE IF NOT EXISTS `fs_telepickups` (
   `opis_color` int(10) unsigned NOT NULL DEFAULT '16732697',
   `opis_drawdistance` smallint(5) unsigned NOT NULL DEFAULT '600',
   `restrict_gang` int(10) unsigned NOT NULL DEFAULT '0',
-  `restrict_level` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=997 ;
+  `restrict_level` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=998 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_telepickups`
@@ -11590,7 +11590,7 @@ INSERT INTO `fs_telepickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `poka
 (293, 259.081, 1409.618, -3.507, 0, 0, 'Wyjscie na balkon', 1, 19197, 0, -1917.424, 992.972, 45.429, 0, 0, 272.2, 0, 16732697, 600, 0, 0),
 (294, -1921.625, 992.75, 45.429, 0, 0, 'Do bazy dilerow', 1, 19197, 0, 262.453, 1409.01, -3.504, 0, 0, 258, 0, 16732697, 600, 0, 0),
 (316, 7.428, 1523.178, -39.378, 14, 0, 'Wyjscie', 0, 19197, 0, 1011.758, 2575.295, 11.281, 0, 0, 251.5, 0, 16732697, 600, 0, 0),
-(637, 1018.869, -2563.092, 20.476, 0, 0, 'Zbrojownia', 1, 1318, 0, 315.798, -141.009, 999.601, 7, 0, 358.5, 0, 25297, 600, 0, 0),
+(997, 1328.352, 1282.401, 10.82, 0, 0, 'test', 0, 1318, 0, 0, 0, 5, 0, 0, 0, 0, 16732697, 600, 0, 0),
 (297, 1481.104, -1881.849, 13.546, 0, 0, 'Wejscie na Patio', 1, 19197, 0, 1487.866, -1895.169, 22.227, 0, 0, 82.7, 0, 16732697, 600, 0, 0),
 (298, 1490.081, -1895.3, 22.214, 0, 0, 'Zejscie na ulice', 1, 19197, 0, 1480.976, -1879.07, 13.546, 0, 0, 4.5, 0, 16732697, 600, 0, 0),
 (317, 21.26, 1486.977, -38.39, 14, 0, 'Do klubu', 0, 19197, 0, -5.576, 1509.935, -39.378, 14, 0, 345.2, 0, 16732697, 600, 0, 0),
@@ -11642,7 +11642,6 @@ INSERT INTO `fs_telepickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `poka
 (676, -1749.365, 868.557, 25.085, 0, 0, 'Drapacz chmur', 1, 1318, 0, -1753.794, 885.18, 295.875, 0, 0, 7.5, 0, 16732697, 600, 0, 0),
 (677, -1753.626, 883.834, 295.6, 0, 0, 'zejscie', 0, 1318, 0, -1749.116, 860.945, 24.882, 0, 0, 183, 0, 16732697, 600, 0, 0),
 (680, 327.963, 1477.724, 1084.437, 15, 2037, 'wyjscie z domu', 0, 1318, 0, 0, 0, 5, 0, 0, 0, 0, 16732697, 600, 0, 0),
-(686, 1003.399, -2568.769, 89.761, 0, 0, 'Do bazy', 1, 1318, 0, 1095.563, -2543.173, 20.128, 0, 0, 102.5, 0, 25297, 600, 0, 0),
 (984, 244.421, 1867.908, -32.388, 0, 0, 'Wejscie na gore afganistan', 0, 19197, 0, 246.57, 1867.893, 8.764, 0, 0, 275.4, 0, 16732697, 600, 0, 0),
 (749, 1199.429, -918.533, 43.119, 0, 0, 'BurgerAtK', 0, 1318, 0, 364.431, -73.939, 1001.507, 10, 0, 301.7, 0, 16732697, 600, 0, 0),
 (710, 938.587, -936.786, 57.741, 0, 0, 'Wejscie do hotelu', 0, 1318, 0, 975.331, -913.696, 194.789, 0, 103, 175.2, 0, 16732697, 600, 0, 0),
@@ -11692,6 +11691,7 @@ INSERT INTO `fs_telepickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `poka
 -- Struktura tabeli dla tabeli `fs_vehicles`
 --
 
+DROP TABLE IF EXISTS `fs_vehicles`;
 CREATE TABLE IF NOT EXISTS `fs_vehicles` (
   `vid` smallint(3) unsigned NOT NULL,
   `name` varchar(32) DEFAULT NULL,
@@ -11703,9 +11703,7 @@ CREATE TABLE IF NOT EXISTS `fs_vehicles` (
   `plywa` tinyint(1) NOT NULL DEFAULT '0',
   `wojskowy` tinyint(1) NOT NULL DEFAULT '0',
   `przyczepa` tinyint(1) NOT NULL DEFAULT '0',
-  `tablica` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`vid`),
-  KEY `minPoziom` (`minPoziom`)
+  `tablica` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -11931,6 +11929,7 @@ INSERT INTO `fs_vehicles` (`vid`, `name`, `altnames`, `cena`, `minPoziom`, `jezd
 --
 -- Zastąpiona struktura widoku `fs_view_housesandvehicles`
 --
+DROP VIEW IF EXISTS `fs_view_housesandvehicles`;
 CREATE TABLE IF NOT EXISTS `fs_view_housesandvehicles` (
 `id` int(10) unsigned
 ,`X` double
@@ -11967,24 +11966,24 @@ CREATE TABLE IF NOT EXISTS `fs_view_housesandvehicles` (
 ,`IFNULL(``hv``.``components``,"-")` varchar(80)
 ,`restrict_gang` tinyint(2) unsigned
 );
+
 -- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `fs_wg_arena`
 --
 
+DROP TABLE IF EXISTS `fs_wg_arena`;
 CREATE TABLE IF NOT EXISTS `fs_wg_arena` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `descr` varchar(64) NOT NULL,
   `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
   `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
   `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
   `wb_cube` varchar(64) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'prostopadloscian x1,y1,z1,x2,y2,z2',
   `wb_mode` enum('oraz','lub') CHARACTER SET ascii NOT NULL DEFAULT 'lub' COMMENT 'oraz - gracz musi byc w obu polach, lub - musi byc w jednym z nich',
-  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r',
-  PRIMARY KEY (`id`),
-  KEY `minplayers` (`minplayers`,`maxplayers`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r'
+) ENGINE=MyISAM AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_wg_arena`
@@ -12075,18 +12074,17 @@ INSERT INTO `fs_wg_arena` (`id`, `descr`, `interior`, `minplayers`, `maxplayers`
 -- Struktura tabeli dla tabeli `fs_wg_arena_sp`
 --
 
+DROP TABLE IF EXISTS `fs_wg_arena_sp`;
 CREATE TABLE IF NOT EXISTS `fs_wg_arena_sp` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `aid` int(10) unsigned NOT NULL,
   `team` tinyint(1) unsigned NOT NULL,
   `X` double NOT NULL,
   `Y` double NOT NULL,
   `Z` double NOT NULL,
   `A` double NOT NULL,
-  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie',
-  PRIMARY KEY (`id`),
-  KEY `aid` (`aid`,`team`,`randomorder`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3338 ;
+  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie'
+) ENGINE=MyISAM AUTO_INCREMENT=3338 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_wg_arena_sp`
@@ -14993,15 +14991,15 @@ INSERT INTO `fs_wg_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`, `randomor
 -- Struktura tabeli dla tabeli `fs_zones`
 --
 
+DROP TABLE IF EXISTS `fs_zones`;
 CREATE TABLE IF NOT EXISTS `fs_zones` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `miny` double NOT NULL,
   `minx` double NOT NULL,
   `maxy` double NOT NULL,
   `maxx` double NOT NULL,
-  `active` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=286 ;
+  `active` tinyint(3) unsigned NOT NULL DEFAULT '1'
+) ENGINE=MyISAM AUTO_INCREMENT=286 DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `fs_zones`
@@ -15253,12 +15251,16 @@ INSERT INTO `fs_zones` (`id`, `miny`, `minx`, `maxy`, `maxx`, `active`) VALUES
 -- Struktura tabeli dla tabeli `fs_zones_gangscore`
 --
 
+DROP TABLE IF EXISTS `fs_zones_gangscore`;
 CREATE TABLE IF NOT EXISTS `fs_zones_gangscore` (
   `id_zone` int(10) unsigned NOT NULL,
   `id_gang` smallint(5) unsigned NOT NULL,
-  `respect` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id_zone`,`id_gang`)
+  `respect` int(10) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `fs_zones_gangscore`
+--
 
 -- --------------------------------------------------------
 
@@ -15267,10 +15269,549 @@ CREATE TABLE IF NOT EXISTS `fs_zones_gangscore` (
 --
 DROP TABLE IF EXISTS `fs_view_housesandvehicles`;
 
-CREATE VIEW `fs_view_housesandvehicles` AS select `h`.`id` AS `id`,`h`.`X` AS `X`,`h`.`Y` AS `Y`,`h`.`Z` AS `Z`,`h`.`exitX` AS `exitX`,`h`.`exitY` AS `exitY`,`h`.`exitZ` AS `exitZ`,`h`.`exitA` AS `exitA`,ifnull(`h`.`ownerid`,0) AS `ownerid`,`h`.`koszt` AS `koszt`,ifnull(`p`.`nick`,_ascii'nn') AS `nick`,ifnull(`h`.`paidTo`,_utf8'-') AS `IFNULL
+CREATE ALGORITHM=UNDEFINED DEFINER=`k11`@`%` SQL SECURITY DEFINER VIEW `fs_view_housesandvehicles` AS select `h`.`id` AS `id`,`h`.`X` AS `X`,`h`.`Y` AS `Y`,`h`.`Z` AS `Z`,`h`.`exitX` AS `exitX`,`h`.`exitY` AS `exitY`,`h`.`exitZ` AS `exitZ`,`h`.`exitA` AS `exitA`,ifnull(`h`.`ownerid`,0) AS `ownerid`,`h`.`koszt` AS `koszt`,ifnull(`p`.`nick`,_ascii'nn') AS `nick`,ifnull(`h`.`paidTo`,_utf8'-') AS `IFNULL
 (h.paidTo,'-')`,ifnull((to_days(`h`.`paidTo`) - to_days(now())),-(1)) AS `IFNULL(DATEDIFF(h.paidTo,NOW()),-1)`,`h`.`homeX` AS `homeX`,`h`.`homeY` AS `homeY`,`h`.`homeZ` AS `homeZ`,`h`.`homeA` AS `homeA`,`h`.`homeI` AS `homeI`,`h`.`homeVW` AS `homeVW`,`h`.`vehicles_allowed` AS `vehicles_allowed`,`h`.`vehicle_radius` AS `vehicle_radius`,ifnull(`hv`.`model`,0) AS `IFNULL(hv.model,0)`,ifnull(`hv`.`X`,0) AS `IFNULL(hv.X,0)`,ifnull(`hv`.`Y`,0) AS `IFNULL(hv.Y,0)`,ifnull(`hv`.`Z`,0) AS `IFNULL(hv.Z,0)`,ifnull(`hv`.`A`,0) AS `IFNULL(hv.A,0)`,ifnull(`hv`.`color1`,0) AS `IFNULL(hv.color1,0)`,ifnull(`hv`.`color2`,0) AS `IFNULL(hv.color2,0)`,ifnull(`hv`.`plate`,_latin1'-') AS `IFNULL(hv.plate,"-
 ")`,ifnull(`h`.`audioURL`,_latin1'-') AS `IFNULL(audioURL,_latin1'-')`,ifnull(`hv`.`components`,_latin1'-') AS `IFNULL(``hv``.``components``,"-")`,`h`.`restrict_gang` AS `restrict_gang` from ((`fs_houses` `h` left join `fs_players` `p` on((`p`.`id` = `h`.`ownerid`))) left join `fs_houses_vehicles` `hv` on(((`hv`.`houseid` = `h`.`id`) and (`h`.`ownerid` > 0) and (`h`.`paidTo` > cast(now() as date)))));
 
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indexes for table `fs_achievements`
+--
+ALTER TABLE `fs_achievements`
+  ADD PRIMARY KEY (`shortname`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `fs_achievements_ranks`
+--
+ALTER TABLE `fs_achievements_ranks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shortname` (`shortname`),
+  ADD KEY `shortname_2` (`shortname`,`score`);
+
+--
+-- Indexes for table `fs_admin_activity`
+--
+ALTER TABLE `fs_admin_activity`
+  ADD UNIQUE KEY `id_player` (`id_player`,`data`);
+
+--
+-- Indexes for table `fs_arena`
+--
+ALTER TABLE `fs_arena`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_bans`
+--
+ALTER TABLE `fs_bans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `player_banned` (`player_banned`,`date_created`,`date_end`);
+
+--
+-- Indexes for table `fs_chowany_arena`
+--
+ALTER TABLE `fs_chowany_arena`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_chowany_arena_sp`
+--
+ALTER TABLE `fs_chowany_arena_sp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_config`
+--
+ALTER TABLE `fs_config`
+  ADD PRIMARY KEY (`option_name`);
+
+--
+-- Indexes for table `fs_ctf_arena`
+--
+ALTER TABLE `fs_ctf_arena`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `minplayers` (`minplayers`,`maxplayers`);
+
+--
+-- Indexes for table `fs_ctf_arena_sp`
+--
+ALTER TABLE `fs_ctf_arena_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`,`team`,`randomorder`);
+
+--
+-- Indexes for table `fs_derby_arena`
+--
+ALTER TABLE `fs_derby_arena`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`);
+
+--
+-- Indexes for table `fs_derby_arena_sp`
+--
+ALTER TABLE `fs_derby_arena_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indexes for table `fs_dragrace_records`
+--
+ALTER TABLE `fs_dragrace_records`
+  ADD UNIQUE KEY `id_player` (`id_player`,`vehicleModel`);
+
+--
+-- Indexes for table `fs_drift_records`
+--
+ALTER TABLE `fs_drift_records`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `raceid` (`raceid`);
+
+--
+-- Indexes for table `fs_drift_tracks`
+--
+ALTER TABLE `fs_drift_tracks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`);
+
+--
+-- Indexes for table `fs_drift_tracks_cp`
+--
+ALTER TABLE `fs_drift_tracks_cp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indexes for table `fs_drift_tracks_sp`
+--
+ALTER TABLE `fs_drift_tracks_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indexes for table `fs_gangs`
+--
+ALTER TABLE `fs_gangs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `tag` (`tag`);
+
+--
+-- Indexes for table `fs_gangs_alliance`
+--
+ALTER TABLE `fs_gangs_alliance`
+  ADD PRIMARY KEY (`g1`,`g2`);
+
+--
+-- Indexes for table `fs_houses`
+--
+ALTER TABLE `fs_houses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ownerid` (`ownerid`);
+
+--
+-- Indexes for table `fs_houses_vehicles`
+--
+ALTER TABLE `fs_houses_vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_ipbans`
+--
+ALTER TABLE `fs_ipbans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `date_created` (`date_created`,`date_end`);
+
+--
+-- Indexes for table `fs_iplocks`
+--
+ALTER TABLE `fs_iplocks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `serial` (`ip_class`),
+  ADD KEY `date_created` (`date_created`);
+
+--
+-- Indexes for table `fs_mapicons`
+--
+ALTER TABLE `fs_mapicons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_miscpickups`
+--
+ALTER TABLE `fs_miscpickups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_mutes`
+--
+ALTER TABLE `fs_mutes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `player_banned` (`player_muted`,`date_created`,`date_end`);
+
+--
+-- Indexes for table `fs_paczki`
+--
+ALTER TABLE `fs_paczki`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_paczki_gracze`
+--
+ALTER TABLE `fs_paczki_gracze`
+  ADD PRIMARY KEY (`id_paczki`,`id_gracza`),
+  ADD KEY `idg` (`id_gracza`);
+
+--
+-- Indexes for table `fs_players`
+--
+ALTER TABLE `fs_players`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nick` (`nick`),
+  ADD KEY `session` (`session`),
+  ADD KEY `respect` (`respect`),
+  ADD KEY `skill` (`skill`),
+  ADD KEY `ip_last` (`ip_last`),
+  ADD KEY `serial_last` (`serial_last`),
+  ADD KEY `gamep` (`gamep`),
+  ADD KEY `serial_registered` (`serial_registered`),
+  ADD KEY `ip_registered` (`ip_registered`);
+
+--
+-- Indexes for table `fs_players_achievements`
+--
+ALTER TABLE `fs_players_achievements`
+  ADD PRIMARY KEY (`playerid`,`shortname`),
+  ADD KEY `shortname` (`shortname`,`score`),
+  ADD KEY `playerid` (`playerid`);
+
+--
+-- Indexes for table `fs_players_arenascore`
+--
+ALTER TABLE `fs_players_arenascore`
+  ADD PRIMARY KEY (`id_player`,`id_arena`);
+
+--
+-- Indexes for table `fs_players_arenascore_week`
+--
+ALTER TABLE `fs_players_arenascore_week`
+  ADD PRIMARY KEY (`id_player`,`id_arena`);
+
+--
+-- Indexes for table `fs_players_in_gangs`
+--
+ALTER TABLE `fs_players_in_gangs`
+  ADD PRIMARY KEY (`id_gang`,`id_player`),
+  ADD KEY `player_in_gang` (`id_player`,`rank`);
+
+--
+-- Indexes for table `fs_poczta`
+--
+ALTER TABLE `fs_poczta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_polecenia`
+--
+ALTER TABLE `fs_polecenia`
+  ADD PRIMARY KEY (`polecona`);
+
+--
+-- Indexes for table `fs_quiz`
+--
+ALTER TABLE `fs_quiz`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kategoria` (`kategoria`);
+
+--
+-- Indexes for table `fs_races`
+--
+ALTER TABLE `fs_races`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`),
+  ADD KEY `active` (`active`);
+
+--
+-- Indexes for table `fs_races_cp`
+--
+ALTER TABLE `fs_races_cp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indexes for table `fs_races_records`
+--
+ALTER TABLE `fs_races_records`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `raceid` (`raceid`),
+  ADD KEY `i1` (`playerid`,`raceid`);
+
+--
+-- Indexes for table `fs_races_sp`
+--
+ALTER TABLE `fs_races_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`);
+
+--
+-- Indexes for table `fs_returnpickups`
+--
+ALTER TABLE `fs_returnpickups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_sbans`
+--
+ALTER TABLE `fs_sbans`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `serial` (`serial`,`ip_class`),
+  ADD KEY `date_created` (`date_created`);
+
+--
+-- Indexes for table `fs_sluby`
+--
+ALTER TABLE `fs_sluby`
+  ADD UNIQUE KEY `para` (`id_player1`,`id_player2`);
+
+--
+-- Indexes for table `fs_solo_matches`
+--
+ALTER TABLE `fs_solo_matches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_stats`
+--
+ALTER TABLE `fs_stats`
+  ADD PRIMARY KEY (`option_name`);
+
+--
+-- Indexes for table `fs_telecheckpoints`
+--
+ALTER TABLE `fs_telecheckpoints`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_telepickups`
+--
+ALTER TABLE `fs_telepickups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_vehicles`
+--
+ALTER TABLE `fs_vehicles`
+  ADD PRIMARY KEY (`vid`),
+  ADD KEY `minPoziom` (`minPoziom`);
+
+--
+-- Indexes for table `fs_wg_arena`
+--
+ALTER TABLE `fs_wg_arena`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `minplayers` (`minplayers`,`maxplayers`);
+
+--
+-- Indexes for table `fs_wg_arena_sp`
+--
+ALTER TABLE `fs_wg_arena_sp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aid` (`aid`,`team`,`randomorder`);
+
+--
+-- Indexes for table `fs_zones`
+--
+ALTER TABLE `fs_zones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fs_zones_gangscore`
+--
+ALTER TABLE `fs_zones_gangscore`
+  ADD PRIMARY KEY (`id_zone`,`id_gang`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `fs_achievements_ranks`
+--
+ALTER TABLE `fs_achievements_ranks`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
+--
+-- AUTO_INCREMENT dla tabeli `fs_bans`
+--
+ALTER TABLE `fs_bans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_chowany_arena`
+--
+ALTER TABLE `fs_chowany_arena`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
+--
+-- AUTO_INCREMENT dla tabeli `fs_chowany_arena_sp`
+--
+ALTER TABLE `fs_chowany_arena_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2291;
+--
+-- AUTO_INCREMENT dla tabeli `fs_ctf_arena`
+--
+ALTER TABLE `fs_ctf_arena`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
+--
+-- AUTO_INCREMENT dla tabeli `fs_ctf_arena_sp`
+--
+ALTER TABLE `fs_ctf_arena_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3414;
+--
+-- AUTO_INCREMENT dla tabeli `fs_derby_arena`
+--
+ALTER TABLE `fs_derby_arena`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT dla tabeli `fs_derby_arena_sp`
+--
+ALTER TABLE `fs_derby_arena_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=447;
+--
+-- AUTO_INCREMENT dla tabeli `fs_drift_records`
+--
+ALTER TABLE `fs_drift_records`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT dla tabeli `fs_drift_tracks`
+--
+ALTER TABLE `fs_drift_tracks`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT dla tabeli `fs_drift_tracks_cp`
+--
+ALTER TABLE `fs_drift_tracks_cp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=234;
+--
+-- AUTO_INCREMENT dla tabeli `fs_drift_tracks_sp`
+--
+ALTER TABLE `fs_drift_tracks_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT dla tabeli `fs_houses`
+--
+ALTER TABLE `fs_houses`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=905;
+--
+-- AUTO_INCREMENT dla tabeli `fs_houses_vehicles`
+--
+ALTER TABLE `fs_houses_vehicles`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10907;
+--
+-- AUTO_INCREMENT dla tabeli `fs_ipbans`
+--
+ALTER TABLE `fs_ipbans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_iplocks`
+--
+ALTER TABLE `fs_iplocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_mapicons`
+--
+ALTER TABLE `fs_mapicons`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+--
+-- AUTO_INCREMENT dla tabeli `fs_miscpickups`
+--
+ALTER TABLE `fs_miscpickups`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=841;
+--
+-- AUTO_INCREMENT dla tabeli `fs_mutes`
+--
+ALTER TABLE `fs_mutes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_paczki`
+--
+ALTER TABLE `fs_paczki`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=134;
+--
+-- AUTO_INCREMENT dla tabeli `fs_players`
+--
+ALTER TABLE `fs_players`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT dla tabeli `fs_poczta`
+--
+ALTER TABLE `fs_poczta`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_quiz`
+--
+ALTER TABLE `fs_quiz`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1612;
+--
+-- AUTO_INCREMENT dla tabeli `fs_races`
+--
+ALTER TABLE `fs_races`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=116;
+--
+-- AUTO_INCREMENT dla tabeli `fs_races_cp`
+--
+ALTER TABLE `fs_races_cp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4260;
+--
+-- AUTO_INCREMENT dla tabeli `fs_races_records`
+--
+ALTER TABLE `fs_races_records`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT dla tabeli `fs_races_sp`
+--
+ALTER TABLE `fs_races_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1477;
+--
+-- AUTO_INCREMENT dla tabeli `fs_returnpickups`
+--
+ALTER TABLE `fs_returnpickups`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=152;
+--
+-- AUTO_INCREMENT dla tabeli `fs_sbans`
+--
+ALTER TABLE `fs_sbans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_solo_matches`
+--
+ALTER TABLE `fs_solo_matches`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `fs_telecheckpoints`
+--
+ALTER TABLE `fs_telecheckpoints`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+--
+-- AUTO_INCREMENT dla tabeli `fs_telepickups`
+--
+ALTER TABLE `fs_telepickups`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=998;
+--
+-- AUTO_INCREMENT dla tabeli `fs_wg_arena`
+--
+ALTER TABLE `fs_wg_arena`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
+--
+-- AUTO_INCREMENT dla tabeli `fs_wg_arena_sp`
+--
+ALTER TABLE `fs_wg_arena_sp`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3338;
+--
+-- AUTO_INCREMENT dla tabeli `fs_zones`
+--
+ALTER TABLE `fs_zones`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=286;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

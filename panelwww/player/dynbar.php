@@ -25,7 +25,7 @@ SOFTWARE.
  
 $pid=intval($_REQUEST['pid']);
 if (!($pid>0)) $pid=32;
-$hash=md5($_SERVER['REQUEST_URI']);
+$hash=md5($pid);
 $filename="tmp/dynbar-".$hash.".png";
 
 if(file_exists($filename)){

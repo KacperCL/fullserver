@@ -28,7 +28,7 @@ if (!($pid>0)) $pid=32;
 $tlo=intval($_REQUEST['tlo']);
 if (!($tlo>0) || $tlo>6) $tlo=1;
 
-$hash=md5($_SERVER['REQUEST_URI']);
+$hash=md5($pid.$tlo);
 $filename="tmp/userbar1-".$hash.".png";
 
 if(file_exists($filename)){

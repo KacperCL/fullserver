@@ -143,7 +143,7 @@ CMD:config(playerid)
 CMD:unmute(playerid, params[])
 {
   if(!IsAdmin(playerid,LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 247)); // U篡waj: /unmute <gracz>
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 247)); // Uzwaj: /unmute <gracz>
 
   new
    targetplayerid,
@@ -188,10 +188,10 @@ CMD:unmute(playerid, params[])
   mysql_query(buffer);
 
   format(buffer, sizeof buffer, TXT(playerid, 249), GetPlayerNick(targetplayerid));
-  Msg(playerid, COLOR_INFO, buffer); // Wyciszenie gracza "xxx" zosta這 wy章czone.
+  Msg(playerid, COLOR_INFO, buffer);
 
   format(buffer, sizeof buffer, TXT(playerid, 250), (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid));
-  Msg(targetplayerid, COLOR_INFO2, buffer); // Twoje wyciszenie zosta這 wy章czone przez admina "xxx".*/
+  Msg(targetplayerid, COLOR_INFO2, buffer);
 
   return 1;
 }
@@ -595,7 +595,7 @@ CMD:ach(playerid,params[]){
 CMD:aa(playerid, params[])
 {
   if(!IsAdmin(playerid, LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 134)); // U篡waj: /aa <tekst>
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 134));
 
   if(FilterText(playerid, params) == 0) return 1;
   if(gmData[chatColors] && pData[playerid][adminLevel]>=LEVEL_ADMIN3) FilterTextWithColors(params);
@@ -674,7 +674,7 @@ CMD:configupdate(playerid)
 CMD:unban(playerid, params[])
 {
   if(!IsAdmin(playerid, LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 181)); // U篡waj: /unban <nazwa konta>
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 181));
 
   new
    buffer[128];
@@ -701,14 +701,14 @@ CMD:unban(playerid, params[])
 CMD:unbanip(playerid, params[])
 {
   if(!IsAdmin(playerid, LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 191)); // U篡waj: /unbanip <adres IP>
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, TXT(playerid, 191));
 
   new
    buffer[128];
 
   if(!IsCorrectIP(params))
   {
-    return Msg(playerid, COLOR_ERROR, TXT(playerid, 192)); // Podany adres IP jest nieprawid這wy.
+    return Msg(playerid, COLOR_ERROR, TXT(playerid, 192));
   }
 
   copy(params, pTemp[playerid][tmpBanIP]);
@@ -722,7 +722,7 @@ CMD:unbanip(playerid, params[])
 CMD:fakeban(playerid, params[])
 {
   if(!IsAdmin(playerid, LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, "Uzyj: {b}/fakeban <id/nick> [powod]{/b}");
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, "Uzywaj: {b}/fakeban <id/nick> [powod]{/b}");
   new
    tplayer[24],
    uid,
@@ -755,7 +755,7 @@ CMD:fakeban(playerid, params[])
 CMD:zawies(playerid, params[])
 {
   if(!IsAdmin(playerid, LEVEL_ADMIN3)) return 0;
-  if(isnull(params)) return Msg(playerid, COLOR_ERROR, "U篡waj: /zawies <gracz> <czas> <m/g/d/t/s>");
+  if(isnull(params)) return Msg(playerid, COLOR_ERROR, "Uzywaj: /zawies <gracz> <czas> <m/g/d/t/s>");
 
   new
    szPlayerName[24],
@@ -798,7 +798,7 @@ CMD:zawies(playerid, params[])
 
   if(period != 'm' && period != 'h' && period != 'd' && period != 't' && period != 's')
   {
-    Msg(playerid, COLOR_ERROR, TXT(playerid, 29)); // Nieprawid這wy ostatni parametr komendy.
+    Msg(playerid, COLOR_ERROR, TXT(playerid, 29));
     return Msg(playerid, COLOR_ERROR, "M - minuty, H - godziny, D - dni, T - tygodnie, S - miesiace");
   }
 

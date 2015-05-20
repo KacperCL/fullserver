@@ -431,7 +431,7 @@ CreateConfigDBIfNotExists()
 
     //  --- CREATE FIELDS ---
 
-    format(szQuery, sizeof szQuery, "CREATE TABLE config(");
+    format(szQuery, sizeof szQuery, "CREATE TABLE `config`(");
 
     for(new i = 0; i < sizeof defaultColorsFields; i++)
     {
@@ -440,8 +440,10 @@ CreateConfigDBIfNotExists()
 
       strcat(szQuery, buffer);
     }
+    
+    db_query(hDB, szQuery);
 
-    format(szQuery, sizeof szQuery, "CREATE TABLE mysql_config (prefix TEXT, database TEXT, username TEXT, password TEXT, hostname TEXT);");
+    format(szQuery, sizeof szQuery, "CREATE TABLE `mysql_config` (prefix TEXT, database TEXT, username TEXT, password TEXT, hostname TEXT);");
     db_query(hDB, szQuery);
 
     //  --- INSERT DATA ---
@@ -463,12 +465,17 @@ CreateConfigDBIfNotExists()
 
       strcat(szQuery, buffer);
     }
+    
+    db_query(hDB, szQuery);
+    
+    format(szQuery, sizeof szQuery, "INSERT INTO `mysql_config` (prefix, database, username, password, hostname) VALUES ('fs_','fullserver','fullserv','rot13','127.0.0.1')");
 
     db_query(hDB, szQuery);
 
-    printf(" Teraz musisz wypelnic plik config.db odpowiednimi danymi");
-
+    printf(" [!!!] TERAZ MUSISZ WYPELNIC PLIK `config.db` ODPOWIEDNIMI DANYMI");
     db_close(hDB);
+    
+    fread(File:EXIT, gstr);
   }
 }
 
@@ -862,7 +869,7 @@ LoadBasicPlayerData(playerid,bool:altnick=false)
     mysql_store_result();
     if (mysql_fetch_row_format(buffer,"|")) {
         new gangrank[16];
-        sscanf(buffer,"p<|>ddddds[16]dds[64]s[25]dd",
+        sscanf(buffer,"p<|>dddddds[16]ds[64]s[25]dd",
             pData[playerid][accountID],
             pData[playerid][lastUsedSkin],
             pData[playerid][jailMysql],

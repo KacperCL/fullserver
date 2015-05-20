@@ -3,11 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas generowania: 20 Maj 2015, 12:57
+-- Czas generowania: 20 Maj 2015, 15:58
 -- Wersja serwera: 5.6.23-1~dotdeb.3-log
 -- Wersja PHP: 5.5.23-1~dotdeb.2
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -524,7 +523,7 @@ CREATE TABLE IF NOT EXISTS `fs_players` (
   `datetime_last` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `session` bigint(11) NOT NULL,
   `level` tinyint(1) unsigned NOT NULL,
-  `levelAddition` int(1) DEFAULT '0' COMMENT '1 - maper',
+  `levelAddition` int(1) NOT NULL DEFAULT '0' COMMENT '1 - maper',
   `suspendedTo` timestamp NULL DEFAULT NULL COMMENT 'zawieszenie rangi do daty',
   `vip` date NOT NULL,
   `doubleMode` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'tryb furii',
@@ -548,7 +547,7 @@ CREATE TABLE IF NOT EXISTS `fs_players` (
   `zaloz` varchar(32) DEFAULT NULL,
   `spawnData` tinyint(1) unsigned NOT NULL DEFAULT '5',
   `selectedWeap` smallint(1) unsigned NOT NULL DEFAULT '1',
-  `hudData` varchar(64) NOT NULL DEFAULT '1,1,1,1,1,1,1,1,1,1',
+  `hudData` varchar(64) NOT NULL DEFAULT '1,1,1,1,1,1,1,1,1,1,1',
   `isLocked` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'blokada konta'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -995,7 +994,7 @@ CREATE TABLE IF NOT EXISTS `fs_zones_gangscore` (
 --
 DROP TABLE IF EXISTS `fs_view_housesandvehicles`;
 
-CREATE VIEW `fs_view_housesandvehicles` AS select `h`.`id` AS `id`,`h`.`X` AS `X`,`h`.`Y` AS `Y`,`h`.`Z` AS `Z`,`h`.`exitX` AS `exitX`,`h`.`exitY` AS `exitY`,`h`.`exitZ` AS `exitZ`,`h`.`exitA` AS `exitA`,ifnull(`h`.`ownerid`,0) AS `ownerid`,`h`.`koszt` AS `koszt`,ifnull(`p`.`nick`,_ascii'nn') AS `nick`,ifnull(`h`.`paidTo`,_utf8'-') AS `IFNULL
+CREATE ALGORITHM=UNDEFINED DEFINER=`k11`@`%` SQL SECURITY DEFINER VIEW `fs_view_housesandvehicles` AS select `h`.`id` AS `id`,`h`.`X` AS `X`,`h`.`Y` AS `Y`,`h`.`Z` AS `Z`,`h`.`exitX` AS `exitX`,`h`.`exitY` AS `exitY`,`h`.`exitZ` AS `exitZ`,`h`.`exitA` AS `exitA`,ifnull(`h`.`ownerid`,0) AS `ownerid`,`h`.`koszt` AS `koszt`,ifnull(`p`.`nick`,_ascii'nn') AS `nick`,ifnull(`h`.`paidTo`,_utf8'-') AS `IFNULL
 (h.paidTo,'-')`,ifnull((to_days(`h`.`paidTo`) - to_days(now())),-(1)) AS `IFNULL(DATEDIFF(h.paidTo,NOW()),-1)`,`h`.`homeX` AS `homeX`,`h`.`homeY` AS `homeY`,`h`.`homeZ` AS `homeZ`,`h`.`homeA` AS `homeA`,`h`.`homeI` AS `homeI`,`h`.`homeVW` AS `homeVW`,`h`.`vehicles_allowed` AS `vehicles_allowed`,`h`.`vehicle_radius` AS `vehicle_radius`,ifnull(`hv`.`model`,0) AS `IFNULL(hv.model,0)`,ifnull(`hv`.`X`,0) AS `IFNULL(hv.X,0)`,ifnull(`hv`.`Y`,0) AS `IFNULL(hv.Y,0)`,ifnull(`hv`.`Z`,0) AS `IFNULL(hv.Z,0)`,ifnull(`hv`.`A`,0) AS `IFNULL(hv.A,0)`,ifnull(`hv`.`color1`,0) AS `IFNULL(hv.color1,0)`,ifnull(`hv`.`color2`,0) AS `IFNULL(hv.color2,0)`,ifnull(`hv`.`plate`,_latin1'-') AS `IFNULL(hv.plate,"-
 ")`,ifnull(`h`.`audioURL`,_latin1'-') AS `IFNULL(audioURL,_latin1'-')`,ifnull(`hv`.`components`,_latin1'-') AS `IFNULL(``hv``.``components``,"-")`,`h`.`restrict_gang` AS `restrict_gang` from ((`fs_houses` `h` left join `fs_players` `p` on((`p`.`id` = `h`.`ownerid`))) left join `fs_houses_vehicles` `hv` on(((`hv`.`houseid` = `h`.`id`) and (`h`.`ownerid` > 0) and (`h`.`paidTo` > cast(now() as date)))));
 

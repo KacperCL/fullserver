@@ -3,11 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas generowania: 20 Maj 2015, 13:00
+-- Czas generowania: 20 Maj 2015, 16:01
 -- Wersja serwera: 5.6.23-1~dotdeb.3-log
 -- Wersja PHP: 5.5.23-1~dotdeb.2
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -20,18 +19,11 @@ SET time_zone = "+00:00";
 -- Baza danych: `db_12`
 --
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_achievements`
+-- Tabela Truncate przed wstawieniem `fs_achievements`
 --
 
-DROP TABLE IF EXISTS `fs_achievements`;
-CREATE TABLE IF NOT EXISTS `fs_achievements` (
-  `name` varchar(32) NOT NULL,
-  `shortname` varchar(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+TRUNCATE TABLE `fs_achievements`;
 --
 -- Zrzut danych tabeli `fs_achievements`
 --
@@ -52,21 +44,11 @@ INSERT INTO `fs_achievements` (`name`, `shortname`) VALUES
 ('Zebrane paczki', 'PACZKI'),
 ('Rozwiazane QUIZy', 'QUIZ');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_achievements_ranks`
+-- Tabela Truncate przed wstawieniem `fs_achievements_ranks`
 --
 
-DROP TABLE IF EXISTS `fs_achievements_ranks`;
-CREATE TABLE IF NOT EXISTS `fs_achievements_ranks` (
-  `id` int(10) unsigned NOT NULL,
-  `shortname` varchar(10) CHARACTER SET ascii NOT NULL,
-  `rank` varchar(48) NOT NULL,
-  `score` int(10) unsigned NOT NULL,
-  `replacename` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
-
+TRUNCATE TABLE `fs_achievements_ranks`;
 --
 -- Zrzut danych tabeli `fs_achievements_ranks`
 --
@@ -187,35 +169,11 @@ INSERT INTO `fs_achievements_ranks` (`id`, `shortname`, `rank`, `score`, `replac
 (152, 'CHOFAN', '10 rozegranych /CH', 10, 1),
 (151, 'CHOFAN', 'Pierwsze rozegrane /CH', 1, 1);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_admin_activity`
+-- Tabela Truncate przed wstawieniem `fs_arena`
 --
 
-DROP TABLE IF EXISTS `fs_admin_activity`;
-CREATE TABLE IF NOT EXISTS `fs_admin_activity` (
-  `id_player` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `minut` smallint(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_admin_activity`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_arena`
---
-
-DROP TABLE IF EXISTS `fs_arena`;
-CREATE TABLE IF NOT EXISTS `fs_arena` (
-  `id` int(10) unsigned NOT NULL,
-  `descr` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_arena`;
 --
 -- Zrzut danych tabeli `fs_arena`
 --
@@ -236,40 +194,11 @@ INSERT INTO `fs_arena` (`id`, `descr`) VALUES
 (14, '/cs'),
 (8, '/rpg');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_bans`
+-- Tabela Truncate przed wstawieniem `fs_chowany_arena`
 --
 
-DROP TABLE IF EXISTS `fs_bans`;
-CREATE TABLE IF NOT EXISTS `fs_bans` (
-  `id` int(11) NOT NULL,
-  `player_banned` int(11) NOT NULL,
-  `player_given` int(11) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_chowany_arena`
---
-
-DROP TABLE IF EXISTS `fs_chowany_arena`;
-CREATE TABLE IF NOT EXISTS `fs_chowany_arena` (
-  `id` int(10) unsigned NOT NULL,
-  `descr` varchar(64) NOT NULL,
-  `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `wb_cube` varchar(64) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'prostopadloscian x1,y1,z1,x2,y2,z2',
-  `wb_mode` enum('oraz','lub') CHARACTER SET ascii NOT NULL DEFAULT 'lub' COMMENT 'oraz - gracz musi byc w obu polach, lub - musi byc w jednym z nich',
-  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r'
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_chowany_arena`;
 --
 -- Zrzut danych tabeli `fs_chowany_arena`
 --
@@ -307,23 +236,11 @@ INSERT INTO `fs_chowany_arena` (`id`, `descr`, `interior`, `minplayers`, `maxpla
 (42, 'Farmerida wiejska ', 0, 3, 20, NULL, 'lub', '-1439.51,-1504.72,101.74,100'),
 (43, 'Kolo salonu w SF', 0, 666, 24, '-1855,610,122,-1990,364,10', 'lub', NULL);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_chowany_arena_sp`
+-- Tabela Truncate przed wstawieniem `fs_chowany_arena_sp`
 --
 
-DROP TABLE IF EXISTS `fs_chowany_arena_sp`;
-CREATE TABLE IF NOT EXISTS `fs_chowany_arena_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `team` tinyint(1) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `A` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2291 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_chowany_arena_sp`;
 --
 -- Zrzut danych tabeli `fs_chowany_arena_sp`
 --
@@ -2129,18 +2046,11 @@ INSERT INTO `fs_chowany_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`) VALU
 (2289, 43, 0, -1923.8502, 477.3993, 35.1718, 84),
 (2290, 43, 0, -1928.3674, 473.8255, 35.1718, 351.88);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_config`
+-- Tabela Truncate przed wstawieniem `fs_config`
 --
 
-DROP TABLE IF EXISTS `fs_config`;
-CREATE TABLE IF NOT EXISTS `fs_config` (
-  `option_name` varchar(32) NOT NULL,
-  `value` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+TRUNCATE TABLE `fs_config`;
 --
 -- Zrzut danych tabeli `fs_config`
 --
@@ -2149,27 +2059,11 @@ INSERT INTO `fs_config` (`option_name`, `value`) VALUES
 ('welcome_text', 'Zmiany w gangach:~n~~n~~w~Wkrotce na terenie ~b~Los Santos ~w~zostana wprowadzone terytoria do przejmowania przez gangi.'),
 ('admin_password', 'AD102B4368EBE7CDCC7BAD16030AEF1C');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_ctf_arena`
+-- Tabela Truncate przed wstawieniem `fs_ctf_arena`
 --
 
-DROP TABLE IF EXISTS `fs_ctf_arena`;
-CREATE TABLE IF NOT EXISTS `fs_ctf_arena` (
-  `id` int(10) unsigned NOT NULL,
-  `descr` varchar(64) NOT NULL,
-  `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `wb_cube` varchar(64) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'prostopadloscian x1,y1,z1,x2,y2,z2',
-  `wb_mode` enum('oraz','lub') CHARACTER SET ascii NOT NULL DEFAULT 'lub' COMMENT 'oraz - gracz musi byc w obu polach, lub - musi byc w jednym z nich',
-  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r',
-  `flaga_spawn` varchar(64) NOT NULL,
-  `flaga_team0` varchar(64) NOT NULL COMMENT 'zielony',
-  `flaga_team1` varchar(64) NOT NULL COMMENT 'niebieski'
-) ENGINE=MyISAM AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_ctf_arena`;
 --
 -- Zrzut danych tabeli `fs_ctf_arena`
 --
@@ -2182,24 +2076,11 @@ INSERT INTO `fs_ctf_arena` (`id`, `descr`, `interior`, `minplayers`, `maxplayers
 (89, 'Pole golfowe', 0, 2, 20, '1121,2725,5,1437,2859,36', 'lub', NULL, '1269.98,2791.77,10.82', '1314.936645,2816.564941,24.353786', '1206.134887,2806.575927,24.522247'),
 (90, 'Angel Pine', 0, 2, 20, NULL, 'lub', '-2171.17,-2416.83,36.85,100', '-2171.17,-2416.83,36.85', '-2110.144287,-2425.340332,30.625000', '-2152.134521,-2474.392822,30.625000');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_ctf_arena_sp`
+-- Tabela Truncate przed wstawieniem `fs_ctf_arena_sp`
 --
 
-DROP TABLE IF EXISTS `fs_ctf_arena_sp`;
-CREATE TABLE IF NOT EXISTS `fs_ctf_arena_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `team` tinyint(1) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `A` double NOT NULL,
-  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie'
-) ENGINE=MyISAM AUTO_INCREMENT=3414 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_ctf_arena_sp`;
 --
 -- Zrzut danych tabeli `fs_ctf_arena_sp`
 --
@@ -2330,24 +2211,11 @@ INSERT INTO `fs_ctf_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`, `randomo
 (3412, 90, 0, -2098.1042, -2409.1489, 30.625, 134.8, 0),
 (3413, 90, 0, -2096.8, -2407.5427, 30.625, 134.8, 0);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_derby_arena`
+-- Tabela Truncate przed wstawieniem `fs_derby_arena`
 --
 
-DROP TABLE IF EXISTS `fs_derby_arena`;
-CREATE TABLE IF NOT EXISTS `fs_derby_arena` (
-  `id` int(10) unsigned NOT NULL,
-  `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '2',
-  `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '4',
-  `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
-  `interior` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `descr` varchar(255) DEFAULT NULL,
-  `nitro` tinyint(1) NOT NULL DEFAULT '0',
-  `minZ` int(11) NOT NULL DEFAULT '-1000'
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
-
+TRUNCATE TABLE `fs_derby_arena`;
 --
 -- Zrzut danych tabeli `fs_derby_arena`
 --
@@ -2371,22 +2239,11 @@ INSERT INTO `fs_derby_arena` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `inte
 (17, 4, 6, 464, 10, 'RC Baron', 0, -1000),
 (18, 2, 10, 480, 0, 'Easter basin', 1, 15);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_derby_arena_sp`
+-- Tabela Truncate przed wstawieniem `fs_derby_arena_sp`
 --
 
-DROP TABLE IF EXISTS `fs_derby_arena_sp`;
-CREATE TABLE IF NOT EXISTS `fs_derby_arena_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=447 DEFAULT CHARSET=utf8;
-
+TRUNCATE TABLE `fs_derby_arena_sp`;
 --
 -- Zrzut danych tabeli `fs_derby_arena_sp`
 --
@@ -2760,68 +2617,11 @@ INSERT INTO `fs_derby_arena_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 (445, 18, -1433.56, 370.27, 29.86, 274.19),
 (446, 18, -1421.32, 348.29, 29.87, 302.81);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_dragrace_records`
+-- Tabela Truncate przed wstawieniem `fs_drift_tracks`
 --
 
-DROP TABLE IF EXISTS `fs_dragrace_records`;
-CREATE TABLE IF NOT EXISTS `fs_dragrace_records` (
-  `id_player` int(10) unsigned NOT NULL,
-  `vehicleModel` int(10) unsigned NOT NULL,
-  `time` double(6,3) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ping` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_drift_records`
---
-
-DROP TABLE IF EXISTS `fs_drift_records`;
-CREATE TABLE IF NOT EXISTS `fs_drift_records` (
-  `id` int(10) unsigned NOT NULL,
-  `playerid` int(10) unsigned NOT NULL,
-  `raceid` smallint(10) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `recordtime` float unsigned NOT NULL,
-  `opponents` mediumint(9) NOT NULL DEFAULT '1',
-  `finalscore` smallint(5) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_drift_records`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_drift_tracks`
---
-
-DROP TABLE IF EXISTS `fs_drift_tracks`;
-CREATE TABLE IF NOT EXISTS `fs_drift_tracks` (
-  `id` int(10) unsigned NOT NULL,
-  `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '10',
-  `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
-  `interior` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `descr` varchar(255) DEFAULT NULL,
-  `nitro` tinyint(1) NOT NULL DEFAULT '0',
-  `allowRepairs` tinyint(1) NOT NULL DEFAULT '0',
-  `allowFlip` tinyint(1) NOT NULL DEFAULT '0',
-  `distance` double unsigned NOT NULL DEFAULT '100',
-  `scx` double DEFAULT NULL,
-  `scy` double DEFAULT NULL,
-  `scz` double DEFAULT NULL,
-  `limitrand` tinyint(4) NOT NULL DEFAULT '100',
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `partime` float unsigned NOT NULL DEFAULT '100'
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_drift_tracks`;
 --
 -- Zrzut danych tabeli `fs_drift_tracks`
 --
@@ -2842,24 +2642,11 @@ INSERT INTO `fs_drift_tracks` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `int
 (13, 1, 3, 562, 0, 'Sea road', 1, 0, 0, 6.05, 4262.27, 574.38, 7.7, 100, 0, 100),
 (14, 1, 4, 562, 0, 'Verdant Meadows', 1, 1, 1, 0, 425, 2377, 41, 100, 1, 100);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_drift_tracks_cp`
+-- Tabela Truncate przed wstawieniem `fs_drift_tracks_cp`
 --
 
-DROP TABLE IF EXISTS `fs_drift_tracks_cp`;
-CREATE TABLE IF NOT EXISTS `fs_drift_tracks_cp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `type` smallint(3) unsigned NOT NULL DEFAULT '0',
-  `size` double NOT NULL DEFAULT '0',
-  `so` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=234 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_drift_tracks_cp`;
 --
 -- Zrzut danych tabeli `fs_drift_tracks_cp`
 --
@@ -3092,22 +2879,11 @@ INSERT INTO `fs_drift_tracks_cp` (`id`, `aid`, `X`, `Y`, `Z`, `type`, `size`, `s
 (232, 14, 218.6977, 2750.9492, 59.1985, 0, 8, 290),
 (233, 14, 392.0466, 2703.7177, 60.4122, 1, 8, 300);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_drift_tracks_sp`
+-- Tabela Truncate przed wstawieniem `fs_drift_tracks_sp`
 --
 
-DROP TABLE IF EXISTS `fs_drift_tracks_sp`;
-CREATE TABLE IF NOT EXISTS `fs_drift_tracks_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_drift_tracks_sp`;
 --
 -- Zrzut danych tabeli `fs_drift_tracks_sp`
 --
@@ -3158,76 +2934,11 @@ INSERT INTO `fs_drift_tracks_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 (44, 14, 432.3291, 2377.375, 26.0586, 107.2),
 (45, 14, 432.1593, 2381.0676, 26.0828, 101.2);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_gangs`
+-- Tabela Truncate przed wstawieniem `fs_houses`
 --
 
-DROP TABLE IF EXISTS `fs_gangs`;
-CREATE TABLE IF NOT EXISTS `fs_gangs` (
-  `id` smallint(1) unsigned NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `tag` varchar(5) NOT NULL,
-  `color` char(6) NOT NULL DEFAULT '000000',
-  `respect` int(11) NOT NULL DEFAULT '0',
-  `datetime_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `basespawn` varchar(64) NOT NULL DEFAULT '2023,1008,12,270' COMMENT 'Miejsce spawnu gangu - WYSPA',
-  `spawnpoint` varchar(64) NOT NULL DEFAULT '2023,1008,11,270',
-  `active` tinyint(4) NOT NULL DEFAULT '1',
-  `www` varchar(30) NOT NULL,
-  `wyspa_sphere` varchar(64) NOT NULL COMMENT 'kula/sfera: x,y,z,r'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `fs_gangs`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_gangs_alliance`
---
-
-DROP TABLE IF EXISTS `fs_gangs_alliance`;
-CREATE TABLE IF NOT EXISTS `fs_gangs_alliance` (
-  `g1` smallint(2) unsigned NOT NULL,
-  `g2` smallint(2) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_houses`
---
-
-DROP TABLE IF EXISTS `fs_houses`;
-CREATE TABLE IF NOT EXISTS `fs_houses` (
-  `id` int(10) unsigned NOT NULL,
-  `descr` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `ownerid` int(10) unsigned DEFAULT NULL,
-  `koszt` smallint(4) unsigned NOT NULL DEFAULT '0',
-  `exitX` float NOT NULL DEFAULT '0',
-  `exitY` float NOT NULL DEFAULT '0',
-  `exitZ` float NOT NULL DEFAULT '0',
-  `exitA` float NOT NULL DEFAULT '0',
-  `paidTo` date DEFAULT NULL,
-  `homeX` float NOT NULL,
-  `homeY` float NOT NULL,
-  `homeZ` float NOT NULL,
-  `homeA` float NOT NULL,
-  `homeI` smallint(6) NOT NULL,
-  `homeVW` mediumint(9) NOT NULL DEFAULT '-1',
-  `vehicles_allowed` tinyint(4) NOT NULL DEFAULT '1',
-  `vehicle_radius` double unsigned NOT NULL DEFAULT '20',
-  `audioURL` varchar(128) DEFAULT NULL,
-  `restrict_gang` tinyint(2) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=905 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_houses`;
 --
 -- Zrzut danych tabeli `fs_houses`
 --
@@ -3510,27 +3221,11 @@ INSERT INTO `fs_houses` (`id`, `descr`, `X`, `Y`, `Z`, `ownerid`, `koszt`, `exit
 (897, 'flint county', -582.62, -1040.19, 23.58, 16204, 70, -582.475, -1042.21, 23.6059, 180.606, '2014-04-24', 268.361, 304.954, 999.148, 271.353, 2, -1, 1, 20, NULL, 0),
 (898, 'Richman', 552.89, -1200.29, 44.83, 0, 100, 550.204, -1200.56, 44.8315, 108.769, '0000-00-00', 223.313, 1288.88, 1082.13, 0.563712, 1, -1, 1, 20, NULL, 0);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_houses_vehicles`
+-- Tabela Truncate przed wstawieniem `fs_houses_vehicles`
 --
 
-DROP TABLE IF EXISTS `fs_houses_vehicles`;
-CREATE TABLE IF NOT EXISTS `fs_houses_vehicles` (
-  `id` int(10) unsigned NOT NULL,
-  `houseid` int(10) unsigned NOT NULL,
-  `model` smallint(5) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `A` double NOT NULL,
-  `color1` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `color2` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `plate` varchar(32) NOT NULL DEFAULT 'bryka',
-  `components` varchar(80) NOT NULL DEFAULT ' '
-) ENGINE=MyISAM AUTO_INCREMENT=10907 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_houses_vehicles`;
 --
 -- Zrzut danych tabeli `fs_houses_vehicles`
 --
@@ -3816,58 +3511,11 @@ INSERT INTO `fs_houses_vehicles` (`id`, `houseid`, `model`, `X`, `Y`, `Z`, `A`, 
 (10900, 97, 558, 2485.7, -2017.88, 13.13, 88.55, 6, 6, 'Fs_Kozdyr0_Vs', '1164:0:1091:1095:0:1010:1092:1075:0:1087:1166:1168:0:0'),
 (10906, 851, 558, -2475.11, 1138.79, 55.37, 357.61, 0, 0, 'BlackBear39', '1164:0:1091:1095:0:1010:1092:1085:0:1087:1166:1168:0:0');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_ipbans`
+-- Tabela Truncate przed wstawieniem `fs_mapicons`
 --
 
-DROP TABLE IF EXISTS `fs_ipbans`;
-CREATE TABLE IF NOT EXISTS `fs_ipbans` (
-  `id` int(11) NOT NULL,
-  `ip` varchar(24) NOT NULL,
-  `player_given` int(11) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` text NOT NULL,
-  `target_nick` varchar(32) DEFAULT NULL,
-  `target_accountid` int(10) unsigned DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_iplocks`
---
-
-DROP TABLE IF EXISTS `fs_iplocks`;
-CREATE TABLE IF NOT EXISTS `fs_iplocks` (
-  `id` int(11) NOT NULL,
-  `ip_class` varchar(16) NOT NULL DEFAULT 'NONE' COMMENT 'tylko nie za zbyt szerokie ;-)',
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `comment` tinytext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_mapicons`
---
-
-DROP TABLE IF EXISTS `fs_mapicons`;
-CREATE TABLE IF NOT EXISTS `fs_mapicons` (
-  `id` int(10) unsigned NOT NULL,
-  `mapicon` smallint(6) NOT NULL DEFAULT '1',
-  `pX` double NOT NULL,
-  `pY` double NOT NULL,
-  `pZ` double NOT NULL,
-  `pi` mediumint(9) NOT NULL DEFAULT '0',
-  `pvw` mediumint(9) NOT NULL DEFAULT '0',
-  `opis` varchar(64) DEFAULT NULL,
-  `type` smallint(1) unsigned NOT NULL DEFAULT '1',
-  `loadingdistance` int(10) unsigned NOT NULL DEFAULT '1200'
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_mapicons`;
 --
 -- Zrzut danych tabeli `fs_mapicons`
 --
@@ -3898,25 +3546,11 @@ INSERT INTO `fs_mapicons` (`id`, `mapicon`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis
 (48, 62, -2972.114, 2477, 34, 0, 0, 'DX base', 0, 900),
 (65, 48, 74.482, 2022.909, 27.448, 0, 0, 'lowisko wojsko', 1, 1200);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_miscpickups`
+-- Tabela Truncate przed wstawieniem `fs_miscpickups`
 --
 
-DROP TABLE IF EXISTS `fs_miscpickups`;
-CREATE TABLE IF NOT EXISTS `fs_miscpickups` (
-  `id` int(10) unsigned NOT NULL,
-  `pickupid` mediumint(8) unsigned NOT NULL DEFAULT '371',
-  `interior` int(11) NOT NULL DEFAULT '0',
-  `vw` int(11) NOT NULL DEFAULT '0',
-  `pX` double NOT NULL,
-  `pY` double NOT NULL,
-  `pZ` double NOT NULL,
-  `descr` varchar(64) DEFAULT NULL,
-  `addedby` int(10) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=841 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_miscpickups`;
 --
 -- Zrzut danych tabeli `fs_miscpickups`
 --
@@ -4376,39 +4010,11 @@ INSERT INTO `fs_miscpickups` (`id`, `pickupid`, `interior`, `vw`, `pX`, `pY`, `p
 (796, 359, 0, 0, -1344.985, 445.492, 30.085, 'marynarka', 32),
 (797, 359, 0, 0, -1339.89, 453.417, 7.18, 'marynarka', 32);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_mutes`
+-- Tabela Truncate przed wstawieniem `fs_paczki`
 --
 
-DROP TABLE IF EXISTS `fs_mutes`;
-CREATE TABLE IF NOT EXISTS `fs_mutes` (
-  `id` int(11) NOT NULL,
-  `player_muted` int(11) NOT NULL,
-  `player_given` int(11) NOT NULL,
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_end` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reason` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_paczki`
---
-
-DROP TABLE IF EXISTS `fs_paczki`;
-CREATE TABLE IF NOT EXISTS `fs_paczki` (
-  `id` int(10) unsigned NOT NULL,
-  `x` double NOT NULL,
-  `y` double NOT NULL,
-  `z` double NOT NULL,
-  `i` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `vw` int(10) unsigned NOT NULL DEFAULT '0',
-  `opis` varchar(64) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_paczki`;
 --
 -- Zrzut danych tabeli `fs_paczki`
 --
@@ -4543,195 +4149,11 @@ INSERT INTO `fs_paczki` (`id`, `x`, `y`, `z`, `i`, `vw`, `opis`) VALUES
 (132, -2818.177001, 1143.803466, 19.293674, 0, 0, 'palisades'),
 (133, -2662.560058, 1595.153808, 225.757812, 0, 0, 'san fierro');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_paczki_gracze`
+-- Tabela Truncate przed wstawieniem `fs_quiz`
 --
 
-DROP TABLE IF EXISTS `fs_paczki_gracze`;
-CREATE TABLE IF NOT EXISTS `fs_paczki_gracze` (
-  `id_paczki` int(10) unsigned NOT NULL,
-  `id_gracza` int(10) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_paczki_gracze`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_players`
---
-
-DROP TABLE IF EXISTS `fs_players`;
-CREATE TABLE IF NOT EXISTS `fs_players` (
-  `id` int(11) unsigned NOT NULL,
-  `nick` varchar(24) CHARACTER SET ascii NOT NULL,
-  `email` varchar(56) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `ip_registered` varchar(16) NOT NULL,
-  `ip_last` varchar(16) NOT NULL,
-  `serial_registered` varchar(50) NOT NULL,
-  `serial_last` varchar(50) NOT NULL,
-  `datetime_registered` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `datetime_last` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `session` bigint(11) NOT NULL,
-  `level` tinyint(1) unsigned NOT NULL,
-  `levelAddition` int(1) DEFAULT '0' COMMENT '1 - maper',
-  `suspendedTo` timestamp NULL DEFAULT NULL COMMENT 'zawieszenie rangi do daty',
-  `vip` date NOT NULL,
-  `doubleMode` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'tryb furii',
-  `ban_count` mediumint(9) unsigned NOT NULL,
-  `kick_count` mediumint(9) unsigned NOT NULL,
-  `login_count` mediumint(9) unsigned NOT NULL,
-  `kill_count` mediumint(9) unsigned NOT NULL,
-  `teamkill_count` mediumint(9) unsigned NOT NULL,
-  `death_count` mediumint(9) unsigned NOT NULL,
-  `suicide_count` mediumint(9) unsigned NOT NULL,
-  `respect` int(11) unsigned NOT NULL,
-  `gamep` int(11) unsigned NOT NULL,
-  `skill` mediumint(9) unsigned NOT NULL,
-  `next_nick_change` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `bank_money` decimal(32,0) unsigned NOT NULL,
-  `wallet_money` int(11) unsigned NOT NULL,
-  `hitman_prize` int(11) unsigned NOT NULL,
-  `jail` mediumint(9) NOT NULL DEFAULT '-1',
-  `last_skin` smallint(3) NOT NULL DEFAULT '-1',
-  `active_server` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `zaloz` varchar(32) DEFAULT NULL,
-  `spawnData` tinyint(1) unsigned NOT NULL DEFAULT '5',
-  `selectedWeap` smallint(1) unsigned NOT NULL DEFAULT '1',
-  `hudData` varchar(64) NOT NULL DEFAULT '1,1,1,1,1,1,1,1,1,1',
-  `isLocked` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'blokada konta'
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `fs_players`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_players_achievements`
---
-
-DROP TABLE IF EXISTS `fs_players_achievements`;
-CREATE TABLE IF NOT EXISTS `fs_players_achievements` (
-  `playerid` int(10) unsigned NOT NULL,
-  `shortname` enum('DERBYFAN','DERBYWIN','KILLS','LONGPLAY','RACEDIST','RACEFCNT','WALIZKI','FOTOCASH','DRIFTPTS','LISTONOSZ','CHOFAN','CHOWIN','QUIZ','PACZKI') CHARACTER SET ascii NOT NULL,
-  `score` int(10) unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `fs_players_achievements`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_players_arenascore`
---
-
-DROP TABLE IF EXISTS `fs_players_arenascore`;
-CREATE TABLE IF NOT EXISTS `fs_players_arenascore` (
-  `id_player` int(10) unsigned NOT NULL,
-  `id_arena` smallint(5) unsigned NOT NULL,
-  `kills` int(10) unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_players_arenascore`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_players_arenascore_week`
---
-
-DROP TABLE IF EXISTS `fs_players_arenascore_week`;
-CREATE TABLE IF NOT EXISTS `fs_players_arenascore_week` (
-  `id_player` int(10) unsigned NOT NULL,
-  `id_arena` smallint(5) unsigned NOT NULL,
-  `kills` int(10) unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_players_arenascore_week`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_players_in_gangs`
---
-
-DROP TABLE IF EXISTS `fs_players_in_gangs`;
-CREATE TABLE IF NOT EXISTS `fs_players_in_gangs` (
-  `id_gang` smallint(1) unsigned NOT NULL,
-  `id_player` int(10) unsigned NOT NULL,
-  `rank` enum('member','owner','leader','suspended','viceowner') NOT NULL DEFAULT 'member',
-  `join_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `fs_players_in_gangs`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_poczta`
---
-
-DROP TABLE IF EXISTS `fs_poczta`;
-CREATE TABLE IF NOT EXISTS `fs_poczta` (
-  `id` int(10) unsigned NOT NULL,
-  `nadawca` int(10) unsigned NOT NULL,
-  `odbiorca` int(10) unsigned NOT NULL,
-  `tresc` varchar(1024) CHARACTER SET cp1250 COLLATE cp1250_polish_ci NOT NULL,
-  `dostarczone` tinyint(1) NOT NULL DEFAULT '0',
-  `przeczytane` tinyint(1) NOT NULL DEFAULT '0',
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_polecenia`
---
-
-DROP TABLE IF EXISTS `fs_polecenia`;
-CREATE TABLE IF NOT EXISTS `fs_polecenia` (
-  `polecona` int(11) unsigned NOT NULL,
-  `polecil` int(11) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ip` varchar(32) DEFAULT NULL,
-  `ua` varchar(128) DEFAULT NULL,
-  `rewarded` tinyint(4) NOT NULL DEFAULT '0',
-  `reward_date` timestamp NULL DEFAULT NULL,
-  `uniewazniony` tinyint(4) NOT NULL DEFAULT '0',
-  `uniewazniony_powod` varchar(128) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_quiz`
---
-
-DROP TABLE IF EXISTS `fs_quiz`;
-CREATE TABLE IF NOT EXISTS `fs_quiz` (
-  `id` int(10) unsigned NOT NULL,
-  `kategoria` varchar(64) CHARACTER SET utf8 NOT NULL,
-  `pytanie` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `odpowiedz` varchar(64) CHARACTER SET utf8 NOT NULL,
-  `lu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM AUTO_INCREMENT=1612 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_quiz`;
 --
 -- Zrzut danych tabeli `fs_quiz`
 --
@@ -4744,7 +4166,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (5, 'Literatura', 'Jak nazywal sie autor "Folwarku zwierzecego" i "Roku 1984"?', 'George Orwell', '2015-05-18 18:00:14'),
 (280, 'Sport', 'Ktory Polski pilkaz zostal krolem strzelcow podczas mundialu w 1974r. w Niemczech?', 'Grzegorz Lato', '2015-05-18 18:38:47'),
 (7, 'Filmy', 'Jak na nazwisko maja rezyserowie filmu "Matrix"?', 'Wachowski', '2015-05-11 15:32:02'),
-(8, 'Filmy', 'Jak nazywa sie rezyser "Powrotow do przyszlosci"?', 'Robert Zemeckis', '2015-05-18 18:37:02'),
+(8, 'Filmy', 'Jak nazywa sie rezyser "Powrotow do przyszlosci"?', 'Robert Zemeckis', '2015-05-20 13:05:42'),
 (9, 'Geografia', 'Najglebsze jezioro w Polsce to?', 'Hancza', '2015-05-15 15:42:21'),
 (10, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgCl?', 'chlorek srebra', '2015-05-03 17:54:13'),
 (11, 'Chemia', 'Nazwa zwiazku chemicznego o symbolu AgNO3?', 'azotan srebra', '2015-05-17 18:04:04'),
@@ -4798,7 +4220,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (133, 'Geografia', 'Stolica panstwa Cypr?', 'Nikozja', '2015-05-19 13:17:44'),
 (132, 'Geografia', 'Stolica panstwa Chorwacja?', 'Zagrzeb', '2015-05-08 18:38:35'),
 (131, 'Geografia', 'Stolica panstwa Chiny?', 'Pekin', '2015-05-18 13:42:21'),
-(130, 'Geografia', 'Stolica panstwa Chile?', 'Santiago', '2015-05-17 15:10:57'),
+(130, 'Geografia', 'Stolica panstwa Chile?', 'Santiago', '2015-05-20 13:58:24'),
 (129, 'Geografia', 'Stolica panstwa Burundi?', 'Buzumbura', '2015-05-05 15:21:22'),
 (128, 'Geografia', 'Stolica panstwa Burkina Faso?', 'Wagadugu', '2015-05-16 18:49:51'),
 (127, 'Geografia', 'Stolica panstwa Bulgaria?', 'Sofia', '2015-05-11 18:23:06'),
@@ -4854,7 +4276,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (190, 'Geografia', 'Stolica panstwa Laos?', 'Wientian', '2015-05-03 15:26:50'),
 (191, 'Geografia', 'Stolica panstwa Lesotho?', 'Maseru', '2015-05-18 13:45:51'),
 (192, 'Geografia', 'Stolica panstwa Liban?', 'Bejrut', '2015-04-30 15:57:30'),
-(193, 'Geografia', 'Stolica panstwa Liberia?', 'Monrovia', '2015-04-25 15:36:05'),
+(193, 'Geografia', 'Stolica panstwa Liberia?', 'Monrovia', '2015-05-20 13:12:44'),
 (194, 'Geografia', 'Stolica panstwa Libia?', 'Trypolis', '2015-05-16 15:49:59'),
 (195, 'Geografia', 'Stolica panstwa Liechtenstein?', 'Vaduz', '2015-05-17 13:22:48'),
 (196, 'Geografia', 'Stolica panstwa Litwa?', 'Wilno', '2015-05-10 18:08:42'),
@@ -4908,7 +4330,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (244, 'Geografia', 'Stolica panstwa Serbia?', 'Belgrad', '2015-04-18 15:56:51'),
 (245, 'Geografia', 'Stolica panstwa Seszele?', 'Victoria', '2015-05-02 20:37:53'),
 (246, 'Geografia', 'Stolica panstwa Sierra Leone?', 'Freetown', '2015-05-06 15:12:26'),
-(247, 'Geografia', 'Stolica panstwa Singapur?', 'Singapur', '2015-05-13 13:42:31'),
+(247, 'Geografia', 'Stolica panstwa Singapur?', 'Singapur', '2015-05-20 13:58:23'),
 (248, 'Geografia', 'Stolica panstwa Slowacja?', 'Bratyslawa', '2015-05-05 15:03:42'),
 (249, 'Geografia', 'Stolica panstwa Slowenia?', 'Lublana', '2015-05-04 15:10:39'),
 (250, 'Geografia', 'Stolica panstwa Somalia?', 'Mogadiszu', '2015-05-15 13:58:17'),
@@ -4924,7 +4346,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (260, 'Geografia', 'Stolica panstwa Timor Wschodni?', 'Dili', '2015-05-15 18:47:56'),
 (261, 'Geografia', 'Stolica panstwa Trynidad i Tobago?', 'Port-of-Spain', '2015-04-27 17:56:05'),
 (262, 'Geografia', 'Stolica panstwa Tunezja?', 'Tunis', '2015-05-07 18:56:35'),
-(263, 'Geografia', 'Stolica panstwa Turcja?', 'Ankara', '2015-04-15 15:44:54'),
+(263, 'Geografia', 'Stolica panstwa Turcja?', 'Ankara', '2015-05-20 13:40:51'),
 (264, 'Geografia', 'Stolica panstwa Turkmenistan?', 'Aszchabad', '2015-05-19 18:56:06'),
 (265, 'Geografia', 'Stolica panstwa Uganda?', 'Kampala', '2015-05-17 18:02:20'),
 (266, 'Geografia', 'Stolica panstwa Ukraina?', 'Kijow', '2015-04-21 17:54:03'),
@@ -5017,7 +4439,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (354, 'Gry', 'Jak nazywa sie protagonista w grze GTA Vice City', 'Tommy Vercetti', '2015-05-17 15:28:26'),
 (355, 'Filmy', 'Indyjski odpowiednik Hollywood?', 'Bollywood', '2015-05-18 18:40:33'),
 (356, 'Geografia', 'Ktory kraj Europy jest najgesciej zaludniony (osoba/km^2)?', 'Monako', '2015-05-15 18:18:09'),
-(357, 'Astronomia', 'Jak nazywa sie najglebiej polozona czesc planety?', 'Jadro', '2015-05-19 15:46:09'),
+(357, 'Astronomia', 'Jak nazywa sie najglebiej polozona czesc planety?', 'Jadro', '2015-05-20 13:56:38'),
 (358, 'Astronomia', 'Jak nazywa sie warstwa gazow otaczajaca wiekszosc planet i niektore ksiezyce?', 'Atmosfera', '2015-05-03 20:55:43'),
 (359, 'Astronomia', 'Jak nazywa sie szlak, po ktorym porusza sie planeta wokol Slonca lub ksiezyc dookola planety?', 'Orbita', '2015-04-23 15:25:04'),
 (360, 'Astronomia', 'Jedna z wewnetrznych warstw planety, zlokalizowany ponizej skorupy.', 'Plaszcz', '2015-05-11 13:26:37'),
@@ -5025,7 +4447,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (362, 'Astronomia', 'Jak sie nazywa najstarszy wahadlowiec?', 'Columbia', '2015-03-28 17:59:25'),
 (363, 'Astronomia', 'Jak sie nazywa wlascicielka rekordu najdluzszego pobytu kobiety w kosmosie?', 'Lucid', '2015-05-13 13:23:08'),
 (364, 'Astronomia', 'Kto pierwszy opisal kanaly na Marsie?', 'Schiaparelli', '2015-05-05 20:08:59'),
-(365, 'Astronomia', 'Jak sie nazywa najdalszy ksiezyc Urana?', 'Setebos', '2015-05-05 20:51:19'),
+(365, 'Astronomia', 'Jak sie nazywa najdalszy ksiezyc Urana?', 'Setebos', '2015-05-20 13:23:17'),
 (366, 'Astronomia', 'Ile ksiezycow ma Neptun?', '11', '2015-04-30 15:39:36'),
 (367, 'Astronomia', '3.26 roku swietlnego to inaczej... ?', 'parsek', '2015-04-22 17:32:40'),
 (368, 'Astronomia', 'Jaka jest najjasniejsza gwiazda na polskim niebie?', 'Slonce', '2015-05-19 15:12:47'),
@@ -5066,7 +4488,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (403, 'Mitologia', 'Jak nazywal sie statek argonautow?', 'Argo', '2015-04-19 20:11:22'),
 (404, 'Mitologia', 'zona Odyseusza byla...', 'Penelopa', '2015-05-16 18:11:22'),
 (405, 'Mitologia', 'Ukochana Erosa to...', 'Psyche', '2015-05-13 13:05:30'),
-(406, 'Mitologia', 'zona Zeusa jest...', 'Hera', '2015-04-22 17:02:18'),
+(406, 'Mitologia', 'zona Zeusa jest...', 'Hera', '2015-05-20 13:39:06'),
 (407, 'Mitologia', 'Ile jest muz w mitologii greckiej?', 'dziewiec', '2015-05-03 17:15:01'),
 (408, 'Informatyka', 'Rozwin skrot WWW', 'World Wide Web', '2015-05-19 15:19:49'),
 (409, 'Informatyka', 'Szerokopasmowa transmisja danych umozliwiajaca korzystanie z internetu metoda bezprzewodowa to...', 'UMTS', '2015-05-18 18:01:59'),
@@ -5087,7 +4509,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (424, 'Motoryzacja', 'W jakim miescie byly produkowane samochody dostawcze FSC Zuk?', 'Lublin', '2015-05-14 15:47:43'),
 (425, 'Przyslowia', 'Niedaleko pada...', 'jablko od jabloni', '2015-05-12 15:00:12'),
 (426, 'Przyslowia', 'Bez pracy...', 'nie ma kolaczy', '2015-05-18 18:59:48'),
-(427, 'Przyslowia', 'Komu w droge..', 'temu czas', '2015-05-19 15:11:02'),
+(427, 'Przyslowia', 'Komu w droge..', 'temu czas', '2015-05-20 13:51:23'),
 (428, 'Przyslowia', 'Gdzie kucharek szesc...', 'tam nie ma co jesc', '2015-05-13 18:21:30'),
 (429, 'Sport', 'Ile razy Ruch Chorzow i Gornik Zabrze zdobyly MP w pilce noznej?', '14', '2015-05-10 18:36:32'),
 (430, 'Sport', 'Kto zdobyl najwiecej goli dla reprezentacji Polski w pilce noznej?', 'Wlodzimierz Lubanski', '2015-05-13 18:00:32'),
@@ -5191,7 +4613,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (528, 'Informatyka', 'Rozwin skrot FAT', 'File Allocation Table', '2015-04-16 17:16:45'),
 (529, 'Informatyka', 'Rozwin skrot LAN', 'Local Area Network', '2015-05-19 13:35:18'),
 (530, 'Informatyka', 'Rozwin skrot MBR', 'Master Boot Record', '2015-04-22 15:37:59'),
-(531, 'Informatyka', 'Rozwin skrot NTFS', 'New Technology File System', '2015-04-28 15:55:53'),
+(531, 'Informatyka', 'Rozwin skrot NTFS', 'New Technology File System', '2015-05-20 13:00:25'),
 (532, 'Informatyka', 'Rozwin skrot P2P', 'Peer To Peer', '2015-05-07 17:17:52'),
 (533, 'Informatyka', 'Rozwin skrot PCI', 'Peripheral Component Interconnect', '2015-04-15 20:11:21'),
 (534, 'Informatyka', 'Rozwin skrot RGB', 'Red Green Blue', '2015-05-15 18:46:11'),
@@ -5213,7 +4635,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (550, 'Rozne', 'Podaj nazwisko wynalazcy m.in. silnika elektrycznego, dynama i radia', 'Tesla', '2015-04-12 20:50:24'),
 (551, 'Rozne', 'Podaj nazwisko braci - wynalazcow samolotu', 'Wright', '2015-05-12 18:23:25'),
 (552, 'Rozne', 'Podaj nazwisko wynalazcy czcionek drukarskich', 'Gutenberg', '2015-05-11 15:00:26'),
-(553, 'Rozne', 'Podaj nazwisko wynalazcy pierwszego syntezatora muzycznego', 'Moog', '2015-04-28 20:50:41'),
+(553, 'Rozne', 'Podaj nazwisko wynalazcy pierwszego syntezatora muzycznego', 'Moog', '2015-05-20 13:32:05'),
 (554, 'Rozne', 'Podaj nazwisko wynalazcy silnika wysokopreznego (na olej napedowy)', 'Diesel', '2015-05-05 17:03:44'),
 (555, 'Rozne', 'Podaj nazwisko tworcy alfabetu dla niewidomych', 'Braille', '2015-05-18 15:51:33'),
 (556, 'Rozne', 'Jak nazywa sie choroba polegajaca na niemoznosci rozpoznawania barw?', 'daltonizm', '2015-05-18 13:23:04'),
@@ -5254,7 +4676,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (591, 'Rozne', 'Ostatnia litera alfabetu greckiego to?', 'omega', '2015-05-16 13:07:11'),
 (592, 'Rozne', 'Jak nazywa sie japonska sztuka skladania papieru', 'origami', '2015-05-15 18:35:41'),
 (593, 'Malarstwo', 'Podaj nazwisko autora obrazu "Krzyk"', 'Munch', '2015-05-02 20:29:00'),
-(594, 'Malarstwo', 'Podaj nazwisko autora obrazu "Stanczyk"', 'Matejko', '2015-05-18 18:42:18'),
+(594, 'Malarstwo', 'Podaj nazwisko autora obrazu "Stanczyk"', 'Matejko', '2015-05-20 13:53:08'),
 (595, 'Malarstwo', 'Podaj nazwisko autora obrazu "Ostatnia wieczerza"', 'da Vinci', '2015-05-14 18:00:20'),
 (596, 'Malarstwo', 'Podaj nazwisko autora obrazu "Trwalosc pamieci"', 'Dali', '2015-05-04 20:33:45'),
 (597, 'Malarstwo', 'Podaj nazwisko autora obrazu "Guernica"', 'Picasso', '2015-05-15 18:42:40'),
@@ -5265,7 +4687,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (602, 'Rozne', 'Jak oficjalnie nazywa sie waluta Szwajcarii?', 'frank szwajcarski', '2015-04-16 15:41:18'),
 (603, 'Rozne', 'Jak oficjalnie nazywa sie waluta Unii Europejskiej?', 'euro', '2015-05-14 15:52:59'),
 (604, 'Rozne', 'Jak oficjalnie nazywa sie waluta Australii?', 'dolar australijski', '2015-04-26 20:59:54'),
-(605, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kanady?', 'dolar kanadyjski', '2015-05-18 13:21:19'),
+(605, 'Rozne', 'Jak oficjalnie nazywa sie waluta Kanady?', 'dolar kanadyjski', '2015-05-20 13:54:51'),
 (606, 'Rozne', 'Jak oficjalnie nazywa sie waluta Wegier?', 'forint wegierski', '2015-05-17 13:59:36'),
 (607, 'Rozne', 'Jak oficjalnie nazywa sie waluta Czech?', 'korona czeska', '2015-05-19 13:21:14'),
 (608, 'Rozne', 'Jak oficjalnie nazywa sie waluta Danii?', 'korona dunska', '2015-03-16 20:28:46'),
@@ -5302,7 +4724,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (639, 'Historia', 'Kto byl pierwszym prezydentem Polski?', 'Gabriel Narutowicz', '2015-04-27 20:23:48'),
 (640, 'Architektura', 'Kto zaprojektowal wroclawska Hale Stulecia?', 'Max Berg', '2015-05-05 15:30:12'),
 (641, 'Historia', 'Jak nazywal sie niemiecki minister propagandy w latach 1933-1945?', 'Joseph Goebbels', '2015-05-19 18:40:21'),
-(642, 'Muzyka', 'Jaki zespol wydal piosenke "The Winner Takes It All"?', 'ABBA', '2015-05-11 13:21:20'),
+(642, 'Muzyka', 'Jaki zespol wydal piosenke "The Winner Takes It All"?', 'ABBA', '2015-05-20 13:25:03'),
 (643, 'Muzyka', 'Jaki zespol wydal album "Brothers in Arms"?', 'Dire Straits', '2015-05-03 15:05:28'),
 (644, 'Geografia', 'Ktory amerykanski stan ma najwieksza powierzchnie?', 'Alaska', '2015-05-18 13:37:05'),
 (645, 'Sport', 'Jaka nazwe nosi pilkarski stadion narodowy Anglii?', 'Wembley', '2015-05-15 13:37:09'),
@@ -5315,13 +4737,13 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (652, 'Historia', 'Jaka nazwe nosilo miasto Wroclaw przed 1945 rokiem?', 'Breslau', '2015-05-12 18:44:29'),
 (653, 'Historia', 'Kto byl pierwszym przywodca Korei Polnocnej?', 'Kim Ir Sen', '2015-05-08 18:50:48'),
 (654, 'Motoryzacja', 'W jakim miescie swoja siedzibe ma przedsiebiorstwo BMW?', 'Monachium', '2015-05-08 13:46:01'),
-(655, 'Geografia', 'W jakim amerykanskim stanie znajduje sie miasto Salt Lake City?', 'Utah', '2015-04-11 17:59:27'),
+(655, 'Geografia', 'W jakim amerykanskim stanie znajduje sie miasto Salt Lake City?', 'Utah', '2015-05-20 13:21:32'),
 (656, 'Polityka', 'W jakim niemieckim kraju zwiazkowym funkcjonuje partia CSU?', 'Bawaria', '2015-04-30 17:20:16'),
 (657, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ch?', 'Szwajcaria', '2015-04-02 20:35:21'),
 (658, 'Internet', 'Do jakiego panstwa przypisana jest domena internetowa .ua?', 'Ukraina', '2015-05-13 18:12:46'),
 (659, 'Historia', 'Jakie miasto stanowilo stolice Królestwa SHS?', 'Belgrad', '2015-05-17 18:19:47'),
 (660, 'Sport', 'Jak nazywa sie mamucia skocznia narciarska w Planicy? ', 'Letalnica', '2015-05-05 20:47:47'),
-(661, 'Administracja', 'Kto w Polsce stanowi naczelny organ administracji rzadowej?', 'Prezes Rady Ministrow', '2015-05-15 15:47:37'),
+(661, 'Administracja', 'Kto w Polsce stanowi naczelny organ administracji rzadowej?', 'Prezes Rady Ministrow', '2015-05-20 13:19:47'),
 (662, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.03 a 20.04?', 'Baran', '2015-04-02 20:47:32'),
 (663, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 21.04 a 21.05?', 'Byk', '2015-05-13 13:26:39'),
 (664, 'Astronomia', 'Jaki znak zodiaku oznaczaja urodziny miedzy 22.05 a 21.06?', 'Bliznieta', '2015-04-03 17:19:46'),
@@ -5339,7 +4761,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (676, 'Geografia', 'Co nastepuje corocznie 21-go czerwca?', 'przesilenie letnie', '2015-05-15 15:01:58'),
 (677, 'Geografia', 'Co nastepuje corocznie 22-go grudnia?', 'przesilenie zimowe', '2015-05-16 18:42:53'),
 (678, 'Geografia', 'Zjawisko swietlne wystepujace za kolem podbiegunowym to?', 'zorza polarna', '2015-05-15 18:51:26'),
-(679, 'Astronomia', 'Kosmiczna eksplozja tworzaca wpierw jasny, a wkrotce niewidoczny obiekt?', 'supernowa', '2015-04-30 20:52:22'),
+(679, 'Astronomia', 'Kosmiczna eksplozja tworzaca wpierw jasny, a wkrotce niewidoczny obiekt?', 'supernowa', '2015-05-20 13:54:53'),
 (680, 'Astronomia', 'Obiekt astronomiczny skladajacy sie ze zdegenerowanej materii to?', 'bialy karzel', '2015-05-06 17:53:08'),
 (681, 'Astronomia', 'Obszar czasoprzestrzeni, ktorego nic nie moze opuscic to?', 'czarna dziura', '2015-05-05 20:33:41'),
 (682, 'Astronomia', 'Planeta nie majaca stalej powierzchni to?', 'gazowy olbrzym', '2015-04-30 17:11:19'),
@@ -5394,7 +4816,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (731, 'Muzyka', 'Sceniczne dzielo muzyczne, gdzie muzyka wspoldziala z akcja dramat. to?', 'opera', '2015-05-17 15:09:12'),
 (732, 'Muzyka', 'Rodzaj powaznej opery z elementami komicznymi?', 'opera semiseria', '2015-05-08 15:44:31'),
 (733, 'Muzyka', 'Rodzaj opery komicznej to?', 'opera buffa', '2015-05-03 20:05:53'),
-(734, 'Muzyka', 'Forma muzyczna zlozona z 4 czesci (allegro, adagio, menuet, allegro) to?', 'sonata klasyczna', '2015-04-29 15:19:41'),
+(734, 'Muzyka', 'Forma muzyczna zlozona z 4 czesci (allegro, adagio, menuet, allegro) to?', 'sonata klasyczna', '2015-05-20 13:26:48'),
 (735, 'Muzyka', 'Orkiestrowy odpowiednik sonaty to?', 'symfonia', '2015-05-15 13:44:12'),
 (736, 'Muzyka', 'Forma muzyczna z powracajacymi refrenem i kupletami to?', 'rondo', '2015-04-22 20:38:03'),
 (737, 'Muzyka', 'Niemiecki kompozytor i pianista, prekursor romantyzmu w muzyce to?', 'Ludwig van Beethoven', '2015-04-23 17:47:13'),
@@ -5578,7 +5000,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (915, 'Muzyka', 'Instrument dety australijskich aborygenow to?', 'didgeridoo', '2015-05-15 18:16:24'),
 (916, 'Muzyka', 'Instrument muzyczny posiadajacy 4 pary strun strojonych w kwintach to?', 'mandolina', '2015-05-16 15:14:48'),
 (917, 'Muzyka', 'Instrument dety drewniany z grupy aerofonow wargowych to?', 'flet', '2015-04-25 17:11:34'),
-(918, 'Muzyka', 'Instr. strunowy z grupy chordofonow smyczkowych wiekszy od skrzypiec to?', 'altowka', '2015-05-12 15:31:48'),
+(918, 'Muzyka', 'Instr. strunowy z grupy chordofonow smyczkowych wiekszy od skrzypiec to?', 'altowka', '2015-05-20 13:35:35'),
 (919, 'Matematyka', 'Gorna czesc ulamka to?', 'licznik', '2015-05-11 13:54:40'),
 (920, 'Matematyka', 'Dolna czesc ulamka to?', 'mianownik', '2015-05-17 13:26:19'),
 (921, 'Matematyka', 'Linia oddzielajaca licznik od mianownika to?', 'kreska ulamkowa', '2015-05-04 17:54:55'),
@@ -5586,7 +5008,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (923, 'Biologia', 'Zjawisko scislego i korzystnego wspolzycia co najmniej dwoch organizmow?', 'symbioza', '2015-05-13 18:26:45'),
 (924, 'Biologia', 'Forma wspolz. 2-och organizmow, dla 1-go korzystna, dla 2-go szkodliwa?', 'pasozytnictwo', '2015-05-01 15:25:25'),
 (925, 'Biologia', 'Najliczniejsza na Ziemi grupa zwierzat to?', 'owady', '2015-04-16 17:50:37'),
-(926, 'Biologia', 'Dzial zoologii zajmujacy sie owadami to?', 'entomologia', '2015-05-04 20:51:22'),
+(926, 'Biologia', 'Dzial zoologii zajmujacy sie owadami to?', 'entomologia', '2015-05-20 13:30:19'),
 (927, 'Biologia', 'Nauka przyrodnicza zajmujaca sie badaniem zycia i organizmow zywych to?', 'biologia', '2015-05-07 15:10:48'),
 (928, 'Biologia', 'Urzadzenie sluz. do obserwacji malych obiektow w duzym powiekszeniu to?', 'mikroskop', '2015-05-13 15:49:24'),
 (929, 'Biologia', 'Dzial biologii zajmujacy sie roslinami to?', 'botanika', '2015-05-07 17:37:13'),
@@ -5637,7 +5059,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (974, 'Biologia', 'Dzial zoologii zajmujacy sie ssakami to?', 'teriologia', '2015-05-12 15:14:14'),
 (975, 'Biologia', 'Dzial zoologii zajmujacy sie ptakami to?', 'ornitologia', '2015-05-15 13:17:48'),
 (976, 'Biologia', 'Dzial zoologii zajmujacy sie plazami i gadami to?', 'herpetologia', '2015-05-14 13:45:58'),
-(977, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Las Venturas?', 'Las Vegas', '2015-04-24 17:59:34'),
+(977, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Las Venturas?', 'Las Vegas', '2015-05-20 13:53:04'),
 (978, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest San Fierro?', 'San Francisco', '2015-05-12 15:56:21'),
 (979, 'Gry', 'Na jakim prawdziwym miescie wzorowane jest Los Santos?', 'Los Angeles', '2015-05-15 13:03:45'),
 (980, 'Gry', 'Seria gier pilkarskich z firmy Konami to?', 'Pro Evolution Soccer', '2015-04-12 17:09:23'),
@@ -5705,7 +5127,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1042, 'Matematyka', 'Ile wynosi wynik dzialania 1+2-3-4+5 ?', '1', '2015-04-23 20:02:39');
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1043, 'Matematyka', 'Ile wynosi wynik dzialania 1-2+3-4+5 ?', '3', '2015-05-18 15:34:06'),
-(1044, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3-4-5 ?', '-3', '2015-04-20 15:10:43'),
+(1044, 'Matematyka', 'Ile wynosi wynik dzialania 1+2+3-4-5 ?', '-3', '2015-05-20 13:28:34'),
 (1045, 'Matematyka', 'Ile wynosi wynik dzialania 1-2-3+4-5 ?', '-5', '2015-04-20 15:49:49'),
 (1046, 'Matematyka', 'Ile wynosi silnia z 3?', '6', '2015-04-13 15:42:47'),
 (1047, 'Matematyka', 'Ile wynosi silnia z 4?', '24', '2015-05-18 15:07:49'),
@@ -5749,7 +5171,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1086, 'Rozne', 'Jaki symbol przedstawiony jest na fladze Izraela?', 'Gwiazda Dawida', '2015-05-18 15:32:21'),
 (1087, 'Historia', 'Jak nazywal sie najwiekszy niemiecki oboz koncentracyjny istniejacy w latach 1940-1945 na Dolnym Slasku?', 'Gross-Rosen', '2015-05-17 15:38:54'),
 (1088, 'Historia', 'Jak brzmial kryptonim najwiekszego projektu gorniczo-budowlanego hitlerowskich Niemiec istniejacego w Gorach Sowich?', 'Riese', '2015-05-07 18:03:52'),
-(1089, 'Rozne', 'Jaka nazwe nosza sily powietrzne Republiki Federalnej Niemiec?', 'Luftwaffe', '2015-05-05 20:21:20'),
+(1089, 'Rozne', 'Jaka nazwe nosza sily powietrzne Republiki Federalnej Niemiec?', 'Luftwaffe', '2015-05-20 13:07:27'),
 (1090, 'Historia', 'Jak nazywal sie pierwszy prezydent Autonomii Palestynskiej?', 'Jaser Arafat', '2015-05-04 17:33:39'),
 (1091, 'Rozne', 'Jak brzmi stosowana przez Argentyne nazwa archipelagu Falklandy? ', 'Malwiny', '2015-05-19 18:38:36'),
 (1092, 'Rozne', 'Jakie miasto jest stolica Szkocji?', 'Edynburg', '2015-05-18 13:31:50'),
@@ -5783,7 +5205,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1120, 'Kulinaria', 'Napoj alk. o slodkim smaku owocowym, korzennym lub korzenno-ziolowym to?', 'likier', '2015-05-15 18:32:12'),
 (1121, 'Kulinaria', 'Wyciag z owocow, korzeni, kwiatow lub ziol i nastepnie zalany alkoholem?', 'nalewka', '2015-04-26 20:47:22'),
 (1122, 'Kulinaria', 'Destylat alkoholowy rozcienczony woda w stosunku ok. 2:3 to?', 'wodka', '2015-05-06 17:00:05'),
-(1123, 'Kulinaria', 'Destylat alkoholu etylowego o zawartosci alkoholu około 96 procent to?', 'spirytus rektyfikowany', '2015-05-14 15:02:00'),
+(1123, 'Kulinaria', 'Destylat alkoholu etylowego o zawartosci alkoholu około 96 procent to?', 'spirytus rektyfikowany', '2015-05-20 13:03:56'),
 (1124, 'Kulinaria', 'Hiszpanski napoj alkoholowy, robiony na bazie wina z dodatkiem owocow to?', 'sangria', '2015-05-01 15:00:24'),
 (1125, 'Kulinaria', 'Szczegolny rodzaj wina musujacego pochodzacy z Francji to?', 'szampan', '2015-05-13 18:09:17'),
 (1126, 'Kulinaria', 'Wysokoprocentowy napoj alkoholowy, produkowany ze sliwek wegierek to?', 'sliwowica', '2015-05-19 15:39:07'),
@@ -5799,12 +5221,12 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1136, 'Kulinaria', 'Wloska zapiekana potrawa na bazie makaronu przekladanego farszem to?', 'lazania', '2015-05-11 18:09:08'),
 (1137, 'Kulinaria', 'Polska, litewska i bialoruska potrawa z kapusty i miesa to?', 'bigos', '2015-05-16 18:41:09'),
 (1138, 'Kulinaria', 'Zupa przyrzadzana na bazie zakwasu z razowej maki zytniej to?', 'zur', '2015-04-23 15:16:08'),
-(1139, 'Kulinaria', 'Ugotowany makaron wymieszany z odpowiednim sosem i posypany serem to?', 'spaghetti', '2015-04-27 15:05:28'),
-(1140, 'Kulinaria', 'Slaska zupa z chleba, czosnku oraz tluszczu zalewanych wrzatkiem to?', 'wodzionka', '2015-05-09 13:00:17'),
+(1139, 'Kulinaria', 'Ugotowany makaron wymieszany z odpowiednim sosem i posypany serem to?', 'spaghetti', '2015-05-20 13:02:10'),
+(1140, 'Kulinaria', 'Slaska zupa z chleba, czosnku oraz tluszczu zalewanych wrzatkiem to?', 'wodzionka', '2015-05-20 13:16:15'),
 (1141, 'Kulinaria', 'Goralska zupa z kiszonej kapusty, soku z kwaszonej kapusty i miesa to?', 'kwasnica', '2015-05-18 18:26:31'),
 (1142, 'Kulinaria', 'Turecka potrawa ze skrawanego miesa i surowek umieszczanych w bulce?', 'kebab', '2015-05-08 15:23:25'),
 (1143, 'Kulinaria', 'Smazone filety rybne w sosie warzywnym na cieplo lub zimno to?', 'ryba po grecku', '2015-05-06 20:53:16'),
-(1144, 'Kulinaria', 'Potrawa, ktora sklada sie z zapiekanego nalesnika z farszem to?', 'krokiet', '2015-05-07 15:56:34'),
+(1144, 'Kulinaria', 'Potrawa, ktora sklada sie z zapiekanego nalesnika z farszem to?', 'krokiet', '2015-05-20 13:44:22'),
 (1145, 'Kulinaria', 'Potrawa zlozona z farszu miesno-ryzowego zawinietego w liscie kapusty?', 'golabki', '2015-05-01 17:02:35'),
 (1146, 'Kulinaria', 'Polska i niemiecka potrawa skladajaca sie z kulek nadziewanych sliwkami?', 'knedle', '2015-05-03 15:58:52'),
 (1147, 'Kulinaria', 'Gotowane kluski przyrzadzane z twarogu, jaj i maki to?', 'pierogi leniwe', '2015-05-08 18:43:49'),
@@ -5852,7 +5274,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1189, 'Biologia', 'Jak nazywa sie epidemia o szerokim zasiegu?', 'pandemia', '2015-05-01 17:36:27'),
 (1190, 'Biologia', 'Jak nazywamy ogranizmy, ktore prowadza pasozytniczy tryb zycia?', 'pasozyty', '2015-05-19 15:42:38'),
 (1191, 'Biologia', 'Zewnetrzna warstwa ciala wielu pierwotniakow, to?', 'pellikula', '2015-05-18 15:41:07'),
-(1192, 'Biologia', 'Chemiczne, plynne lub sproszkowane srodki ochrony zywnosci, to?', 'pestycydy', '2015-04-16 20:39:34'),
+(1192, 'Biologia', 'Chemiczne, plynne lub sproszkowane srodki ochrony zywnosci, to?', 'pestycydy', '2015-05-20 13:47:52'),
 (1193, 'Biologia', 'Jak nazywa sie zgrubiala os pedu u drzew?', 'pien', '2015-05-19 15:56:41'),
 (1194, 'Biologia', 'Jak nazywaja sie barwniki naturalne lub syntetyczne?', 'pigmenty', '2015-04-11 17:41:39'),
 (1195, 'Biologia', 'Rogowe wytwory naskorka pokrywajace cialo ptakow, to?', 'piora', '2015-05-19 13:37:04'),
@@ -5880,7 +5302,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1217, 'Biologia', 'Odkladanie sie wapnia w tkankach, to?', 'zwapnienie', '2015-05-17 13:49:05'),
 (1218, 'Jezyk Polski', 'Wiersz abecadlowy, to?', 'abecedariusz', '2015-05-02 15:05:37'),
 (1219, 'Jezyk Polski', 'Pisemny skrot wyrazu lub grupy wyrazow, to?', 'abrewiacja', '2015-05-11 18:24:51'),
-(1220, 'Jezyk Polski', 'Dodatki do tesktu glownego, uzupelnienia, to?', 'addenda', '2015-05-07 18:47:50'),
+(1220, 'Jezyk Polski', 'Dodatki do tesktu glownego, uzupelnienia, to?', 'addenda', '2015-05-20 13:56:37'),
 (1221, 'Jezyk Polski', 'Danse macabre to tak zwany?', 'taniec smierci', '2015-05-01 17:09:43'),
 (1222, 'Jezyk Polski', 'Elektroniczny odpowiednik ksiazki, to?', 'e-book', '2015-03-29 17:32:08'),
 (1223, 'Jezyk Polski', 'Slowo lub wyrazenie zapozyczone z obcych kultur, to?', 'egzotyzm', '2015-04-11 15:30:43'),
@@ -5894,14 +5316,14 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1231, 'Jezyk Polski', 'Jednakowa liczba zglosek w wersach w metryce, to?', 'izosylabizm', '2015-05-12 15:49:20'),
 (1232, 'Jezyk Polski', 'Jenorazowe wydawnictwo okolicznosciowe majace forme czasopisma, to?', 'jednodniowka', '2015-05-11 18:26:36'),
 (1233, 'Jezyk Polski', 'Odmiana jezyka literackiego, ktora operuje literatura piekna, to?', 'jezyk poetycki', '2015-05-18 15:30:36'),
-(1234, 'Jezyk Polski', 'Jak nazywa sie widowisko estradowe o charakterze humorystycznym?', 'kabaret', '2015-03-14 20:03:41'),
+(1234, 'Jezyk Polski', 'Jak nazywa sie widowisko estradowe o charakterze humorystycznym?', 'kabaret', '2015-05-20 13:49:38'),
 (1235, 'Jezyk Polski', 'Ezoteryczno - mistyczny nurt w judaizmie.', 'kabala', '2015-05-14 18:19:34'),
 (1236, 'Jezyk Polski', 'Piekne, czytelne i staranne pismo.', 'kaligrafia', '2015-05-08 13:32:00'),
 (1237, 'Jezyk Polski', 'Doslowne tlumaczenie wyrazu lub zwrotu obcojezycznego.', 'kalka', '2015-04-27 20:41:43'),
 (1238, 'Jezyk Polski', 'Zbior spiewow liturgicznych w kosciele rzymskokatolickim', 'kancjonal', '2015-04-29 20:18:42'),
 (1239, 'Jezyk Polski', 'Jak nazywa sie poprawianie tekstu przed jego wydrukowaniem?', 'korekta', '2015-05-05 20:56:36'),
 (1240, 'Jezyk Polski', 'Wypowiedz lub fragment wypowiedzi postaci scenicznej, to?', 'kwestia', '2015-05-12 18:04:10'),
-(1241, 'Jezyk Polski', 'Inna nazwa piesni zalobnej.', 'lamentacja', '2015-05-15 18:54:56'),
+(1241, 'Jezyk Polski', 'Inna nazwa piesni zalobnej.', 'lamentacja', '2015-05-20 13:14:30'),
 (1242, 'Jezyk Polski', 'Gatunek prozy reportazowej lub publicystycznej, to?', 'list z podrozy', '2015-05-09 13:47:36'),
 (1243, 'Jezyk Polski', 'Modlitwa o charakterze blagalnej piesni.', 'litania', '2015-05-16 13:45:43'),
 (1244, 'Jezyk Polski', 'Powtarzalne, stereotypowe zwroty, frazesy.', 'loci communes', '2015-04-10 15:35:53'),
@@ -5930,7 +5352,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1268, 'Informatyka', 'Plik, ktory moze byc uruchomiony bezposrednio w srodowisku syst. oper.?', 'plik wykonywalny', '2015-05-12 13:23:08'),
 (1269, 'Informatyka', 'Plik, ktory jest wykonywany bez wplywu uzytkownika na przebieg programu?', 'plik wsadowy', '2015-05-06 15:37:06'),
 (1270, 'Informatyka', 'Sposob na przelamanie technicznych zabezpieczen oprogramowania komp. to?', 'crack', '2015-05-11 18:38:49'),
-(1271, 'Informatyka', 'Liczba sluzaca do sprawdzania poprawnosci przetwarzanych danych to?', 'suma kontrolna', '2015-05-01 17:23:58'),
+(1271, 'Informatyka', 'Liczba sluzaca do sprawdzania poprawnosci przetwarzanych danych to?', 'suma kontrolna', '2015-05-20 13:42:37'),
 (1272, 'Informatyka', 'Dziedzina wiedzy o przekazywaniu informacji w sposób zabezpieczony to?', 'kryptografia', '2015-03-10 15:29:54'),
 (1273, 'Informatyka', 'Skonczony ciag czynnosci, koniecznych do wykonan. pewnego rodzaju zadan?', 'algorytm', '2015-05-16 13:31:43'),
 (1274, 'Informatyka', 'Zbior danych zapisanych zgodnie z okreslonymi regulami to?', 'baza danych', '2015-05-12 15:23:01'),
@@ -5946,7 +5368,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1284, 'Informatyka', 'Jaki czlowiek rozpoczal w 1991 roku historie Linuxa?', 'Linus Torvalds', '2015-04-03 15:22:46'),
 (1285, 'Informatyka', 'Aplikacja Windows gromadzaca narzedzia do zmiany parametrow syst. oper.?', 'Panel sterowania', '2015-05-02 17:59:39'),
 (1286, 'Informatyka', 'Znajdujacy sie przy dolnej krawedzi ekranu element GUI systemu Windows?', 'Pasek zadan', '2015-04-25 20:33:01'),
-(1287, 'Informatyka', 'Niewielki program mozliwy do osadzenia w stronie WWW to?', 'aplet', '2015-05-04 17:47:49'),
+(1287, 'Informatyka', 'Niewielki program mozliwy do osadzenia w stronie WWW to?', 'aplet', '2015-05-20 13:10:58'),
 (1288, 'Informatyka', 'Obiektowy jezyk programowania z firmy Sun Microsystems to?', 'Java', '2015-05-12 18:32:12'),
 (1289, 'Informatyka', 'Dodatek do systemow MS Windows chroniacy przed programami szpiegujacymi?', 'Windows Defender', '2015-05-10 18:19:09'),
 (1290, 'Informatyka', 'Darmowe oprogramowanie, ale zawierajace funkcje wyswietlajaca reklamy?', 'adware', '2015-05-13 18:37:15'),
@@ -6032,7 +5454,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1371, 'Jezyk polski', 'Relacja wyrazania roznych znaczen za pomoca identycznych form jezykowych to?', 'homonimia', '2015-04-30 15:46:46'),
 (1372, 'Jezyk polski', 'Slowo utworzone przez skrocenie wyrazenia zlozonego z 2 lub wiecej slow to?', 'akronim', '2015-05-10 18:00:00'),
 (1373, 'Jezyk polski', 'Nowy wyraz, utworzony by nazwac nieznany wczesniej przedmiot czy sytuacje to?', 'neologizm', '2015-05-06 20:47:59'),
-(1374, 'Jezyk polski', 'Dzial nauk humanistycznych badajacych istote, budowe i rozwoj jezyka to?', 'lingwistyka', '2015-05-11 18:57:59'),
+(1374, 'Jezyk polski', 'Dzial nauk humanistycznych badajacych istote, budowe i rozwoj jezyka to?', 'lingwistyka', '2015-05-20 13:18:01'),
 (1375, 'Jezyk polski', 'Nauka o zasadach budowy i odmiany wyrazow oraz o regulach skladni to?', 'gramatyka', '2015-04-26 15:12:36'),
 (1376, 'Jezyk polski', 'Dziedzina jezykoznawstwa zajmujaca sie analiza tresci wyrazen jezykowych to?', 'semantyka', '2015-03-30 20:16:20'),
 (1377, 'Jezyk polski', 'Dzial jezykoznawstwa badajacy strone dzwiekowa jezyka (gloski) to?', 'fonetyka', '2015-04-30 20:55:56'),
@@ -6041,7 +5463,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1380, 'Jezyk polski', 'Zaleznosc znaczenia fragmentu tekstu od znaczen slow poprzedzajacych i nastepujacych to?', 'kontekst', '2015-05-11 15:39:03'),
 (1381, 'Jezyk polski', 'Sprowadzenie pojecia do mniej szczegolowej postaci to?', 'uogolnienie', '2015-05-03 17:16:48'),
 (1382, 'Fizyka', 'Ruch, w ktorym cialo w jednak. odst. czasu przebywa jednak. odc. drogi to?', 'ruch jednostajny', '2015-05-06 20:18:01'),
-(1383, 'Fizyka', 'Ruch, w ktorym cialo zwieksza predkosc o jednak. wartosc w jednak. odst. czasu to?', 'ruch jednostajnie przyspieszony', '2015-04-25 20:45:32'),
+(1383, 'Fizyka', 'Ruch, w ktorym cialo zwieksza predkosc o jednak. wartosc w jednak. odst. czasu to?', 'ruch jednostajnie przyspieszony', '2015-05-20 13:46:07'),
 (1384, 'Fizyka', 'Krzywa zakreslana w przestrzeni przez poruszajace sie cialo to?', 'trajektoria', '2015-05-17 18:52:59'),
 (1385, 'Fizyka', 'Dzial fizyki zajmujacy sie badaniem geometrycznych wlasciwosci ruchu cial to?', 'kinematyka', '2015-05-18 13:33:35'),
 (1386, 'Fizyka', 'Obiekt fizyczny posiadajacy kierunek, zwrot, wartosc i punkt przylozenia to?', 'wektor', '2015-05-14 13:12:34'),
@@ -6083,7 +5505,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1422, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Cd?', 'kadm', '2015-05-15 15:30:04'),
 (1423, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Sn?', 'Cyna', '2015-03-31 15:45:33'),
 (1424, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest I?', 'jod', '2015-05-15 13:42:26'),
-(1425, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pt?', 'platyna', '2015-05-17 18:16:17'),
+(1425, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pt?', 'platyna', '2015-05-20 13:44:25'),
 (1426, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Au?', 'zloto', '2015-04-19 20:38:01'),
 (1427, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Hg?', 'rtec', '2015-05-15 18:12:54'),
 (1428, 'Chemia', 'Jak nazywa sie pierwiastek, ktorego symbolem jest Pb?', 'olow', '2015-04-25 20:09:45'),
@@ -6134,7 +5556,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1473, 'Administracja', 'Ile miast w Polsce posiada prawa powiatu?', '66', '2015-04-24 17:32:45'),
 (1474, 'Rozne', 'Jak nazywa się siostra Apple Bloom z serialu My Little Pony?', 'Applejack', '2015-05-17 13:07:05'),
 (1475, 'Sport', 'Kto zostal krolem strzelcow podczas Euro 2008?', 'David Villa', '2015-04-18 15:26:50'),
-(1476, 'Geografia', 'Jakie jest najwieksze miasto Walii?', 'Cardiff', '2015-04-05 17:51:09');
+(1476, 'Geografia', 'Jakie jest najwieksze miasto Walii?', 'Cardiff', '2015-05-20 13:33:50');
 INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1477, 'Muzyka', 'W jakim miescie odbywa sie tradycyjny noworoczny koncert filharmonikow?', 'Wieden', '2015-04-30 17:50:35'),
 (1478, 'Rozne', 'Z jakim narodem najblizej spokrewnieni sa Finowie?', 'Estonczycy', '2015-05-18 15:35:52'),
@@ -6175,7 +5597,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1513, 'Geografia', 'Stolica stanu Maine?', 'Augusta', '2015-03-19 15:35:24'),
 (1514, 'Geografia', 'Stolica stanu Maryland?', 'Annapolis', '2015-04-02 17:54:36'),
 (1515, 'Geografia', 'Stolica stanu Massachusetts?', 'Boston', '2015-05-08 18:17:35'),
-(1516, 'Geografia', 'Stolica stanu Michigan?', 'Lansing', '2015-05-16 13:17:41'),
+(1516, 'Geografia', 'Stolica stanu Michigan?', 'Lansing', '2015-05-20 13:37:21'),
 (1517, 'Geografia', 'Stolica stanu Minnesota?', 'Saint Paul', '2015-04-14 20:41:46'),
 (1518, 'Geografia', 'Stolica stanu Missisipi?', 'Jackson', '2015-05-19 15:51:25'),
 (1519, 'Geografia', 'Stolica stanu Missouri?', 'Jefferson City', '2015-04-30 17:30:59'),
@@ -6245,7 +5667,7 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1584, 'Literatura', 'Które drzewo w Czarnolesie bylo tematem fraszek Jana Kochanowskiego?', 'lipa', '2015-05-14 13:56:31'),
 (1585, 'Rozne', 'Jak nazywamy wizerunek twarzy widzianej z boku?', 'profil', '2015-05-18 13:26:35'),
 (1586, 'Rozne', 'Jak nazywa sie opad atmosferyczny zlozony z brylek lodu?', 'grad', '2015-05-19 18:31:35'),
-(1587, 'Rozne', 'Rozwin skrot: WAT.', 'Wojskowa Akademia Techniczna', '2015-05-19 15:54:55'),
+(1587, 'Rozne', 'Rozwin skrot: WAT.', 'Wojskowa Akademia Techniczna', '2015-05-20 13:09:13'),
 (1588, 'Rozne', 'Zielony nalot powstajacy w wyniku reakcji miedzi z dwutlenkiem wegla i wody to?', 'patyna', '2015-05-05 15:49:37'),
 (1589, 'Biologia', 'Intensywny rozwoj roslin i mikroorganizmow wodnych to?', 'eutrofizacja', '2015-05-14 13:51:15'),
 (1590, 'Rozne', 'W jakim miescie urodzil sie Barack Obama?', 'Honolulu', '2015-05-09 15:58:44'),
@@ -6269,31 +5691,11 @@ INSERT INTO `fs_quiz` (`id`, `kategoria`, `pytanie`, `odpowiedz`, `lu`) VALUES
 (1610, 'Fizyka', 'Rodzaj elektrody przez ktory ladunek ujemny opuszcza dany uklad elektr. lub do ukladu jest dostarczany lad. dodatni to?', 'Anoda', '2015-04-14 17:44:57'),
 (1611, 'Informatyka', 'Co oznacza skrot DoS?', 'Denial of Service', '2015-05-09 15:34:08');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_races`
+-- Tabela Truncate przed wstawieniem `fs_races`
 --
 
-DROP TABLE IF EXISTS `fs_races`;
-CREATE TABLE IF NOT EXISTS `fs_races` (
-  `id` int(10) unsigned NOT NULL,
-  `minPlayers` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `maxPlayers` tinyint(3) unsigned NOT NULL DEFAULT '10',
-  `vehicle` smallint(5) unsigned NOT NULL DEFAULT '444',
-  `interior` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `descr` varchar(255) DEFAULT NULL,
-  `nitro` tinyint(1) NOT NULL DEFAULT '0',
-  `allowRepairs` tinyint(1) NOT NULL DEFAULT '0',
-  `allowFlip` tinyint(1) NOT NULL DEFAULT '0',
-  `distance` double unsigned NOT NULL DEFAULT '100',
-  `scx` double DEFAULT NULL,
-  `scy` double DEFAULT NULL,
-  `scz` double DEFAULT NULL,
-  `limitrand` tinyint(4) NOT NULL DEFAULT '100',
-  `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_races`;
 --
 -- Zrzut danych tabeli `fs_races`
 --
@@ -6406,24 +5808,11 @@ INSERT INTO `fs_races` (`id`, `minPlayers`, `maxPlayers`, `vehicle`, `interior`,
 (114, 1, 6, 533, 0, 'Fort Carson', 1, 1, 1, 5.14, 12.82, 1148.5, 28.56, 100, 1),
 (115, 255, 1, 560, 0, 'TRASA KONKURSOWA', 1, 1, 1, 1000, 1030, -2240, 13, 100, 0);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_races_cp`
+-- Tabela Truncate przed wstawieniem `fs_races_cp`
 --
 
-DROP TABLE IF EXISTS `fs_races_cp`;
-CREATE TABLE IF NOT EXISTS `fs_races_cp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `type` smallint(3) unsigned NOT NULL DEFAULT '0',
-  `size` double NOT NULL DEFAULT '0',
-  `so` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=4260 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_races_cp`;
 --
 -- Zrzut danych tabeli `fs_races_cp`
 --
@@ -9898,43 +9287,11 @@ INSERT INTO `fs_races_cp` (`id`, `aid`, `X`, `Y`, `Z`, `type`, `size`, `so`) VAL
 (4258, 115, 2247.0598, -1656.5614, 14.9909, 0, 8, 850),
 (4259, 115, 2485.9921, -1668.4482, 13.0444, 1, 8, 860);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_races_records`
+-- Tabela Truncate przed wstawieniem `fs_races_sp`
 --
 
-DROP TABLE IF EXISTS `fs_races_records`;
-CREATE TABLE IF NOT EXISTS `fs_races_records` (
-  `id` int(10) unsigned NOT NULL,
-  `playerid` int(10) unsigned NOT NULL,
-  `raceid` smallint(10) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `recordtime` float unsigned NOT NULL,
-  `opponents` mediumint(9) NOT NULL DEFAULT '1',
-  `finalposition` smallint(5) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_races_records`
---
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_races_sp`
---
-
-DROP TABLE IF EXISTS `fs_races_sp`;
-CREATE TABLE IF NOT EXISTS `fs_races_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `angle` double NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=1477 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_races_sp`;
 --
 -- Zrzut danych tabeli `fs_races_sp`
 --
@@ -11151,24 +10508,11 @@ INSERT INTO `fs_races_sp` (`id`, `aid`, `X`, `Y`, `Z`, `angle`) VALUES
 (1475, 114, -5.8805, 1145.6632, 19.3011, 90.3),
 (1476, 115, 1045.603, -2084.821, 12.5312, 351.9);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_returnpickups`
+-- Tabela Truncate przed wstawieniem `fs_returnpickups`
 --
 
-DROP TABLE IF EXISTS `fs_returnpickups`;
-CREATE TABLE IF NOT EXISTS `fs_returnpickups` (
-  `id` int(10) unsigned NOT NULL,
-  `pX` double NOT NULL,
-  `pY` double NOT NULL,
-  `pZ` double NOT NULL,
-  `pi` int(11) NOT NULL,
-  `pvw` int(11) NOT NULL,
-  `opis` varchar(64) DEFAULT NULL,
-  `pickupid` int(10) unsigned NOT NULL DEFAULT '19197'
-) ENGINE=MyISAM AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_returnpickups`;
 --
 -- Zrzut danych tabeli `fs_returnpickups`
 --
@@ -11301,97 +10645,11 @@ INSERT INTO `fs_returnpickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `pi
 (150, 4.375, 22.975, 1199.601, 1, -1, '', 1318),
 (151, -1358.787, 2059.407, -5.439, 5, 5, '', 1318);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_sbans`
+-- Tabela Truncate przed wstawieniem `fs_telecheckpoints`
 --
 
-DROP TABLE IF EXISTS `fs_sbans`;
-CREATE TABLE IF NOT EXISTS `fs_sbans` (
-  `id` int(11) NOT NULL,
-  `serial` varchar(60) NOT NULL DEFAULT 'NONE',
-  `ip_class` varchar(16) NOT NULL DEFAULT '.' COMMENT 'Domyslnie: "." - kazdy adres IP',
-  `nick_exc` varchar(512) NOT NULL DEFAULT 'none;none;none;none;none;none;none;none;none;none;none;none;none;none;none' COMMENT 'nicki wylaczone z banowania || oddzielaj znakiem ; || max 15',
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `comment` tinytext NOT NULL,
-  `exception` int(1) NOT NULL DEFAULT '0' COMMENT 'pomijac banowanie ip po wejsciu gracza z serialem?'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_sluby`
---
-
-DROP TABLE IF EXISTS `fs_sluby`;
-CREATE TABLE IF NOT EXISTS `fs_sluby` (
-  `id_player1` int(11) NOT NULL,
-  `id_player2` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_solo_matches`
---
-
-DROP TABLE IF EXISTS `fs_solo_matches`;
-CREATE TABLE IF NOT EXISTS `fs_solo_matches` (
-  `id` int(10) unsigned NOT NULL,
-  `arenaid` smallint(5) unsigned NOT NULL,
-  `weapon1` tinyint(3) unsigned NOT NULL,
-  `weapon2` tinyint(3) unsigned NOT NULL,
-  `playerid` int(10) unsigned NOT NULL,
-  `killerid` int(10) unsigned NOT NULL,
-  `fightlen` mediumint(8) unsigned NOT NULL,
-  `hp` tinyint(3) unsigned NOT NULL,
-  `ar` tinyint(3) unsigned NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_stats`
---
-
-DROP TABLE IF EXISTS `fs_stats`;
-CREATE TABLE IF NOT EXISTS `fs_stats` (
-  `option_name` varchar(32) NOT NULL,
-  `value` blob
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `fs_stats`
---
-
-INSERT INTO `fs_stats` (`option_name`, `value`) VALUES
-('most_online', 0x333137),
-('most_online_date', 0x323031312d31312d31312031333a32353a3233),
-('kick_count', 0x31323235),
-('death_count', 0x353933323733),
-('kill_count', 0x353432363634),
-('join_count', 0x3433323231),
-('ban_count', 0x31323137);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_telecheckpoints`
---
-
-DROP TABLE IF EXISTS `fs_telecheckpoints`;
-CREATE TABLE IF NOT EXISTS `fs_telecheckpoints` (
-  `id` int(10) unsigned NOT NULL,
-  `fPOS` varchar(64) NOT NULL COMMENT 'X,Y,Z,A,interior',
-  `fOPIS` varchar(64) DEFAULT NULL COMMENT 'opis na 3dtextlabel i gametext',
-  `dPOS` varchar(64) NOT NULL,
-  `dOPIS` varchar(64) DEFAULT NULL,
-  `rozmiar` smallint(5) unsigned NOT NULL DEFAULT '8',
-  `aktywny` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_telecheckpoints`;
 --
 -- Zrzut danych tabeli `fs_telecheckpoints`
 --
@@ -11401,37 +10659,11 @@ INSERT INTO `fs_telecheckpoints` (`id`, `fPOS`, `fOPIS`, `dPOS`, `dOPIS`, `rozmi
 (30, '83.14,2022.3,18,82,0', 'Radioaktywne jeziorko', '-710.07,1966.88,20,180,0', 'Odplyw', 10, 1),
 (31, '2582.4,2828.84,8,273,0', 'Radioaktywny zbiornik', '-710.07,1966.88,20,180,0', 'Odplyw', 8, 1);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_telepickups`
+-- Tabela Truncate przed wstawieniem `fs_telepickups`
 --
 
-DROP TABLE IF EXISTS `fs_telepickups`;
-CREATE TABLE IF NOT EXISTS `fs_telepickups` (
-  `id` int(10) unsigned NOT NULL,
-  `pX` double NOT NULL COMMENT 'Wspolrzedne pickupu',
-  `pY` double NOT NULL,
-  `pZ` double NOT NULL,
-  `pi` int(11) NOT NULL COMMENT 'interior pickupu',
-  `pvw` int(11) NOT NULL COMMENT 'vw pickupu',
-  `opis` varchar(64) DEFAULT NULL COMMENT 'opis tekstowy',
-  `pokazopis` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'czy opis ma sie pojawic przy pickupie',
-  `pickupid` int(10) unsigned NOT NULL DEFAULT '19197' COMMENT 'id pickupu, domyslnie 19197',
-  `mapicon` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'ikonka na mapie, 0 - brak. lista pod http://wiki.sa-mp.com/wiki/MapIcons',
-  `tX` double NOT NULL COMMENT 'dokad ma przenosic - wspolrzedne',
-  `tY` double NOT NULL,
-  `tZ` double NOT NULL,
-  `ti` int(11) NOT NULL COMMENT 'dokad - interior',
-  `tvw` mediumint(9) NOT NULL,
-  `tA` double NOT NULL COMMENT 'dokad - kierunek patrzenia po przeniesieniu',
-  `mapicon_type` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `opis_color` int(10) unsigned NOT NULL DEFAULT '16732697',
-  `opis_drawdistance` smallint(5) unsigned NOT NULL DEFAULT '600',
-  `restrict_gang` int(10) unsigned NOT NULL DEFAULT '0',
-  `restrict_level` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=998 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_telepickups`;
 --
 -- Zrzut danych tabeli `fs_telepickups`
 --
@@ -11685,27 +10917,11 @@ INSERT INTO `fs_telepickups` (`id`, `pX`, `pY`, `pZ`, `pi`, `pvw`, `opis`, `poka
 (993, -2974.658, 454.897, 8049.536, 0, 0, 'Tajna baza', 0, 1318, 0, 0, 0, 5, 0, 0, 0, 0, 16732697, 600, 0, 0),
 (996, -1916.014, 6845.892, 13.932, 0, 10, 'Wyjscie z sali spotkan', 1, 1318, 0, 887.036, -2371.581, 13.282, 0, 0, 254, 0, 16732697, 600, 0, 0);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_vehicles`
+-- Tabela Truncate przed wstawieniem `fs_vehicles`
 --
 
-DROP TABLE IF EXISTS `fs_vehicles`;
-CREATE TABLE IF NOT EXISTS `fs_vehicles` (
-  `vid` smallint(3) unsigned NOT NULL,
-  `name` varchar(32) DEFAULT NULL,
-  `altnames` varchar(64) DEFAULT NULL,
-  `cena` mediumint(8) unsigned NOT NULL DEFAULT '10000',
-  `minPoziom` enum('gracz','vip','gm','admin') NOT NULL DEFAULT 'gracz',
-  `jezdzi` tinyint(1) NOT NULL DEFAULT '1',
-  `lata` tinyint(1) NOT NULL DEFAULT '0',
-  `plywa` tinyint(1) NOT NULL DEFAULT '0',
-  `wojskowy` tinyint(1) NOT NULL DEFAULT '0',
-  `przyczepa` tinyint(1) NOT NULL DEFAULT '0',
-  `tablica` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_vehicles`;
 --
 -- Zrzut danych tabeli `fs_vehicles`
 --
@@ -11924,67 +11140,11 @@ INSERT INTO `fs_vehicles` (`vid`, `name`, `altnames`, `cena`, `minPoziom`, `jezd
 (610, 'Farm trailer', NULL, 80000, 'vip', 1, 0, 0, 0, 1, 1),
 (611, 'Utility van trailer', NULL, 80000, 'vip', 1, 0, 0, 0, 1, 1);
 
--- --------------------------------------------------------
-
 --
--- Zastąpiona struktura widoku `fs_view_housesandvehicles`
---
-DROP VIEW IF EXISTS `fs_view_housesandvehicles`;
-CREATE TABLE IF NOT EXISTS `fs_view_housesandvehicles` (
-`id` int(10) unsigned
-,`X` double
-,`Y` double
-,`Z` double
-,`exitX` float
-,`exitY` float
-,`exitZ` float
-,`exitA` float
-,`ownerid` decimal(10,0)
-,`koszt` smallint(4) unsigned
-,`nick` varchar(24)
-,`IFNULL
-(h.paidTo,'-')` varchar(10)
-,`IFNULL(DATEDIFF(h.paidTo,NOW()),-1)` int(7)
-,`homeX` float
-,`homeY` float
-,`homeZ` float
-,`homeA` float
-,`homeI` smallint(6)
-,`homeVW` mediumint(9)
-,`vehicles_allowed` tinyint(4)
-,`vehicle_radius` double unsigned
-,`IFNULL(hv.model,0)` decimal(5,0)
-,`IFNULL(hv.X,0)` double
-,`IFNULL(hv.Y,0)` double
-,`IFNULL(hv.Z,0)` double
-,`IFNULL(hv.A,0)` double
-,`IFNULL(hv.color1,0)` decimal(5,0)
-,`IFNULL(hv.color2,0)` decimal(5,0)
-,`IFNULL(hv.plate,"-
-")` varchar(32)
-,`IFNULL(audioURL,_latin1'-')` varchar(128)
-,`IFNULL(``hv``.``components``,"-")` varchar(80)
-,`restrict_gang` tinyint(2) unsigned
-);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_wg_arena`
+-- Tabela Truncate przed wstawieniem `fs_wg_arena`
 --
 
-DROP TABLE IF EXISTS `fs_wg_arena`;
-CREATE TABLE IF NOT EXISTS `fs_wg_arena` (
-  `id` int(10) unsigned NOT NULL,
-  `descr` varchar(64) NOT NULL,
-  `interior` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `minplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `maxplayers` smallint(5) unsigned NOT NULL DEFAULT '2',
-  `wb_cube` varchar(64) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL COMMENT 'prostopadloscian x1,y1,z1,x2,y2,z2',
-  `wb_mode` enum('oraz','lub') CHARACTER SET ascii NOT NULL DEFAULT 'lub' COMMENT 'oraz - gracz musi byc w obu polach, lub - musi byc w jednym z nich',
-  `wb_sphere` varchar(64) CHARACTER SET ascii DEFAULT NULL COMMENT 'kula/sfera: x,y,z,r'
-) ENGINE=MyISAM AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_wg_arena`;
 --
 -- Zrzut danych tabeli `fs_wg_arena`
 --
@@ -12068,24 +11228,11 @@ INSERT INTO `fs_wg_arena` (`id`, `descr`, `interior`, `minplayers`, `maxplayers`
 (84, 'Tierra Robada', 0, 2, 10, NULL, 'lub', '-1309.52,2523.09,87.41,50'),
 (85, 'Demon battle', 0, 6, 30, NULL, 'lub', '559.48,-2170.60,13.14,45');
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_wg_arena_sp`
+-- Tabela Truncate przed wstawieniem `fs_wg_arena_sp`
 --
 
-DROP TABLE IF EXISTS `fs_wg_arena_sp`;
-CREATE TABLE IF NOT EXISTS `fs_wg_arena_sp` (
-  `id` int(10) unsigned NOT NULL,
-  `aid` int(10) unsigned NOT NULL,
-  `team` tinyint(1) unsigned NOT NULL,
-  `X` double NOT NULL,
-  `Y` double NOT NULL,
-  `Z` double NOT NULL,
-  `A` double NOT NULL,
-  `randomorder` tinyint(3) unsigned NOT NULL COMMENT 'wartosc losowa, aktualizowana automatycznie'
-) ENGINE=MyISAM AUTO_INCREMENT=3338 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_wg_arena_sp`;
 --
 -- Zrzut danych tabeli `fs_wg_arena_sp`
 --
@@ -14985,22 +14132,11 @@ INSERT INTO `fs_wg_arena_sp` (`id`, `aid`, `team`, `X`, `Y`, `Z`, `A`, `randomor
 (3320, 85, 1, 571.7962, -2149.4824, 11.0921, 241.07, 0),
 (3321, 85, 1, 574.7586, -2151.7844, 11.1171, 151.07, 0);
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `fs_zones`
+-- Tabela Truncate przed wstawieniem `fs_zones`
 --
 
-DROP TABLE IF EXISTS `fs_zones`;
-CREATE TABLE IF NOT EXISTS `fs_zones` (
-  `id` int(10) unsigned NOT NULL,
-  `miny` double NOT NULL,
-  `minx` double NOT NULL,
-  `maxy` double NOT NULL,
-  `maxx` double NOT NULL,
-  `active` tinyint(3) unsigned NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=286 DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `fs_zones`;
 --
 -- Zrzut danych tabeli `fs_zones`
 --
@@ -15245,573 +14381,6 @@ INSERT INTO `fs_zones` (`id`, `miny`, `minx`, `maxy`, `maxx`, `active`) VALUES
 (284, 2621.065429, 255.89746, 2821.065429, 455.89746, 0),
 (285, 2831.065429, 255.89746, 3031.065429, 455.89746, 0);
 
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `fs_zones_gangscore`
---
-
-DROP TABLE IF EXISTS `fs_zones_gangscore`;
-CREATE TABLE IF NOT EXISTS `fs_zones_gangscore` (
-  `id_zone` int(10) unsigned NOT NULL,
-  `id_gang` smallint(5) unsigned NOT NULL,
-  `respect` int(10) unsigned NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `fs_zones_gangscore`
---
-
--- --------------------------------------------------------
-
---
--- Struktura widoku `fs_view_housesandvehicles`
---
-DROP TABLE IF EXISTS `fs_view_housesandvehicles`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`k11`@`%` SQL SECURITY DEFINER VIEW `fs_view_housesandvehicles` AS select `h`.`id` AS `id`,`h`.`X` AS `X`,`h`.`Y` AS `Y`,`h`.`Z` AS `Z`,`h`.`exitX` AS `exitX`,`h`.`exitY` AS `exitY`,`h`.`exitZ` AS `exitZ`,`h`.`exitA` AS `exitA`,ifnull(`h`.`ownerid`,0) AS `ownerid`,`h`.`koszt` AS `koszt`,ifnull(`p`.`nick`,_ascii'nn') AS `nick`,ifnull(`h`.`paidTo`,_utf8'-') AS `IFNULL
-(h.paidTo,'-')`,ifnull((to_days(`h`.`paidTo`) - to_days(now())),-(1)) AS `IFNULL(DATEDIFF(h.paidTo,NOW()),-1)`,`h`.`homeX` AS `homeX`,`h`.`homeY` AS `homeY`,`h`.`homeZ` AS `homeZ`,`h`.`homeA` AS `homeA`,`h`.`homeI` AS `homeI`,`h`.`homeVW` AS `homeVW`,`h`.`vehicles_allowed` AS `vehicles_allowed`,`h`.`vehicle_radius` AS `vehicle_radius`,ifnull(`hv`.`model`,0) AS `IFNULL(hv.model,0)`,ifnull(`hv`.`X`,0) AS `IFNULL(hv.X,0)`,ifnull(`hv`.`Y`,0) AS `IFNULL(hv.Y,0)`,ifnull(`hv`.`Z`,0) AS `IFNULL(hv.Z,0)`,ifnull(`hv`.`A`,0) AS `IFNULL(hv.A,0)`,ifnull(`hv`.`color1`,0) AS `IFNULL(hv.color1,0)`,ifnull(`hv`.`color2`,0) AS `IFNULL(hv.color2,0)`,ifnull(`hv`.`plate`,_latin1'-') AS `IFNULL(hv.plate,"-
-")`,ifnull(`h`.`audioURL`,_latin1'-') AS `IFNULL(audioURL,_latin1'-')`,ifnull(`hv`.`components`,_latin1'-') AS `IFNULL(``hv``.``components``,"-")`,`h`.`restrict_gang` AS `restrict_gang` from ((`fs_houses` `h` left join `fs_players` `p` on((`p`.`id` = `h`.`ownerid`))) left join `fs_houses_vehicles` `hv` on(((`hv`.`houseid` = `h`.`id`) and (`h`.`ownerid` > 0) and (`h`.`paidTo` > cast(now() as date)))));
-
---
--- Indeksy dla zrzutów tabel
---
-
---
--- Indexes for table `fs_achievements`
---
-ALTER TABLE `fs_achievements`
-  ADD PRIMARY KEY (`shortname`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexes for table `fs_achievements_ranks`
---
-ALTER TABLE `fs_achievements_ranks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shortname` (`shortname`),
-  ADD KEY `shortname_2` (`shortname`,`score`);
-
---
--- Indexes for table `fs_admin_activity`
---
-ALTER TABLE `fs_admin_activity`
-  ADD UNIQUE KEY `id_player` (`id_player`,`data`);
-
---
--- Indexes for table `fs_arena`
---
-ALTER TABLE `fs_arena`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_bans`
---
-ALTER TABLE `fs_bans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `player_banned` (`player_banned`,`date_created`,`date_end`);
-
---
--- Indexes for table `fs_chowany_arena`
---
-ALTER TABLE `fs_chowany_arena`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_chowany_arena_sp`
---
-ALTER TABLE `fs_chowany_arena_sp`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_config`
---
-ALTER TABLE `fs_config`
-  ADD PRIMARY KEY (`option_name`);
-
---
--- Indexes for table `fs_ctf_arena`
---
-ALTER TABLE `fs_ctf_arena`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `minplayers` (`minplayers`,`maxplayers`);
-
---
--- Indexes for table `fs_ctf_arena_sp`
---
-ALTER TABLE `fs_ctf_arena_sp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`,`team`,`randomorder`);
-
---
--- Indexes for table `fs_derby_arena`
---
-ALTER TABLE `fs_derby_arena`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`);
-
---
--- Indexes for table `fs_derby_arena_sp`
---
-ALTER TABLE `fs_derby_arena_sp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`);
-
---
--- Indexes for table `fs_dragrace_records`
---
-ALTER TABLE `fs_dragrace_records`
-  ADD UNIQUE KEY `id_player` (`id_player`,`vehicleModel`);
-
---
--- Indexes for table `fs_drift_records`
---
-ALTER TABLE `fs_drift_records`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `raceid` (`raceid`);
-
---
--- Indexes for table `fs_drift_tracks`
---
-ALTER TABLE `fs_drift_tracks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`);
-
---
--- Indexes for table `fs_drift_tracks_cp`
---
-ALTER TABLE `fs_drift_tracks_cp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`);
-
---
--- Indexes for table `fs_drift_tracks_sp`
---
-ALTER TABLE `fs_drift_tracks_sp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`);
-
---
--- Indexes for table `fs_gangs`
---
-ALTER TABLE `fs_gangs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`),
-  ADD UNIQUE KEY `tag` (`tag`);
-
---
--- Indexes for table `fs_gangs_alliance`
---
-ALTER TABLE `fs_gangs_alliance`
-  ADD PRIMARY KEY (`g1`,`g2`);
-
---
--- Indexes for table `fs_houses`
---
-ALTER TABLE `fs_houses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ownerid` (`ownerid`);
-
---
--- Indexes for table `fs_houses_vehicles`
---
-ALTER TABLE `fs_houses_vehicles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_ipbans`
---
-ALTER TABLE `fs_ipbans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `date_created` (`date_created`,`date_end`);
-
---
--- Indexes for table `fs_iplocks`
---
-ALTER TABLE `fs_iplocks`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `serial` (`ip_class`),
-  ADD KEY `date_created` (`date_created`);
-
---
--- Indexes for table `fs_mapicons`
---
-ALTER TABLE `fs_mapicons`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_miscpickups`
---
-ALTER TABLE `fs_miscpickups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_mutes`
---
-ALTER TABLE `fs_mutes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `player_banned` (`player_muted`,`date_created`,`date_end`);
-
---
--- Indexes for table `fs_paczki`
---
-ALTER TABLE `fs_paczki`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_paczki_gracze`
---
-ALTER TABLE `fs_paczki_gracze`
-  ADD PRIMARY KEY (`id_paczki`,`id_gracza`),
-  ADD KEY `idg` (`id_gracza`);
-
---
--- Indexes for table `fs_players`
---
-ALTER TABLE `fs_players`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nick` (`nick`),
-  ADD KEY `session` (`session`),
-  ADD KEY `respect` (`respect`),
-  ADD KEY `skill` (`skill`),
-  ADD KEY `ip_last` (`ip_last`),
-  ADD KEY `serial_last` (`serial_last`),
-  ADD KEY `gamep` (`gamep`),
-  ADD KEY `serial_registered` (`serial_registered`),
-  ADD KEY `ip_registered` (`ip_registered`);
-
---
--- Indexes for table `fs_players_achievements`
---
-ALTER TABLE `fs_players_achievements`
-  ADD PRIMARY KEY (`playerid`,`shortname`),
-  ADD KEY `shortname` (`shortname`,`score`),
-  ADD KEY `playerid` (`playerid`);
-
---
--- Indexes for table `fs_players_arenascore`
---
-ALTER TABLE `fs_players_arenascore`
-  ADD PRIMARY KEY (`id_player`,`id_arena`);
-
---
--- Indexes for table `fs_players_arenascore_week`
---
-ALTER TABLE `fs_players_arenascore_week`
-  ADD PRIMARY KEY (`id_player`,`id_arena`);
-
---
--- Indexes for table `fs_players_in_gangs`
---
-ALTER TABLE `fs_players_in_gangs`
-  ADD PRIMARY KEY (`id_gang`,`id_player`),
-  ADD KEY `player_in_gang` (`id_player`,`rank`);
-
---
--- Indexes for table `fs_poczta`
---
-ALTER TABLE `fs_poczta`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_polecenia`
---
-ALTER TABLE `fs_polecenia`
-  ADD PRIMARY KEY (`polecona`);
-
---
--- Indexes for table `fs_quiz`
---
-ALTER TABLE `fs_quiz`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `kategoria` (`kategoria`);
-
---
--- Indexes for table `fs_races`
---
-ALTER TABLE `fs_races`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `minPlayers` (`minPlayers`,`maxPlayers`),
-  ADD KEY `active` (`active`);
-
---
--- Indexes for table `fs_races_cp`
---
-ALTER TABLE `fs_races_cp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`);
-
---
--- Indexes for table `fs_races_records`
---
-ALTER TABLE `fs_races_records`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `raceid` (`raceid`),
-  ADD KEY `i1` (`playerid`,`raceid`);
-
---
--- Indexes for table `fs_races_sp`
---
-ALTER TABLE `fs_races_sp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`);
-
---
--- Indexes for table `fs_returnpickups`
---
-ALTER TABLE `fs_returnpickups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_sbans`
---
-ALTER TABLE `fs_sbans`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `serial` (`serial`,`ip_class`),
-  ADD KEY `date_created` (`date_created`);
-
---
--- Indexes for table `fs_sluby`
---
-ALTER TABLE `fs_sluby`
-  ADD UNIQUE KEY `para` (`id_player1`,`id_player2`);
-
---
--- Indexes for table `fs_solo_matches`
---
-ALTER TABLE `fs_solo_matches`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_stats`
---
-ALTER TABLE `fs_stats`
-  ADD PRIMARY KEY (`option_name`);
-
---
--- Indexes for table `fs_telecheckpoints`
---
-ALTER TABLE `fs_telecheckpoints`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_telepickups`
---
-ALTER TABLE `fs_telepickups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_vehicles`
---
-ALTER TABLE `fs_vehicles`
-  ADD PRIMARY KEY (`vid`),
-  ADD KEY `minPoziom` (`minPoziom`);
-
---
--- Indexes for table `fs_wg_arena`
---
-ALTER TABLE `fs_wg_arena`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `minplayers` (`minplayers`,`maxplayers`);
-
---
--- Indexes for table `fs_wg_arena_sp`
---
-ALTER TABLE `fs_wg_arena_sp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `aid` (`aid`,`team`,`randomorder`);
-
---
--- Indexes for table `fs_zones`
---
-ALTER TABLE `fs_zones`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `fs_zones_gangscore`
---
-ALTER TABLE `fs_zones_gangscore`
-  ADD PRIMARY KEY (`id_zone`,`id_gang`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT dla tabeli `fs_achievements_ranks`
---
-ALTER TABLE `fs_achievements_ranks`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
---
--- AUTO_INCREMENT dla tabeli `fs_bans`
---
-ALTER TABLE `fs_bans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_chowany_arena`
---
-ALTER TABLE `fs_chowany_arena`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=44;
---
--- AUTO_INCREMENT dla tabeli `fs_chowany_arena_sp`
---
-ALTER TABLE `fs_chowany_arena_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2291;
---
--- AUTO_INCREMENT dla tabeli `fs_ctf_arena`
---
-ALTER TABLE `fs_ctf_arena`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
---
--- AUTO_INCREMENT dla tabeli `fs_ctf_arena_sp`
---
-ALTER TABLE `fs_ctf_arena_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3414;
---
--- AUTO_INCREMENT dla tabeli `fs_derby_arena`
---
-ALTER TABLE `fs_derby_arena`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT dla tabeli `fs_derby_arena_sp`
---
-ALTER TABLE `fs_derby_arena_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=447;
---
--- AUTO_INCREMENT dla tabeli `fs_drift_records`
---
-ALTER TABLE `fs_drift_records`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT dla tabeli `fs_drift_tracks`
---
-ALTER TABLE `fs_drift_tracks`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT dla tabeli `fs_drift_tracks_cp`
---
-ALTER TABLE `fs_drift_tracks_cp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=234;
---
--- AUTO_INCREMENT dla tabeli `fs_drift_tracks_sp`
---
-ALTER TABLE `fs_drift_tracks_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
---
--- AUTO_INCREMENT dla tabeli `fs_houses`
---
-ALTER TABLE `fs_houses`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=905;
---
--- AUTO_INCREMENT dla tabeli `fs_houses_vehicles`
---
-ALTER TABLE `fs_houses_vehicles`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10907;
---
--- AUTO_INCREMENT dla tabeli `fs_ipbans`
---
-ALTER TABLE `fs_ipbans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_iplocks`
---
-ALTER TABLE `fs_iplocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_mapicons`
---
-ALTER TABLE `fs_mapicons`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
---
--- AUTO_INCREMENT dla tabeli `fs_miscpickups`
---
-ALTER TABLE `fs_miscpickups`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=841;
---
--- AUTO_INCREMENT dla tabeli `fs_mutes`
---
-ALTER TABLE `fs_mutes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_paczki`
---
-ALTER TABLE `fs_paczki`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=134;
---
--- AUTO_INCREMENT dla tabeli `fs_players`
---
-ALTER TABLE `fs_players`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
---
--- AUTO_INCREMENT dla tabeli `fs_poczta`
---
-ALTER TABLE `fs_poczta`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_quiz`
---
-ALTER TABLE `fs_quiz`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1612;
---
--- AUTO_INCREMENT dla tabeli `fs_races`
---
-ALTER TABLE `fs_races`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=116;
---
--- AUTO_INCREMENT dla tabeli `fs_races_cp`
---
-ALTER TABLE `fs_races_cp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4260;
---
--- AUTO_INCREMENT dla tabeli `fs_races_records`
---
-ALTER TABLE `fs_races_records`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT dla tabeli `fs_races_sp`
---
-ALTER TABLE `fs_races_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1477;
---
--- AUTO_INCREMENT dla tabeli `fs_returnpickups`
---
-ALTER TABLE `fs_returnpickups`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=152;
---
--- AUTO_INCREMENT dla tabeli `fs_sbans`
---
-ALTER TABLE `fs_sbans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_solo_matches`
---
-ALTER TABLE `fs_solo_matches`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT dla tabeli `fs_telecheckpoints`
---
-ALTER TABLE `fs_telecheckpoints`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
---
--- AUTO_INCREMENT dla tabeli `fs_telepickups`
---
-ALTER TABLE `fs_telepickups`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=998;
---
--- AUTO_INCREMENT dla tabeli `fs_wg_arena`
---
-ALTER TABLE `fs_wg_arena`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
---
--- AUTO_INCREMENT dla tabeli `fs_wg_arena_sp`
---
-ALTER TABLE `fs_wg_arena_sp`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3338;
---
--- AUTO_INCREMENT dla tabeli `fs_zones`
---
-ALTER TABLE `fs_zones`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=286;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

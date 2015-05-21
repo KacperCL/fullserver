@@ -1881,12 +1881,12 @@ CMD:unkratkaall(playerid){
       oKratki[i]=-1;
       cnt++;
     }
-    if (cnt==0) Msg(playerid,COLOR_INFO2,"Brak kratek do usuniecia.");
-    else 
-    {
-      format(gstr, sizeof gstr, "%s usun%s wszystkie (%d) kratki.", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("ela"):("al"),cnt);
-      MSGToAdmins(COLOR_INFO2, gstr, true, LEVEL_GM);
-    }
+  }
+  if (cnt==0) Msg(playerid,COLOR_INFO2,"Brak kratek do usuniecia.");
+  else 
+  {
+    format(gstr, sizeof gstr, "%s usun%s wszystkie (%d) kratki.", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("ela"):("al"),cnt);
+    MSGToAdmins(COLOR_INFO2, gstr, true, LEVEL_GM);
   }
   return 1;
 }

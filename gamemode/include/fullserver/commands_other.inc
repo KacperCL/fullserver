@@ -1508,14 +1508,14 @@ CMD:tune(playerid){
 }
 
 CMD:rcmd(playerid) {
-  ShowPlayerDialog(playerid,DIALOG_CMDSEL,DIALOG_STYLE_LIST,__("Komendy za respekt:"),"{FFFFFF}/RARMOR \t {ff3030} 10 {ffffff}kamizelka\n{DDDDFF}/RINVISIBLE \t {ff3030} 35 {FFFFFF}Niewidzialnosc na radarze\n{FFAAAA}/RDUALSO \t {ff3030} 30 {ffffff}dwa sawnoffy\n{FFAAAA}/RDUALUZI \t {ff3030} 30 {ffffff}dwa polautomaty\n{FFAAAA}/RDUALPISTOLS \t {ff3030} 30 {ffffff}dwa pistolety","OK","Anuluj");
+  ShowPlayerDialog(playerid,DIALOG_CMDSEL,DIALOG_STYLE_TABLIST_HEADERS,__("Komendy za respekt:"),"Opcja\tKoszt\tOpis\n{FFFFFF}/RARMOR\t{ff3030}10\t{ffffff}kamizelka\n{DDDDFF}/RINVISIBLE\t{ff3030}35\t{FFFFFF}Niewidzialnosc na radarze\n{FFAAAA}/RDUALSO\t{ff3030}30\t{ffffff}dwa sawnoffy\n{FFAAAA}/RDUALUZI\t{ff3030}30\t{ffffff}dwa polautomaty\n{FFAAAA}/RDUALPISTOLS\t{ff3030}30\t{ffffff}dwa pistolety","OK","Anuluj");
   return 1;
 }
 
 CMD:rarmor(playerid){ // 10
   MUST_BE_SPAWNED(playerid);
   if (!pData[playerid][loggedIn])
-    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
+    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rcmd. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
   if (pData[playerid][respect]<10)
     return Msg(playerid,COLOR_ERROR,__("Masz za malo respektu! Wymagane {b}10{/b}!"));
   if(!TeleportAllowed(playerid) || !AttractionAllowed(playerid) || pTemp[playerid][godMode])
@@ -1538,7 +1538,7 @@ CMD:visible(playerid){
 CMD:rinvisible(playerid){ // 35
   MUST_BE_SPAWNED(playerid);
   if (!pData[playerid][loggedIn])
-    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
+    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rcmd. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
   if (pData[playerid][respect]<35)
     return Msg(playerid,COLOR_ERROR,__("Masz za malo respektu! Wymagane {b}35{/b}!"));
   if(!TeleportAllowed(playerid) || !AttractionAllowed(playerid))
@@ -1556,7 +1556,7 @@ CMD:rinvisible(playerid){ // 35
 CMD:rdualso(playerid){  // 30
   MUST_BE_SPAWNED(playerid);
   if (!pData[playerid][loggedIn])
-    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
+    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rcmd. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
   if (pData[playerid][respect]<30)
     return Msg(playerid,COLOR_ERROR,__("Masz za malo respektu! Wymagane {b}30{/b}!"));
 
@@ -1581,7 +1581,7 @@ CMD:rdualso(playerid){  // 30
 CMD:rdualuzi(playerid){ // 30
   MUST_BE_SPAWNED(playerid);
   if (!pData[playerid][loggedIn])
-    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
+    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rcmd. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
   if (pData[playerid][respect]<30)
     return Msg(playerid,COLOR_ERROR,__("Masz za malo respektu! Wymagane {b}30{/b}!"));
 
@@ -1607,7 +1607,7 @@ CMD:rdualuzi(playerid){ // 30
 CMD:rdualpistols(playerid){ // 30
   MUST_BE_SPAWNED(playerid);
   if (!pData[playerid][loggedIn])
-    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rkomend. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
+    return Msg(playerid,COLOR_ERROR,__("Musisz byc zarejestrowanym graczem, aby korzystac z /rcmd. Wpisz {b}/rejestracja{/b} aby sie zarejestrowac."));
   if (pData[playerid][respect]<30)
     return Msg(playerid,COLOR_ERROR,__("Masz za malo respektu! Wymagane {b}30{/b}!"));
 

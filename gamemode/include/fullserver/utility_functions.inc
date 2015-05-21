@@ -30,6 +30,19 @@ bool:IsPlayerSpawned(playerid)
   return true;
 }
 
+stock AC_DestroyDynamicObject(objectid)
+{
+  printf("DestroyDynamicObject(%d)",objectid);
+  return DestroyDynamicObject(objectid);
+}
+
+#if defined _ALS_DestroyDynamicObject
+    #undef DestroyDynamicObject
+#else
+    #define _ALS_DestroyDynamicObject
+#endif
+#define DestroyDynamicObject AC_DestroyDynamicObject
+
 /* == setPlayerSkin hook == */
 #if defined CJHIT_MODEL
 
@@ -38,7 +51,8 @@ stock AC_SetPlayerSkin(playerid,skinid){
   if(!IsValidSkin(skinid)) return;
   SetPlayerSkin(playerid,skinid);
 
-  if(pData[playerid][hudSetting][HUD_CJHIT] && IsPlayerSpawned(playerid)){
+  if(pData[playerid][hudSetting][HUD_CJHIT] && IsPlayerSpawned(playerid))
+  {
     PlayerTextDrawSetPreviewModel(playerid, pTextDraw[PTD_CJHIT][playerid], skinid);
     PlayerTextDrawSetPreviewModel(playerid, pTextDraw[PTD_CJHIT2][playerid], skinid);
     ShowPlayerHudElement(playerid, HUD_CJHIT, true);

@@ -65,7 +65,7 @@ new TeleCheckpoints[MAX_TELECHECKPOINTS][e_telecheckpoint];
 
 
 enum e_DynamicAreas {
-    eDA_andromeda,
+  eDA_andromeda,
   eDA_jail,
   eDA_tuneleKrzyk,  // prostopadloscian o wysokosc 1j, przecinajacy kanaly - po przejsciu przez niego rozlegnie sie krzyk
   eDA_getto
@@ -1153,6 +1153,12 @@ obiekty_odswiezTeleCheckpoints(){
 
   }
   return TeleCPCount;
+}
+
+obiekty_clearAllData()
+{
+  Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
+  Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
 }
 
 obiekty_odswiezMiscPickups(){

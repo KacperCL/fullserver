@@ -291,6 +291,7 @@ public OnGameModeInit()
   obiekty_odswiezTelePickups();
   obiekty_odswiezMapIcons();
   obiekty_odswiezMiscPickups();
+  obiekty_clearAllData();
   zaladujPaczki();
 
   gmTemp[snoopPM]=0;

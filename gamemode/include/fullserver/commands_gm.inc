@@ -1621,8 +1621,10 @@ CMD:strefa(playerid,params[]){
     }
     DestroyDynamicArea(StrefyNoDM[ea_przenosna]);
 
-    if (IsValidDynamicObject(Os[eO_przenosna_strefa]))
+    if (IsValidDynamicObject(Os[eO_przenosna_strefa]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefa], E_STREAMER_MODEL_ID) == 1872) {
       DestroyDynamicObject(Os[eO_przenosna_strefa]);
+      Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
+    }
 
     StrefyNoDM[ea_przenosna]=CreateDynamicSphere(0,0,0,1,0,0,-1);
     format(gstr,sizeof gstr, "{b}%s{/b} skasowal%s przenosna strefe bez DM", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("a"):(""));
@@ -1637,8 +1639,10 @@ CMD:strefa(playerid,params[]){
     rozmiar=5;
     Msg(playerid,COLOR_ERROR,"Rozmiar strefy zwiekszony do 5");
   }
-  if (IsValidDynamicObject(Os[eO_przenosna_strefa]))
-    DestroyDynamicObject(Os[eO_przenosna_strefa]);
+  if (IsValidDynamicObject(Os[eO_przenosna_strefa]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefa], E_STREAMER_MODEL_ID) == 1872) {
+      DestroyDynamicObject(Os[eO_przenosna_strefa]);
+      Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
+  }
 
   foreach(i)
     if (IsPlayerInDynamicArea(playerid,StrefyNoDM[ea_przenosna])) {
@@ -1664,16 +1668,22 @@ CMD:strefas(playerid,params[]){
   if (sscanf(params,"d",rozmiar))
     return Msg(playerid,COLOR_INFO2,"Uzyj: {b}/strefas <15-100>{/b} aby utworzyc strefe smierci. {b}/strefa 0{/b} aby ja usunac");
 
-  if (rozmiar==0) {
+  if (rozmiar==0) 
+  {
     foreach(i)
-      if (IsPlayerInDynamicArea(playerid,StrefyFullDM[ea_przenosna])) {
+    {
+      if (IsPlayerInDynamicArea(playerid,StrefyFullDM[ea_przenosna])) 
+      {
         pTemp[i][wStrefieFULLDM]=false;
         TextDrawHideForPlayer(i,gTextDraw[TD_AREAFULLDM]);
+      }
     }
     DestroyDynamicArea(StrefyFullDM[ea_przenosna]);
 
-    if (IsValidDynamicObject(Os[eO_przenosna_strefaDM]))
+    if (IsValidDynamicObject(Os[eO_przenosna_strefaDM]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefaDM], E_STREAMER_MODEL_ID) == 18728) {
       DestroyDynamicObject(Os[eO_przenosna_strefaDM]);
+      Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
+    }
 
     StrefyFullDM[ea_przenosna]=CreateDynamicSphere(0,0,0,1,0,0,-1);
     format(gstr,sizeof gstr, "{b}%s{/b} skasowal%s przenosna strefe smierci", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("a"):(""));
@@ -1681,20 +1691,29 @@ CMD:strefas(playerid,params[]){
     return 1;
   }
 
-  if (rozmiar>100) {
+  if (rozmiar>100) 
+  {
     rozmiar=100;
     Msg(playerid,COLOR_ERROR,"Rozmiar strefy zmniejszony do 100");
-  } else if (rozmiar<15) {
+  } 
+  else if (rozmiar<15) 
+  {
     rozmiar=15;
     Msg(playerid,COLOR_ERROR,"Rozmiar strefy zwiekszony do 15");
   }
   if (IsValidDynamicObject(Os[eO_przenosna_strefaDM]))
+  {
     DestroyDynamicObject(Os[eO_przenosna_strefaDM]);
-
+    Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
+  }
+  
   foreach(i)
-    if (IsPlayerInDynamicArea(playerid,StrefyFullDM[ea_przenosna])) {
+  {
+    if (IsPlayerInDynamicArea(playerid,StrefyFullDM[ea_przenosna]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefaDM], E_STREAMER_MODEL_ID) == 1872) 
+    {
       pTemp[i][wStrefieFULLDM]=false;
       TextDrawHideForPlayer(i,gTextDraw[TD_AREAFULLDM]);
+    }
   }
   DestroyDynamicArea(StrefyFullDM[ea_przenosna]);
 
@@ -1716,17 +1735,16 @@ CMD:zestaw(playerid){
   GivePlayerWeapon(playerid,29,1000); // mp5      4
   GivePlayerWeapon(playerid,31,1000); // m4       5
   GivePlayerWeapon(playerid,34,1000); // sniper   6
-  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1){
+  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1)
+  {
     GivePlayerWeapon(playerid,38,1000); // minigun    7
     GivePlayerWeapon(playerid,16,1000); // granaty    8
     GivePlayerWeapon(playerid,42,1000); // gasnica    9
   }
   SetPlayerArmour(playerid,100.0);
   SetPlayerHealth(playerid,100);
-  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1)
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
-  else
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
+  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1) Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
+  else Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
   return 1;
 }
 
@@ -1742,10 +1760,8 @@ CMD:zestaw2(playerid){
   GivePlayerWeapon(playerid,16,1000); // granaty    8
   SetPlayerArmour(playerid,100.0);
   SetPlayerHealth(playerid,100);
-  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1)
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
-  else
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
+  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1) Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
+  else Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
   return 1;
 }
 
@@ -1763,10 +1779,8 @@ CMD:zestaw3(playerid){
   GivePlayerWeapon(playerid,15,1);  // laska      10
   SetPlayerArmour(playerid,100.0);
   SetPlayerHealth(playerid,100);
-  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1)
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
-  else
-    Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
+  if (pData[playerid][adminLevel]>=LEVEL_ADMIN1) Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni admina");
+  else Msg(playerid,COLOR_INFO,"Otrzymales zestaw broni GMa");
   return 1;
 }
 
@@ -1788,98 +1802,93 @@ CMD:ann2(playerid, params[])
   return 1;
 }
 
-CMD:kratka(playerid,params[]){
-    if(!IsGM(playerid)) return 0;
-    new userid;
-    if (sscanf(params,"d",userid)){
-      Msg(playerid,COLOR_ERROR,"U퓓j: /kratka <id>");
-        new
-      lista[1024],
-      cnt;
-        for (new i=0; i<MAX_PLAYERS;i++)
-        if (IsValidDynamicObject(oKratki[i])) {
-      if (cnt++<10)
-          format(lista,sizeof lista,"%s%s{ffffff}%d\t{%06x}%s", lista, strlen(lista)>0?("\n"):(""), i, pData[i][currentColor],GetPlayerNick(i));
-      if (cnt>=10)
-        format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (cnt-9), dli(cnt-9, "gracz","graczy","graczy"));
-
-      ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezione kratki graczy:", lista, "Zamknij","");
-      cnt++;
+CMD:kratka(playerid,params[])
+{
+  if(!IsGM(playerid)) return 0;
+  new userid;
+  if (sscanf(params,"d",userid))
+  {
+    Msg(playerid,COLOR_ERROR,"U퓓j: /kratka <id>");
+    new lista[1024], cnt;
+    for (new i=0; i<MAX_PLAYERS;i++)
+    {
+      if (IsValidDynamicObject(oKratki[i])) 
+      {
+        if (cnt++<10) format(lista,sizeof lista,"%s%s{ffffff}%d\t{%06x}%s", lista, strlen(lista)>0?("\n"):(""), i, pData[i][currentColor],GetPlayerNick(i));
+        if (cnt>=10) format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (cnt-9), dli(cnt-9, "gracz","graczy","graczy"));
+        ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezione kratki graczy:", lista, "Zamknij","");
+        cnt++;
+      }
+      if(cnt==0) return Msg(playerid,COLOR_INFO2,"Brak kratek.");
+      return 1;
     }
-    if(cnt==0) return Msg(playerid,COLOR_INFO2,"Brak kratek.");
-    return 1;
   }
   if (!IsPlayerConnected(userid))
   return Msg(playerid,COLOR_ERROR,"Nie ma takiego gracza!");
+  
+  new Float:P[3],int,vw;
+  GetPlayerPos(userid,P[0],P[1],P[2]);
+  int=GetPlayerInterior(userid);
+  vw=GetPlayerVirtualWorld(userid);
 
-    new Float:P[3],int,vw;
-    GetPlayerPos(userid,P[0],P[1],P[2]);
-    int=GetPlayerInterior(userid);
-    vw=GetPlayerVirtualWorld(userid);
-
-    if (IsValidDynamicObject(oKratki[userid]))
-  DestroyDynamicObject(oKratki[userid]);
-    oKratki[userid] = CreateDynamicObject(19075, P[0],  P[1],     P[2]+0.5, 0.0, 0.0, 0.0, vw,int,-1,300);
-    SetPlayerPos(userid,P[0],P[1],P[2]);
+  if(IsValidDynamicObject(oKratki[userid])) DestroyDynamicObject(oKratki[userid]);
+  oKratki[userid] = CreateDynamicObject(19075, P[0],  P[1],     P[2]+0.5, 0.0, 0.0, 0.0, vw,int,-1,300);
+  SetPlayerPos(userid,P[0],P[1],P[2]);
   Streamer_Update(userid);
-    PlayerPlaySound(userid, 1137, 0,0,0);
-    return 1;
+  PlayerPlaySound(userid, 1137, 0,0,0);
+  return 1;
 }
 
 CMD:tpkratka(playerid,params[]){
-    if(!IsGM(playerid)) return 0;
-    new userid;
-    if (sscanf(params,"d",userid))
-    return Msg(playerid,COLOR_ERROR,"U퓓j: /tpkratka <id gracza>");
-    if (!IsValidDynamicObject(oKratki[userid]))
-    return Msg(playerid,COLOR_ERROR,"Nie odnaleziono podanej kratki.");
+  if(!IsGM(playerid)) return 0;
+  new userid;
+  if (sscanf(params,"d",userid)) return Msg(playerid,COLOR_ERROR,"U퓓j: /tpkratka <id gracza>");
+  if (!IsValidDynamicObject(oKratki[userid])) return Msg(playerid,COLOR_ERROR,"Nie odnaleziono podanej kratki.");
 
   new Float:P[3],int,vw;
   GetDynamicObjectPos(oKratki[userid],P[0],P[1],P[2]);
   int=Streamer_GetIntData(STREAMER_TYPE_OBJECT, oKratki[userid], E_STREAMER_INTERIOR_ID);
   vw=Streamer_GetIntData(STREAMER_TYPE_OBJECT, oKratki[userid],E_STREAMER_WORLD_ID);
-  if (vw==-1)
-    vw=GetPlayerVirtualWorld(playerid);
-  if (int==-1)
-    int=GetPlayerInterior(playerid);
+  if (vw==-1) vw=GetPlayerVirtualWorld(playerid);
+  if (int==-1) int=GetPlayerInterior(playerid);
 
-    Teleport(T_PLAYER, playerid, P[0], P[1], P[2], 0, int, vw, true);
-    SetPlayerInterior(playerid,int);
-    SetPlayerVirtualWorld(playerid,vw);
+  Teleport(T_PLAYER, playerid, P[0], P[1], P[2], 0, int, vw, true);
+  SetPlayerInterior(playerid,int);
+  SetPlayerVirtualWorld(playerid,vw);
   Msg(playerid,COLOR_INFO2,"Przeniesiono do kratki");
   return 1;
 }
 
 CMD:unkratka(playerid,params[]){
-    if(!IsGM(playerid)) return 0;
-    new userid;
-    if (sscanf(params,"d",userid))
-  return Msg(playerid,COLOR_ERROR,"U퓓j: /unkratka <id gracza>");
-    if (IsValidDynamicObject(oKratki[userid]))
-      DestroyDynamicObject(oKratki[userid]);
+  if(!IsGM(playerid)) return 0;
+  new userid;
+  if (sscanf(params,"d",userid)) return Msg(playerid,COLOR_ERROR,"U퓓j: /unkratka <id gracza>");
+  if (IsValidDynamicObject(oKratki[userid])) DestroyDynamicObject(oKratki[userid]);
   oKratki[userid]=-1;
   Streamer_Update(userid);
-    return 1;
+  return 1;
 }
 
 CMD:unkratkaall(playerid){
-    if(!IsGM(playerid)) return 0;
-    new cnt=0;
+  if(!IsGM(playerid)) return 0;
+  new cnt=0;
 
-    for (new i=0; i<MAX_PLAYERS;i++)
-        if (IsValidDynamicObject(oKratki[i])) {
-        DestroyDynamicObject(oKratki[i]);
+  for (new i=0; i<MAX_PLAYERS;i++)
+  {
+    if (IsValidDynamicObject(oKratki[i])) 
+    {
+      DestroyDynamicObject(oKratki[i]);
       oKratki[i]=-1;
       cnt++;
     }
-
-  if (cnt==0)
-    Msg(playerid,COLOR_INFO2,"Brak kratek do usuniecia.");
-  else {
-    format(gstr, sizeof gstr, "%s usun%s wszystkie (%d) kratki.", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("ela"):("al"),cnt);
-    MSGToAdmins(COLOR_INFO2, gstr, true, LEVEL_GM);
+    if (cnt==0) Msg(playerid,COLOR_INFO2,"Brak kratek do usuniecia.");
+    else 
+    {
+      format(gstr, sizeof gstr, "%s usun%s wszystkie (%d) kratki.", (pData[playerid][adminLevel] == LEVEL_ADMINHIDDEN) ? TXT(playerid, 416) : GetPlayerNick(playerid), Kobieta(playerid)?("ela"):("al"),cnt);
+      MSGToAdmins(COLOR_INFO2, gstr, true, LEVEL_GM);
+    }
   }
-    return 1;
+  return 1;
 }
 
 CMD:tt(playerid, params[])

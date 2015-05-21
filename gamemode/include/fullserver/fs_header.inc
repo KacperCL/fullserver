@@ -1074,7 +1074,9 @@ enum e_pTemp
   identStep,
   hPaymentType,
   smsType,
-  lastOpuUpdateTick,
+  opuStep1,
+  opuStep2,
+  opuStep3,
 }
 
 enum e_gData

@@ -2441,87 +2441,118 @@ public OnPlayerUpdate(playerid)
   
   if(IsPlayerNPC(playerid)) return 1;
   if(pTemp[playerid][desync]) return 0;
+  if(!IsPlayerSpawned(playerid)|| pData[playerid][classSelecting]) return 1;
   
-  if (GetTickCount()%2==0) return 1;    // raz na 2 razy kontynuujemy
+  if (GetTickCount()%2==0) return 1;
   
-  if((GetTickCount()-pTemp[playerid][lastOpuUpdateTick]) <= 30) { pTemp[playerid][lastOpuUpdateTick] = GetTickCount(); return 1; }
-  pTemp[playerid][lastOpuUpdateTick] = GetTickCount();
-
-  static pState,wepid,bbuf[128];
+  static pState,wepid,bbuf[128],Float:opupHealth,Float:opupArmour;
   pState = GetPlayerState(playerid);
-
-  wepid=GetPlayerWeapon(playerid);
-  if (wepid!=pTemp[playerid][lastWeaponHolded]) {
-     if (wepid>1 && wepid!=41 &&
+  
+  // !! STEP 1 !!
+  if(pTemp[playerid][opuStep1]%2==0)
+  {
+    printf("STEP 1");
+    // vehicle status info
+    if(pState == PLAYER_STATE_DRIVER || pState == PLAYER_STATE_PASSENGER)
+    {
+      RefreshPlayerVehicleInfo(playerid);
+    }
+  
+    // godMode, no-dm area and free time (db,dtbk)
+    if(pTemp[playerid][godMode] && pData[playerid][pAttraction]==A_NONE)
+    {
+      SetPlayerHealth(playerid,99999.0);
+      SetPlayerArmour(playerid,99999.0);
+      ResetPlayerWeapons(playerid);
+      if(pState == PLAYER_STATE_DRIVER)
+      {
+        RepairVehicle(GetPlayerVehicleID(playerid));
+        SetVehicleHealth(GetPlayerVehicleID(playerid),VEHICLE_DEFAULT_HP);
+      }
+    }
+    else if(pState == PLAYER_STATE_DRIVER && (!IsFreeTime() || IsPlayerInNoDMArea(playerid)))
+    {
+      SetPlayerArmedWeapon(playerid,0);
+    }
+    
+    // chowany
+    if((aData[A_CHOWANY][aState] == A_STATE_ON && pData[playerid][aChowany] && pTemp[playerid][aChowanySide] == A_CHOWANY_SEARCHING && pData[playerid][pAttraction] == A_CHOWANY))
+    {
+      SetPlayerHealth(playerid,9999.0);
+    }
+  }
+  
+  // !! STEP 2 !!
+  if(pTemp[playerid][opuStep2]%3==0)
+  {
+    printf("STEP 2");
+    // hp & armour status
+    if(pData[playerid][hudSetting][HUD_HP]) 
+    {
+      GetPlayerHealth(playerid,opupHealth);
+      GetPlayerArmour(playerid,opupArmour);
+    
+      // armour
+      if(floatcmp(opupArmour, 100.0)==1) 
+      {
+        format(bbuf,28,"GOD~n~~n~~n~~n~~r~~h~");
+        PlayerTextDrawShow(playerid, pTextDraw[PTD_ARICON][playerid]);
+      }
+      else if(floatcmp(opupArmour, 0.0)==0) 
+      {
+        format(bbuf,28,"_~n~~n~~n~~n~~r~~h~");
+        PlayerTextDrawHide(playerid, pTextDraw[PTD_ARICON][playerid]);
+      }
+      else
+      {
+        format(bbuf,28,"%.0f~n~~n~~n~~n~~r~~h~",opupArmour);
+        PlayerTextDrawShow(playerid, pTextDraw[PTD_ARICON][playerid]);
+      }
+    
+      // hp
+      if(floatcmp(opupHealth, 100.0)==1) 
+      {
+        format(bbuf,28,"%sGOD",bbuf);
+      }
+      else 
+      {
+        format(bbuf,28,"%s%.0f",bbuf,opupHealth);
+      }
+      PlayerTextDrawSetString(playerid,pTextDraw[PTD_HPTEXT][playerid], bbuf);
+    }
+  }
+  
+  // !! STEP 3 !!
+  if(pTemp[playerid][opuStep3]%3==0)
+  {
+    printf("STEP 3");
+    // weapon status
+    wepid=GetPlayerWeapon(playerid);
+    if (wepid!=pTemp[playerid][lastWeaponHolded]) 
+    {
+      if (wepid>1 && wepid!=41 &&
       (pTemp[playerid][wStrefieNODM] || pTemp[playerid][protping] || !pTemp[playerid][weaponsAllowed]) &&
       !pTemp[playerid][protkill] &&
-      (pData[playerid][adminLevel]<LEVEL_GM || pTemp[playerid][protping] || !pTemp[playerid][weaponsAllowed]) && pState!=0 && pState!=9 && pState!=8 && pState!=7 && GetPlayerWeapon(playerid) != 43 && GetPlayerWeapon(playerid) != 46) {
-        if(GetPlayerWeapon(playerid) != 0) {
-          SetPlayerArmedWeapon(playerid,0);
-          return 0;
-        }
+      (pData[playerid][adminLevel]<LEVEL_GM || pTemp[playerid][protping] || !pTemp[playerid][weaponsAllowed]) && pState!=0 && pState!=9 && pState!=8 && pState!=7 && GetPlayerWeapon(playerid) != 43 && GetPlayerWeapon(playerid) != 46) 
+      {
+        SetPlayerArmedWeapon(playerid,0);
+      }
+      OnPlayerChangeWeapon(playerid,pTemp[playerid][lastWeaponHolded], wepid);
+      pTemp[playerid][lastWeaponHolded]=wepid;
     }
-
-    OnPlayerChangeWeapon(playerid,pTemp[playerid][lastWeaponHolded], wepid);
-    pTemp[playerid][lastWeaponHolded]=wepid;
-  }
-
-  if(GetTickCount()%2==0 || !IsPlayerSpawned(playerid) || GetPlayerState(playerid)==PLAYER_STATE_WASTED || pData[playerid][classSelecting]) return 1;
-
-  if(pData[playerid][hudSetting][HUD_HP]) {
-    static Float:opupHealth, Float:opupArmour;
-    GetPlayerHealth(playerid,opupHealth);
-    GetPlayerArmour(playerid,opupArmour);
-    if(floatcmp(opupArmour, 0.0)!=0) {
-        if(floatcmp(opupHealth, 100.0)==1 && floatcmp(opupArmour, 100.0)!=1) format(bbuf,28,"%.0f~n~~n~~n~~n~~r~~h~GOD",opupArmour);
-        else if(floatcmp(opupArmour, 100.0)==1 && floatcmp(opupHealth, 100.0)!=1) format(bbuf,28,"GOD~n~~n~~n~~n~~r~~h~%.0f",opupHealth);
-        else if(floatcmp(opupArmour, 100.0)==1 && floatcmp(opupHealth, 100.0)==1) format(bbuf,28,"GOD~n~~n~~n~~n~~r~~h~GOD");
-        else format(bbuf,28,"%.0f~n~~n~~n~~n~~r~~h~%.0f",opupArmour,opupHealth);
-      PlayerTextDrawShow(playerid, pTextDraw[PTD_ARICON][playerid] );
-    }
-    else {
-      if(floatcmp(opupHealth, 100.0)==1) format(bbuf,28,"_~n~~n~~n~~n~~r~~h~GOD");
-        else format(bbuf,28,"_~n~~n~~n~~n~~r~~h~%.0f",opupHealth);
-      PlayerTextDrawHide(playerid, pTextDraw[PTD_ARICON][playerid] );
-    }
-    PlayerTextDrawSetString(playerid,pTextDraw[PTD_HPTEXT][playerid], bbuf);
-  }
-
-  if(pState == PLAYER_STATE_DRIVER || pState == PLAYER_STATE_PASSENGER){
-    RefreshPlayerVehicleInfo(playerid);
-  }
-
-  if(GetTickCount()%3==0) return 1;
-
-  if(pTemp[playerid][godMode] && pData[playerid][pAttraction]==A_NONE){
-    SetPlayerHealth(playerid,99999.0);
-    SetPlayerArmour(playerid,99999.0);
-    ResetPlayerWeapons(playerid);
-  }
-
-  if((aData[A_CHOWANY][aState] == A_STATE_ON && pData[playerid][aChowany] && pTemp[playerid][aChowanySide] == A_CHOWANY_SEARCHING && pData[playerid][pAttraction] == A_CHOWANY)){
-      SetPlayerHealth(playerid,9999.0);
-  }
-
-  if(IsPlayerInAnyVehicle(playerid))
-  {
-     if(pTemp[playerid][godMode] && pData[playerid][pAttraction]==A_NONE){
-      RepairVehicle(GetPlayerVehicleID(playerid));
-      SetVehicleHealth(GetPlayerVehicleID(playerid),VEHICLE_DEFAULT_HP);
-    }
-    if(tVehicles[pData[playerid][lastVehicle]][vo_driver]==INVALID_PLAYER_ID || pTemp[tVehicles[pData[playerid][lastVehicle]][vo_driver]][godMode] || IsPlayerInNoDMArea(playerid)){
-      SetPlayerArmedWeapon(playerid,0);
-      return 0;
-    }
-    if(!IsFreeTime() && pState == PLAYER_STATE_DRIVER){
-      SetPlayerArmedWeapon(playerid,0);
-      return 0;
+  
+    // bad player
+    if(pTemp[playerid][identStep] > MAX_IDENT_STEP)
+    {
+      BanEx(playerid, "BAD PLAYER");
     }
   }
-  if(pTemp[playerid][identStep]>MAX_IDENT_STEP){
-    BanEx(playerid, "BAD PLAYER");
-    return 0;
-  }
+  
+  // !! UPDATE STEPS !!  
+  if(++pTemp[playerid][opuStep1]>=65530) pTemp[playerid][opuStep1] = 0;
+  if(++pTemp[playerid][opuStep2]>=65530) pTemp[playerid][opuStep2] = 0;
+  if(++pTemp[playerid][opuStep3]>=65530) pTemp[playerid][opuStep3] = 0;
+  
   return 1;
 }
 

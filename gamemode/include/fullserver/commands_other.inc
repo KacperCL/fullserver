@@ -78,8 +78,8 @@ CMD:cpanel(playerid) // thx to pr0f from PBS for this command
     tVehicleUsed[vid]=true;
     tVehicles[vid][vo_used]=true;
 
-    format(sstr,sizeof sstr,"Silnik:\t\t%s\nŒwiat³a:\t\t%s\nAlarm:\t\t%s\nDrzwi:\t\t%s\nMaska:\t\t%s\nBaga¿nik:\t%s",K[engine],K[lights],K[alarm],K[3-doors],K[bonnet+2],K[boot+2]);
-    ShowPlayerDialog(playerid,DIALOG_VEH_PANEL,DIALOG_STYLE_LIST,"Zarz¹dzanie pojazdem",sstr,"Prze³¹cz","Zamknij");
+    format(sstr,sizeof sstr,"Opcja\tStatus\nSilnik:\t%s\nŒwiat³a:\t%s\nAlarm:\t%s\nDrzwi:\t%s\nMaska:\t%s\nBaga¿nik:\t%s",K[engine],K[lights],K[alarm],K[3-doors],K[bonnet+2],K[boot+2]);
+    ShowPlayerDialog(playerid,DIALOG_VEH_PANEL,DIALOG_STYLE_TABLIST_HEADERS,"Zarz¹dzanie pojazdem",sstr,"Prze³¹cz","Zamknij");
   }
   else return Msg(playerid,COLOR_INFO,TXT(playerid,451)); // musisz byc w pojezdzie aby to zrobic
   return 1;
@@ -214,14 +214,14 @@ CMD:osiagniecia(playerid){
         mysql_get_field("name", nazwao);
         mysql_get_field("score", score);
 
-        format(buffer,sizeof buffer,"{FFFF00}%36s\t{FF0000}%8s\n",nazwao,score);
+        format(buffer,sizeof buffer,"Nazwa\tPoziom\n{FFFF00}%36s\t{FF0000}%8s\n",nazwao,score);
         strcat(dlg_buffer, buffer);
   }
   strdel(dlg_buffer, strlen(dlg_buffer) - 1, strlen(dlg_buffer));
   mysql_free_result();
 
   if(strlen(dlg_buffer)>1)
-    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Osiagniecia", dlg_buffer, "Zamknij", "");
+    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Osiagniecia", dlg_buffer, "Zamknij", "");
   else
       Msg(playerid,COLOR_ERROR,"Nie masz jescze zadnych osiagniec, kod b³êdu: #MYSQL_NO_ACH_OR");
   return 1;

@@ -183,4 +183,7 @@ CMD:driftingexit(playerid)
   
 CMD:jetmax(playerid)
   return _molo(playerid);
+  
+CMD:arte(playerid)
+  return _artefakt(playerid);
 // EOF

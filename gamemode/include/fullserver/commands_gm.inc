@@ -1810,13 +1810,14 @@ CMD:kratka(playerid,params[])
   {
     Msg(playerid,COLOR_ERROR,"U¿yj: /kratka <id>");
     new lista[1024], cnt;
+    format(lista,sizeof lista,"ID\tNick\n");
     for (new i=0; i<MAX_PLAYERS;i++)
     {
       if (IsValidDynamicObject(oKratki[i])) 
       {
         if (cnt++<10) format(lista,sizeof lista,"%s%s{ffffff}%d\t{%06x}%s", lista, strlen(lista)>0?("\n"):(""), i, pData[i][currentColor],GetPlayerNick(i));
         if (cnt>=10) format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (cnt-9), dli(cnt-9, "gracz","graczy","graczy"));
-        ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezione kratki graczy:", lista, "Zamknij","");
+        ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezione kratki graczy:", lista, "Zamknij","");
         cnt++;
       }
       if(cnt==0) return Msg(playerid,COLOR_INFO2,"Brak kratek.");
@@ -2193,7 +2194,8 @@ CMD:gracze(playerid, params[])
 
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
-
+    
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2206,7 +2208,7 @@ CMD:gracze(playerid, params[])
                 if (pcount>=20)
                     format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                 pcount++;
             }
         }
@@ -2234,6 +2236,7 @@ CMD:snaj(playerid, params[])
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
 
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2246,7 +2249,7 @@ CMD:snaj(playerid, params[])
                 if (pcount>=10)
                     format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                 pcount++;
             }
         }
@@ -2275,6 +2278,7 @@ CMD:hyd(playerid, params[])
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
 
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2290,7 +2294,7 @@ CMD:hyd(playerid, params[])
                     if (pcount>=10)
                         format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                     pcount++;
                 }
             }
@@ -2320,6 +2324,7 @@ CMD:hunt(playerid, params[])
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
 
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2335,7 +2340,7 @@ CMD:hunt(playerid, params[])
                     if (pcount>=10)
                         format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                     pcount++;
                 }
             }
@@ -2365,6 +2370,7 @@ CMD:rust(playerid, params[])
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
 
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2380,7 +2386,7 @@ CMD:rust(playerid, params[])
                     if (pcount>=10)
                         format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                     pcount++;
                 }
             }
@@ -2410,6 +2416,7 @@ CMD:baron(playerid, params[])
     int=GetPlayerInterior(playerid);
     vw=GetPlayerVirtualWorld(playerid);
 
+    format(lista,sizeof lista,"ID\tNick\n");
     foreach(i)
     {
         if (IsPlayerSpawned(i) && GetPlayerInterior(i)==int && GetPlayerVirtualWorld(i)==vw)
@@ -2425,7 +2432,7 @@ CMD:baron(playerid, params[])
                     if (pcount>=10)
                         format(lista,sizeof lista,"%s\n{ffffff}+%d %s", lista, (pcount-9), dli(pcount-9, "gracz","graczy","graczy"));
 
-                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_LIST, "Znalezieni gracze:", lista, "Zamknij","");
+                    ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Znalezieni gracze:", lista, "Zamknij","");
                     pcount++;
                 }
             }

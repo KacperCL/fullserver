@@ -70,17 +70,18 @@ CMD:arena(playerid){
 
   areny_recount();
 
-    new lista[1024];
+  new lista[1024];
+  format(lista, sizeof lista, "Arena\tGracze\n");
   for (new i=0;i<sizeof Areny;i++)
    if (strlen(Areny[i][ea_cmd])>0) {
     if (Areny[i][ea_limit]<=0)
-      format(lista, sizeof lista, "%s%s{%06x}%16s \t{ffffff}%d/-", lista, strlen(lista)>0?("\n"):(""), Areny[i][ea_cnt]>0?0x74c1f9:0x3481B9, Areny[i][ea_cmd], Areny[i][ea_cnt]);
+      format(lista, sizeof lista, "%s%s{%06x}%16s\t{ffffff}%d/-", lista, strlen(lista)>0?("\n"):(""), Areny[i][ea_cnt]>0?0x74c1f9:0x3481B9, Areny[i][ea_cmd], Areny[i][ea_cnt]);
     else
-      format(lista, sizeof lista, "%s%s{%06x}%16s \t{ffffff}%d/%d", lista, strlen(lista)>0?("\n"):(""), Areny[i][ea_cnt]>0?0x74c1f9:0x3481B9, Areny[i][ea_cmd], Areny[i][ea_cnt], Areny[i][ea_limit]);
+      format(lista, sizeof lista, "%s%s{%06x}%16s\t{ffffff}%d/%d", lista, strlen(lista)>0?("\n"):(""), Areny[i][ea_cnt]>0?0x74c1f9:0x3481B9, Areny[i][ea_cmd], Areny[i][ea_cnt], Areny[i][ea_limit]);
 
    }
 
-  ShowPlayerDialog(playerid,DIALOG_CMDSEL,DIALOG_STYLE_LIST,"Wybierz arene", lista, "OK", "Anuluj");
+  ShowPlayerDialog(playerid,DIALOG_CMDSEL,DIALOG_STYLE_TABLIST_HEADERS,"Wybierz arene", lista, "OK", "Anuluj");
   return 1;
 }
 CMD:areny(playerid)

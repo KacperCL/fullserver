@@ -104,11 +104,6 @@ main()
 {
 }
 
-public OnRuntimeError(code, &bool:suppress)
-{
-   return 1;
-}
-
 public OnVehicleMod(playerid,vehicleid,componentid)
 {
   if(GetPlayerInterior(playerid) == 0)
@@ -144,6 +139,11 @@ public OnActorStreamOut(actorid, forplayerid)
 public OnTrailerUpdate(playerid, vehicleid)
 {
   return 1;
+}
+
+public OnRuntimeError(code, &bool:suppress)
+{
+   return 1;
 }
 
 public OnGameModeInit()
@@ -265,7 +265,7 @@ public OnGameModeInit()
   CreateATMs();
 
   // stolik w wybieralce sf
-  CreateObject(1433,-1962.03, 817.68,110.0, 0.0, 0.0, 0.0, 300.0);
+  //CreateObject(1433,-1962.03, 817.68,110.0, 0.0, 0.0, 0.0, 300.0);
   
   printf(" Ladowanie pojazdow ...");
 

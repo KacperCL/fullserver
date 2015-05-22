@@ -1236,9 +1236,10 @@ GetDialogList(playerid, dialogid)
     }
     case DIALOG_WEAPON_QUICKBUY:
     {
+      format(szList,sizeof szList,"Nazwa\tKoszt\n");
       for(new i=0;i<sizeof quickbuyWeapons;i++)
       if (quickbuyWeapons[i][ewd_quickBuy])
-        format(szList,sizeof szList,"%s%s{FCE206}%d$\t{ffffff}%s", szList, ((i>0)?("\n"):("")), quickbuyWeapons[i][ewd_baseCost],quickbuyWeapons[i][ewd_PLname]);
+        format(szList,sizeof szList,"%s%s{ffffff}%s\t{FCE206}$%d", szList, ((i>0)?("\n"):("")), quickbuyWeapons[i][ewd_PLname], quickbuyWeapons[i][ewd_baseCost]);
       return szList;
     }
 

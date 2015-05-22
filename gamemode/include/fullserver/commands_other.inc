@@ -1458,14 +1458,14 @@ CMD:ctfexit(playerid){
 CMD:bronie(playerid){
   MUST_BE_SPAWNED(playerid);
   if(!TeleportAllowed(playerid) || pTemp[playerid][godMode]) return Msg(playerid,COLOR_ERROR,__("Nie mozesz teraz kupic broni!"));
-  return ShowPlayerDialog(playerid, DIALOG_WEAPON_QUICKBUY, DIALOG_STYLE_LIST, __("Zakup broni"), GetDialogList(playerid, DIALOG_WEAPON_QUICKBUY), __("Wybierz"), __("Wyjdz"));
+  return ShowPlayerDialog(playerid, DIALOG_WEAPON_QUICKBUY, DIALOG_STYLE_TABLIST_HEADERS, __("Zakup broni"), GetDialogList(playerid, DIALOG_WEAPON_QUICKBUY), __("Wybierz"), __("Wyjdz"));
 }
 
 CMD:spadochron(playerid){
   MUST_BE_SPAWNED(playerid);
   if(!TeleportAllowed(playerid)) return Msg(playerid,COLOR_ERROR,__("Nie mozesz teraz kupic spadochronu"));
   if (GetPlayerMoney(playerid)<250 && !IsAdmin(playerid))
-    return Msg(playerid, COLOR_ERROR, __("Nie masz wystarczajacej ilosc gotowki!"));
+    return Msg(playerid, COLOR_ERROR, __("Nie masz wystarczajacej ilosc gotowki ($250)!"));
   if (!IsAdmin(playerid))
     SetPlayerMoney(playerid, GetPlayerMoney(playerid)-250);
   GivePlayerWeapon(playerid,46,1);
@@ -1476,7 +1476,7 @@ CMD:aparat(playerid){
   MUST_BE_SPAWNED(playerid);
   if(!TeleportAllowed(playerid)) return Msg(playerid,COLOR_ERROR,__("Nie mozesz teraz kupic aparatu"));
   if (GetPlayerMoney(playerid)<250 && !IsAdmin(playerid))
-    return Msg(playerid, COLOR_ERROR, __("Nie masz wystarczajacej ilosc gotowki!"));
+    return Msg(playerid, COLOR_ERROR, __("Nie masz wystarczajacej ilosc gotowki ($250)!"));
   if (!IsAdmin(playerid))
     SetPlayerMoney(playerid, GetPlayerMoney(playerid)-250);
   GivePlayerWeapon(playerid,43,200);

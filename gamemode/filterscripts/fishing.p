@@ -191,12 +191,6 @@ mg_fishing_Stop(playerid,i){
     }
 }
 
-public OnPlayerUpdate(playerid){
-  if (mg_fishing[playerid]==-1)
-    return 1;
-  return 1;
-}
-
 public OnPlayerKeyStateChange(playerid,newkeys,oldkeys){
   if (mg_fishing[playerid]==-1)
     return 1;

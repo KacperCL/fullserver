@@ -43,22 +43,6 @@ public PlayerCommandPerformedOutside(playerid, cmdtext[], success)
   OnPlayerCommandPerformed(playerid, cmdtext, success);
 }
 
-public IsPlayerCountedAndNotExpired(playerid)
-{
-  if(pData[playerid][isCountedForRestore] && pData[playerid][disconnectSession] + 300000 >= GetTickCount())
-  {
-    new serial[50],IP[16],PlayerName[32];
-    gpci(playerid, serial, sizeof serial);
-    GetPlayerIp(playerid,IP,sizeof(IP));
-    GetPlayerName(playerid,PlayerName,sizeof(PlayerName));
-    
-    if(strcmp(pData[playerid][lastNick],PlayerName,false)==0 && strcmp(pData[playerid][lastIp],IP,false)==0 && strcmp(pData[playerid][lastSerial],serial,false)==0){
-      return 1;
-    }
-  }
-  return 0;
-}
-
 public GetPlayerFactionID(playerid){
     if (!IsPlayerConnected(playerid)) return 0;
     return pTemp[playerid][faction];

@@ -406,6 +406,7 @@ CH_Finish(bool:timeLimit=false) {
     }
 
     pData[gmTemp[aChowanyPlayers][i]][pAttraction] = A_NONE;
+    pTemp[gmTemp[aChowanyPlayers][i]][aChowanySide] = -1;
 
     if (GetPlayerState(gmTemp[aChowanyPlayers][i])!=PLAYER_STATE_WASTED && !pTemp[gmTemp[aChowanyPlayers][i]][aCHDead]) {
         SetPlayerHealth(gmTemp[aChowanyPlayers][i],100.0);

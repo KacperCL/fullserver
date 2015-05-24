@@ -26,6 +26,9 @@ SOFTWARE.
 #include <samp/a_samp>
 #include <samp/a_http>
 
+// pre-includes
+#include <fullserver/version>
+
 // 3rd party includes
 #include <3rdparty/y_timers>
 #include <3rdparty/sscanf2>
@@ -43,7 +46,6 @@ SOFTWARE.
 #endif
 
 // main gamemode includes
-#include <fullserver/version>
 #include <fullserver/fs_header>
 #include <fullserver/money>
 #include <fullserver/atms>
@@ -469,8 +471,10 @@ public OnPlayerRequestSpawn(playerid)
 public OnPlayerConnect(playerid)
 {
   if(IsPlayerNPC(playerid)) return 1;
-  if (playerid>=(MAX_SERVER_PLAYERS-10)) {
-      Msg(playerid,COLOR_ERROR,"Programowy limit graczy osiagniety, kod bledu: #AMX_DEFINE_SERVER_FULL");
+  
+  if (playerid>=(MAX_SERVER_PLAYERS-10)) 
+  {
+    Msg(playerid,COLOR_ERROR,"Programowy limit graczy osiagniety, kod bledu: #AMX_DEFINE_SERVER_FULL");
     KickPlayer(playerid);
     return 0; // nie przekazujemy informacji do skryptow itp
   }
@@ -478,54 +482,62 @@ public OnPlayerConnect(playerid)
   new serial[50],IP[16],version[10],PlayerName[32];
   gpci(playerid, serial, sizeof serial);
   GetPlayerVersion(playerid,version,sizeof version);
-    GetPlayerIp(playerid,IP,sizeof(IP));
-    GetPlayerName(playerid,PlayerName,sizeof(PlayerName));
+  GetPlayerIp(playerid,IP,sizeof(IP));
+  GetPlayerName(playerid,PlayerName,sizeof(PlayerName));
 
-    if (strcmp(version,"0.3.7",true)!=0 && strcmp(version,"0.3.7-R1-2",true)!=0 && strcmp(version,"0.3.7-R2",true)!=0) {
-        printf("Zla wersja (%s) klienta SA-MP z IP %s - ZBANOWANY",version, IP);
-        BanEx(playerid,"Zla wersja klienta SA-MP");
-        return 0;
-    }
+  if (strcmp(version,"0.3.7",true)!=0 && strcmp(version,"0.3.7-R1-2",true)!=0 && strcmp(version,"0.3.7-R2",true)!=0) 
+  {
+    printf("Zla wersja (%s) klienta SA-MP z IP %s - ZBANOWANY",version, IP);
+    BanEx(playerid,"Zla wersja klienta SA-MP");
+    return 0;
+  }
 
-    new time = gettime();
-    new joins;
-    for(new i=0;i<10;i++){
-        if(LastTenJoinTimes[i] + 10 >= time){
-            if(!strcmp(LastTenJoinIps[i],IP,false) && LastTenJoinIps[i][0] != '\0'){
-                joins++;
-            }
-        }
+  new time = gettime();
+  new joins;
+  for(new i=0;i<10;i++)
+  {
+    if(LastTenJoinTimes[i] + 10 >= time)
+    {
+      if(!strcmp(LastTenJoinIps[i],IP,false) && LastTenJoinIps[i][0] != '\0')
+      {
+        joins++;
+      }
     }
-    joins += 1;
-    if(joins >= 3){
-        // 3 polaczenia z tego samego IP w ciagu 10 sekund
-        printf("Prawdopodobny flooder na graczy z IP %s - ZBANOWANY",IP);
+  }
+  joins += 1;
+  if(joins >= 3)
+  {
+    // 3 polaczenia z tego samego IP w ciagu 10 sekund
+    printf("Prawdopodobny flooder na graczy z IP %s - ZBANOWANY",IP);
     BanEx(playerid,"Prawdopodobny flooder na graczy <zbyt duzo polaczen w ciagu 10 sekund>");
     return 0;
-    }
+  }
 
-    new index;
-    new ttime = time;
-    for(new i=0;i<10;i++){
-        if(LastTenJoinTimes[i] <= ttime){
-            ttime = LastTenJoinTimes[i];
-            index = i;
-        }
+  new index;
+  new ttime = time;
+  for(new i=0;i<10;i++)
+  {
+    if(LastTenJoinTimes[i] <= ttime)
+    {
+      ttime = LastTenJoinTimes[i];
+      index = i;
     }
-    LastTenJoinTimes[index] = time;
-    LastTenJoinIps[index] = IP;
+  }
+  LastTenJoinTimes[index] = time;
+  LastTenJoinIps[index] = IP;
 
-    if(pTemp[playerid][uglyRejoinHack]){ // rejoin na to samo ID bez wysylania onPlayerDisconnect (a.k.a m0d_rejoin by bartekdvd)
-        printf("Prawdopodobny m0d_rejoin hack z IP %s - ZBANOWANY",IP);
+  if(pTemp[playerid][uglyRejoinHack])
+  { // rejoin na to samo ID bez wysylania onPlayerDisconnect (a.k.a m0d_rejoin by bartekdvd)
+    printf("Prawdopodobny m0d_rejoin hack z IP %s - ZBANOWANY",IP);
     BanEx(playerid,"Prawdopodobny m0d_rejoin hack");
     pTemp[playerid][uglyRejoinHack]=false;
     return 0;
   }
 
   if (strlen(PlayerName)<3 || strlen(PlayerName)>23){
-        printf("Nieprawidlowa dlugosc nicku z IP %s - ZBANOWANY",IP);
-        BanEx(playerid,"Nieprawidlowa dlugosc nicku");
-        return 0;
+    printf("Nieprawidlowa dlugosc nicku z IP %s - ZBANOWANY",IP);
+    BanEx(playerid,"Nieprawidlowa dlugosc nicku");
+    return 0;
   }
 
   // logujemy wszystkie seriale
@@ -534,28 +546,6 @@ public OnPlayerConnect(playerid)
   if (gmTemp[highestPlayerID]<playerid) gmTemp[highestPlayerID]=playerid; // this should be faster then calling to GetPlayerPoolSize
 
   pTemp[playerid][uglyRejoinHack]=true;
-  
-  ////////////////////// restore after crash! /////////////////
-  if(!pData[playerid][isCountedForRestore])
-  {
-    format(pData[playerid][lastNick],32,"%s",PlayerName);
-    format(pData[playerid][lastIp],32,"%s",IP);
-    format(pData[playerid][lastSerial],48,"%s",serial);
-  }
-  
-  if(pData[playerid][isCountedForRestore]) {
-    printf(" INFO: player %d found for restore! tick: %d, disconnectSess: %d, disconnectCHECK: %d",playerid,GetTickCount(),pData[playerid][disconnectSession],(pData[playerid][disconnectSession] + 300000));
-  }
-  
-  pData[playerid][restoredFromLastSession] = false;
-  if(pData[playerid][isCountedForRestore] && pData[playerid][disconnectSession] + 300000 >= GetTickCount())
-  {
-    if(strcmp(pData[playerid][lastNick],PlayerName,false)==0 && strcmp(pData[playerid][lastIp],IP,false)==0 && strcmp(pData[playerid][lastSerial],serial,false)==0){
-      pData[playerid][restoredFromLastSession] = true;
-    }
-  }
-  /////////////////////// end restore ///////////////////////////
-  if(!pData[playerid][restoredFromLastSession]) pData[playerid][session] = GetTickCount();
 
   SendClientMessage(playerid,-1," ");
   SendClientMessage(playerid,0xffffffff, "FullServer GM{adc3e7}, ver. " #GMVERSION " " #GMCOMPILED);
@@ -572,10 +562,10 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][loginAttemps] = 0;
   pTemp[playerid][shamalId] = 0;
   pTemp[playerid][fakeKillWarn] = false;
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][fRsp] = true;
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][gongAll] = false;
+  pTemp[playerid][fRsp] = true;
+  pTemp[playerid][gongAll] = false;
   pData[playerid][vipEnabled] = false;
-  pData[playerid][vipDaysLeft]=-1;
+  pData[playerid][vipDaysLeft]= -1;
   pTemp[playerid][watchDmg]=false;
   pTemp[playerid][lastDmg]=0;
   pTemp[playerid][aCTFexit]=false;
@@ -584,28 +574,23 @@ public OnPlayerConnect(playerid)
   format(pData[playerid][vipToDate], 12, "0000-00-00");
   pTemp[playerid][hPaymentType]=0;
   pTemp[playerid][smsType]=0;
-
   pTemp[playerid][skinBeforeChange]=-1;
   pTemp[playerid][lastSessionSaveTick] = GetTickCount();
   pTemp[playerid][noSkill] = false;
-  //pTemp[playerid][audioHandleId] = -1;
-  
   pTemp[playerid][lastDeathHeadshottedBy] = INVALID_PLAYER_ID;
-
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][doubleMode]=false;
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][godMode]=false;
+  pTemp[playerid][doubleMode]=false;
+  pTemp[playerid][godMode]=false;
   pTemp[playerid][lastKillTickCount]=0;
   pTemp[playerid][fastKillWarn]=false;
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][rampy]=false;
-
+  pTemp[playerid][rampy]=false;
   pTemp[playerid][identStep]=0;
-
   pTemp[playerid][isFS] = false;
-  if(strfind(PlayerName, "[FS]", true) != -1 || strfind(PlayerName, ".fs", true) != -1 || strfind(PlayerName, "fs.", true) != -1
-  || strfind(PlayerName, "FS_", true) != -1  || strfind(PlayerName, "_FS", true) != -1){
-      pTemp[playerid][isFS] = true;
+  
+  if(strfind(PlayerName, "[FS]", true) != -1 || strfind(PlayerName, ".fs", true) != -1 || strfind(PlayerName, "fs.", true) != -1 || strfind(PlayerName, "FS_", true) != -1  || strfind(PlayerName, "_FS", true) != -1)
+  {
+    pTemp[playerid][isFS] = true;
   }
-    format(pTemp[playerid][properName],MAX_PLAYER_NAME,"%s", PlayerName);
+  format(pTemp[playerid][properName],MAX_PLAYER_NAME,"%s", PlayerName);
 
   pData[playerid][gang] = NO_GANG;
   pData[playerid][gangRank] = GANG_RANK_NONE;
@@ -646,7 +631,7 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][firstClassSelection]=true;
   pTemp[playerid][onArena]=ARENA_NONE;
   pTemp[playerid][pickupDelay]=0;
-  if(!pData[playerid][restoredFromLastSession]) pTemp[playerid][bonusHours] = 0;
+  pTemp[playerid][bonusHours] = 0;
   pTemp[playerid][miniGame]=MINIGAME_NONE;
   pTemp[playerid][lastPlayerKilled]=INVALID_PLAYER_ID;
   pTemp[playerid][killStreak]=0;
@@ -657,31 +642,25 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][tmpAlpha]=PLAYER_COLOR_ALPHA;
   pTemp[playerid][TPInv]=0;
   pTemp[playerid][disableWeaponCheck]=false;
-
   pTemp[playerid][wStrefieNODM]=false;
   pTemp[playerid][wStrefieFULLDM]=false;
-
   pTemp[playerid][curPos]=1;
   pTemp[playerid][lastPos]=-1;
-
   pTemp[playerid][cenzura]=false;
   pTemp[playerid][protkill]=false;
   pTemp[playerid][protping]=false;
-
   pTemp[playerid][troll]=false;
   pTemp[playerid][desync]=false;
   pTemp[playerid][antygl]=0;
   pTemp[playerid][lockedPos]=false;
   pTemp[playerid][weaponsAllowed]=true;
   pTemp[playerid][cheater]=false;
-
   pTemp[playerid][weaponSkill_pistol]=0;
   pTemp[playerid][weaponSkill_silenced]=0;
   pTemp[playerid][weaponSkill_sawnoff]=0;
   pTemp[playerid][weaponSkill_uzi]=0;
   pTemp[playerid][audio_vehicle]=-1;
   pTemp[playerid][vehicleSpecialLastUsed]=GetTickCount();
-
   pTemp[playerid][bannedPlayersCnt]=0;
   pTemp[playerid][bannedPlayersRS]=0;
   pTemp[playerid][faction]=FACTION_NONE;
@@ -689,10 +668,7 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][fakeAFK]=false;
   pTemp[playerid][ept_fpswarns]=0;
   pTemp[playerid][seesNametags]=true;
-
-  for(new i=0;i<ARENA_MAX;i++)
-    pTemp[playerid][arenaScore][i]=0;
-
+  for(new i=0;i<ARENA_MAX;i++) pTemp[playerid][arenaScore][i]=0;
   privpos[playerid][tpX]=FLOAT_NAN;
   privpos2[playerid][tpX]=FLOAT_NAN;
   pTemp[playerid][isFreezed]=false;
@@ -701,7 +677,6 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][bombPos][0]=-1;
   pTemp[playerid][bombPos][1]=-1;
   pTemp[playerid][bombPos][2]=-1;
-
   pTemp[playerid][vipHeal]=-1;
   pTemp[playerid][vipArmor]=-1;
 
@@ -713,56 +688,47 @@ public OnPlayerConnect(playerid)
 
   if(IsPlayerAdmin(playerid) && pData[playerid][allowedLevel]<LEVEL_ADMIN3) // zalogowany na rcona bez rcona w bazie danych!
   {
-    format(buffer,sizeof buffer,__("Nieautoryzowane logowanie na admina RCON przez %s (%d)! Wykopany."), GetPlayerNick(playerid), playerid);
+    format(buffer,sizeof buffer,__("Nieautoryzowane logowanie na admina RCON przez %s (%d)! Wykopany."), PlayerName, playerid);
     KickPlayer(playerid);
     MSGToAdmins(COLOR_ERROR, buffer, false);
     OutputLog(LOG_SYSTEM, buffer);
     return 0;
-
   }
-  else if (IsPlayerAdmin(playerid) && pData[playerid][allowedLevel]>=LEVEL_ADMIN3)
-    pTemp[playerid][isRcon] = true;
-
+  else if (IsPlayerAdmin(playerid) && pData[playerid][allowedLevel]>=LEVEL_ADMIN3) pTemp[playerid][isRcon] = true;
 
   ShowElement(playerid, TDE_WIDE, true);
   ShowElement(playerid, TDE_FULLSERVERLOGO, true);
 
-  if (gmTemp[debugMode]){
+  if (gmTemp[debugMode])
+  {
     TextDrawShowForPlayer(playerid,gTextDraw[30]);
   }
-
   for(new i = TD_STARS_START; i <= TD_STARS_END; i++)
   {
     TextDrawHideForPlayer(playerid, gTextDraw[i]);
   }
-
   ShowPlayerHudElement(playerid, HUD_HP, false);
 
   if (gmTemp[showJoins]==2 || (gmTemp[showJoins]==1 && gmTemp[pAbsAdminCount]>0))
-  foreach(i)
   {
-    if(playerid == i) continue;
-
-    new
-     szPlayerName[24];
-
-    GetPlayerName(playerid, szPlayerName, sizeof szPlayerName);
-
-    if(IsAdmin(i))
+    foreach(i)
     {
-      format(buffer, sizeof buffer, SkinKobiecy(pData[playerid][lastUsedSkin]) ? ("{b}%s (%i){/b} weszla na serwer (IP: %s)") : ("{b}%s (%i){/b} wszedl na serwer (IP: %s)"), szPlayerName, playerid, GetPlayerIP(playerid));
-      Msg(i, COLOR_JOININFO, buffer, ((gmTemp[pPlayerCount]<5 && pData[playerid][allowedLevel]<=0) ? true : false) );
-    }
-    else if (gmTemp[showJoins]==2)
-    {
-      format(buffer, sizeof buffer, (SkinKobiecy(pData[playerid][lastUsedSkin])) ? ("{b}%s (%i){/b} weszla na serwer.") : ("{b}%s (%i){/b} wszedl na serwer."), szPlayerName, playerid);
-      Msg(i, COLOR_JOININFO, buffer, ((gmTemp[pPlayerCount]<5 && pData[playerid][allowedLevel]<=0) ? true : false) );
+      if(playerid == i) continue;
+
+      if(IsAdmin(i))
+      {
+        format(buffer, sizeof buffer, SkinKobiecy(pData[playerid][lastUsedSkin]) ? ("{b}%s (%i){/b} weszla na serwer (IP: %s)") : ("{b}%s (%i){/b} wszedl na serwer (IP: %s)"), PlayerName, playerid, IP);
+        Msg(i, COLOR_JOININFO, buffer, ((gmTemp[pPlayerCount]<5 && pData[playerid][allowedLevel]<=0) ? true : false) );
+      }
+      else if (gmTemp[showJoins]==2)
+      {
+        format(buffer, sizeof buffer, (SkinKobiecy(pData[playerid][lastUsedSkin])) ? ("{b}%s (%i){/b} weszla na serwer.") : ("{b}%s (%i){/b} wszedl na serwer."), PlayerName, playerid);
+        Msg(i, COLOR_JOININFO, buffer, ((gmTemp[pPlayerCount]<5 && pData[playerid][allowedLevel]<=0) ? true : false) );
+      }
     }
   }
 
-  new
-   pOnline = GetPlayerCount();
-
+  new pOnline = GetPlayerCount();
   if(pOnline > StringToInt(GetServerStat("most_online")))
   {
     SetServerStatInt("most_online", pOnline);
@@ -771,7 +737,6 @@ public OnPlayerConnect(playerid)
     format(buffer, sizeof buffer, __("Nowy rekord graczy na serwerze!~n~~n~~r~~h~%i!"), pOnline);
     ShowAnnouncement(buffer);
   }
-
   gmData[join_count]++;
 
   if(PlayerAccountExists(playerid))
@@ -787,20 +752,13 @@ public OnPlayerConnect(playerid)
     
     ShowPlayerDialog(playerid, DIALOG_HELP_RULES_GUEST, DIALOG_STYLE_MSGBOX, TXT(playerid, 80), GetDialogContent(DIALOG_HELP_RULES), __("Akceptuj"), __("Wyjdz"));
   }
+  
+  new str[160];
 
-
-  new
-   szPlayerName[24],
-   str[160];
-
-  GetPlayerName(playerid, szPlayerName, sizeof szPlayerName);
-
-  format(str,sizeof str," ~r~%s ~w~(~l~%d~w~) ",szPlayerName,playerid);
+  format(str,sizeof str," ~r~%s ~w~(~l~%d~w~) ",PlayerName,playerid);
   PlayerTextDrawSetString(playerid,pTextDraw[PTD_STAT][playerid], str);
 
   Msg(playerid,COLOR_INFO,"Je¿eli chcesz dowiedzieæ siê co jest nowego na serwerze, wpisz {b}/nowosci{/b}");
-  
-  if(pData[playerid][restoredFromLastSession]) Msg(playerid, COLOR_ERROR, "Wygl¹da na to, ¿e mia³eœ crasha. Twoje podstawowe statystyki zosta³y przywrócone z poprzedniej sesji.");
 
   PlaySound(playerid, 1183);  // standardowa muza fs
 
@@ -809,19 +767,18 @@ public OnPlayerConnect(playerid)
   pTemp[playerid][accepts][eac_solo]=ACCEPTS_ALL;
   pTemp[playerid][accepts][eac_pm]=ACCEPTS_ALL;
 
-  if (gmTemp[protAll])
-    Msg(playerid, COLOR_ERROR,__("Uwaga! Obecnie wszyscy gracze na serwerze posiadaja imunitet!"));
+  if (gmTemp[protAll]) Msg(playerid, COLOR_ERROR,__("Uwaga! Obecnie wszyscy gracze na serwerze posiadaja imunitet!"));
 
   UpdatePlayerNickTD(playerid);
 
   copy("",pData[playerid][pDzaloz]);
   for(new i; i < MAX_PLAYER_ATTACHED_OBJECTS; i++)
+  {
+    if(IsPlayerAttachedObjectSlotUsed(playerid, i))
     {
-        if(IsPlayerAttachedObjectSlotUsed(playerid, i))
-        {
-            RemovePlayerAttachedObject(playerid, i);
-        }
+      RemovePlayerAttachedObject(playerid, i);
     }
+  }
 
   TogglePlayerClock(playerid,0);
   SyncPlayerGameTime(playerid);
@@ -973,15 +930,6 @@ public OnPlayerDisconnect(playerid, reason)
   pTemp[playerid][bombTimer]=-1;
 
   if(IsPlayerInAnyVehicle(playerid)) tVehicles[GetPlayerVehicleID(playerid)][vo_driver]=INVALID_PLAYER_ID;
-
-  //////////////// restore after crash! ///////////////
-  pData[playerid][disconnectSession] = GetTickCount();
-  pData[playerid][isCountedForRestore] = false;
-  if(reason == 0 || pTemp[playerid][lostedByAdmin]) {
-    pData[playerid][isCountedForRestore] = true;
-    printf(" INFO: player %d counted for restore, tick count: %d, lost status: %d",playerid,GetTickCount(),pTemp[playerid][lostedByAdmin]);
-  }
-  //////////////// end restore after crash! ///////////////
   
   pData[playerid][pAttraction] = A_NONE;
   pData[playerid][aChowany] = false;
@@ -1008,67 +956,89 @@ public OnPlayerDisconnect(playerid, reason)
 
   TextDrawHideForPlayer(playerid,gTextDraw[30]);
 
-  if (gmTemp[aRacePlayersR][playerid]!=INVALID_PLAYER_ID) {
+  if (gmTemp[aRacePlayersR][playerid]!=INVALID_PLAYER_ID) 
+  {
     gmTemp[aRacePlayers][gmTemp[aRacePlayersR][playerid]]=INVALID_PLAYER_ID;
     gmTemp[aRacePlayersR][playerid] = INVALID_PLAYER_ID;
   }
 
   if (aData[A_WG][aState] != A_STATE_OFF)
+  {
     for(new i = 0; i < gmTemp[aWGMaxPlayers]; i++)
-          if (gmTemp[aWGPlayers][i]==playerid) {
+    {
+      if (gmTemp[aWGPlayers][i]==playerid) 
+      {
         gmTemp[aWGPlayers][i]=INVALID_PLAYER_ID;
         break;
       }
-    if (aData[A_CTF][aState] != A_STATE_OFF)
+    }
+  }
+  if (aData[A_CTF][aState] != A_STATE_OFF)
+  {
     for(new i = 0; i < gmTemp[aCTFMaxPlayers]; i++)
-          if (gmTemp[aCTFPlayers][i]==playerid) {
+    {
+      if (gmTemp[aCTFPlayers][i]==playerid) 
+      {
         gmTemp[aCTFPlayers][i]=INVALID_PLAYER_ID;
         break;
       }
-      if (aData[A_GG][aState] != A_STATE_OFF)
+    }
+  }
+  if (aData[A_GG][aState] != A_STATE_OFF)
+  {
     for(new i = 0; i < gmTemp[aGGMaxPlayers]; i++)
-          if (gmTemp[aGGPlayers][i]==playerid) {
+    {
+      if (gmTemp[aGGPlayers][i]==playerid) 
+      {
         gmTemp[aGGPlayers][i]=INVALID_PLAYER_ID;
         break;
       }
-
+    }
+  }
   if (aData[A_CHOWANY][aState] != A_STATE_OFF)
+  {
     for(new i = 0; i < gmTemp[aChowanyMaxPlayers]; i++)
-          if (gmTemp[aChowanyPlayers][i]==playerid) {
+    {
+      if (gmTemp[aChowanyPlayers][i]==playerid) 
+      {
         gmTemp[aChowanyPlayers][i]=INVALID_PLAYER_ID;
         break;
       }
+    }
+  }
+  if (aData[A_STRZELNICA][aState] != A_STATE_OFF)
+  {
+    for(new i = 0; i < gmTemp[aStrzelnicaMaxPlayers]; i++)
+    {
+      if(gmTemp[aStrzelnicaPlayers][i] == playerid)
+      {
+        gmTemp[aStrzelnicaPlayers][i] = INVALID_PLAYER_ID;
+        break;
+      }
+    }
+  }
 
   avt_zeroPlayerAchievements(playerid); // zerujemy zapisy o osiagnieciach, na wypadek gdyby na ten id wrocil ktos niezarejestrowany (i te nie zostana pobrane).
-    poczta_wyczyscTorbe(playerid);
+  poczta_wyczyscTorbe(playerid);
 
   if(pData[playerid][reported]) RemovePlayerFromReportList(playerid);
 
-  if(pTemp[playerid][e_houseid]>=0)
-    domy_OnHouseOwnerDisconnects(playerid);
-
-  for(new i = 0; i < gmTemp[aStrzelnicaMaxPlayers]; i++)
-  {
-    if(playerid != gmTemp[aStrzelnicaPlayers][i]) continue;
-
-    gmTemp[aStrzelnicaPlayers][i] = INVALID_PLAYER_ID;
-  }
+  if(pTemp[playerid][e_houseid]>=0) domy_OnHouseOwnerDisconnects(playerid);
 
   if(pData[playerid][loggedIn])
   {
     UpdatePlayerAccountData(playerid,true,true);  // 3 arg - wylogowany
     pTemp[playerid][lastSessionSaveTick] = GetTickCount();
   }
-
-  if(gmData[artefactOwner] == playerid){
+  if(gmData[artefactOwner] == playerid)
+  {
     DropArtefact(playerid);
   }
-
-  if(pData[playerid][loggedIn]){
-
+  if(pData[playerid][loggedIn])
+  {
     if(pData[playerid][jail] - (GetTickCount() / 1000) > 0 && pData[playerid][jail] != 0)
     {
-          format(gstr,sizeof gstr,"UPDATE fs_players SET jail=%d WHERE id=%d LIMIT 1",pData[playerid][jail] - (GetTickCount() / 1000), pData[playerid][accountID]);
+      format(gstr,sizeof gstr,"UPDATE fs_players SET jail=%d WHERE id=%d LIMIT 1",pData[playerid][jail] - (GetTickCount() / 1000), pData[playerid][accountID]);
       mysql_query(gstr);
     }
     else
@@ -1087,7 +1057,6 @@ public OnPlayerDisconnect(playerid, reason)
     mysql_query(gstr);
   }
 
-  if (gmTemp[showJoins]>0)
   foreach(i)
   {
     if(pData[i][spectating] == playerid)
@@ -1098,16 +1067,19 @@ public OnPlayerDisconnect(playerid, reason)
     if(i == playerid || reason == LEAVE_REASON_KICKBAN) continue;
   }
 
-  if (gmTemp[showJoins]>0) {
+  if (gmTemp[showJoins]>0) 
+  {
     new
      playedSeconds = GetPlayerCurrentSession(playerid),
      tempPeriod;
+     
     GetOptimalTimeUnit(playedSeconds, tempPeriod);
 
     format(gstr, sizeof gstr,
         (SkinKobiecy(pData[playerid][lastUsedSkin]))?("%s (%i) opuœci³a serwer (gra³a %i %s)%s"):("%s (%i) opuœci³ serwer (gra³ %i %s)%s"),
         GetPlayerProperName(playerid), playerid, playedSeconds, GetPeriodName(playerid, tempPeriod, playedSeconds), (reason == LEAVE_REASON_TIMEOUT) ? (" (crash/timeout)") : (""));
-    foreach(i) {
+    foreach(i) 
+    {
       if (gmTemp[showJoins]>0 && IsAdmin(i))
         Msg(i, COLOR_LEAVEINFO, gstr, ((gmTemp[pPlayerCount]<=10) ? true : false));
       else if (gmTemp[showJoins]==2)
@@ -1119,7 +1091,7 @@ public OnPlayerDisconnect(playerid, reason)
   pData[playerid][vipEnabled]=false;
   pData[playerid][adminLevel]=0;
   pData[playerid][allowedLevel]=0;
-  if(!pData[playerid][isCountedForRestore]) pData[playerid][session]=0;
+  pData[playerid][session]=0;
   pData[playerid][accountID]=0;
   pTemp[playerid][curPos]=1;
   pTemp[playerid][lastPos]=-1;
@@ -1154,8 +1126,7 @@ public OnPlayerDisconnect(playerid, reason)
   pTemp[playerid][isRcon] = false;
   pTemp[playerid][uglyRejoinHack]=false; // na koncu dla zachowania pewnosci ze onPlayerDisconnect sie wykonalo i zachowana jest spojnosc danych!
 
-  if (IsValidDynamicObject(oKratki[playerid]))
-  DestroyDynamicObject(oKratki[playerid]);
+  if (IsValidDynamicObject(oKratki[playerid])) DestroyDynamicObject(oKratki[playerid]);
 
   return 1;
 }
@@ -1709,6 +1680,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         }
 
         pData[playerid][pAttraction] = A_NONE;
+        pTemp[playerid][aChowanySide] = -1;
         avt_record(playerid,e_chofan,1,ART_ADD);
         CH_Update();
       }
@@ -2262,136 +2234,169 @@ public OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid){
 
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
-  new pstate=GetPlayerState(playerid);
+  static pstate, pweapon; 
+  pstate = GetPlayerState(playerid);
+  pweapon = GetPlayerWeapon(playerid);
 
-  if (pstate==PLAYER_STATE_SPECTATING) {
-    if (KEY_PRESSED(KEY_CROUCH) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) {
-      _info(playerid,""); return 0;
-    } else if (KEY_PRESSED(KEY_FIRE) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) {
+  if (pstate==PLAYER_STATE_SPECTATING) 
+  {
+    if (KEY_PRESSED(KEY_CROUCH) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) 
+    {
+      _info(playerid,""); 
+      return 0;
+    } 
+    else if (KEY_PRESSED(KEY_FIRE) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) 
+    {
       FindNextPlayerToSpectate(playerid, false);
       return 0;
-    } else if (KEY_PRESSED(KEY_HANDBRAKE) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) {
+    } 
+    else if (KEY_PRESSED(KEY_HANDBRAKE) && (pData[playerid][spectating]!=INVALID_PLAYER_ID) && (pData[playerid][adminLevel]>=LEVEL_ADMIN1)) 
+    {
       FindNextPlayerToSpectate(playerid, true);
       return 0;
     }
-  } else if (pstate == PLAYER_STATE_ONFOOT) {
-    // antygl na wybranej arenie
-    if(KEY_PRESSED(KEY_CROUCH) && pTemp[playerid][onArena]==ARENA_ONEDE2 && GetTickCount()-pTemp[playerid][lastFireKeypress]<600 && GetPlayerWeapon(playerid)==24) 
+  } 
+  else if (pstate == PLAYER_STATE_ONFOOT) 
+  {
+    if(pTemp[playerid][onArena]==ARENA_ONEDE2 && KEY_PRESSED(KEY_CROUCH) && GetTickCount()-pTemp[playerid][lastFireKeypress]<600 && GetPlayerWeapon(playerid)==24) 
     {
-      //format(gstr,sizeof gstr,"%d", GetPlayerAnimationIndex(playerid));
-      //SendClientMessage(playerid,-1,gstr);
       SetPlayerVelocity(playerid, 0.0,0.0,0.5);
-      if(!pTemp[playerid][isFreezed]) FreezePlayer(playerid,200);
+      if(!pTemp[playerid][isFreezed]) 
+      {
+        FreezePlayer(playerid,200);
+      }
       SetPlayerArmedWeapon(playerid,0);
-      /*if((pTemp[playerid][antygl]++)==MAX_IDENT_STEP) {
-        Msg(playerid,COLOR_ERROR,"Ignorowanie regulaminu nie bêdzie tutaj tolerowane. Zostajesz wyrzucony");
-        Kick(playerid);
-      }*/
       Msg(playerid,COLOR_ERROR,"Na tej arenie nie wolno wykonywaæ GL/TGL!");
       return 0;
-    }
-    if(KEY_PRESSED(KEY_FIRE))
+    } 
+    else if(KEY_PRESSED(KEY_FIRE))
+    {
+      if((pTemp[playerid][wStrefieNODM] || pTemp[playerid][protping] || (pTemp[playerid][aChowanySide] == A_CHOWANY_HIDDING && GetPlayerVirtualWorld(playerid) == VW_CHOWANY) || !pTemp[playerid][weaponsAllowed]) && !pTemp[playerid][protkill] && pData[playerid][adminLevel]<LEVEL_GM && pweapon != 43 && pweapon != 46 && !IsPlayerSwimming(playerid))
       {
-          if((pTemp[playerid][wStrefieNODM] || pTemp[playerid][protping] || (aData[A_CHOWANY][aState] == A_STATE_ON && pData[playerid][aChowany] && pTemp[playerid][aChowanySide] == A_CHOWANY_HIDDING && pData[playerid][pAttraction] == A_CHOWANY) || !pTemp[playerid][weaponsAllowed]) &&
-      !pTemp[playerid][protkill] &&
-      (pData[playerid][adminLevel]<LEVEL_GM || pTemp[playerid][protping] || !pTemp[playerid][weaponsAllowed]) && pstate!=0 && pstate!=9 && pstate!=8 && pstate!=7 && GetPlayerWeapon(playerid) != 43 && GetPlayerWeapon(playerid) != 46 && !IsPlayerSwimming(playerid)){
-            SetPlayerVelocity(playerid, 0.0,0.0,0.5);
-          SetPlayerArmedWeapon(playerid,0);
-          if(!pTemp[playerid][isFreezed]) FreezePlayer(playerid,200);
-          return 0;
+        SetPlayerVelocity(playerid, 0.0,0.0,0.5);
+        SetPlayerArmedWeapon(playerid,0);
+        if(!pTemp[playerid][isFreezed])
+        {
+          FreezePlayer(playerid,200);
+        }
+        return 0;
       }
-
       pTemp[playerid][lastFireKeypress]=GetTickCount();
       pTemp[playerid][staleTime]=0;
-          pTemp[playerid][lastWeaponUsed] = GetPlayerWeapon(playerid);
+      pTemp[playerid][lastWeaponUsed] = GetPlayerWeapon(playerid);
     }
-    if(pTemp[playerid][performingAnim]) { // resetujemy odtwarzana animacje
-          pTemp[playerid][performingAnim]=false;
-          ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0, 0, 0, 0, 0, 0, 0);
-          ClearAnimations(playerid, 0);
+    if(pTemp[playerid][performingAnim]) 
+    {
+      pTemp[playerid][performingAnim]=false;
+      ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0, 0, 0, 0, 0, 0, 0);
+      ClearAnimations(playerid, 0);
     }
-    //KEY_HANDBRAKE == key_aim
-    if(HOLDING_KEYS(KEY_HANDBRAKE | KEY_JUMP  ) && (GetPlayerWeapon(playerid)==0 || GetPlayerWeapon(playerid)==1) && pTemp[playerid][fRsp]) {
-        if(GetTickCount()-pTemp[playerid][lastResyncByKey]>3000) {
+    if(HOLDING_KEYS(KEY_HANDBRAKE | KEY_JUMP) && (GetPlayerWeapon(playerid)==0 || GetPlayerWeapon(playerid)==1) && pTemp[playerid][fRsp]) 
+    {
+      if(GetTickCount()-pTemp[playerid][lastResyncByKey]>3000) 
+      {
         _rsp(playerid,"");
         pTemp[playerid][lastResyncByKey]=GetTickCount();
       }
     }
-  } else if (pstate==PLAYER_STATE_PASSENGER) {
-    // nothing!
-  } else if (pstate==PLAYER_STATE_DRIVER) {
-    new vid=GetPlayerVehicleID(playerid);
-    if(vid>0 && vid!=INVALID_VEHICLE_ID) {
-      if(KEY_PRESSED(KEY_SUBMISSION)) {
+    if (pTemp[playerid][shamalId] > 0 && newkeys == 16)
+    {
+      new Float:sX,Float:sY,Float:sZ;
+      GetVehiclePos(pTemp[playerid][shamalId], sX, sY, sZ);
+      SetPlayerPos(playerid, sX+4, sY, sZ);
+      SetPlayerInterior(playerid, 0);
+      SetPlayerVirtualWorld(playerid,0);
+      pTemp[playerid][shamalId]=0;
+    }
+  } 
+  else if (pstate==PLAYER_STATE_PASSENGER) 
+  {
+  
+  } 
+  else if (pstate==PLAYER_STATE_DRIVER) 
+  {
+    static vid, vf;
+    vid = GetPlayerVehicleID(playerid);
+    vf = GetVehicleFlags(vid);
+    if(vid>0 && vid!=INVALID_VEHICLE_ID) 
+    {
+      if(KEY_PRESSED(KEY_SUBMISSION)) 
+      {
         if(pTemp[playerid][cenzura]) return 0;
-        if (pData[playerid][pAttraction]==A_RACE) {
+        if (pData[playerid][pAttraction]==A_RACE) 
+        {
           race_Napraw(playerid);
           return 0;
-        } else if (pData[playerid][pAttraction]==A_DRIFT) {
+        } 
+        else if (pData[playerid][pAttraction]==A_DRIFT) 
+        {
           drift_Napraw(playerid);
           return 0;
-        } else
+        } 
+        else
         {
-            new vf=GetVehicleFlags(vid);
-            if (vf&VF_MILITARY==VF_MILITARY) return 0;
+          if (vf&VF_MILITARY==VF_MILITARY) return 0;
           if (vf&VF_AIRPLANE==VF_AIRPLANE) return 0;
           if (vf&VF_AIRBORNE==VF_AIRBORNE) return 0;
           if (vf&VF_NATATORIAL==VF_NATATORIAL) return 0;
-          if(!pData[playerid][vipEnabled]) _napraw(playerid);
-          else _vnapraw(playerid,"");
+          if(!pData[playerid][vipEnabled]) 
+          {
+            _napraw(playerid);
+          }
+          else 
+          {
+            _vnapraw(playerid,"");
+          }
           _flip(playerid);
         }
-      } else if (KEY_PRESSED(KEY_FIRE)) {     // turbo
-
-        if(pData[playerid][pAttraction]==A_DERBY && GetVehicleModel(vid)==564) { // rc tiger
+      } 
+      else if (KEY_PRESSED(KEY_FIRE)) 
+      {
+        if(pData[playerid][pAttraction]==A_DERBY && GetVehicleModel(vid)==564) 
+        {
           vehicles_RCTiger_shoot(playerid);
           return 0;
         }
-
-        if (pData[playerid][pAttraction]==A_NONE && tVehicles[vid][vo_hasTurbo]) {
+        else if (pData[playerid][pAttraction]==A_NONE && tVehicles[vid][vo_hasTurbo]) 
+        {
           vehicles_EngageTurbo(playerid,vid,0);
           return 0;
         }
-
-      } else if (KEY_RELEASED(KEY_FIRE)) {  // nitro
-        if (vehicleHasNitro[vid]) {
+      } 
+      else if (KEY_RELEASED(KEY_FIRE))
+      {
+        if (vehicleHasNitro[vid]) 
+        {
           AddVehicleComponent(vid, 1010);
         }
-      } else  if (KEY_PRESSED(KEY_ANALOG_DOWN)) {
-        if (vid>0 && GetVehicleModel(vid)==525) { // towtruck
+      } 
+      else  if (KEY_PRESSED(KEY_ANALOG_DOWN)) 
+      {
+        if (vid>0 && GetVehicleModel(vid)==525) 
+        {
           TowVehicle(vid);
         }
-      } else if(KEY_PRESSED(KEY_ACTION)) {
-          if(!pTemp[playerid][rampy]) return 0;
-          if(pData[playerid][pAttraction]!=A_NONE) return 0;
-          if(IsPlayerInNoDMArea(playerid)) return 0;
-          new vf=GetVehicleFlags(vid);
-          if (vf&VF_MILITARY==VF_MILITARY) return 0;
+      } 
+      else if(KEY_PRESSED(KEY_ACTION)) 
+      {
+        if(!pTemp[playerid][rampy]) return 0;
+        if(pData[playerid][pAttraction]!=A_NONE) return 0;
+        if(IsPlayerInNoDMArea(playerid)) return 0;
+        if (vf&VF_MILITARY==VF_MILITARY) return 0;
         if (vf&VF_AIRPLANE==VF_AIRPLANE) return 0;
         if (vf&VF_AIRBORNE==VF_AIRBORNE) return 0;
         if (vf&VF_NATATORIAL==VF_NATATORIAL) return 0;
-          KillTimer(rampTimer);
-          RemoveRamp(playerid);
-          new Float:x,Float:y,Float:z,Float:anglee;
+        KillTimer(rampTimer);
+        RemoveRamp(playerid);
+        new Float:x,Float:y,Float:z,Float:anglee;
         GetPlayerPos(playerid, x, y, z);
-          anglee = GetXYInFrontOfPlayer(playerid, x, y, GetOptimumRampDistance(playerid));
+        anglee = GetXYInFrontOfPlayer(playerid, x, y, GetOptimumRampDistance(playerid));
         z += 0.5;
-          pTemp[playerid][rampId]=CreatePlayerObject(playerid, 1632, x, y, z - 0.5, 0.0, 0.0, anglee);
-          pTemp[playerid][rampTimer]=SetTimerEx("RemoveRamp", 2000, 0, "d", playerid);
-          return 0;
+        pTemp[playerid][rampId]=CreatePlayerObject(playerid, 1632, x, y, z - 0.5, 0.0, 0.0, anglee);
+        pTemp[playerid][rampTimer]=SetTimerEx("RemoveRamp", 2000, 0, "d", playerid);
+        return 0;
       }
     }
-  }
-
-
-    if (newkeys == 16 && pTemp[playerid][shamalId] > 0)
-  {
-    new Float:sX,Float:sY,Float:sZ;
-    GetVehiclePos(pTemp[playerid][shamalId], sX, sY, sZ);
-    SetPlayerPos(playerid, sX+4, sY, sZ);
-    SetPlayerInterior(playerid, 0);
-    SetPlayerVirtualWorld(playerid,0);
-    pTemp[playerid][shamalId]=0;
   }
   return 1;
 }
@@ -4772,19 +4777,21 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 {
   pTemp[playerid][lastPos]=-1;
 
-  if(pData[playerid][jail]>0 && pData[playerid][adminLevel]<LEVEL_GM && pData[playerid][allowedLevel]<LEVEL_GM && strfind(cmdtext,"raport",true)!=0 && strfind(cmdtext,"report",true)!=0) {
+  if(pData[playerid][jail]>0 && pData[playerid][adminLevel]<LEVEL_GM && pData[playerid][allowedLevel]<LEVEL_GM && strfind(cmdtext,"raport",true)!=0 && strfind(cmdtext,"report",true)!=0) 
+  {
     Msg(playerid, COLOR_ERROR, __("Niestety - siedzisz w paczce."));
     return 0;
   }
-  if(pTemp[playerid][cenzura] && pData[playerid][adminLevel]<4){
+  if(pTemp[playerid][cenzura] && pData[playerid][adminLevel]<4)
+  {
     Msg(playerid, COLOR_ERROR, __("{b}Jestes ocenzurowany/-a{/b}! Nie mozesz wpisywac komend."));
     return 0;
   }
-  if(pData[playerid][logonDialog] || (pData[playerid][classSelecting] && strfind(cmdtext, "skin", true) == -1 && strfind(cmdtext, "/ms", true) == -1)) {
+  if(pData[playerid][logonDialog] || (pData[playerid][classSelecting] && strfind(cmdtext, "skin", true) == -1 && strfind(cmdtext, "/ms", true) == -1)) 
+  {
     Msg(playerid,COLOR_ERROR,__("Najpierw musisz dolaczyc do gry."));
     return 0;
   }
-
   return 1;
 }
 
@@ -4798,15 +4805,12 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
     {
       Msg(playerid, COLOR_ERROR, __("Spamowanie nie bedzie tolerowane."));
       KickPlayer(playerid);
-
       return 1;
     }
-
     if(pTemp[playerid][spamCount] >= 2)
     {
       Msg(playerid, COLOR_ERROR, __("Nie spamuj! Kolejne ostrzezenia moga skonczyc sie wyrzuceniem z serwera."));
       pTemp[playerid][lastMsgTick] = GetTickCount();
-
       return 1;
     }
   }
@@ -4814,14 +4818,12 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
   {
     pTemp[playerid][spamCount] = 0;
   }
-
   pTemp[playerid][lastMsgTick] = GetTickCount();
 
   if(success)
   {
     format(gstr, sizeof gstr, "%i %s", playerid, cmdtext);
     OutputLog(LOG_COMMANDS, gstr);
-
     return 1;
   }
   else
@@ -4837,7 +4839,7 @@ OnPlayerRCONLogin(playerid)
    buffer[128];
 
   if (!pData[playerid][loggedIn] || pData[playerid][allowedLevel]<LEVEL_ADMIN3) {
-    format(buffer,sizeof buffer,__("Player %s [ID %d] with allowedLevel=%d tried to log on as RCON (adminLevel=%d] and has been kicked!"), GetPlayerNick(playerid), playerid, pData[playerid][adminLevel], pData[playerid][allowedLevel]);
+    format(buffer,sizeof buffer,__("Player %s [ID %d] with allowedLevel=%d tried to log on as RCON (adminLevel=%d) and has been kicked!"), GetPlayerNick(playerid), playerid, pData[playerid][adminLevel], pData[playerid][allowedLevel]);
     KickPlayer(playerid);
     foreach(i)
       if(IsAdmin(i, LEVEL_ADMIN1))

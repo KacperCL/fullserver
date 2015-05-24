@@ -890,13 +890,6 @@ enum e_pData
   pAttraction,
   hitman,
   currentColor,
-  //////////////// restore after crash! ///////////////
-  disconnectSession,
-  lastSerial[48],
-  lastIp[32],
-  lastNick[32],
-  bool:isCountedForRestore,
-  bool:restoredFromLastSession
 }
 
 #define ACCEPTS_NONE    0

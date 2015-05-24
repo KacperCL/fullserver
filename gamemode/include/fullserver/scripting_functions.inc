@@ -2003,13 +2003,12 @@ RefreshPlayerVehicleInfo(playerid)
   new
    vehicleid = GetPlayerVehicleID(playerid),
    Float:vHealth,
-   vmodel;
-
-    if (vehicleid==0 || vehicleid==INVALID_VEHICLE_ID) return;
-
-  vmodel=GetVehicleModel(vehicleid);
-  if (vmodel==0) return;
+   vmodel = GetVehicleModel(vehicleid);
+   
   GetVehicleHealth(vehicleid, vHealth);
+
+  if (vehicleid==0 || vehicleid==INVALID_VEHICLE_ID) return;
+  if (vmodel==0) return;
 
   vHealth = (vHealth - 250.0) / 7.5; // zeskalowane dla DVHP 1000
   if (vHealth>100) vHealth=100;
@@ -2030,17 +2029,14 @@ RefreshPlayerVehicleInfo(playerid)
   else
     hpstr="~l~]]]]]";
 
-  format(gstr, sizeof gstr, "~r~~h~%s~n~~b~~h~~h~~h~%i ~w~km/h    %s",
-    vehicleName[vmodel - 400],
-    GetVehicleSpeed(vehicleid),hpstr);
-
+  format(gstr, sizeof gstr, "~r~~h~%s~n~~b~~h~~h~~h~%i ~w~km/h    %s", vehicleName[vmodel - 400], GetVehicleSpeed(vehicleid),hpstr);
   PlayerTextDrawSetString(playerid,pTextDraw[PTD_VEHICLEINFO][playerid], gstr);
 
   if(gmData[artefactOwner] == playerid)
   {
     new vf=GetVehicleFlags(vehicleid);
-
-    if (vf&VF_MILITARY==VF_MILITARY || vf&VF_AIRBORNE==VF_AIRBORNE || vf&VF_NATATORIAL==VF_NATATORIAL){
+    if (vf&VF_MILITARY==VF_MILITARY || vf&VF_AIRBORNE==VF_AIRBORNE || vf&VF_NATATORIAL==VF_NATATORIAL)
+    {
       Msg(playerid,COLOR_ERROR,"Niestety, artefakt postanowil Cie opuscic...");
       DropArtefact(gmData[artefactOwner]);
     }

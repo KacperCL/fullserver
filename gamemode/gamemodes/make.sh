@@ -42,6 +42,7 @@ GDZIE=`hostname`
 
 echo \#define GMCOMPILED \"skompilowana $KIEDY przez $USER@$GDZIE\" >> ../include/fullserver/version.inc
 echo \#define SERVER_NUM 1 >> ../include/fullserver/version.inc
+cat settings.ini >> ../include/fullserver/version.inc
 
 ../pawno/pawncc.exe -A4 -v2 -d2 -i..\\include\\fullserver -i..\\include\\3rdparty -i..\\include\\samp fs.pwn  -\;\+ -\\ -\(\+
 date

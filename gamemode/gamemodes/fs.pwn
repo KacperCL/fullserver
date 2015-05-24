@@ -26,12 +26,6 @@ SOFTWARE.
 #include <samp/a_samp>
 #include <samp/a_http>
 
-// some pre-defines
-#define DYNAMIC_HP
-#define SPECTATE_KILLER // czy po smierci gracz ma specowac zabojce
-#define SNIPER_HEADSHOOT
-#define CJHIT_MODEL // moze powodowac lagi
-
 // 3rd party includes
 #include <3rdparty/y_timers>
 #include <3rdparty/sscanf2>
@@ -44,7 +38,9 @@ SOFTWARE.
 #include <3rdparty/mapandreas>
 #include <3rdparty/regex>
 #include <3rdparty/crashdetect>
-#include <3rdparty/profiler>
+#if defined PROFILER
+  #include <3rdparty/profiler>
+#endif
 
 // main gamemode includes
 #include <fullserver/version>
@@ -336,8 +332,10 @@ public OnGameModeInit()
 
   printf(" FullServer DM zaladowany pomyslnie (%0.3f sekund)\r\n", float(GetTickCount() - gmTemp[startTime]) / 1000);
   
+#if defined PROFILER
   Profiler_Start();
-  
+#endif
+
   if(IsCrashDetectPresent())
   {
     printf(" [CR] CrashDetect plugin is loaded and ready.");
@@ -348,8 +346,10 @@ public OnGameModeInit()
 
 public OnGameModeExit()
 {
+#if defined PROFILER
   Profiler_Stop();
   Profiler_Dump();
+#endif
 
   printf(" Wylaczanie gamemode. Zapisywanie danych graczy i statystyk serwera");
   foreach(playerid){

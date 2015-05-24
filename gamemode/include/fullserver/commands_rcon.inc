@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#if defined PROFILER
 CMD:profiler(playerid,params[]){
   if (!IsPlayerAdmin(playerid)) return 0;
 
@@ -53,6 +54,7 @@ CMD:profiler(playerid,params[]){
   Msg(playerid, COLOR_ERROR, "Uzyj: {b}/profiler <state|start|stop|dump>{/b}");
   return 1;
 }
+#endif
  
 CMD:inserttoveh(playerid,params[]){
     if (!IsPlayerAdmin(playerid)) return 0;

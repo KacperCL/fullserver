@@ -263,4 +263,12 @@ public OnPlayerPickUpDynamicPickup(playerid,pickupid){
   SendClientMessageToAll(-1, "PICK UP");
   return 1;
 }
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+  if(success)
+  {
+    CallRemoteFunction("PlayerCommandPerformedOutside", "isi", playerid, cmdtext, success);
+  }
+}
 // EOF

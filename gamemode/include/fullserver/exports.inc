@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+forward PlayerCommandPerformedOutside(playerid, cmdtext[], success);
 forward GetPlayerFactionID(playerid);
 forward IsPlayeRVIP(playerid);
 forward GetFSAdminLeveL(playerid);
@@ -36,6 +37,11 @@ forward ShowAnnouncementExport(params[]);
 forward GetPlayerOnlineHoursBySession(playerid);
 forward GetPlayerOnlineMinutesBySession(playerid);
 forward IsPlayerCountedAndNotExpired(playerid);
+
+public PlayerCommandPerformedOutside(playerid, cmdtext[], success)
+{
+  OnPlayerCommandPerformed(playerid, cmdtext, success);
+}
 
 public IsPlayerCountedAndNotExpired(playerid)
 {

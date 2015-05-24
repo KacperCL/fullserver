@@ -74,4 +74,12 @@ lampion_pusc(playerid){
 public lampion_usun(obiekt){
   DestroyDynamicObject(obiekt);
 }
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+  if(success)
+  {
+    CallRemoteFunction("PlayerCommandPerformedOutside", "isi", playerid, cmdtext, success);
+  }
+}
 // EOF

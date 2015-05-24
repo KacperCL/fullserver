@@ -24,9 +24,6 @@ SOFTWARE.
 
 #include <a_samp>
 #include <3rdparty/streamer>
-#define FILTERSCRIPT
-#include <3rdparty/dc_cmd>
-#include <3rdparty/sscanf2>
 
 new blowjobCP;
 new blowjobCP2;

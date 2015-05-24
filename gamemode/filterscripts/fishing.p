@@ -23,8 +23,6 @@ SOFTWARE.
 */
 
 #include <a_samp>
-#define FILTERSCRIPT
-#include <3rdparty/dc_cmd>
 #include <3rdparty/progress>
 #include <3rdparty/streamer>
 

@@ -24,8 +24,6 @@ SOFTWARE.
 
 // some includes
 #include <a_samp>
-#define FILTERSCRIPT // very important for dc_cmd!
-#include <3rdparty/dc_cmd>
 
 // some defines which aren't in a_samp but should be
 #define INVALID_TIMER_ID 0xFFFF

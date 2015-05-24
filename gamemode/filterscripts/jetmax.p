@@ -24,8 +24,6 @@ SOFTWARE.
 
 #include <a_samp>
 #include <3rdparty/streamer>
-#define FILTERSCRIPT
-#include <3rdparty/dc_cmd>
 
 new mg_spedycja_cel[MAX_PLAYERS]={-1,...};
 new mg_spedycja_pociag[MAX_PLAYERS]={INVALID_VEHICLE_ID, ... };

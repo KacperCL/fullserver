@@ -96,4 +96,12 @@ public rakieta_wybuch(Float:X, Float:Y, Float:Z, r1, r2) {
   DestroyDynamicObject(r2);
   CreateExplosion(X,Y,Z, 10,5);
 }
-// EOFs
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+  if(success)
+  {
+    CallRemoteFunction("PlayerCommandPerformedOutside", "isi", playerid, cmdtext, success);
+  }
+}
+// EOF

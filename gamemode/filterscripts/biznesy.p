@@ -304,4 +304,12 @@ public biznesy_Dochody(){
       }
     }
 }
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+  if(success)
+  {
+    CallRemoteFunction("PlayerCommandPerformedOutside", "isi", playerid, cmdtext, success);
+  }
+}
 // EOF

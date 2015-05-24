@@ -342,4 +342,12 @@ public WylaczRadio(playerid){
   coJestGrane[playerid]="";
   return;
 }
+
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+  if(success)
+  {
+    CallRemoteFunction("PlayerCommandPerformedOutside", "isi", playerid, cmdtext, success);
+  }
+}
 // EOF

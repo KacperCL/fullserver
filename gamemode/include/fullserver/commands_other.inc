@@ -183,9 +183,12 @@ CMD:rcolor(playerid)
 CMD:dajbronie(playerid)
 {
   MUST_BE_SPAWNED(playerid);
-  if (pData[playerid][pAttraction]!=A_NONE || IsPlayerInAnyVehicle(playerid) || GetPlayerInterior(playerid)>0 || GetPlayerVirtualWorld(playerid)>0 || pTemp[playerid][godMode]) return Msg(playerid,COLOR_ERROR,"Nie mozesz teraz tego zrobic.");
+  if (pData[playerid][pAttraction]!=A_NONE || IsPlayerInAnyVehicle(playerid) || GetPlayerInterior(playerid)>0 || GetPlayerVirtualWorld(playerid)>0 || pTemp[playerid][godMode]) 
+  {
+    return Msg(playerid,COLOR_ERROR,"Nie mozesz teraz tego zrobic.");
+  }
   ResetPlayerWeapons(playerid);
-    GivePlayerNormalWeapons(playerid,false);
+  GivePlayerNormalWeapons(playerid,false);
   SetPlayerSkillLevel(playerid,WEAPONSKILL_PISTOL, pTemp[playerid][weaponSkill_pistol]);
   SetPlayerSkillLevel(playerid,WEAPONSKILL_PISTOL_SILENCED, pTemp[playerid][weaponSkill_silenced]);
   SetPlayerSkillLevel(playerid,WEAPONSKILL_SAWNOFF_SHOTGUN, pTemp[playerid][weaponSkill_sawnoff]);
@@ -195,27 +198,30 @@ CMD:dajbronie(playerid)
   return 1;
 }
 
-CMD:uptime(playerid){
+CMD:uptime(playerid)
+{
   new tt=floatround(float(GetTickCount()-gmTemp[startTime])/1000);
-  format(gstr, sizeof gstr, "Serwer wlaczony od: {b}%d{/b} %s {b}%d{/b} %s",
-    tt/3600, dli(tt/3600,"godziny","godzin","godzin"),
-    tt%3600/60, dli(tt%3600/60,"minuty","minut","minut"));
+  format(gstr, sizeof gstr, "Serwer wlaczony od: {b}%d{/b} %s {b}%d{/b} %s", tt/3600, dli(tt/3600,"godziny","godzin","godzin"), tt%3600/60, dli(tt%3600/60,"minuty","minut","minut"));
   Msg(playerid,COLOR_INFO,gstr);
   return 1;
 }
 
-CMD:osiagniecia(playerid){
-    if(!pData[playerid][loggedIn]) return Msg(playerid, COLOR_ERROR, "Nie masz jescze konta na serwerze! Aby skorzystac ze tej funkcji serwera utworz je! {b}/rej <haslo>{/b}");
+CMD:osiagniecia(playerid)
+{
+  if(!pData[playerid][loggedIn]) return Msg(playerid, COLOR_ERROR, "Nie masz jescze konta na serwerze! Aby skorzystac ze tej funkcji serwera utworz je! {b}/rej <haslo>{/b}");
   new buffer[256],nazwao[36],score[8],dlg_buffer[1500];
   format(buffer,sizeof buffer,"SELECT a.name,pa.score FROM fs_players_achievements pa JOIN fs_achievements a ON a.shortname=pa.shortname WHERE pa.playerid=%d",pData[playerid][accountID]);
   mysql_query(buffer);
   mysql_store_result();
-  while(mysql_retrieve_row()){
-        mysql_get_field("name", nazwao);
-        mysql_get_field("score", score);
+  format(buffer,sizeof buffer,"Nazwa\tPoziom\n");
+  strcat(dlg_buffer, buffer);
+  while(mysql_retrieve_row())
+  {
+    mysql_get_field("name", nazwao);
+    mysql_get_field("score", score);
 
-        format(buffer,sizeof buffer,"Nazwa\tPoziom\n{FFFF00}%36s\t{FF0000}%8s\n",nazwao,score);
-        strcat(dlg_buffer, buffer);
+    format(buffer,sizeof buffer,"{FFFF00}%36s\t{FF0000}%8s\n",nazwao,score);
+    strcat(dlg_buffer, buffer);
   }
   strdel(dlg_buffer, strlen(dlg_buffer) - 1, strlen(dlg_buffer));
   mysql_free_result();
@@ -223,7 +229,7 @@ CMD:osiagniecia(playerid){
   if(strlen(dlg_buffer)>1)
     ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_TABLIST_HEADERS, "Osiagniecia", dlg_buffer, "Zamknij", "");
   else
-      Msg(playerid,COLOR_ERROR,"Nie masz jescze zadnych osiagniec, kod b³êdu: #MYSQL_NO_ACH_OR");
+    Msg(playerid,COLOR_ERROR,"Nie masz jescze zadnych osiagniec, kod b³êdu: #MYSQL_NO_ACH_OR");
   return 1;
 }
 

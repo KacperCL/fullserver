@@ -37,7 +37,7 @@ echo. >> ../include/fullserver/version.inc
 echo #define GMVERSION "PUBLICrGIT" >> ../include/fullserver/version.inc
 echo #define GMCOMPILED "skompilowana %DATE% %TIME% przez %USER%@%GDZIE%" >> ../include/fullserver/version.inc
 echo #define SERVER_NUM 1 >> ../include/fullserver/version.inc
-cat settings.ini >> ../include/fullserver/version.inc
+type settings.ini >> ../include/fullserver/version.inc
 endlocal
 
 echo Please wait...

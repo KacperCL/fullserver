@@ -556,7 +556,7 @@ SOFTWARE.
 native gpci(playerid, const serial[ ], maxlen);
 native IsValidVehicle(vehicleid);
 
-bool:IsValidSkin(skinid);
+forward bool:IsValidSkin(skinid);
 
 new gstr[256];
 new ebuf[256]; // used for error logging

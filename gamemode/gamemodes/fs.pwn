@@ -546,6 +546,8 @@ public OnPlayerConnect(playerid)
   if (gmTemp[highestPlayerID]<playerid) gmTemp[highestPlayerID]=playerid; // this should be faster then calling to GetPlayerPoolSize
 
   pTemp[playerid][uglyRejoinHack]=true;
+  
+  pData[playerid][session] = GetTickCount();
 
   SendClientMessage(playerid,-1," ");
   SendClientMessage(playerid,0xffffffff, "FullServer GM{adc3e7}, ver. " #GMVERSION " " #GMCOMPILED);

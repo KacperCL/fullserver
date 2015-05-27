@@ -297,24 +297,28 @@ Timer:TimeSync[20000](){  // aktualizacja daty na pasku u dolu ekranu co 20/40 s
 }
 
 // co 120 sekund, ale iterujemy co 4tego gracza 4x czesciej
-Timer:PRA[30000](){   // PlayerRespectAddition
+Timer:PRA[30000]() // PlayerRespectAddition
+{
   gmTemp[timer_PRA_step]++;
   gmTemp[timer_PRA_step]=gmTemp[timer_PRA_step]%4;
 
   for(new playerid = gmTemp[timer_PRA_step]; playerid <= gmTemp[highestPlayerID]; playerid+=4)
-  if(pData[playerid][loggedIn] && IsPlayerConnected(playerid) && !IsPlayerNPC(playerid) && pTemp[playerid][staleTime]<72) {
-    GivePlayerScore(playerid,1 + (IsFS(playerid) ? 1 : 0) ,"automatyczny bonus co 72s", false);
-    if (pData[playerid][hudSetting][HUD_STARS])
+  {
+    if(pData[playerid][loggedIn] && IsPlayerConnected(playerid) && !IsPlayerNPC(playerid) && pTemp[playerid][staleTime]<72) 
     {
-      RefreshPlayerStars(playerid);
-    }
+      GivePlayerScore(playerid,1 + (IsFS(playerid) ? 1 : 0) ,"automatyczny bonus co 72s", false);
+      if (pData[playerid][hudSetting][HUD_STARS])
+      {
+        RefreshPlayerStars(playerid);
+      }
 
-    if ((pTemp[playerid][bonusHours]+1)*3600  < GetPlayerCurrentSession(playerid)) {
-      pTemp[playerid][bonusHours]++;
-      score_GivePlayerHourBonus(playerid, (pTemp[playerid][bonusHours] > 9) ? 9 : pTemp[playerid][bonusHours]);
+      if ((pTemp[playerid][bonusHours]+1)*3600  < GetPlayerCurrentSession(playerid)) 
+      {
+        pTemp[playerid][bonusHours]++;
+        score_GivePlayerHourBonus(playerid, (pTemp[playerid][bonusHours] > 9) ? 9 : pTemp[playerid][bonusHours]);
+      }
     }
   }
-
 }
 
 Timer:EPS[250](){ // odpalany co 250ms, przetwarza za kazdym razem co 4tego gracza

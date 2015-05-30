@@ -96,7 +96,6 @@ HAY_Start()
     aData[A_HAY][aState] = A_STATE_OFF;
     return;
   }
-  HAY_Cleanup();
 
   for (new x=0;x<10;x++)
     for (new y=0;y<10;y++) {
@@ -213,10 +212,7 @@ HAY_Update()
 
     GivePlayerScore(gmTemp[aHAYPlayers][lastPlayer], resp, "HAY");
 
-    pData[gmTemp[aHAYPlayers][lastPlayer]][pAttraction] = A_NONE;
-      SpawnPlayer(gmTemp[aHAYPlayers][lastPlayer]);
-    gmTemp[aHAYPlayers][lastPlayer]=INVALID_PLAYER_ID;
-    aData[A_HAY][aState]=A_STATE_OFF;
+    HAY_Finish();
     return;
   }
   if (activePlayers==0) {
@@ -226,6 +222,7 @@ HAY_Update()
 }
 
 HAY_Finish(){
+  HAY_Cleanup();
   aData[A_HAY][aState]=A_STATE_OFF;
   for(new i = 0; i < gmTemp[aHAYMaxPlayers]; i++)
     if (gmTemp[aHAYPlayers][i]!=INVALID_PLAYER_ID) {

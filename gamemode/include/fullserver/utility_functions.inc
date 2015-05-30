@@ -30,6 +30,19 @@ bool:IsPlayerSpawned(playerid)
   return true;
 }
 
+stock AC_DestroyDynamicObject(&objectid)
+{
+  objectid = INVALID_OBJECT_ID;
+  return DestroyDynamicObject(objectid);
+}
+
+#if defined _ALS_DestroyDynamicObject
+    #undef DestroyDynamicObject
+#else
+    #define _ALS_DestroyDynamicObject
+#endif
+#define DestroyDynamicObject AC_DestroyDynamicObject
+
 /* == setPlayerSkin hook == */
 #if defined CJHIT_MODEL
 

@@ -102,7 +102,6 @@ public OnFilterScriptInit()
 
 public OnFilterScriptExit()
 {
-  UnloadAll();
   return 1;
 }
 
@@ -115,8 +114,6 @@ public OnFilterScriptExit()
 #define MAP_STREAM_DISTANCE          200.0
 
 #define ADD_OBJECT(%1) 				CreateDynamicObject(%1, interior, world, -1, MAP_STREAM_DISTANCE)
-#define DELETE_OBJECT(%1)       	DestroyDynamicObject(%1)
-
 #define MAX_MODS 					14
 #define MAX_NUMBERPLATE   32
 
@@ -147,48 +144,6 @@ stock NextElementID()
 	}
 	if (MapElements[MinElementID][eElementType]) 	goto Increment;
 	return true;
-}
-
-stock UnloadMtaMap(file[])
-{
-	new n;
-	for (new id=MAX_LOADED_ELEMENTS-1; id >= 0; id--) if (MapElements[id][eElementType] && strcmp(file, MapElements[id][eElementSource], false, MAX_MAP_FILE_PATH) == 0)
-	{
-	    switch (MapElements[id][eElementType])
-	    {
-	        case ELEMENT_TYPE_OBJECT: 	DELETE_OBJECT(MapElements[id][eElementID]);
-	        case ELEMENT_TYPE_VEHICLE:  DestroyVehicle(MapElements[id][eElementID]);
-	    }
-	    MapElements[id][eElementID] 		= 0;
-	    MapElements[id][eElementType]   	= ELEMENT_TYPE_NONE;
-	    MapElements[id][eElementSource][0] 	= '\0';
-	    MinElementID 						= id;
-	}
-	return n;
-}
-
-stock IsMapLoaded(file[])
-{
-	for (new id=MAX_LOADED_ELEMENTS-1; id >= 0; id--) if (MapElements[id][eElementType] && strcmp(file, MapElements[id][eElementSource], false, MAX_MAP_FILE_PATH) == 0) return true;
-	return false;
-}
-
-stock UnloadAll()
-{
-	new n;
-	for (new id=MAX_LOADED_ELEMENTS-1; id >= 0; id--) if (MapElements[id][eElementType])
-	{
-	    switch (MapElements[id][eElementType])
-	    {
-	        case ELEMENT_TYPE_OBJECT: 	DELETE_OBJECT(MapElements[id][eElementID]);
-	        case ELEMENT_TYPE_VEHICLE:  DestroyVehicle(MapElements[id][eElementID]);
-	    }
-	    MapElements[id][eElementID] 		= 0;
-	    MapElements[id][eElementType]   	= ELEMENT_TYPE_NONE;
-	    MapElements[id][eElementSource][0] 	= '\0';
-	    MinElementID 						= id;
-	}
-	return n;
 }
 
 stock LoadMtaMap(file[])

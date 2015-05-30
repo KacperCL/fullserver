@@ -30,26 +30,11 @@ bool:IsPlayerSpawned(playerid)
   return true;
 }
 
-/*stock AC_DestroyDynamicObject(objectid)
-{
-  printf("DestroyDynamicObject(%d)",objectid);
-  return DestroyDynamicObject(objectid);
-}
-
-#if defined _ALS_DestroyDynamicObject
-    #undef DestroyDynamicObject
-#else
-    #define _ALS_DestroyDynamicObject
-#endif
-#define DestroyDynamicObject AC_DestroyDynamicObject*/
-
 /* == setPlayerSkin hook == */
 #if defined CJHIT_MODEL
 
 stock AC_SetPlayerSkin(playerid,skinid){
-  if(!IsPlayerConnected(playerid)) return;
-  if(!IsValidSkin(skinid)) return;
-  SetPlayerSkin(playerid,skinid);
+  if(!IsValidSkin(skinid)) return 0;
 
   if(pData[playerid][hudSetting][HUD_CJHIT] && IsPlayerSpawned(playerid))
   {
@@ -57,6 +42,8 @@ stock AC_SetPlayerSkin(playerid,skinid){
     PlayerTextDrawSetPreviewModel(playerid, pTextDraw[PTD_CJHIT2][playerid], skinid);
     ShowPlayerHudElement(playerid, HUD_CJHIT, true);
   }
+  
+  return SetPlayerSkin(playerid,skinid);
 }
 
 #if defined _ALS_SetPlayerSkin
@@ -70,13 +57,12 @@ stock AC_SetPlayerSkin(playerid,skinid){
 /* == setPlayerSkin hook end == */
 
 stock AC_TogglePlayerControllable(playerid,toggle){
-  if(!IsPlayerConnected(playerid)) return;
-  TogglePlayerControllable(playerid,toggle);
   if(toggle){
       pTemp[playerid][isFreezed]=false;
   }else{
       pTemp[playerid][isFreezed]=true;
   }
+  return TogglePlayerControllable(playerid,toggle);
 }
 
 #if defined _ALS_TogglePlayerControllable
@@ -87,11 +73,9 @@ stock AC_TogglePlayerControllable(playerid,toggle){
 #define TogglePlayerControllable AC_TogglePlayerControllable
 
 stock AC_ChangeVehicleColor(vehicleid, color1, color2){
-    if(!IsValidVehicle(vehicleid)) return 0;
-  ChangeVehicleColor(vehicleid, color1, color2);
   tVehicles[vehicleid][vo_color][0]=color1;
   tVehicles[vehicleid][vo_color][1]=color2;
-  return 1;
+  return ChangeVehicleColor(vehicleid, color1, color2);
 }
 
 #if defined _ALS_ChangeVehicleColor
@@ -179,9 +163,8 @@ Delay:AC_Kick[100,](playerid)
 
 stock AC_PlayAudioStreamForPlayer(playerid, url[], Float:posX = 0.0, Float:posY = 0.0, Float:posZ = 0.0, Float:distance = 50.0, usepos = 0)
 {
-  if(!IsPlayerConnected(playerid)) return;
-  if(!pTemp[playerid][playPlayall]) return;
-  PlayAudioStreamForPlayer(playerid,url,posX,posY,posZ,distance,usepos);
+  if(!pTemp[playerid][playPlayall]) return 0;
+  return PlayAudioStreamForPlayer(playerid,url,posX,posY,posZ,distance,usepos);
 }
 
 #if defined _ALS_PlayAudioStreamForPlayer

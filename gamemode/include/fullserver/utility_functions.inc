@@ -32,7 +32,7 @@ bool:IsPlayerSpawned(playerid)
 
 stock AC_DestroyDynamicObject(&objectid)
 {
-  objectid = INVALID_OBJECT_ID;
+  objectid = INVALID_DYNAMIC_OBJECT_ID;
   return DestroyDynamicObject(objectid);
 }
 

@@ -166,7 +166,7 @@ stock LoadMtaMap(file[])
       {
         //modelid x y z rx ry rz interior world
 	      new objectid = ADD_OBJECT(modelid, x, y, z, rx, ry, rz);
-	      if (objectid == INVALID_OBJECT_ID) 
+	      if (objectid == INVALID_DYNAMIC_OBJECT_ID) 
         {
           printf("[MTA HANDLER] Error, object could not be created. Make sure you don't exceed max number of objects.");
           CallRemoteFunction("NotifyAdmins","s", "[MTA HANDLER] Error, object could not be created. Make sure you don't exceed max number of objects.");

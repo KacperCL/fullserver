@@ -28,6 +28,8 @@ SOFTWARE.
 
 #define EXIT 0xBABE
 
+#define INVALID_DYNAMIC_OBJECT_ID 0x7FFFFFFF
+
 #define SERVER_NONE 0
 #define VEHICLE_DEFAULT_HP 999
 #define NIEMAPERZY (pData[playerid][levelAddition]!=LEVEL_ADD_MAPPER)
@@ -1177,7 +1179,7 @@ new
  bool:tVehicleUsed[MAX_VEHICLES]={false,...},
  bool:tVehicleSpawned[MAX_VEHICLES]={false,...},
  bool:tVehicles[MAX_VEHICLES][e_vehOptions],
- oKratki[MAX_PLAYERS]={INVALID_OBJECT_ID,...};
+ oKratki[MAX_PLAYERS]={INVALID_DYNAMIC_OBJECT_ID,...};
 
 new fNames_config[][] = {
  "Kolory graczy",

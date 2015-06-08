@@ -1623,7 +1623,7 @@ CMD:strefa(playerid,params[]){
 
     if (IsValidDynamicObject(Os[eO_przenosna_strefa]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefa], E_STREAMER_MODEL_ID) == 1872) {
       DestroyDynamicObject(Os[eO_przenosna_strefa]);
-      Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
+      Os[eO_przenosna_strefa] = INVALID_DYNAMIC_OBJECT_ID;
     }
 
     StrefyNoDM[ea_przenosna]=CreateDynamicSphere(0,0,0,1,0,0,-1);
@@ -1641,7 +1641,7 @@ CMD:strefa(playerid,params[]){
   }
   if (IsValidDynamicObject(Os[eO_przenosna_strefa]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefa], E_STREAMER_MODEL_ID) == 1872) {
       DestroyDynamicObject(Os[eO_przenosna_strefa]);
-      Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
+      Os[eO_przenosna_strefa] = INVALID_DYNAMIC_OBJECT_ID;
   }
 
   foreach(i)
@@ -1682,7 +1682,7 @@ CMD:strefas(playerid,params[]){
 
     if (IsValidDynamicObject(Os[eO_przenosna_strefaDM]) && Streamer_GetIntData(STREAMER_TYPE_OBJECT, Os[eO_przenosna_strefaDM], E_STREAMER_MODEL_ID) == 18728) {
       DestroyDynamicObject(Os[eO_przenosna_strefaDM]);
-      Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
+      Os[eO_przenosna_strefaDM] = INVALID_DYNAMIC_OBJECT_ID;
     }
 
     StrefyFullDM[ea_przenosna]=CreateDynamicSphere(0,0,0,1,0,0,-1);
@@ -1704,7 +1704,7 @@ CMD:strefas(playerid,params[]){
   if (IsValidDynamicObject(Os[eO_przenosna_strefaDM]))
   {
     DestroyDynamicObject(Os[eO_przenosna_strefaDM]);
-    Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
+    Os[eO_przenosna_strefaDM] = INVALID_DYNAMIC_OBJECT_ID;
   }
   
   foreach(i)

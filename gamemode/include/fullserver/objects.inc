@@ -1157,8 +1157,8 @@ obiekty_odswiezTeleCheckpoints(){
 
 obiekty_clearAllData()
 {
-  Os[eO_przenosna_strefaDM] = INVALID_OBJECT_ID;
-  Os[eO_przenosna_strefa] = INVALID_OBJECT_ID;
+  Os[eO_przenosna_strefaDM] = INVALID_DYNAMIC_OBJECT_ID;
+  Os[eO_przenosna_strefa] = INVALID_DYNAMIC_OBJECT_ID;
 }
 
 obiekty_odswiezMiscPickups(){
